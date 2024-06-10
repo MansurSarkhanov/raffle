@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "940783742489",
+    "project_id": "raffle-ec654",
+    "storage_bucket": "raffle-ec654.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940783742489:android:9f29304f9bf17bf6600488",
+        "android_client_info": {
+          "package_name": "alfasoft.raffle.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCtqPjpfAAMM4O0touPK9XyLoucGy2lwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
