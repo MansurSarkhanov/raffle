@@ -15,6 +15,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // final SharedPreferences prefs = await SharedPreferences.getInstance();
+  // await prefs.remove("logged");
   await init();
   runApp(
     MultiProvider(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/path/videos_path.dart';
 import 'package:raffle_app/core/constants/routes.dart';
 import 'package:raffle_app/core/utilities/extension/videos_path_ext.dart';
+import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:video_player/video_player.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,7 +25,11 @@ class _SplashPageState extends State<SplashPage> {
       setState(() {
         _controller.play();
         Future.delayed(const Duration(seconds: 6)).then((value) {
-          context.goNamed(AppRoutes.auth.name);
+          if (context.read<AuthNotifier>().checkAuth()) {
+            context.replaceNamed(AppRoutes.home.name);
+          } else {
+            context.replaceNamed(AppRoutes.auth.name);
+          }
         });
       });
     }
