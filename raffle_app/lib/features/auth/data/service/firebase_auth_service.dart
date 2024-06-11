@@ -40,7 +40,7 @@ final class FirebaseAuthServiceImpl implements FirebaseAuthService {
       print(user?.uid);
       return user;
     } catch (e) {
-      rethrow;
+      return null;
     }
   }
 

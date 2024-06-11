@@ -41,6 +41,9 @@ final class AuthRepositoryImpl implements AuthRepository {
           uid: user.uid,
           number: number,
           surname: surname,
+                balance: 0,
+                image:
+                    'https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/im_person.png?alt=media&token=5aa3c7e7-a53d-4d85-ae9e-b24b43d8d03c'
         ).toJson();
         if (userModel.isNotEmpty) {
           final firebaseRef = FirebaseReference.users.ref;

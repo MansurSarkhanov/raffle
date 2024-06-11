@@ -1,1 +1,1 @@
-enum IconPath { lock, person, google, whatsapp }
+enum IconPath { lock, person, google, whatsapp, close }

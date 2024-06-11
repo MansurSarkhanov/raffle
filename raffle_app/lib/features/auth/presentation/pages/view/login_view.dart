@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/path/icon_path.dart';
-import 'package:raffle_app/core/constants/routes.dart';
 import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
@@ -22,23 +20,23 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailLoginController = TextEditingController();
   TextEditingController passwordLoginController = TextEditingController();
-  late AuthNotifier _authNotifier;
-  @override
-  void initState() {
-    super.initState();
+  // late AuthNotifier _authNotifier;
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    _authNotifier = context.read<AuthNotifier>();
-    _authNotifier.addListener(
-      () {
-        final authNotifier = _authNotifier.state;
-        if (authNotifier is AuthSuccess && mounted) {
-          context.replaceNamed(AppRoutes.home.name);
-        } else if (authNotifier is AuthError) {
-          openFlushbar(context, message: authNotifier.message, title: "İstifadəçi tapılmadı", color: Colors.redAccent);
-        }
-      },
-    );
-  }
+  //   _authNotifier = context.read<AuthNotifier>();
+  //   _authNotifier.addListener(
+  //     () {
+  //       final authNotifier = _authNotifier.state;
+  //       if (authNotifier is AuthSuccess && mounted) {
+  //         context.replaceNamed(AppRoutes.home.name);
+  //       } else if (authNotifier is AuthError) {
+  //         openFlushbar(context, message: "Yeniden cəhd edin", title: "İstifadəçi tapılmadı", color: Colors.redAccent);
+  //       }
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

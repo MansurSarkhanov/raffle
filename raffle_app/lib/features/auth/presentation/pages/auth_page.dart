@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/constants/routes.dart';
+import '../notifier/auth_notifier.dart';
+import '../notifier/auth_state.dart';
+import '../widgets/open_flushbar.dart';
 import '../widgets/whatsapp_widget.dart';
 import 'view/login_view.dart';
 import 'view/register_view.dart';
@@ -12,6 +18,27 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  late AuthNotifier _authNotifier;
+  @override
+  void initState() {
+    super.initState();
+
+    _authNotifier = context.read<AuthNotifier>();
+    _authNotifier.addListener(
+      () {
+        final authNotifier = _authNotifier.state;
+        if (authNotifier is AuthSuccess && mounted) {
+          context.replaceNamed(AppRoutes.home.name);
+        } else if (authNotifier is AuthError) {
+          openFlushbar(context,
+              message: "Yeniden cəhd edin",
+              title: curIndex == 0 ? "İstifadəçi tapılmadı" : "Email və ya parol yanlıs",
+              color: Colors.redAccent);
+        }
+      },
+    );
+  }
+
   int curIndex = 0;
   @override
   Widget build(BuildContext context) {

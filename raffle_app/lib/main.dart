@@ -17,6 +17,8 @@ Future<void> main() async {
   );
   // final SharedPreferences prefs = await SharedPreferences.getInstance();
   // await prefs.remove("logged");
+  // await prefs.remove("token");
+
   await init();
   runApp(
     MultiProvider(

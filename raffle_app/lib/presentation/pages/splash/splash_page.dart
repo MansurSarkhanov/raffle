@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
     if (mounted) {
       setState(() {
         _controller.play();
-        Future.delayed(const Duration(seconds: 6)).then((value) {
+        Future.delayed(const Duration(seconds: 4)).then((value) {
           if (context.read<AuthNotifier>().checkAuth()) {
             context.replaceNamed(AppRoutes.home.name);
           } else {

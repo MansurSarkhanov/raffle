@@ -15,7 +15,7 @@ class AuthNotifier extends ChangeNotifier {
       state = AuthSuccess();
       notifyListeners();
     } else if (result.isError()) {
-      state = AuthError(message: result.tryGetError().toString());
+      state = AuthError();
       notifyListeners();
     }
   }
@@ -29,13 +29,19 @@ class AuthNotifier extends ChangeNotifier {
     state = AuthProgress();
     notifyListeners();
     final result = await authRepository.registerWithEmailAndPassword(
-        email: email, password: password, name: name, number: number, surname: surname);
+      email: email,
+      password: password,
+      name: name,
+      number: number,
+      surname: surname,
+    );
     if (result.isSuccess()) {
       state = AuthSuccess();
       notifyListeners();
     } else if (result.isError()) {
-      state = AuthError(message: result.tryGetError().toString());
+      state = AuthError();
       notifyListeners();
+
     }
   }
 

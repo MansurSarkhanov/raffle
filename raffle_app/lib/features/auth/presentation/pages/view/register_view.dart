@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 
 import '../../../../../core/constants/path/icon_path.dart';
-import '../../../../../core/constants/routes.dart';
 import '../../notifier/auth_state.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_field.dart';
@@ -27,24 +25,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordController = TextEditingController();
 
   bool isPleasedWithConditions = false;
-  late AuthNotifier _authNotifier;
+  // late AuthNotifier _authNotifier;
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    _authNotifier = context.read<AuthNotifier>();
-    _authNotifier.addListener(
-      () {
-        final authNotifier = _authNotifier.state;
-        if (authNotifier is AuthSuccess) {
-          context.replaceNamed(AppRoutes.home.name);
-        } else if (authNotifier is AuthError) {
-          openFlushbar(context, message: authNotifier.message, title: "Nəsə düz getmədi", color: Colors.redAccent);
-        }
-      },
-    );
-  }
+  //   _authNotifier = context.read<AuthNotifier>();
+  //   _authNotifier.addListener(
+  //     () {
+  //       final authNotifier = _authNotifier.state;
+  //       if (authNotifier is AuthSuccess && mounted) {
+  //         context.replaceNamed(AppRoutes.home.name);
+  //       } else if (authNotifier is AuthError&&mounted) {
+  //         openFlushbar(context, message: "Email adresi sehvdir!", title: "Nəsə düz getmədi", color: Colors.redAccent);
+  //       }
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

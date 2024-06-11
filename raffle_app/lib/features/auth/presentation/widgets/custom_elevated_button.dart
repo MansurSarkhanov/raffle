@@ -43,7 +43,6 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
               border: Border.all(color: const Color(0xFFD9D9D9)),
               borderRadius: BorderRadius.circular(widget.borderRadius))
           : null,
-      height: widget.height,
       width: widget.width,
       child: ElevatedButton(
           style: ButtonStyle(
@@ -59,21 +58,24 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
                     color: Colors.white,
                   ),
                 )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      widget.buttonText,
-                      style: TextStyle(color: widget.textColor, fontSize: 18),
-                    ),
-                    if (widget.icon != null)
-                      Row(
-                        children: [
-                          SizedBox(width: size.width * 0.05),
-                          Icon(widget.icon),
-                        ],
+              : Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.buttonText,
+                        style: TextStyle(color: widget.textColor, fontSize: 18),
                       ),
-                  ],
+                      if (widget.icon != null)
+                        Row(
+                          children: [
+                            SizedBox(width: size.width * 0.05),
+                            Icon(widget.icon),
+                          ],
+                        ),
+                    ],
+                  ),
                 )),
     );
   }
