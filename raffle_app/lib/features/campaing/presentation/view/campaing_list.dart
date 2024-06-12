@@ -39,7 +39,7 @@ class _CampaingListState extends State<CampaingList> {
                                   )
                                 ]),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -80,6 +80,7 @@ class _CampaingListState extends State<CampaingList> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(29),
                                         image: DecorationImage(
+                                          fit: BoxFit.cover,
                                             image: NetworkImage(e.image ??
                                                 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg'))),
                                     height: 240,
@@ -92,13 +93,17 @@ class _CampaingListState extends State<CampaingList> {
                                       Text(
                                         'Buy: ${e.price}',
                                         style: const TextStyle(
-                                            color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                          color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text(' ${e.date}'),
+                                    Text(
+                                      ' ${e.date}',
+                                      style: const TextStyle(
+                                          color: Color(0xFFA2A2A2), fontSize: 14, fontWeight: FontWeight.w500),
+                                    ),
                                     ],
                                   ),
                                   CustomElevatedButton(
@@ -118,7 +123,9 @@ class _CampaingListState extends State<CampaingList> {
                           ),
                         ),
                       ))
-                  .toList());
+                .toList()
+              ..add(const InkWell(child: SizedBox(height: 50))),
+          );
         }
         return const Center(child: Text('Something went wrong'));
       },

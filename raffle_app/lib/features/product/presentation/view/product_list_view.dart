@@ -5,6 +5,7 @@ import 'package:raffle_app/features/product/presentation/notifier/product_notifi
 import 'package:raffle_app/features/product/presentation/notifier/product_state.dart';
 
 import '../../../../presentation/components/shimmer_selling_fast.dart';
+import '../widgets/blinking_liner_animation.dart';
 
 class ProductListView extends StatefulWidget {
   const ProductListView({super.key});
@@ -13,14 +14,22 @@ class ProductListView extends StatefulWidget {
   State<ProductListView> createState() => _ProductListViewState();
 }
 
-class _ProductListViewState extends State<ProductListView> {
+class _ProductListViewState extends State<ProductListView> with TickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    )..repeat();
+  }
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SizedBox(
-      //height: 226,
       height: 200,
-      width: size.width,
       child: Consumer<ProductNotifier>(builder: (context, notifier, child) {
         if (notifier.state is ProductProgress) {
           return ListView.builder(
@@ -60,18 +69,65 @@ class _ProductListViewState extends State<ProductListView> {
                           const SizedBox(
                             height: 5,
                           ),
-                          Text("Prize: ${productModel?[index].prize ?? ''}"),
+                          Text(
+                            "Prize: ${productModel?[index].prize ?? ''}",
+                            maxLines: 2,
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              overflow: TextOverflow.ellipsis,
+                              fontFamily: 'Helvetica Neue',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                           const SizedBox(
                             height: 3,
                           ),
-                          Text("Buy: ${productModel?[index].buy ?? ''}"),
+                          Text(
+                            "Buy: ${productModel?[index].buy ?? ''}",
+                            maxLines: 2,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              color: Color(0xFFA1A1A1),
+                              fontSize: 11,
+                              overflow: TextOverflow.ellipsis,
+                              fontFamily: 'Helvetica Neue',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                           const SizedBox(
                             height: 3,
                           ),
-                          Text("USD: ${productModel?[index].price ?? ''}"),
+                          Text(
+                            "USD: ${productModel?[index].price ?? ''}",
+                            maxLines: 2,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              color: Color(0xFFA1A1A1),
+                              fontSize: 11,
+                              overflow: TextOverflow.ellipsis,
+                              fontFamily: 'Helvetica Neue',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                           const SizedBox(
                             height: 2,
                           ),
+                          productModel?[index].isAnimating ?? false
+                              ? BlinkingWidget(
+                                  controller: _controller,
+                                  child: LinearPercentIndicator(
+                                      center: Text("${productModel?[index].percent.toString()} %"),
+                                      animation: true,
+                                      barRadius: const Radius.circular(25),
+                                      lineHeight: 17.64,
+                                      padding: EdgeInsets.zero,
+                                      progressColor: productModel?[index] == 0 ? Colors.green : Colors.yellow[700],
+                                      percent: productModel![index].percent! / 100,
+                                      backgroundColor: const Color(0xffE6E6E6)),
+                                )
+                              :
                           LinearPercentIndicator(
                               barRadius: const Radius.circular(52),
                               animation: false,
@@ -91,11 +147,17 @@ class _ProductListViewState extends State<ProductListView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('${productModel[index].leftPrice}'),
+                              Text(
+                                '${productModel[index].leftPrice}',
+                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
                               const SizedBox(
                                 width: 3,
                               ),
-                              Text('/${productModel[index].rightPrice}'),
+                              Text(
+                                '/${productModel[index].rightPrice} sold',
+                                style: const TextStyle(fontSize: 13),
+                              ),
                             ],
                           ),
                           const Spacer()

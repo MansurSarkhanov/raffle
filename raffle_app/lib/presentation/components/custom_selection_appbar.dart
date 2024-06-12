@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
-import 'package:raffle_app/features/profile/domain/repository/user_info_repository.dart';
 
 import '../../core/constants/path/image_path.dart';
 import '../../core/utilities/helper/route.dart';
 import '../../features/profile/presentation/notifier/profile_notifier.dart';
 import '../../features/profile/presentation/page/profile_page.dart';
-import '../../injetion.dart';
 
 class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomSelectionAppbar({
@@ -31,8 +29,8 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                   Navigator.push(
                     context,
                     RouteHelper.createRoute(
-                      routeName: ChangeNotifierProvider(
-                          create: (context) => ProfileNotifier(getIt.get<UserInfoRepository>())..getUserInformation(),
+                      routeName: ChangeNotifierProvider.value(
+                          value: context.read<ProfileNotifier>(),
                           child: const ProfilePage()),
                       location: RoutingLocation.leftToRight,
                     ),

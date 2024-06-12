@@ -1,11 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:raffle_app/core/utilities/helper/route.dart';
+import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
+import 'package:raffle_app/features/auth/presentation/pages/auth_page.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_state.dart';
+import 'package:raffle_app/features/profile/presentation/page/history_page.dart';
+import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view.dart';
+import 'package:raffle_app/features/profile/presentation/page/wishlist_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../injetion.dart';
 import '../../../../presentation/components/go_back_button.dart';
 import '../../../auth/data/service/firebase_storage_service.dart';
 import '../../../auth/presentation/widgets/whatsapp_widget.dart';
+import '../widgets/call_email_card.dart';
+import '../widgets/contact_method.dart';
 import '../widgets/custom_profile_listtile.dart';
 import '../widgets/profile_title.dart';
 
@@ -63,7 +78,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               CircleAvatar(
                                 backgroundImage: userInfo != null
-                                    ? NetworkImage(userInfo.image ?? '')
+                                    ? NetworkImage(
+                                        userInfo.image ?? '',
+                                      )
                                     : const AssetImage('assets/images/im_person.png'),
                                 radius: size.height * 0.045,
                                 backgroundColor: const Color(0xFFD9D9D9),
@@ -186,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       InkWell(
                           onTap: () {
-                            // SupportController.openWhatsapp(context: context, text: 'Salam', number: '+994776359777');
+                            SupportController.openWhatsapp(context: context, text: 'Salam', number: '+994776359777');
                           },
                           child: WhatsAppWidget(size: size)),
                       SizedBox(
@@ -247,7 +264,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           const Spacer(),
                           InkWell(
                             onTap: () {
-                              // Get.to(() => const RaffleWalletScreen());
+                              Navigator.push(
+                                  context,
+                                  RouteHelper.createRoute(
+                                      routeName: ChangeNotifierProvider.value(
+                                        value: getIt.get<ProfileNotifier>()..getUserInformation(),
+                                        builder: (context, child) => const RaffleWalletScreen(),
+                                      ),
+                                      location: RoutingLocation.rightToLeft));
                             },
                             child:
                                 const ProfileLittleContainer(title: 'Wallet', imageUrl: 'assets/images/im_wallet.png'),
@@ -281,7 +305,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             InkWell(
                               onTap: () {
-                                // Get.to(() => const WishListScreen());
+                                Navigator.of(context).push(RouteHelper.createRoute(
+                                    routeName: const WishlistPage(), location: RoutingLocation.rightToLeft));
                               },
                               child: const CustomProfileListtileWidget(
                                   icon: Icon(
@@ -307,7 +332,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             InkWell(
                               onTap: () {
-                                // Get.to(() => const WinnerCardsScreen());
+                                Navigator.of(context).push(RouteHelper.createRoute(
+                                    routeName: const HistoryPage(), location: RoutingLocation.rightToLeft));
                               },
                               child: const CustomProfileListtileWidget(
                                   icon: Icon(
@@ -363,6 +389,61 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: size.height * 0.03,
+                      ),
+                      CallEmailCard(size: size),
+                      SizedBox(
+                        height: size.height * 0.03,
+                      ),
+                      const ContactMethod(),
+                      SizedBox(
+                        height: size.height * 0.03,
+                      ),
+                      Container(
+                        width: size.width,
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                openBottomSheet(context, size);
+                              },
+                              child: const Text(
+                                'Terms of use',
+                                style: TextStyle(fontSize: 14, color: Color(0xFFA2A2A2)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.005,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                openBottomSheet(context, size);
+                              },
+                              child: const Text('Privacy Policy',
+                                  style: TextStyle(fontSize: 14, color: Color(0xFFA2A2A2))),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.005,
+                            ),
+                            const Text('Delete my account', style: TextStyle(fontSize: 14, color: Color(0xFFA2A2A2))),
+                            SizedBox(
+                              height: size.height * 0.005,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                final value = await context.read<AuthNotifier>().signOut();
+                                if (value == true && context.mounted) {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AuthPage()));
+                                }
+                              },
+                              child: const Text('Logout', style: TextStyle(fontSize: 14, color: Color(0xFFA2A2A2))),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -375,5 +456,153 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  PersistentBottomSheetController openBottomSheet(BuildContext context, Size size) {
+    return showBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: size.height /** 0.93*/,
+            width: size.width,
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: size.width * 0.04, right: size.width * 0.04, top: size.width * 0.15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GoBackButton(
+                        height: 35,
+                        width: 70,
+                        onPressed: () => Navigator.of(context).pop(),
+                        buttonBackColor: const Color(0xFFD9D9D9),
+                      ),
+                      Text(
+                        'User Agreement',
+                        style: GoogleFonts.anton(letterSpacing: 1, fontSize: 25),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: size.width * 0.04, top: size.height * 0.03),
+                  child: const Text(
+                    'User Agreement',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ),
+                Expanded(
+                  child: FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Markdown(
+                          data: snapshot.data.toString(),
+                        );
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                    future: Future.delayed(const Duration(milliseconds: 1000))
+                        .then((value) => rootBundle.loadString('assets/md/privacy_policy.md')),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
+}
+
+class SupportController {
+  static Future<bool> sendEmail({required String mailAddress, required String mailObjective}) async {
+    String? encodeQueryParameters(Map<String, String> params) {
+      return params.entries
+          .map((MapEntry<String, String> e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+          .join('&');
+    }
+
+// ···
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: mailAddress,
+      query: encodeQueryParameters(<String, String>{
+        'subject': mailObjective,
+      }),
+    );
+
+    return await launchUrl(
+      emailLaunchUri,
+    );
+  }
+
+  static Future<bool> makePhoneCall({required String phoneNumber}) async {
+    if (Platform.isIOS) {
+      final Uri phoneUrl = Uri(
+        scheme: 'tel',
+        path: phoneNumber,
+      );
+
+      if (await canLaunchUrl(phoneUrl)) {
+        return await launchUrl(phoneUrl);
+      } else {
+        return false;
+      }
+    } else {
+      final String url = 'tel:$phoneNumber';
+      if (await canLaunchUrl(Uri.parse(url))) {
+        return await launchUrl(
+          Uri.parse(url),
+        );
+      } else {
+        return false;
+      }
+    }
+    //String url = Platform.isIOS ? 'tel://$phoneNumber' : 'tel:$phoneNumber';
+
+    // final String url = 'tel:$phoneNumber';
+    // if (await canLaunchUrl(Uri.parse(url))) {
+    //   return await launchUrl(
+    //     Uri.parse(url),
+    //   );
+    // } else {
+    //   return false;
+    // }
+  }
+
+  static void launchInstagramOrAnyUrl({required String url}) {
+    launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+      webViewConfiguration: const WebViewConfiguration(
+        enableJavaScript: true,
+      ),
+    );
+  }
+
+  static void openWhatsapp({required BuildContext context, required String text, required String number}) async {
+    var whatsapp = number; //+92xx enter like this
+    String whatsappURlAndroid = "whatsapp://send?phone=$whatsapp&text=$text";
+    var whatsappURLIos = "https://wa.me/$whatsapp?text=${Uri.tryParse(text)}";
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunchUrl(Uri.parse(whatsappURLIos))) {
+        await launchUrl(Uri.parse(
+          whatsappURLIos,
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Whatsapp not installed")));
+      }
+    } else {
+      // android , web
+      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+        await launchUrl(Uri.parse(whatsappURlAndroid));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Whatsapp not installed")));
+      }
+    }
   }
 }

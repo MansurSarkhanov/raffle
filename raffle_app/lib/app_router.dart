@@ -43,6 +43,9 @@ final class AppRouter {
               ),
               ChangeNotifierProvider(
                 create: (context) => ProductNotifier(GetIt.instance.get<ProductRepository>())..getProductList(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => ProfileNotifier(GetIt.instance.get<UserInfoRepository>())..getUserInformation(),
               )
             ],
             child: const HomePage(),
@@ -52,7 +55,7 @@ final class AppRouter {
           path: AppRoutes.profile.path,
           name: AppRoutes.profile.name,
           builder: (context, state) => ChangeNotifierProvider(
-              create: (context) => ProfileNotifier(GetIt.instance.get<UserInfoRepository>()..getUserInfo()),
+              create: (context) => ProfileNotifier(GetIt.instance.get<UserInfoRepository>())..getUserInformation(),
               child: const ProfilePage()),
         ),
       ],

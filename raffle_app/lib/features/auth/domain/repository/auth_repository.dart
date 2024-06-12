@@ -11,4 +11,6 @@ abstract class AuthRepository {
       required String surname});
 
   bool checkAuth();
+
+  Future<bool> logout();
 }

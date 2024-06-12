@@ -51,7 +51,7 @@ Future<void> init() async {
   getIt.registerSingleton(AuthNotifier(getIt()));
   getIt.registerSingleton(CampaingListNotifier(getIt())..getCampaingList());
   getIt.registerSingleton(ProductNotifier(getIt()..getProducts()));
-  getIt.registerSingleton(ProfileNotifier(getIt()));
+  getIt.registerSingleton(ProfileNotifier(getIt())..getUserInformation());
 
 
 

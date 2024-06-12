@@ -8,7 +8,6 @@ abstract interface class FirebaseAuthService {
       required String name,
       required String number,
       required String surname});
-  Future<void> signOut();
 }
 
 final class FirebaseAuthServiceImpl implements FirebaseAuthService {
@@ -44,8 +43,5 @@ final class FirebaseAuthServiceImpl implements FirebaseAuthService {
     }
   }
 
-  @override
-  Future<void> signOut() {
-    throw UnimplementedError();
-  }
+
 }

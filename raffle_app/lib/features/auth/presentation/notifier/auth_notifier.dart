@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_state.dart';
 
@@ -41,7 +41,6 @@ class AuthNotifier extends ChangeNotifier {
     } else if (result.isError()) {
       state = AuthError();
       notifyListeners();
-
     }
   }
 
@@ -49,6 +48,17 @@ class AuthNotifier extends ChangeNotifier {
     try {
       final isAuth = authRepository.checkAuth();
       return isAuth;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> signOut() async {
+    try {
+      final isLogut = await authRepository.logout();
+      state = AuthInitial();
+      notifyListeners();
+      return isLogut;
     } catch (e) {
       return false;
     }

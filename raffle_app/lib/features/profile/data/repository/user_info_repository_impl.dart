@@ -15,10 +15,6 @@ class UserInfoRepositoryImpl implements UserInfoRepository {
       final user = await userInforRepository.getUserInfo();
       if (user != null) {
         final userInfoModel = await user.get();
-        print('object');
-
-        print(userInfoModel.data()?.email);
-
         return Success(userInfoModel.data());
       }
       return Error(Exception());

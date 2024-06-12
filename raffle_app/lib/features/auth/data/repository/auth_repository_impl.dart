@@ -35,16 +35,16 @@ final class AuthRepositoryImpl implements AuthRepository {
           email: email, password: password, name: name, number: number, surname: surname);
       if (user != null) {
         final userModel = UserModel(
-          name: name,
-          email: user.email,
-          password: password,
-          uid: user.uid,
-          number: number,
-          surname: surname,
+                name: name,
+                email: user.email,
+                password: password,
+                uid: user.uid,
+                number: number,
+                surname: surname,
                 balance: 0,
                 image:
-                    'https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/im_person.png?alt=media&token=5aa3c7e7-a53d-4d85-ae9e-b24b43d8d03c'
-        ).toJson();
+                    'https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/im_person.png?alt=media&token=5aa3c7e7-a53d-4d85-ae9e-b24b43d8d03c')
+            .toJson();
         if (userModel.isNotEmpty) {
           final firebaseRef = FirebaseReference.users.ref;
           firebaseRef.doc(user.uid).set(userModel);
@@ -70,6 +70,16 @@ final class AuthRepositoryImpl implements AuthRepository {
     try {
       final isAuth = sharedPreference.readBool('logged');
       return isAuth ?? false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> logout() async {
+    try {
+      await sharedPreference.clear();
+      return true;
     } catch (e) {
       return false;
     }

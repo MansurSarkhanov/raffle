@@ -34,6 +34,10 @@ dependencies:
   equatable: ^2.0.5
   another_flushbar: ^1.12.30
   percent_indicator: ^4.2.3
+  flutter_markdown: ^0.6.15
+  google_fonts: ^6.2.1
+  flutter_screenutil: ^5.9.3
+  chewie: ^1.7.1
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +64,8 @@ flutter:
     - assets/svg/
     - assets/gif/
     - assets/videos/
+    - assets/md/
+
 
 
 
