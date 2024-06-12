@@ -13,6 +13,7 @@ import 'package:raffle_app/features/profile/presentation/notifier/profile_state.
 import 'package:raffle_app/features/profile/presentation/page/history_page.dart';
 import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view.dart';
 import 'package:raffle_app/features/profile/presentation/page/wishlist_page.dart';
+import 'package:raffle_app/features/profile/presentation/widgets/select_language.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../injetion.dart';
@@ -37,6 +38,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBody: true,
+
       backgroundColor: const Color(0xFFF1F1F1),
       body: SafeArea(
         child: Consumer<ProfileNotifier>(
@@ -345,7 +348,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   text: 'History'),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                showModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return SelectLangAndCurrency(size: size);
+                                  },
+                                );
+                              },
                               child: CustomProfileListtileWidget(
                                   icon: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
