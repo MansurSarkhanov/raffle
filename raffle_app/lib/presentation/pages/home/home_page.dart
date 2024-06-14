@@ -17,16 +17,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController tabController;
+  late final TabController restorantTabController;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 5, vsync: this);
-
+    restorantTabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
       setState(() {});
     });
+    restorantTabController.addListener(() {
+      setState(() {});
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -38,11 +43,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           : CustomSelectionAppbar(
               controller: tabController,
             ),
-      floatingActionButton: const FabButton(),
+      floatingActionButton: tabController.index == 2 ? null : const FabButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
-        child: BottomNavBar(tabController: tabController),
+        child: tabController.index == 2
+            ? RestorantBottomNavBar(tabController: restorantTabController)
+            : BottomNavBar(tabController: tabController),
       ),
       body: TabBarView(
         controller: tabController,

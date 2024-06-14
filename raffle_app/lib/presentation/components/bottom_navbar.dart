@@ -101,3 +101,111 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 }
+class RestorantBottomNavBar extends StatefulWidget {
+  const RestorantBottomNavBar({
+    super.key,
+    required this.tabController,
+  });
+
+  final TabController tabController;
+
+  @override
+  State<RestorantBottomNavBar> createState() => _RestorantBottomNavBarState();
+}
+
+class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        color: const Color(0xFFF9F9F9),
+        boxShadow: [
+          BoxShadow(color: Colors.grey.shade500, blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 0))
+        ],
+      ),
+      child: TabBar(
+        onTap: (value) {
+          widget.tabController.index = value;
+        },
+        splashBorderRadius: BorderRadius.circular(18),
+        dividerColor: Colors.transparent,
+        indicatorColor: Colors.transparent,
+        padding: const EdgeInsets.all(0),
+        controller: widget.tabController,
+        labelPadding: EdgeInsets.zero,
+        labelColor: const Color(0xFF505050),
+        labelStyle: const TextStyle(fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400),
+        tabs: [
+          Tab(
+            text: "Restaurant",
+            icon: widget.tabController.index == 0
+                ? SvgPicture.asset(
+                    'assets/svg/ic_restorant.svg',
+                    height: 19,
+                    width: 20,
+                  )
+                : Image.asset(
+                    'assets/images/im_restorant.png',
+                    height: 19,
+                    width: 20,
+                  ),
+          ),
+          Tab(
+              text: "Hotel",
+              icon: widget.tabController.index == 1
+                  ? Image.asset(
+                      'assets/images/im_hotel.png',
+                      height: 19,
+                      width: 23.87,
+                    )
+                  : Image.asset(
+                      'assets/images/im_hotel.png',
+                      height: 19,
+                      width: 23.87,
+                    )),
+          Tab(
+              text: "Scan",
+              icon: widget.tabController.index == 3
+                  ? Image.asset(
+                      'assets/images/im_scan.png',
+                      height: 19,
+                      width: 21,
+                    )
+                  : Image.asset(
+                      'assets/images/im_scan.png',
+                      height: 19,
+                      width: 20,
+                    )),
+          Tab(
+              text: "Shop",
+              icon: widget.tabController.index == 3
+                  ? Image.asset(
+                      'assets/images/im_shop.png',
+                      height: 19,
+                      width: 20,
+                    )
+                  : Image.asset(
+                      'assets/images/im_shop.png',
+                      height: 19,
+                      width: 20,
+                    )),
+          Tab(
+              text: "Raffle",
+              icon: widget.tabController.index == 4
+                  ? Image.asset(
+                      'assets/images/im_raffle.png',
+                      height: 19,
+                      width: 21,
+                    )
+                  : Image.asset(
+                      'assets/images/im_raffle.png',
+                      height: 19,
+                      width: 21,
+                    )),
+        ],
+      ),
+    );
+  }
+}

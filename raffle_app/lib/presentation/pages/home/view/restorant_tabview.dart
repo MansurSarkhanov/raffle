@@ -31,7 +31,7 @@ class RestorantTabView extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 50),
             itemCount: restaurants.length,
             itemBuilder: (context, index) {
               final items = restaurants;
