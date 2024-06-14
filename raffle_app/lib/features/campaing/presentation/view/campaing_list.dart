@@ -34,8 +34,9 @@ class _CampaingListState extends State<CampaingList> {
                                 boxShadow: const [
                                   BoxShadow(
                                     color: Colors.grey,
-                                    blurRadius: 10,
-                                    offset: Offset(0, 0),
+                                  blurRadius: 14,
+                                  spreadRadius: -8,
+                                  offset: Offset(3, -3),
                                   )
                                 ]),
                             child: Padding(

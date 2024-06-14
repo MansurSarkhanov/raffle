@@ -38,6 +38,8 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.3
   chewie: ^1.7.1
+  dismissible_page: ^1.0.2
+  story: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +67,8 @@ flutter:
     - assets/gif/
     - assets/videos/
     - assets/md/
+    - assets/demo/
+
 
 
 

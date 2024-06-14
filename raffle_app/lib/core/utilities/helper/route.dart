@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 enum RoutingLocation { leftToRight, rightToLeft, upToDown }
 
 class RouteHelper {
-  static Route createRoute({required Widget routeName, required RoutingLocation location}) {
+  static Route createRoute(
+      {required Widget routeName,
+      required RoutingLocation location,
+      int transitionTime = 500,
+      int reverseTransitionTime = 500}) {
     Offset startOffset;
     switch (location) {
       case RoutingLocation.leftToRight:
@@ -28,8 +32,8 @@ class RouteHelper {
           child: child,
         );
       },
-      transitionDuration: const Duration(milliseconds: 500),
-      reverseTransitionDuration: const Duration(milliseconds: 550),
+      transitionDuration: Duration(milliseconds: transitionTime),
+      reverseTransitionDuration: Duration(milliseconds: reverseTransitionTime),
     );
   }
 }

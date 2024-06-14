@@ -118,7 +118,6 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                               ? BlinkingWidget(
                                   controller: _controller,
                                   child: LinearPercentIndicator(
-                                      center: Text("${productModel?[index].percent.toString()} %"),
                                       animation: true,
                                       barRadius: const Radius.circular(25),
                                       lineHeight: 17.64,
@@ -129,18 +128,15 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                 )
                               :
                           LinearPercentIndicator(
-                              barRadius: const Radius.circular(52),
-                              animation: false,
+                                  barRadius: const Radius.circular(52),
                               // curve:Curves.bounceOut,
                               animationDuration: 1500,
-                              lineHeight: 16,
+                                  lineHeight: 17.64,
                               percent: productModel![index].percent! / 100,
                               padding: EdgeInsets.zero,
                               backgroundColor: const Color(0xfff1f1f1),
                               progressColor: Colors.yellow[700],
-                              center: Center(
-                                child: Text("${productModel[index].percent.toString()} %"),
-                              )),
+                                ),
                           const SizedBox(
                             height: 10,
                           ),

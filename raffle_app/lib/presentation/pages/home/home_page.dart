@@ -6,6 +6,7 @@ import '../../components/custom_selection_appbar.dart';
 import '../../components/fab_button.dart';
 import 'home_tab.dart';
 import 'inbox_ticket_tab.dart';
+import 'view/restorant_tabview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,7 +33,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: true,
       backgroundColor: const Color(0xFFEBEBEB),
-      appBar: tabController.index == 4 || tabController.index == 1 ? null : const CustomSelectionAppbar(),
+      appBar: tabController.index == 4 || tabController.index == 1
+          ? null
+          : CustomSelectionAppbar(
+              controller: tabController,
+            ),
       floatingActionButton: const FabButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Padding(
@@ -45,7 +50,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: [
           HomeTab(size: size),
           const LiveView(),
-          HomeTab(size: size),
+          const RestorantTabView(),
           HomeTab(size: size),
           InboxTicketTab(size: size),
         ],

@@ -1,9 +1,11 @@
+import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/gif_path_ext.dart';
 import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
+import 'package:raffle_app/presentation/pages/home/view/story_view.dart';
 
 import '../../../core/constants/path/gif_path.dart';
 import '../../../core/constants/path/icon_path.dart';
@@ -125,7 +127,9 @@ class HomeTab extends StatelessWidget {
                     GestureDetector(
                       // onTap: () =>
                       //     Get.to(() => const InstagramStoryScreen()),
-                      onTap: () {},
+                      onTap: () {
+                        context.pushTransparentRoute(const StoryView());
+                      },
                       child: Container(
                         width: size.width,
                         // height: 404,
@@ -208,13 +212,11 @@ class HomeTab extends StatelessWidget {
                                             const Text(
                                               'Sort Campaing',
                                               style: TextStyle(
-                                                  color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+                                                  color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700),
                                             ),
                                             const Spacer(),
                                             InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).pop();
-                                              },
+                                              onTap: () => Navigator.of(context).pop(),
                                               child: Container(
                                                 height: 30,
                                                 width: 30,
@@ -230,6 +232,39 @@ class HomeTab extends StatelessWidget {
                                         ),
                                         SizedBox(
                                           height: size.height * 0.04,
+                                        ),
+                                        Column(
+                                          children: [
+                                            buildSortingList(context,
+                                                size: size,
+                                                onPressed: (() {}),
+                                                sortingText: 'Lowest to Highest Price',
+                                                icon: Icons.arrow_upward),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            buildSortingList(context,
+                                                size: size,
+                                                onPressed: (() {}),
+                                                sortingText: 'Highest to Lowest Price',
+                                                icon: Icons.arrow_downward),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            buildSortingList(context,
+                                                size: size,
+                                                onPressed: (() {}),
+                                                sortingText: 'Lowest to Highest Price',
+                                                icon: Icons.arrow_upward),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            buildSortingList(context,
+                                                size: size,
+                                                onPressed: (() {}),
+                                                sortingText: 'Highest to Lowest Price',
+                                                icon: Icons.arrow_downward),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -252,6 +287,30 @@ class HomeTab extends StatelessWidget {
           ]),
         ),
       ],
+    );
+  }
+
+  InkWell buildSortingList(context,
+      {Size? size, required VoidCallback onPressed, required String sortingText, required IconData icon}) {
+    return InkWell(
+      onTap: () {
+        onPressed();
+        Navigator.pop(context);
+      },
+      child: Row(
+        children: [
+          Icon(icon),
+          SizedBox(
+            width: size!.width * 0.02,
+          ),
+          Text(
+            sortingText,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

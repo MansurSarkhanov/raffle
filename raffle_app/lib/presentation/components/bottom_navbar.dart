@@ -29,6 +29,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         onTap: (value) {
           widget.tabController.index = value;
         },
+        
         splashBorderRadius: BorderRadius.circular(18),
         dividerColor: Colors.transparent,
         indicatorColor: Colors.transparent,

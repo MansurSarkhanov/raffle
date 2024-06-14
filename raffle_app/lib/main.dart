@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/app_router.dart';
 import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
+import 'package:raffle_app/notifier/app_index_notifier.dart';
 
 import 'firebase_options.dart';
 import 'injetion.dart';
@@ -25,8 +27,11 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthNotifier(getIt.get<AuthRepository>()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AppIndexNotifier(),
         )
-      ],
+      ],  
       child: const MyApp(),
     ),
   );
@@ -37,15 +42,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp.router(
-      routerConfig: GetIt.instance<AppRouter>().instance,
-      debugShowCheckedModeBanner: false,
-      title: 'Raffle',
-      theme: ThemeData(
-        fontFamily: 'Sans Serif',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      builder: (_, child) {
+        return MaterialApp.router(
+          routerConfig: GetIt.instance<AppRouter>().instance,
+          debugShowCheckedModeBanner: false,
+          title: 'Raffle',
+          theme: ThemeData(
+            fontFamily: 'Sans Serif',
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+        );
+      },
     );
   }
 }
