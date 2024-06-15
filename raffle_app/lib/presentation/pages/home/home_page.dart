@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
+import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
 import '../../components/bottom_navbar.dart';
 import '../../components/custom_selection_appbar.dart';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     tabController = TabController(length: 5, vsync: this);
     restorantTabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
+      
       setState(() {});
     });
     restorantTabController.addListener(() {
@@ -38,18 +40,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: false,
       backgroundColor: const Color(0xFFEBEBEB),
-      appBar: tabController.index == 4 || tabController.index == 1
-          ? null
-          : CustomSelectionAppbar(
+      appBar: tabController.index == 0
+          ? CustomSelectionAppbar(
               controller: tabController,
-            ),
-      floatingActionButton: tabController.index == 2 ? null : const FabButton(),
+            )
+          : null,
+      floatingActionButton: tabController.index == 2
+          ? null
+          : tabController.index == 4
+              ? null
+              : const FabButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
         child: tabController.index == 2
             ? RestorantBottomNavBar(tabController: restorantTabController)
-            : BottomNavBar(tabController: tabController),
+            : tabController.index == 4
+                ? null
+                : BottomNavBar(tabController: tabController),
       ),
       body: TabBarView(
         controller: tabController,
@@ -58,8 +66,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           HomeTab(size: size),
           const LiveView(),
           const RestorantTabView(),
-          HomeTab(size: size),
-          InboxTicketTab(size: size),
+          const OfferView(),
+          InboxTicketTab(
+            controller: tabController,
+          )
         ],
       ),
     );

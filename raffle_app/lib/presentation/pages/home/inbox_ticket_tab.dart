@@ -7,8 +7,8 @@ import 'view/message_view.dart';
 import 'view/ticket_view.dart';
 
 class InboxTicketTab extends StatefulWidget {
-  const InboxTicketTab({super.key, required this.size});
-  final Size size;
+  const InboxTicketTab({super.key, required this.controller});
+  final TabController controller;
 
   @override
   State<InboxTicketTab> createState() => _InboxTicketTabState();
@@ -33,7 +33,11 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GoBackButton(buttonBackColor: const Color(0xFFD9D9D9), onPressed: () {}),
+                GoBackButton(
+                    buttonBackColor: const Color(0xFFD9D9D9),
+                    onPressed: () {
+                      widget.controller.index = 0;
+                    }),
                 Text(
                   'Raffles',
                   style: TextStyle(

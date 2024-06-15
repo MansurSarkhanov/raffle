@@ -105,7 +105,7 @@ class OffersWidget extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           buttonText,
-                          style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700),
+                          style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
                         ),
                       ),
                     ),
