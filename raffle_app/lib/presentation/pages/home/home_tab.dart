@@ -28,13 +28,14 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+
       slivers: [
         SliverAppBar(
           pinned: true,
           elevation: 0,
           expandedHeight: 65,
           toolbarHeight: 0,
-          backgroundColor: const Color(0xFFF1F1F1),
+          backgroundColor: const Color(0xFFEBEBEB),
           flexibleSpace: Padding(
             padding: const EdgeInsets.only(top: 1.50),
             child: FlexibleSpaceBar(

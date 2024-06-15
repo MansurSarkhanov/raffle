@@ -50,7 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 : Image.asset(
                     'assets/images/im_home.png',
                     height: 20,
-                    width: 21,
+                    width: 20,
                   ),
           ),
           Tab(
@@ -58,16 +58,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: widget.tabController.index == 1
                   ? Image.asset(
                       'assets/images/im_live_active.png',
-                      height: 17,
-                      width: 21,
+                      height: 20,
+                      width: 20,
                     )
-                  : SvgPicture.asset(
-              'assets/svg/live.svg',
-              height: 17,
-              width: 21,
+                  : Image.asset(
+                      'assets/images/im_live.png',
+                      height: 20,
+                      width: 20,
                     )
           ),
-          const Tab(text: "Scan", icon: SizedBox(height: 15)),
+          const Tab(text: "Scan", icon: SizedBox(height: 20)),
           Tab(
             text: "Offer",
               icon: widget.tabController.index == 3
@@ -87,13 +87,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: widget.tabController.index == 4
                   ? Image.asset(
                       'assets/images/im_inbox_active.png',
-                      height: 15,
-                      width: 21,
+                      height: 20,
+                      width: 20,
                     )
-                  : SvgPicture.asset(
-              'assets/svg/inbox.svg',
-              height: 15,
-              width: 21,
+                  : Image.asset(
+                      'assets/images/im_inbox.png',
+                      height: 20,
+                      width: 20,
                     )
           ),
         ],

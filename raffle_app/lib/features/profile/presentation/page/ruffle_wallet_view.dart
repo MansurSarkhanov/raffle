@@ -27,8 +27,6 @@ class _RaffleWalletScreenState extends State<RaffleWalletScreen> {
               Row(
                 children: [
                   GoBackButton(
-                    height: 35,
-                    width: 70,
                     onPressed: () {
                       // Get.offAll(
                       //     transition: Transition.leftToRight,

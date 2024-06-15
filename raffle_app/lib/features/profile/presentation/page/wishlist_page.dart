@@ -9,6 +9,8 @@ class WishlistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color(0xFFF1F1F1),
+
       body: Padding(
           padding: EdgeInsets.only(top: size.height * 0.06, left: size.width * 0.04, right: size.width * 0.04),
           child: Column(children: [
@@ -16,8 +18,6 @@ class WishlistPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GoBackButton(
-                    height: 35,
-                    width: 70,
                     buttonBackColor: const Color(0xFFD9D9D9),
                     onPressed: () {
                       Navigator.pop(context);

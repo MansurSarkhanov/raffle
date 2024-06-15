@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GoBackButton extends StatelessWidget {
   final Color buttonBackColor;
-  final double height;
-  final double width;
   final VoidCallback onPressed;
   const GoBackButton({
     super.key,
     required this.buttonBackColor,
     required this.onPressed,
-    required this.height,
-    required this.width,
   });
 
   @override
@@ -20,14 +17,14 @@ class GoBackButton extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: onPressed,
       child: Container(
-        height: height,
-        width: width,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: buttonBackColor),
         child: Container(
-          padding: const EdgeInsetsDirectional.symmetric(horizontal: 25),
-          child: const Image(
+          padding: EdgeInsetsDirectional.symmetric(horizontal: 25.w, vertical: 12.h),
+          child: Image(
             fit: BoxFit.contain,
-            image: AssetImage('assets/icons/ic_back.png'),
+            height: 9.48.h,
+            width: 18.w,
+            image: const AssetImage('assets/icons/ic_back.png'),
           ),
         ),
       ),

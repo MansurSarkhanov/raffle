@@ -61,8 +61,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           GoBackButton(
-                            height: 35,
-                            width: 70,
                             buttonBackColor: const Color(0xFFD9D9D9),
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -486,8 +484,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GoBackButton(
-                        height: 35,
-                        width: 70,
                         onPressed: () => Navigator.of(context).pop(),
                         buttonBackColor: const Color(0xFFD9D9D9),
                       ),

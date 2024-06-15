@@ -22,7 +22,7 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
     return Consumer<AppIndexNotifier>(builder: (context, appIndexNotifier, child) {
       return AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xFFF1F1F1),
+        backgroundColor: const Color(0xFFEBEBEB),
         toolbarHeight: 50,
         title: Row(
           children: [
@@ -30,7 +30,6 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
               children: [
                 GestureDetector(
                   onTap: () {
-                    appIndexNotifier.setIndex(0);
                     Navigator.push(
                       context,
                       RouteHelper.createRoute(
@@ -111,7 +110,6 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
             ),
             GestureDetector(
               onTap: () {
-                appIndexNotifier.setIndex(2);
               },
               child: Container(
                 width: 55.w,

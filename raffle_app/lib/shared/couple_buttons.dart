@@ -29,7 +29,10 @@ class _CoupleButtonsState extends State<CoupleButtons> {
   Widget build(BuildContext context) {
     return Container(
       decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(widget.borderRadius), color: const Color(0xFFE1E1E1)),
+          BoxDecoration(
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          color: const Color(0xFFE1E1E1),
+          border: Border.all(color: Colors.grey.shade400)),
       child: Row(
         children: [
           Expanded(
@@ -48,6 +51,9 @@ class _CoupleButtonsState extends State<CoupleButtons> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: widget.indexFromOut == 0 ? Colors.white : const Color(0xFFE1E1E1),
+                    border: widget.indexFromOut == 0
+                        ? Border.all(color: Colors.grey.shade400, strokeAlign: BorderSide.strokeAlignOutside)
+                        : null,
                     borderRadius: BorderRadius.circular(widget.borderRadius)),
                 child: Text(
                   widget.buttonText1,
@@ -71,7 +77,11 @@ class _CoupleButtonsState extends State<CoupleButtons> {
                   height: widget.height,
                   decoration: BoxDecoration(
                       color: (widget.indexFromOut == 1 ? Colors.white : const Color(0xFFE1E1E1)),
-                      borderRadius: BorderRadius.circular(widget.borderRadius)),
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
+                    border: widget.indexFromOut == 1
+                        ? Border.all(color: Colors.grey.shade400, strokeAlign: BorderSide.strokeAlignOutside)
+                        : null,
+                  ),
                   child: Text(widget.buttonText2, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700))),
             ),
           ),
