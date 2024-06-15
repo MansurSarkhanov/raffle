@@ -445,7 +445,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               onTap: () async {
                                 final value = await context.read<AuthNotifier>().signOut();
                                 if (value == true && context.mounted) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AuthPage()));
+                                  Navigator.pushReplacement(
+                                      context, MaterialPageRoute(builder: (context) => const AuthPage()));
                                 }
                               },
                               child: const Text('Logout', style: TextStyle(fontSize: 14, color: Color(0xFFA2A2A2))),

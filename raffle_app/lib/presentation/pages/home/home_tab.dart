@@ -27,8 +27,7 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-
+    return CustomScrollView( 
       slivers: [
         SliverAppBar(
           pinned: true,

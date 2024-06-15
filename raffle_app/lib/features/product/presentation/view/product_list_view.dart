@@ -3,6 +3,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/product/presentation/notifier/product_notifier.dart';
 import 'package:raffle_app/features/product/presentation/notifier/product_state.dart';
+import 'package:raffle_app/presentation/pages/home/view/product_detail.dart';
 
 import '../../../../presentation/components/shimmer_selling_fast.dart';
 import '../widgets/blinking_liner_animation.dart';
@@ -26,6 +27,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
       vsync: this,
     )..repeat();
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -48,123 +50,136 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
             scrollDirection: Axis.horizontal,
             itemCount: productList?.length,
             itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Container(
-                    width: 150,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 6, right: 6),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Spacer(),
-                          Container(
-                            height: 70.58,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                image: DecorationImage(image: NetworkImage(productModel?[index].image ?? ''))),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Prize: ${productModel?[index].prize ?? ''}",
-                            maxLines: 2,
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              overflow: TextOverflow.ellipsis,
-                              fontFamily: 'Helvetica Neue',
-                              fontWeight: FontWeight.w700,
+              return InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    useSafeArea: true,
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return ProductDetail(
+                        model: productModel[index],
+                      );
+                    },
+                  );
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      width: 150,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 6, right: 6),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Spacer(),
+                            Container(
+                              height: 70.58,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  image: DecorationImage(image: NetworkImage(productModel?[index].image ?? ''))),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          Text(
-                            "Buy: ${productModel?[index].buy ?? ''}",
-                            maxLines: 2,
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                              color: Color(0xFFA1A1A1),
-                              fontSize: 11,
-                              overflow: TextOverflow.ellipsis,
-                              fontFamily: 'Helvetica Neue',
-                              fontWeight: FontWeight.w700,
+                            const SizedBox(
+                              height: 5,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          Text(
-                            "USD: ${productModel?[index].price ?? ''}",
-                            maxLines: 2,
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                              color: Color(0xFFA1A1A1),
-                              fontSize: 11,
-                              overflow: TextOverflow.ellipsis,
-                              fontFamily: 'Helvetica Neue',
-                              fontWeight: FontWeight.w700,
+                            Text(
+                              "Prize: ${productModel?[index].prize ?? ''}",
+                              maxLines: 2,
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                overflow: TextOverflow.ellipsis,
+                                fontFamily: 'Helvetica Neue',
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          productModel?[index].isAnimating ?? false
-                              ? BlinkingWidget(
-                                  controller: _controller,
-                                  child: LinearPercentIndicator(
-                                      animation: true,
-                                      barRadius: const Radius.circular(25),
-                                      lineHeight: 17.64,
-                                      padding: EdgeInsets.zero,
-                                      progressColor: productModel?[index] == 0 ? Colors.green : Colors.yellow[700],
-                                      percent: productModel![index].percent! / 100,
-                                      backgroundColor: const Color(0xffE6E6E6)),
-                                )
-                              :
-                          LinearPercentIndicator(
-                                  barRadius: const Radius.circular(52),
-                              // curve:Curves.bounceOut,
-                              animationDuration: 1500,
-                                  lineHeight: 17.64,
-                              percent: productModel![index].percent! / 100,
-                              padding: EdgeInsets.zero,
-                              backgroundColor: const Color(0xfff1f1f1),
-                              progressColor: Colors.yellow[700],
+                            const SizedBox(
+                              height: 3,
+                            ),
+                            Text(
+                              "Buy: ${productModel?[index].buy ?? ''}",
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                color: Color(0xFFA1A1A1),
+                                fontSize: 11,
+                                overflow: TextOverflow.ellipsis,
+                                fontFamily: 'Helvetica Neue',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 3,
+                            ),
+                            Text(
+                              "USD: ${productModel?[index].price ?? ''}",
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                color: Color(0xFFA1A1A1),
+                                fontSize: 11,
+                                overflow: TextOverflow.ellipsis,
+                                fontFamily: 'Helvetica Neue',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 2,
+                            ),
+                            productModel?[index].isAnimating ?? false
+                                ? BlinkingWidget(
+                                    controller: _controller,
+                                    child: LinearPercentIndicator(
+                                        animation: true,
+                                        barRadius: const Radius.circular(25),
+                                        lineHeight: 17.64,
+                                        padding: EdgeInsets.zero,
+                                        progressColor: productModel?[index] == 0 ? Colors.green : Colors.yellow[700],
+                                        percent: productModel![index].percent! / 100,
+                                        backgroundColor: const Color(0xffE6E6E6)),
+                                  )
+                                : LinearPercentIndicator(
+                                    barRadius: const Radius.circular(52),
+                                    // curve:Curves.bounceOut,
+                                    animationDuration: 1500,
+                                    lineHeight: 17.64,
+                                    percent: productModel![index].percent! / 100,
+                                    padding: EdgeInsets.zero,
+                                    backgroundColor: const Color(0xfff1f1f1),
+                                    progressColor: Colors.yellow[700],
+                                  ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${productModel[index].leftPrice}',
+                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${productModel[index].leftPrice}',
-                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                '/${productModel[index].rightPrice} sold',
-                                style: const TextStyle(fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          const Spacer()
-                        ],
+                                const SizedBox(
+                                  width: 3,
+                                ),
+                                Text(
+                                  '/${productModel[index].rightPrice} sold',
+                                  style: const TextStyle(fontSize: 13),
+                                ),
+                              ],
+                            ),
+                            const Spacer()
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 12.9,
-                  ),
-                ],
+                    const SizedBox(
+                      width: 12.9,
+                    ),
+                  ],
+                ),
               );
             },
           );

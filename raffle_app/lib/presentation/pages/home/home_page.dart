@@ -7,7 +7,7 @@ import '../../components/custom_selection_appbar.dart';
 import '../../components/fab_button.dart';
 import 'home_tab.dart';
 import 'inbox_ticket_tab.dart';
-import 'view/restorant_tabview.dart';
+import 'view/restorant/restorant_tabview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     tabController = TabController(length: 5, vsync: this);
     restorantTabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
-      
       setState(() {});
     });
     restorantTabController.addListener(() {
@@ -40,7 +39,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: false,
       backgroundColor: const Color(0xFFEBEBEB),
-      appBar: tabController.index == 0
+      appBar: tabController.index == 0 || tabController.index == 2
           ? CustomSelectionAppbar(
               controller: tabController,
             )
@@ -65,7 +64,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: [
           HomeTab(size: size),
           const LiveView(),
-          const RestorantTabView(),
+          RestorantTabView(restorantTabController: restorantTabController),
           const OfferView(),
           InboxTicketTab(
             controller: tabController,

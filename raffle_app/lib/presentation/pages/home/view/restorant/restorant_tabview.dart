@@ -2,10 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 
-import '../widgets/restorant_card.dart';
+import '../../widgets/restorant_card.dart';
 
 class RestorantTabView extends StatelessWidget {
-  const RestorantTabView({super.key});
+  const RestorantTabView({super.key, required this.restorantTabController});
+  final TabController restorantTabController;
+  @override
+  Widget build(BuildContext context) {
+    return TabBarView(
+      controller: restorantTabController,
+      children: [
+        const RestorantView(),
+        Container(
+          color: Colors.red,
+        ),
+        Container(
+          color: Colors.green,
+        ),
+        Container(
+          color: Colors.yellow,
+        ),
+        Container(
+          color: Colors.blue,
+        )
+      ],
+    );
+  }
+}
+
+class RestorantView extends StatelessWidget {
+  const RestorantView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +59,11 @@ class RestorantTabView extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 50),
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              top: 10,
+            ),
             itemCount: restaurants.length,
             itemBuilder: (context, index) {
               final items = restaurants;

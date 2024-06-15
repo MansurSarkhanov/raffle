@@ -141,13 +141,13 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
           Tab(
             text: "Restaurant",
             icon: widget.tabController.index == 0
-                ? SvgPicture.asset(
-                    'assets/svg/ic_restorant.svg',
+                ? Image.asset(
+                    'assets/icons/ic_restorant_active.png',
                     height: 19,
                     width: 20,
                   )
                 : Image.asset(
-                    'assets/images/im_restorant.png',
+                    'assets/icons/ic_restorant.png',
                     height: 19,
                     width: 20,
                   ),
@@ -156,12 +156,12 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
               text: "Hotel",
               icon: widget.tabController.index == 1
                   ? Image.asset(
-                      'assets/images/im_hotel.png',
+                      'assets/icons/ic_bed_active.png',
                       height: 19,
                       width: 23.87,
                     )
                   : Image.asset(
-                      'assets/images/im_hotel.png',
+                      'assets/icons/ic_bed.png',
                       height: 19,
                       width: 23.87,
                     )),
@@ -169,12 +169,12 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
               text: "Scan",
               icon: widget.tabController.index == 3
                   ? Image.asset(
-                      'assets/images/im_scan.png',
+                      'assets/icons/ic_scan.png',
                       height: 19,
                       width: 21,
                     )
                   : Image.asset(
-                      'assets/images/im_scan.png',
+                      'assets/icons/ic_scan.png',
                       height: 19,
                       width: 20,
                     )),
@@ -182,12 +182,13 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
               text: "Shop",
               icon: widget.tabController.index == 3
                   ? Image.asset(
-                      'assets/images/im_shop.png',
+                      'assets/icons/ic_shop_active.png',
                       height: 19,
                       width: 20,
                     )
                   : Image.asset(
-                      'assets/images/im_shop.png',
+                      'assets/icons/ic_shop.png',
+
                       height: 19,
                       width: 20,
                     )),
@@ -195,15 +196,15 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
               text: "Raffle",
               icon: widget.tabController.index == 4
                   ? Image.asset(
-                      'assets/images/im_raffle.png',
-                      height: 19,
-                      width: 21,
+                      'assets/images/im_inbox_active.png',
+                      height: 20,
+                      width: 20,
                     )
                   : Image.asset(
-                      'assets/images/im_raffle.png',
-                      height: 19,
-                      width: 21,
-                    )),
+                      'assets/images/im_inbox.png',
+                      height: 20,
+                      width: 20,
+                    ))
         ],
       ),
     );

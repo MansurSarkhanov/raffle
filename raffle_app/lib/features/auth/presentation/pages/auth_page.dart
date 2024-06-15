@@ -27,8 +27,13 @@ class _AuthPageState extends State<AuthPage> {
     _authNotifier.addListener(
       () {
         final authNotifier = _authNotifier.state;
-        if (authNotifier is AuthSuccess && mounted) {
+        if (authNotifier is AuthSuccess) {
           context.replaceNamed(AppRoutes.home.name);
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(
+          //   builder: (context) {
+          //     return const HomePage();
+          //   },
+          // ));
         } else if (authNotifier is AuthError) {
           openFlushbar(context,
               message: "Yeniden cəhd edin",

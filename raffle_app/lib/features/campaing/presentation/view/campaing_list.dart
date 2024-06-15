@@ -125,7 +125,7 @@ class _CampaingListState extends State<CampaingList> {
                         ),
                       ))
                 .toList()
-              ..add(const InkWell(child: SizedBox(height: 50))),
+              ..add(const InkWell(child: SizedBox(height: 10))),
           );
         }
         return const Center(child: Text('Something went wrong'));

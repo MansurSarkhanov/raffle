@@ -6,8 +6,7 @@ abstract class AuthState extends Equatable {
 }
 
 final class AuthInitial extends AuthState {
-  @override
-  List<Object> get props => [];
+
 }
 
 final class AuthProgress extends AuthState {}

@@ -12,6 +12,7 @@ class AuthNotifier extends ChangeNotifier {
     notifyListeners();
     final result = await authRepository.loginWithEmailAndPassword(email: email, password: password);
     if (result.isSuccess()) {
+      print('sdfsdfsdf');
       state = AuthSuccess();
       notifyListeners();
     } else if (result.isError()) {
