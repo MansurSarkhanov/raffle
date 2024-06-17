@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/presentation/pages/wallet/wallet_card_page.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/path/image_path.dart';
@@ -36,8 +37,8 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                           routeName: ChangeNotifierProvider.value(
                               value: context.read<ProfileNotifier>(), child: const ProfilePage()),
                           location: RoutingLocation.leftToRight,
-                          transitionTime: 250,
-                          reverseTransitionTime: 250),
+                          transitionTime: 400,
+                          reverseTransitionTime: 400),
                     );
                   },
                   child: Container(
@@ -110,6 +111,15 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
             ),
             GestureDetector(
               onTap: () {
+                Navigator.push(
+                  context,
+                  RouteHelper.createRoute(
+                      routeName: ChangeNotifierProvider.value(
+                          value: context.read<ProfileNotifier>(), child: const WalletCardPage()),
+                      location: RoutingLocation.rightToLeft,
+                      transitionTime: 500,
+                      reverseTransitionTime: 250),
+                );
               },
               child: Container(
                 width: 55.w,

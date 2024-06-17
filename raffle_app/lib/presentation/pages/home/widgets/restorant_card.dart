@@ -5,9 +5,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:raffle_app/presentation/pages/home/view/restorant/restorant_detail_view.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard({super.key, required this.restaurant});
+  const RestaurantCard({super.key, required this.restaurant, required this.tabController});
   final RestaurantModel restaurant;
-
+final TabController tabController;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,7 +16,9 @@ class RestaurantCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) {
-            return const RestorantDetailView();
+            return RestorantDetailView(
+              tabController: tabController,
+            );
           },
         ));
       },

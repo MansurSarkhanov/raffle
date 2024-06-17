@@ -12,7 +12,7 @@ class RestorantTabView extends StatelessWidget {
     return TabBarView(
       controller: restorantTabController,
       children: [
-        const RestorantView(),
+        RestorantView(tabController: restorantTabController),
         Container(
           color: Colors.red,
         ),
@@ -33,7 +33,9 @@ class RestorantTabView extends StatelessWidget {
 class RestorantView extends StatelessWidget {
   const RestorantView({
     super.key,
+    required this.tabController,
   });
+  final TabController tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class RestorantView extends StatelessWidget {
               return Column(
                 children: [
                   RestaurantCard(
+                    tabController: tabController,
                     restaurant: items[index],
                   ),
                   const SizedBox(

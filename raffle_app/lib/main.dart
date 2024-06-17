@@ -50,7 +50,6 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Raffle',
           theme: ThemeData(
-            fontFamily: 'Sans Serif',
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),

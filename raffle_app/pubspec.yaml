@@ -78,9 +78,19 @@ flutter:
   fonts:
     - family: Noveo Sans
       fonts:
-        # - asset: assets/fonts/NoveoSans-BlackCond.ttf 
         - asset: assets/fonts/NoveoSans-Bold.ttf
-    - family: Sans Serif
+    - family: Helvetica
       fonts:
+        - asset: assets/fonts/helvetica/HelveticaNeueBold.ttf
+          weight: 700
         - asset: assets/fonts/helvetica/HelveticaNeueMedium.otf
+          weight: 600
+        - asset: assets/fonts/helvetica/HelveticaNeueMedium400.otf
+          weight: 500
+        - asset: assets/fonts/helvetica/HelveticaNeueLight.ttf
+          weight: 400
+        - asset: assets/fonts/helvetica/HelveticaNeueThin.otf
+          weight: 300
+        - asset: assets/fonts/helvetica/HelveticaNeueUltraLight.otf
+          weight: 200
 
