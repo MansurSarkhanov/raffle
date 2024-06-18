@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 
 import '../../widgets/restorant_card.dart';
+import 'hotels_view.dart';
 
 class RestorantTabView extends StatelessWidget {
   const RestorantTabView({super.key, required this.restorantTabController});
@@ -13,9 +14,7 @@ class RestorantTabView extends StatelessWidget {
       controller: restorantTabController,
       children: [
         RestorantView(tabController: restorantTabController),
-        Container(
-          color: Colors.red,
-        ),
+        const HotelsView(),
         Container(
           color: Colors.green,
         ),

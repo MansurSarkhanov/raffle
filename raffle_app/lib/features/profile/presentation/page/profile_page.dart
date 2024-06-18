@@ -11,6 +11,7 @@ import 'package:raffle_app/features/auth/presentation/pages/auth_page.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_state.dart';
 import 'package:raffle_app/features/profile/presentation/page/history_page.dart';
+import 'package:raffle_app/features/profile/presentation/page/privacy_policy_view.dart';
 import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view.dart';
 import 'package:raffle_app/features/profile/presentation/page/wishlist_page.dart';
 import 'package:raffle_app/features/profile/presentation/widgets/select_language.dart';
@@ -24,6 +25,7 @@ import '../widgets/call_email_card.dart';
 import '../widgets/contact_method.dart';
 import '../widgets/custom_profile_listtile.dart';
 import '../widgets/profile_title.dart';
+import 'profile_detail_view.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -293,7 +295,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             InkWell(
                               onTap: () {
-                                // Get.to(() => const PersonalDetailScreen());
+                                Navigator.of(context).push(RouteHelper.createRoute(
+                                    routeName: ChangeNotifierProvider.value(
+                                        value: getIt.get<ProfileNotifier>()..getUserInformation(),
+                                        child: const ProfileDetailView()),
+                                    location: RoutingLocation.rightToLeft));
                               },
                               child: const CustomProfileListtileWidget(
                                   icon: Icon(
@@ -320,7 +326,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             InkWell(
                               onTap: () {
-                                // Get.to(() => const PrivacyPolicyScreen());
+                                Navigator.of(context).push(RouteHelper.createRoute(
+                                    routeName: const PrivacyPolicyView(), location: RoutingLocation.rightToLeft));
                               },
                               child: const CustomProfileListtileWidget(
                                   icon: Icon(

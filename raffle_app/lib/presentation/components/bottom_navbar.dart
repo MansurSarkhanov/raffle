@@ -29,7 +29,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         onTap: (value) {
           widget.tabController.index = value;
         },
-        
         splashBorderRadius: BorderRadius.circular(18),
         dividerColor: Colors.transparent,
         indicatorColor: Colors.transparent,
@@ -43,9 +42,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             text: "Home",
             icon: widget.tabController.index == 0
                 ? SvgPicture.asset(
-              'assets/svg/home_active.svg',
-              height: 20,
-              width: 21,
+                    'assets/svg/home_active.svg',
+                    height: 20,
+                    width: 21,
                   )
                 : Image.asset(
                     'assets/images/im_home.png',
@@ -54,7 +53,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ),
           ),
           Tab(
-            text: "Live",
+              text: "Live",
               icon: widget.tabController.index == 1
                   ? Image.asset(
                       'assets/images/im_live_active.png',
@@ -65,11 +64,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       'assets/images/im_live.png',
                       height: 20,
                       width: 20,
-                    )
-          ),
+                    )),
           const Tab(text: "Scan", icon: SizedBox(height: 20)),
           Tab(
-            text: "Offer",
+              text: "Offer",
               icon: widget.tabController.index == 3
                   ? Image.asset(
                       'assets/images/im_offer_active.png',
@@ -77,13 +75,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       width: 20,
                     )
                   : SvgPicture.asset(
-              'assets/svg/offer.svg',
-              height: 20,
-              width: 20,
-                    )
-          ),
+                      'assets/svg/offer.svg',
+                      height: 20,
+                      width: 20,
+                    )),
           Tab(
-            text: "Inbox",
+              text: "Inbox",
               icon: widget.tabController.index == 4
                   ? Image.asset(
                       'assets/images/im_inbox_active.png',
@@ -94,13 +91,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       'assets/images/im_inbox.png',
                       height: 20,
                       width: 20,
-                    )
-          ),
+                    )),
         ],
       ),
     );
   }
 }
+
 class RestorantBottomNavBar extends StatefulWidget {
   const RestorantBottomNavBar({
     super.key,
@@ -115,12 +112,20 @@ class RestorantBottomNavBar extends StatefulWidget {
 
 class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
   @override
+  void initState() {
+    super.initState();
+    widget.tabController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: const Color(0xFFF9F9F9),
+        color: widget.tabController.index == 1 ? const Color(0xFFF5F5F5) : const Color(0xFFF9F9F9),
         boxShadow: [
           BoxShadow(color: Colors.grey.shade500, blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 0))
         ],
@@ -128,6 +133,7 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
       child: TabBar(
         onTap: (value) {
           widget.tabController.index = value;
+          setState(() {});
         },
         splashBorderRadius: BorderRadius.circular(18),
         dividerColor: Colors.transparent,
@@ -188,7 +194,6 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
                     )
                   : Image.asset(
                       'assets/icons/ic_shop.png',
-
                       height: 19,
                       width: 20,
                     )),
