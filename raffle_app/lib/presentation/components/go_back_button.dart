@@ -24,7 +24,10 @@ class GoBackButton extends StatelessWidget {
             fit: BoxFit.contain,
             height: 9.48.h,
             width: 18.w,
-            image: const AssetImage('assets/icons/ic_back.png'),
+            color: Colors.black,
+            image: const AssetImage(
+              'assets/icons/ic_back.png',
+            ),
           ),
         ),
       ),

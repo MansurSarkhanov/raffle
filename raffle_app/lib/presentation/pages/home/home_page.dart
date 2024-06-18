@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       extendBody: false,
       backgroundColor: restorantTabController.index == 1 ? const Color(0xFFF5F5F5) : const Color(0xFFEBEBEB),
       appBar: tabController.index == 0 || tabController.index == 2
-          ? restorantTabController.index == 1
+          ? restorantTabController.index == 1 || restorantTabController.index == 4
               ? null
               : CustomSelectionAppbar(
               controller: tabController,
@@ -55,7 +55,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
         child: tabController.index == 2
-            ? RestorantBottomNavBar(tabController: restorantTabController)
+            ? restorantTabController.index == 4
+                ? null
+                : RestorantBottomNavBar(tabController: restorantTabController)
             : tabController.index == 4
                 ? null
                 : BottomNavBar(tabController: tabController),

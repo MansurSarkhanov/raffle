@@ -111,13 +111,7 @@ class RestorantBottomNavBar extends StatefulWidget {
 }
 
 class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
-  @override
-  void initState() {
-    super.initState();
-    widget.tabController.addListener(() {
-      setState(() {});
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {

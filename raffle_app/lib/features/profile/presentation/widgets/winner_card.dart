@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:raffle_app/core/constants/colors.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 
 class WinnerCard extends StatelessWidget {
   final String nameOfWinner;
@@ -12,25 +15,28 @@ class WinnerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            height: 170,
-            width: size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: const Color(0xFFEA5A5A),
-            ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          height: 190,
+          width: size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color(0xFFEB595A),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                TitleHeading1Widget(
+                  text:
                   'Draw Result',
-                  style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                  fontSize: 19.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
                 ),
                 const SizedBox(
                   height: 4,
@@ -39,13 +45,15 @@ class WinnerCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Winner: ',
-                      style: TextStyle(color: Colors.white),
+                    const TitleHeading1Widget(
+                      text: 'Winner: ',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
                     ),
-                    Text(
-                      nameOfWinner,
-                      style: const TextStyle(color: Colors.white),
+                    TitleHeading1Widget(
+                      text: nameOfWinner,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
                     ),
                   ],
                 ),
@@ -56,13 +64,17 @@ class WinnerCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Prize: ',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                    TitleHeading1Widget(
+                      text: 'Prize: ',
+                      color: Colors.white,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w700,
                     ),
-                    Text(
-                      prizeName,
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                    TitleHeading1Widget(
+                      text: prizeName,
+                      color: Colors.white,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ],
                 ),
@@ -70,56 +82,82 @@ class WinnerCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Winning Ticket: ',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                    TitleHeading1Widget(
+                      text: 'Winning Ticket: ',
+                      color: Colors.white,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w700,
                     ),
-                    Text(
-                      ticketId,
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                    TitleHeading1Widget(
+                      text: 'RR-00001-00000001',
+                      color: Colors.white,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Draw Date: ',
-                      style: TextStyle(color: Colors.white, fontSize: 11),
+                    TitleHeading1Widget(
+                      text: 'Draw date:',
+                      color: Colors.white,
+                      fontSize: 9.sp,
+                      fontWeight: FontWeight.w400,
+
                     ),
-                    Text(
-                      drawDate,
-                      style: const TextStyle(color: Colors.white, fontSize: 11),
+                    TitleHeading1Widget(
+                      text: ' June 15, 2024 5:25 PM',
+                      color: Colors.white,
+                      fontSize: 9.sp,
+                      fontWeight: FontWeight.w400,
                     ),
                   ],
                 ),
-                const Text(
-                  'Please see the draw video on your social channels.',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
+                TitleHeading1Widget(
+                    text: 'Please see the draw video on our social channels.',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 9.sp
                 ),
               ],
             ),
           ),
-          const Positioned(
+        ),
+        Positioned(
+            top: -38,
+            child: ClipOval(
+              child: Container(
+                color: AppColors.backColor,
+                height: 54,
+                width: 80,
+              ),
+            )),
+        Positioned(
             left: -38,
-            child: CircleAvatar(
-              backgroundColor: Color(0xFFF1F1F1),
-              radius: 25,
-            ),
-          ),
-          const Positioned(
+            child: ClipOval(
+              child: Container(
+                color: AppColors.backColor,
+                height: 72,
+                width: 54,
+              ),
+            )
+        ),
+        Positioned(
             right: -38,
-            child: CircleAvatar(
-              backgroundColor: Color(0xFFF1F1F1),
-              radius: 25,
-            ),
-          )
-        ],
-      ),
+            child: ClipOval(
+              child: Container(
+                color: AppColors.backColor,
+                height: 72,
+                width: 54,
+              ),
+            )
+        )
+      ],
     );
   }
 }

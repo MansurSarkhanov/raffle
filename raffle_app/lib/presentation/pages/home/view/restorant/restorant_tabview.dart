@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 
+import '../../inbox_ticket_tab.dart';
 import '../../widgets/restorant_card.dart';
 import 'hotels_view.dart';
 
@@ -11,6 +12,7 @@ class RestorantTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
+      physics: const NeverScrollableScrollPhysics(),
       controller: restorantTabController,
       children: [
         RestorantView(tabController: restorantTabController),
@@ -21,8 +23,8 @@ class RestorantTabView extends StatelessWidget {
         Container(
           color: Colors.yellow,
         ),
-        Container(
-          color: Colors.blue,
+        InboxTicketTab(
+          controller: restorantTabController,
         )
       ],
     );

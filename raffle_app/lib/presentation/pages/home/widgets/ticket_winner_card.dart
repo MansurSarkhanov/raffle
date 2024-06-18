@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raffle_app/core/constants/colors.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 
 import '../../../../shared/painter/liner_dash_painter.dart';
 
@@ -68,7 +69,7 @@ class TicketWinnerCard extends StatelessWidget {
                       ),
                       Text(
                         "Product: Voucher AZN50",
-                        style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w200),
+                        style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400),
                       ),
                       Text(
                         "Issued on:",
@@ -128,14 +129,16 @@ class TicketWinnerCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Ticket No.',
-                                style: TextStyle(color: Colors.black, fontSize: 10),
+                              TitleHeading1Widget(
+                                text: 'Ticket No.',
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
                               ),
-                              Text(
-                                'RR-00001-00000001',
-                                style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
-                              )
+                              TitleHeading1Widget(
+                                text: 'RR-00001-00000001',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ],
                           ))
                     ],
@@ -144,29 +147,57 @@ class TicketWinnerCard extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             left: -42,
-            child: CircleAvatar(
-              backgroundColor: Color(0xFFEBEBEB),
-              radius: 28,
+            child: ClipOval(
+              // clipper: CustomClip(),
+              child: Container(
+                color: const Color(0xFFEBEBEB),
+                height: 80,
+                width: 55,
+              ),
             ),
           ),
-          const Positioned(
+          Positioned(
             right: -42,
-            child: CircleAvatar(
-              backgroundColor: Color(0xFFEBEBEB),
-              radius: 28,
+            child: ClipOval(
+              child: Container(
+                color: const Color(0xFFEBEBEB),
+                height: 80,
+                width: 55,
+              ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: -42,
-            child: CircleAvatar(
-              backgroundColor: Color(0xFFEBEBEB),
-              radius: 28,
+            child: ClipOval(
+              // clipper: CustomClip(),
+              child: Container(
+                color: const Color(0xFFEBEBEB),
+                height: 55,
+                width: 80,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class CustomClip extends CustomClipper<Rect> {
+  final double left;
+  final double top;
+  final double width;
+  final double hight;
+  CustomClip({required this.left, required this.top, required this.width, required this.hight});
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromLTWH(left, top, width, hight);
+  }
+
+  @override
+  bool shouldReclip(oldClipper) {
+    return false;
   }
 }
