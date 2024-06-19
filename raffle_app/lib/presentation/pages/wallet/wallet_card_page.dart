@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 
+import '../../../core/utilities/helper/route.dart';
 import 'user_cards.dart';
+import 'wallet_history_page.dart';
 
 class WalletCardPage extends StatefulWidget {
   const WalletCardPage({super.key});
@@ -26,6 +28,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
           vertical: 27.0,
         ),
         child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: controller,
           children: [
             CardPageView(
@@ -103,25 +106,31 @@ class CardPageView extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFD9D9D9), borderRadius: BorderRadius.all(Radius.circular(9))),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 9),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TitleHeading1Widget(
-                                  text: 'Все', fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 10,
-                              )
-                            ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(RouteHelper.createRoute(
+                              routeName: const WalletHistoryPage(), location: RoutingLocation.rightToLeft));
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFD9D9D9), borderRadius: BorderRadius.all(Radius.circular(9))),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 9),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TitleHeading1Widget(
+                                    text: 'Все', fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 10,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
@@ -29,6 +30,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       setState(() {});
     });
     restorantTabController.addListener(() {
+      if (restorantTabController.index == 2) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) {
+            return const ScanPage();
+          },
+        ));
+      }
       setState(() {});
     });
   }
@@ -43,8 +51,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ? restorantTabController.index == 1 || restorantTabController.index == 4
               ? null
               : CustomSelectionAppbar(
-              controller: tabController,
-            )
+                  controller: tabController,
+                )
           : null,
       floatingActionButton: tabController.index == 2
           ? null

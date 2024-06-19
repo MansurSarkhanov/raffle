@@ -147,7 +147,10 @@ class UserCards extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(height: 40, width: 40, child: Image.asset(ImagePath.raffle_logo.toPathPng)),
+                            SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: InkWell(onTap: onAction, child: Image.asset(ImagePath.raffle_logo.toPathPng))),
                             Row(
                               children: [
                                 Container(
