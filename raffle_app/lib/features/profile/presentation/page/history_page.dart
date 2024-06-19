@@ -37,11 +37,18 @@ class HistoryPage extends StatelessWidget {
                     nameOfWinner: 'Farid Ahmadov',
                     prizeName: 'USD27,100 Cash',
                     ticketId: 'CG-03265-088063422'),
+                SizedBox(
+                  height: 10,
+                ),
                 WinnerCard(
                     drawDate: 'October 14, 2023 11:45 AM',
                     nameOfWinner: 'Emil Xanmammadov',
                     prizeName: 'USD10,100 Cash',
                     ticketId: 'AB-03265-088063422'),
+                SizedBox(
+                  height: 10,
+                ),
+
                 WinnerCard(
                     drawDate: 'October 23, 2023 9:00 AM',
                     nameOfWinner: 'Semral Sadiqov',

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -15,7 +13,6 @@ import 'package:raffle_app/features/profile/presentation/page/privacy_policy_vie
 import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view.dart';
 import 'package:raffle_app/features/profile/presentation/page/wishlist_page.dart';
 import 'package:raffle_app/features/profile/presentation/widgets/select_language.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../injetion.dart';
 import '../../../../presentation/components/go_back_button.dart';
@@ -25,6 +22,8 @@ import '../widgets/call_email_card.dart';
 import '../widgets/contact_method.dart';
 import '../widgets/custom_profile_listtile.dart';
 import '../widgets/profile_title.dart';
+import '../widgets/support_controller.dart';
+import '../widgets/user_profile_image.dart';
 import 'profile_detail_view.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -41,7 +40,6 @@ class _ProfilePageState extends State<ProfilePage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
-
       backgroundColor: const Color(0xFFF1F1F1),
       body: SafeArea(
         child: Consumer<ProfileNotifier>(
@@ -70,46 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      CircleAvatar(
-                        backgroundColor: const Color(0xFFD9D9D9),
-                        radius: size.height * 0.075,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: size.height * 0.055,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: userInfo != null
-                                    ? NetworkImage(
-                                        userInfo.image ?? '',
-                                      )
-                                    : const AssetImage('assets/images/im_person.png'),
-                                radius: size.height * 0.045,
-                                backgroundColor: const Color(0xFFD9D9D9),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: InkWell(
-                                  onTap: () async {
-                                    await storage.pickImage();
-                                    setState(() {});
-                                  },
-                                  child: CircleAvatar(
-                                    radius: size.height * 0.017,
-                                    backgroundColor: Colors.white,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: size.height * 0.01, vertical: size.height * 0.01),
-                                      child: const Image(image: AssetImage('assets/icons/ic_plus.png')),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      UserProfileImage(size: size, userInfo: userInfo, storage: storage),
                       SizedBox(
                         height: size.height * 0.02,
                       ),
@@ -388,7 +347,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   text: 'Language/Currency'),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                openBottomSheet(context, size);
+                              },
                               child: const CustomProfileListtileWidget(
                                   icon: Icon(
                                     Icons.arrow_forward_ios,
@@ -529,95 +490,5 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
         });
-  }
-}
-
-class SupportController {
-  static Future<bool> sendEmail({required String mailAddress, required String mailObjective}) async {
-    String? encodeQueryParameters(Map<String, String> params) {
-      return params.entries
-          .map((MapEntry<String, String> e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-          .join('&');
-    }
-
-// ···
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: mailAddress,
-      query: encodeQueryParameters(<String, String>{
-        'subject': mailObjective,
-      }),
-    );
-
-    return await launchUrl(
-      emailLaunchUri,
-    );
-  }
-
-  static Future<bool> makePhoneCall({required String phoneNumber}) async {
-    if (Platform.isIOS) {
-      final Uri phoneUrl = Uri(
-        scheme: 'tel',
-        path: phoneNumber,
-      );
-
-      if (await canLaunchUrl(phoneUrl)) {
-        return await launchUrl(phoneUrl);
-      } else {
-        return false;
-      }
-    } else {
-      final String url = 'tel:$phoneNumber';
-      if (await canLaunchUrl(Uri.parse(url))) {
-        return await launchUrl(
-          Uri.parse(url),
-        );
-      } else {
-        return false;
-      }
-    }
-    //String url = Platform.isIOS ? 'tel://$phoneNumber' : 'tel:$phoneNumber';
-
-    // final String url = 'tel:$phoneNumber';
-    // if (await canLaunchUrl(Uri.parse(url))) {
-    //   return await launchUrl(
-    //     Uri.parse(url),
-    //   );
-    // } else {
-    //   return false;
-    // }
-  }
-
-  static void launchInstagramOrAnyUrl({required String url}) {
-    launchUrl(
-      Uri.parse(url),
-      mode: LaunchMode.externalApplication,
-      webViewConfiguration: const WebViewConfiguration(
-        enableJavaScript: true,
-      ),
-    );
-  }
-
-  static void openWhatsapp({required BuildContext context, required String text, required String number}) async {
-    var whatsapp = number; //+92xx enter like this
-    String whatsappURlAndroid = "whatsapp://send?phone=$whatsapp&text=$text";
-    var whatsappURLIos = "https://wa.me/$whatsapp?text=${Uri.tryParse(text)}";
-    if (Platform.isIOS) {
-      // for iOS phone only
-      if (await canLaunchUrl(Uri.parse(whatsappURLIos))) {
-        await launchUrl(Uri.parse(
-          whatsappURLIos,
-        ));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Whatsapp not installed")));
-      }
-    } else {
-      // android , web
-      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
-        await launchUrl(Uri.parse(whatsappURlAndroid));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Whatsapp not installed")));
-      }
-    }
   }
 }

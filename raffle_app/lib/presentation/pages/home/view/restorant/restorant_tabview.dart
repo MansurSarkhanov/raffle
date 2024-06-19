@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/constants/colors.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 
 import '../../inbox_ticket_tab.dart';
-import '../../widgets/restorant_card.dart';
 import 'hotels_view.dart';
+import 'restorant_view.dart';
 
 class RestorantTabView extends StatelessWidget {
   const RestorantTabView({super.key, required this.restorantTabController});
@@ -18,10 +19,11 @@ class RestorantTabView extends StatelessWidget {
         RestorantView(tabController: restorantTabController),
         const HotelsView(),
         Container(
-          color: Colors.green,
+          color: AppColors.backColor,
+
         ),
         Container(
-          color: Colors.yellow,
+          color: AppColors.backColor,
         ),
         InboxTicketTab(
           controller: restorantTabController,
@@ -31,63 +33,6 @@ class RestorantTabView extends StatelessWidget {
   }
 }
 
-class RestorantView extends StatelessWidget {
-  const RestorantView({
-    super.key,
-    required this.tabController,
-  });
-  final TabController tabController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 6,
-        ),
-        CategoryList(),
-        const SizedBox(
-          height: 10,
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
-          child: Row(
-            children: [
-              Text(
-                "168 Restaurants",
-                style: TextStyle(color: AppColors.chipBackColor, fontSize: 14, fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.only(
-              left: 15,
-              right: 15,
-              top: 10,
-            ),
-            itemCount: restaurants.length,
-            itemBuilder: (context, index) {
-              final items = restaurants;
-              return Column(
-                children: [
-                  RestaurantCard(
-                    tabController: tabController,
-                    restaurant: items[index],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  )
-                ],
-              );
-            },
-          ),
-        )
-      ],
-    );
-  }
-}
 
 class CategoryList extends StatelessWidget {
   CategoryList({
@@ -118,13 +63,11 @@ class CategoryList extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 9.5),
-                child: Text(
-                  item,
-                  style: TextStyle(
-                    color: index == 0 ? AppColors.chipUnselectBackColor : AppColors.chipBackColor,
+                child: TitleHeading1Widget(
+                  text: item,
+                  color: index == 0 ? Colors.white : Colors.black,
                     fontWeight: index == 0 ? FontWeight.w500 : FontWeight.w400,
-                    fontSize: 14,
-                  ),
+                  fontSize: 14,
                 ),
               ),
             ),

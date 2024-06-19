@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/product/presentation/notifier/product_notifier.dart';
@@ -31,7 +32,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 240,
       child: Consumer<ProductNotifier>(builder: (context, notifier, child) {
         if (notifier.state is ProductProgress) {
           return ListView.builder(
@@ -66,20 +67,21 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                 child: Row(
                   children: [
                     Container(
-                      width: 150,
+                      width: 140,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 6, right: 6),
+                        padding: const EdgeInsets.only(left: 6, right: 6, top: 6),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Spacer(),
                             Container(
-                              height: 70.58,
+                              height: 110.h,
                               decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
                                   color: Colors.white,
-                                  image: DecorationImage(image: NetworkImage(productModel?[index].image ?? ''))),
+                                image: DecorationImage(image: NetworkImage(productModel?[index].image ?? '')),
+                              ),
                             ),
                             const SizedBox(
                               height: 5,
@@ -135,7 +137,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                     child: LinearPercentIndicator(
                                         animation: true,
                                         barRadius: const Radius.circular(25),
-                                        lineHeight: 17.64,
+                                        lineHeight: 16.h,
                                         padding: EdgeInsets.zero,
                                         progressColor: productModel?[index] == 0 ? Colors.green : Colors.yellow[700],
                                         percent: productModel![index].percent! / 100,
@@ -143,9 +145,10 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                   )
                                 : LinearPercentIndicator(
                                     barRadius: const Radius.circular(52),
-                                    // curve:Curves.bounceOut,
+                                    curve: Curves.bounceOut,
                                     animationDuration: 1500,
-                                    lineHeight: 17.64,
+                                    lineHeight: 16.h,
+
                                     percent: productModel![index].percent! / 100,
                                     padding: EdgeInsets.zero,
                                     backgroundColor: const Color(0xfff1f1f1),
