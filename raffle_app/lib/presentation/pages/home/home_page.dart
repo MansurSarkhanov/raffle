@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     restorantTabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
       setState(() {});
+
     });
     restorantTabController.addListener(() {
       if (restorantTabController.index == 2) {
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBody: false,
+      extendBody: true,
       backgroundColor: restorantTabController.index == 1 ? const Color(0xFFF5F5F5) : const Color(0xFFEBEBEB),
       appBar: tabController.index == 0 || tabController.index == 2
           ? restorantTabController.index == 1 || restorantTabController.index == 4
@@ -70,18 +71,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ? null
                 : BottomNavBar(tabController: tabController),
       ),
-      body: TabBarView(
-        controller: tabController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          HomeTab(size: size),
-          const LiveView(),
-          RestorantTabView(restorantTabController: restorantTabController),
-          const OfferView(),
-          InboxTicketTab(
-            controller: tabController,
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: TabBarView(
+          controller: tabController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            HomeTab(size: size),
+            const LiveView(),
+            RestorantTabView(restorantTabController: restorantTabController),
+            const OfferView(),
+            InboxTicketTab(
+              controller: tabController,
+            )
+          ],
+        ),
       ),
     );
   }

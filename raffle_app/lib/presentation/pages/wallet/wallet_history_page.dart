@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/components/go_back_button.dart';
 
@@ -94,24 +95,21 @@ class _WalletHistoryPageState extends State<WalletHistoryPage> {
             child: ListView.builder(
               itemCount: 5,
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(bottom: 24.0, left: 12, right: 12),
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 24.0, left: 12, right: 12),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.red,
-                      ),
-                      SizedBox(
+                      SvgPicture.asset('assets/svg/ic_empty_user.svg'),
+                      const SizedBox(
                         width: 12,
                       ),
-                      TitleHeading1Widget(
+                      const TitleHeading1Widget(
                         text: 'Emil H.',
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
-                      Spacer(),
-                      TitleHeading1Widget(
+                      const Spacer(),
+                      const TitleHeading1Widget(
                         text: '+125 \$',
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

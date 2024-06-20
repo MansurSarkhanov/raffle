@@ -200,7 +200,44 @@ class UserCards extends StatelessWidget {
                                 child: InkWell(onTap: onAction, child: Image.asset(ImagePath.raffle_logo.toPathPng))),
                           ],
                         ),
-                        Row(
+                        cardColor == 'green'
+                            ? 
+                            Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      decoration:
+                                          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 12.0),
+                                        child: Center(
+                                          child: TitleHeading1Widget(
+                                              text: 'Withdraw', color: Colors.black, fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF40593A),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 12.0),
+                                        child: Center(
+                                          child: TitleHeading1Widget(
+                                              text: 'Top-up', color: Colors.white, fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
                           children: [
                             Expanded(
                               child: Container(
@@ -247,7 +284,7 @@ class UserCards extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                              )
                       ],
                     ),
             ),

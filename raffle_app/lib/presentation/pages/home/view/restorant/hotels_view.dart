@@ -1,36 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:raffle_app/presentation/pages/map/map_page.dart';
+
+import 'hotel_detail_view.dart';
 
 class HotelModel {
   final String name;
   final String location;
   final String imageUrl;
-  HotelModel({required this.name, required this.location, required this.imageUrl});
+  final String detailImageUrl;
+  HotelModel({
+    required this.name,
+    required this.location,
+    required this.imageUrl,
+    required this.detailImageUrl,
+  });
 }
 
 final List<HotelModel> hotels = [
   HotelModel(
     imageUrl: 'assets/images/im_grand_hotel.png',
     location: "Nardaran kd.\nBaku, Azerbaijan",
-    name: "Grand Hayat",
+    name: "Grand Hotel",
+    detailImageUrl: 'assets/images/im_grand_hotel_detail.png',
+    
   ),
   HotelModel(
-    imageUrl: 'assets/images/im_marriot_hotel.png',
-    location: "674 Azadliq Square\nBaku, Azerbaijan",
-    name: "Marriot Hotel",
-  ),
+      imageUrl: 'assets/images/im_marriot_hotel.png',
+      location: "674 Azadliq Square\nBaku, Azerbaijan",
+      name: "Marriot Hotel",
+      detailImageUrl: 'assets/images/im_marriot_hotel_detail.png'),
   HotelModel(
-    imageUrl: 'assets/images/im_seabreaz_hotel.png',
-    location: "Nardaran kd.\nBaku, Azerbaijan",
-    name: "Sea Breeze Hotel",
-  ),
+      imageUrl: 'assets/images/im_seabreaz_hotel.png',
+      location: "Nardaran kd.\nBaku, Azerbaijan",
+      name: "Sea Breeze Hotel",
+      detailImageUrl: 'assets/images/im_seabreaz_hotel_detail.png'),
   HotelModel(
-    imageUrl: 'assets/images/im_excelsior_hotel.png',
-    location: "2 Heydar Aliyev Ave,\nBaku, Azerbaijan",
-    name: "Excelsior Hotel",
-  )
+      imageUrl: 'assets/images/im_excelsior_hotel.png',
+      location: "2 Heydar Aliyev Ave,\nBaku, Azerbaijan",
+      name: "Excelsior Hotel",
+      detailImageUrl: 'assets/images/im_excelsior_hotel_detail.png')
 ];
 
 class HotelsView extends StatelessWidget {
@@ -53,7 +63,7 @@ class HotelsView extends StatelessWidget {
                 hotelHeaderWidget(title: 'Leaving', subTime: '3 Jun 2024'),
               ],
             ),
-            searchHeader(),
+            searchHeader(context),
             const Column(
               children: [
                 SearchHotelResult(),
@@ -68,20 +78,29 @@ class HotelsView extends StatelessWidget {
     );
   }
 
-  Row searchHeader() {
+  Row searchHeader(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 68.w,
-          height: 66.h,
-          decoration: BoxDecoration(
-              color: const Color(0xFFD9D9D9),
-              border: Border.all(color: const Color(0xFF797979), strokeAlign: BorderSide.strokeAlignOutside)),
-          child: Center(
-            child: Image.asset(
-              'assets/icons/ic_location.png',
-              height: 24,
-              width: 24,
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return const MapPage();
+              },
+            ));
+          },
+          child: Container(
+            width: 68.w,
+            height: 66.h,
+            decoration: BoxDecoration(
+                color: const Color(0xFFD9D9D9),
+                border: Border.all(color: const Color(0xFF797979), strokeAlign: BorderSide.strokeAlignOutside)),
+            child: Center(
+              child: Image.asset(
+                'assets/icons/ic_location.png',
+                height: 24,
+                width: 24,
+              ),
             ),
           ),
         ),
@@ -203,10 +222,10 @@ class SearchHotelResult extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {
-                      if (!await launchUrl(Uri.parse('https://nergizrestoran.az/'))) {
-                        throw Exception('Could not launch');
-                      }
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                        return HotelDetailView(hotelModel: hotels[index]);
+                      }));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -26,9 +26,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
       ),
       child: TabBar(
-        onTap: (value) {
-          widget.tabController.index = value;
-        },
+        // onTap: (value) {
+        //   print(value);
+        //   if (value == 2) {
+        //     return;
+        //   }
+        //   widget.tabController.index = value;
+        // },
         splashBorderRadius: BorderRadius.circular(18),
         dividerColor: Colors.transparent,
         indicatorColor: Colors.transparent,
@@ -65,7 +69,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       height: 20,
                       width: 20,
                     )),
-          const Tab(text: "Scan", icon: SizedBox(height: 20)),
+          const Tab(text: "", icon: SizedBox(height: 20)),
           Tab(
               text: "Offer",
               icon: widget.tabController.index == 3
@@ -111,8 +115,6 @@ class RestorantBottomNavBar extends StatefulWidget {
 }
 
 class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(

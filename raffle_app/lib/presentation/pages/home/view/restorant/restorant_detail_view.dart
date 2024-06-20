@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../components/custom_text.dart';
 
@@ -19,7 +20,10 @@ class RestorantDetailView extends StatelessWidget {
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-          const RestorantImageAppBar(),
+          const RestorantImageAppBar(
+            imageUrl: 'assets/images/im_burger.png',
+            isRestorant: true,
+          ),
           SliverPadding(
             padding: EdgeInsets.symmetric(vertical: 39.h, horizontal: 11.w),
             sliver: SliverList(
@@ -162,13 +166,17 @@ class RestorantDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 32,
                   ),
-                  const ContactWidget(
+                  ContactWidget(
+                    onPressed: () async {
+                      if (!await launchUrl(Uri.parse('https://agalarovrest.com/restorany/peach/'))) {}
+                    },
                     text: 'Visit website',
                   ),
                   const SizedBox(
                     height: 12,
                   ),
-                  const ContactWidget(
+                  ContactWidget(
+                    onPressed: () {},
                     text: '+7 (495) 909 00 69',
                   ),
                   const SizedBox(
@@ -282,15 +290,17 @@ class ContactWidget extends StatelessWidget {
   const ContactWidget({
     super.key,
     required this.text,
+    required this.onPressed,
   });
   final String? text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
-      onTap: () {},
+      onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(64),
@@ -326,7 +336,11 @@ class ContactWidget extends StatelessWidget {
 class RestorantImageAppBar extends StatelessWidget {
   const RestorantImageAppBar({
     super.key,
+    required this.imageUrl,
+    this.isRestorant = false,
   });
+  final String imageUrl;
+  final bool? isRestorant;
 
   @override
   Widget build(BuildContext context) {
@@ -336,10 +350,10 @@ class RestorantImageAppBar extends StatelessWidget {
       flexibleSpace: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/im_burger.png'),
+                image: AssetImage(imageUrl),
               ),
             ),
           ),
@@ -392,7 +406,8 @@ class RestorantImageAppBar extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          isRestorant ?? false
+              ? const Positioned(
               bottom: 4,
               right: 12,
               child: Row(
@@ -405,7 +420,8 @@ class RestorantImageAppBar extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   )
                 ],
-              ))
+                  ))
+              : const SizedBox.shrink()
         ],
       ),
     );
