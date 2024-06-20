@@ -39,6 +39,7 @@ class RestorantView extends StatelessWidget {
               left: 15,
               right: 15,
               top: 10,
+              bottom: 30
             ),
             itemCount: restaurants.length,
             itemBuilder: (context, index) {

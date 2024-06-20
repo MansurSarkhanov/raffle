@@ -27,8 +27,8 @@ import '../widgets/user_profile_image.dart';
 import 'profile_detail_view.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
-
+  const ProfilePage({super.key, this.controller});
+  final TabController? controller;
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -176,9 +176,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           InkWell(
                             onTap: () {
-                              //  Get.offAll(() => const ApplicationSelectionScreen(
-                              //     raffleAppIndexComesFromForward: 3,
-                              //   )),
+                              Navigator.of(context).pop();
+                              widget.controller?.index = 4;
                             },
                             child: const ProfileLittleContainer(
                               title: 'Raffle',
@@ -188,18 +187,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           const Spacer(),
                           InkWell(
                             onTap: () {
-                              // Get.offAll(() => const ApplicationSelectionScreen(
-                              //     raffleAppIndexComesFromForward: 2,
-                              //   )),
+                              Navigator.of(context).pop();
+                              widget.controller?.index = 1;
                             },
                             child: const ProfileLittleContainer(title: 'Live', imageUrl: 'assets/images/im_live.png'),
                           ),
                           const Spacer(),
                           InkWell(
                             onTap: () {
-                              // Get.offAll(() => const ApplicationSelectionScreen(
-                              //     raffleAppIndexComesFromForward: 1,
-                              //   )),
+                              Navigator.of(context).pop();
+                              widget.controller?.index = 3;
                             },
                             child: Stack(
                               clipBehavior: Clip.none,

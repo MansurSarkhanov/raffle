@@ -70,9 +70,7 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
             SizedBox(
               height: size.height * 0.03,
             ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
+           
             Expanded(
               child: rafflesScreen[curIndex],
             ),

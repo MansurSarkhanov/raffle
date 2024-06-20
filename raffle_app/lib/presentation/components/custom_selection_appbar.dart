@@ -35,7 +35,7 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                       context,
                       RouteHelper.createRoute(
                           routeName: ChangeNotifierProvider.value(
-                              value: context.read<ProfileNotifier>(), child: const ProfilePage()),
+                              value: context.read<ProfileNotifier>(), child: ProfilePage(controller: controller)),
                           location: RoutingLocation.leftToRight,
                           transitionTime: 400,
                           reverseTransitionTime: 400),

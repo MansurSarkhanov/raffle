@@ -21,13 +21,14 @@ class HomeTab extends StatelessWidget {
   const HomeTab({
     super.key,
     required this.size,
+    required this.controller,
   });
 
   final Size size;
-
+  final TabController controller;
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView( 
+    return CustomScrollView(
       slivers: [
         SliverAppBar(
           pinned: true,
@@ -83,7 +84,9 @@ class HomeTab extends StatelessWidget {
                                     location: RoutingLocation.leftToRight,
                                     routeName: ChangeNotifierProvider.value(
                                       value: context.read<ProfileNotifier>(),
-                                      child: const ProfilePage(),
+                                      child: ProfilePage(
+                                        controller: controller,
+                                      ),
                                     ),
                                   ),
                                 );
