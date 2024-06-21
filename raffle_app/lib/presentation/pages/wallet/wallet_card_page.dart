@@ -28,7 +28,6 @@ class _WalletCardPageState extends State<WalletCardPage> {
           vertical: 27.0,
         ),
         child: PageView(
-          physics: const NeverScrollableScrollPhysics(),
           controller: controller,
           children: [
             CardPageView(

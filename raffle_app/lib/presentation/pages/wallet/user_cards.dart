@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
+import 'package:raffle_app/presentation/pages/wallet/portfolio_page.dart';
 
 import '../../../core/constants/path/image_path.dart';
 import '../../components/custom_text.dart';
@@ -147,10 +148,7 @@ class UserCards extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: InkWell(onTap: onAction, child: Image.asset(ImagePath.raffle_logo.toPathPng))),
+                            SizedBox(height: 40, width: 40, child: Image.asset(ImagePath.raffle_logo.toPathPng)),
                             Row(
                               children: [
                                 Container(
@@ -194,15 +192,11 @@ class UserCards extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: InkWell(onTap: onAction, child: Image.asset(ImagePath.raffle_logo.toPathPng))),
+                            SizedBox(height: 40, width: 40, child: Image.asset(ImagePath.raffle_logo.toPathPng)),
                           ],
                         ),
                         cardColor == 'green'
-                            ? 
-                            Row(
+                            ? Row(
                                 children: [
                                   Expanded(
                                     child: Container(
@@ -238,52 +232,72 @@ class UserCards extends StatelessWidget {
                                 ],
                               )
                             : Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 12.0),
-                                  child: Center(
-                                    child: TitleHeading1Widget(
-                                        text: 'Portfolio', color: Colors.black, fontWeight: FontWeight.w400),
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                          return const PortfolioPage();
+                                        }));
+                                      },
+                                      child: Container(
+                                        decoration:
+                                            BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                          child: Center(
+                                            child: TitleHeading1Widget(
+                                              text: 'Portfolio',
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFF2F576C), borderRadius: BorderRadius.circular(8)),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 12.0),
-                                  child: Center(
-                                    child: TitleHeading1Widget(
-                                        text: 'Depozit', color: Colors.white, fontWeight: FontWeight.w400),
+                                  const SizedBox(
+                                    width: 20,
                                   ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFF2F576C), borderRadius: BorderRadius.circular(8)),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 12.0),
-                                  child: Center(
-                                    child: TitleHeading1Widget(
-                                        text: 'Transfer', color: Colors.white, fontWeight: FontWeight.w400),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFF2F576C), borderRadius: BorderRadius.circular(8)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                        child: Center(
+                                          child: TitleHeading1Widget(
+                                            text: 'Depozit',
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFF2F576C), borderRadius: BorderRadius.circular(8)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                        child: Center(
+                                          child: TitleHeading1Widget(
+                                            text: 'Transfer',
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               )
                       ],
                     ),
