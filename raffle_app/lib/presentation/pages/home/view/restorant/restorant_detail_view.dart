@@ -345,84 +345,88 @@ class RestorantImageAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      pinned: true,
       automaticallyImplyLeading: false,
-      toolbarHeight: 370.h,
-      flexibleSpace: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(imageUrl),
+      backgroundColor: const Color(0xFFF9F9F9),
+      expandedHeight: 370.h,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(imageUrl),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 60,
-            left: 12,
-            right: 12,
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
+            Positioned(
+              top: 60,
+              left: 12,
+              right: 12,
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/icons/ic_arrow_left.png',
+                          height: 18,
+                          width: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
-                        'assets/icons/ic_arrow_left.png',
+                        'assets/icons/ic_adress.png',
                         height: 18,
                         width: 18,
                       ),
                     ),
                   ),
-                ),
-                const Spacer(),
-                Container(
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/icons/ic_adress.png',
-                      height: 18,
-                      width: 18,
+                  SizedBox(width: 8.w),
+                  Container(
+                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        'assets/icons/ic_share.png',
+                        height: 18,
+                        width: 18,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 8.w),
-                Container(
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/icons/ic_share.png',
-                      height: 18,
-                      width: 18,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          isRestorant ?? false
-              ? const Positioned(
-              bottom: 4,
-              right: 12,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TitleHeading1Widget(
-                    text: 'Restoran adı 1/9',
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  )
                 ],
-                  ))
-              : const SizedBox.shrink()
-        ],
+              ),
+            ),
+            isRestorant ?? false
+                ? const Positioned(
+                    bottom: 4,
+                    right: 12,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TitleHeading1Widget(
+                          text: 'Restoran adı 1/9',
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        )
+                      ],
+                    ))
+                : const SizedBox.shrink()
+          ],
+        ),
       ),
     );
   }

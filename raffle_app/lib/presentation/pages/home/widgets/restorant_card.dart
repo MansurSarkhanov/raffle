@@ -32,10 +32,9 @@ final TabController tabController;
             borderRadius: BorderRadius.circular(18),
             boxShadow: const [
               BoxShadow(
-                color: Color(0xFF757575),
+                color: Color(0xFFE3E3E3),
                 offset: Offset(0, 0),
-                blurRadius: 14,
-                spreadRadius: -10
+                blurRadius: 5, spreadRadius: 2
               ),
             
             ],

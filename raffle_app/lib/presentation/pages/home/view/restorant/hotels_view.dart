@@ -93,8 +93,12 @@ class HotelsView extends StatelessWidget {
             width: 68.w,
             height: 66.h,
             decoration: BoxDecoration(
-                color: const Color(0xFFD9D9D9),
-                border: Border.all(color: const Color(0xFF797979), strokeAlign: BorderSide.strokeAlignOutside)),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 10, color: const Color(0xFF858585).withOpacity(0.25), offset: const Offset(0, 2))
+                ],
+                color: const Color(0xFFF9F9F9),
+                border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
             child: Center(
               child: Image.asset(
                 'assets/icons/ic_location.png',
@@ -108,8 +112,12 @@ class HotelsView extends StatelessWidget {
           child: Container(
             height: 66.h,
             decoration: BoxDecoration(
-                color: const Color(0xFFD9D9D9),
-                border: Border.all(color: const Color(0xFF797979), strokeAlign: BorderSide.strokeAlignOutside)),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 10, color: const Color(0xFF858585).withOpacity(0.25), offset: const Offset(0, 2))
+                ],
+                color: const Color(0xFFF9F9F9),
+                border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.only(left: 19.0),
@@ -147,10 +155,10 @@ class HotelsView extends StatelessWidget {
     return Expanded(
         child: Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFD9D9D9),
+        color: const Color(0xFFF9F9F9),
         border: Border.all(
           strokeAlign: BorderSide.strokeAlignOutside,
-          color: const Color(0xFF797979),
+          color: const Color(0xFFD0D0D7),
         ),
       ),
       child: Padding(
@@ -234,7 +242,7 @@ class SearchHotelResult extends StatelessWidget {
                           height: 160,
                           width: 160,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(image: AssetImage(hotels[index].imageUrl))),
                         ),
                         SizedBox(height: 12.h),

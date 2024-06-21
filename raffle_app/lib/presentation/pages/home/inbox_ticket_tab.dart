@@ -24,9 +24,10 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
       const TicketView(),
       const MessagesScreen(),
     ];
-    return SafeArea(
+    return Container(
+      color: const Color(0xFFEBEBEB),
       child: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 12, right: 12),
+        padding: const EdgeInsets.only(top: 40, left: 12, right: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,7 +71,6 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
             SizedBox(
               height: size.height * 0.03,
             ),
-           
             Expanded(
               child: rafflesScreen[curIndex],
             ),

@@ -57,7 +57,7 @@ class CategoryList extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(right: 8.w),
               decoration: BoxDecoration(
-                border: index == 0 ? null : Border.all(width: 1, color: const Color(0xffBDBDBD)),
+                border: index == 0 ? null : Border.all(width: 1, color: const Color(0xffD1D1D6)),
                 color: index == 0 ? const Color(0xff48484A) : Colors.white,
                 borderRadius: BorderRadius.circular(40),
               ),

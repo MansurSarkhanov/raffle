@@ -40,7 +40,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         controller: widget.tabController,
         labelPadding: EdgeInsets.zero,
         labelColor: const Color(0xFF505050),
-        labelStyle: const TextStyle(fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400),
+        labelStyle: const TextStyle(
+            fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400, fontFamily: 'Helvetica'),
         tabs: [
           Tab(
             text: "Home",
