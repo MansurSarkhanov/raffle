@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/pages/home/view/restorant/restorant_detail_view.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -32,16 +33,11 @@ final TabController tabController;
             boxShadow: const [
               BoxShadow(
                 color: Color(0xFF757575),
-                offset: Offset(-2, 2),
+                offset: Offset(0, 0),
                 blurRadius: 14,
-                spreadRadius: -10,
+                spreadRadius: -10
               ),
-              BoxShadow(
-                color: Color(0xFF757575),
-                offset: Offset(2, -2),
-                blurRadius: 14,
-                spreadRadius: -10,
-              ),
+            
             ],
           ),
           child: Padding(
@@ -50,7 +46,7 @@ final TabController tabController;
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 22.w),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,25 +55,24 @@ final TabController tabController;
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 17.w, height: 20.h, child: SvgPicture.asset('assets/svg/ic_save.svg')),
+                          SizedBox(width: 16.w, height: 20.h, child: SvgPicture.asset('assets/svg/ic_save.svg')),
                           SizedBox(
-                            height: 1.h,
+                            height: 8.h,
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 1.5.w),
-                            child: Text(
-                              restaurant.name,
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            child: TitleHeading1Widget(
+                              text: restaurant.name,
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF2D2D32),
                             ),
                           ),
                         ],
                       ),
                       Container(
-                        width: 86,
-                        height: 86,
+                        width: 90.w,
+                        height: 90.h,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.cover,
@@ -99,7 +94,7 @@ final TabController tabController;
                     ],
                   ),
                 ),
-                SizedBox(height: 21.h),
+                SizedBox(height: 24.h),
                 const Divider(
                   thickness: 0.33,
                   height: 0,
@@ -127,13 +122,17 @@ final TabController tabController;
                       ),
                       Row(
                         children: [
-                          Text(
+                          TitleHeading1Widget(
+                            text:
                             '${restaurant.sold}/',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.sp,
                           ),
-                          Text('${restaurant.target} sold', style: const TextStyle())
+                          TitleHeading1Widget(
+                            text: '${restaurant.target} sold',
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                          )
                         ],
                       ),
                     ],
@@ -179,7 +178,7 @@ final List<RestaurantModel> restaurants = [
     color: const Color.fromRGBO(253, 32, 138, 1),
   ),
   RestaurantModel(
-      name: 'M A T A',
+      name: 'Navikov Group',
       logo: 'assets/demo/novikov.png',
       sold: 6000,
       target: 14000,
@@ -189,14 +188,15 @@ final List<RestaurantModel> restaurants = [
         Color(0xffe9b602),
       ])),
   RestaurantModel(
-    name: 'PINSKIY & CO',
+    name: 'MATA',
     logo: 'assets/demo/m.png',
     sold: 8400,
     target: 12000,
     color: const Color.fromRGBO(253, 32, 138, 1),
   ),
   RestaurantModel(
-    name: 'PINSKIY & CO',
+    name: 'MATA',
+
     logo: 'assets/demo/m.png',
     sold: 8400,
     target: 12000,

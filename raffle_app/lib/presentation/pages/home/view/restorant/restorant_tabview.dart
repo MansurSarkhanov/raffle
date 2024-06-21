@@ -44,7 +44,7 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40.h,
+      height: 36,
       child: ListView.builder(
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -58,16 +58,16 @@ class CategoryList extends StatelessWidget {
               margin: EdgeInsets.only(right: 8.w),
               decoration: BoxDecoration(
                 border: index == 0 ? null : Border.all(width: 1, color: const Color(0xffBDBDBD)),
-                color: index == 0 ? const Color(0xff48484a) : AppColors.chipUnselectBackColor,
+                color: index == 0 ? const Color(0xff48484A) : Colors.white,
                 borderRadius: BorderRadius.circular(40),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 9.5),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 9),
                 child: TitleHeading1Widget(
                   text: item,
                   color: index == 0 ? Colors.white : Colors.black,
                     fontWeight: index == 0 ? FontWeight.w500 : FontWeight.w400,
-                  fontSize: 14,
+                  fontSize: 13.sp,
                 ),
               ),
             ),

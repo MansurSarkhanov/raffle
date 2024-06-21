@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/colors.dart';
+import '../../../../components/custom_text.dart';
 import '../../widgets/restorant_card.dart';
 import 'restorant_tabview.dart';
 
@@ -16,19 +17,20 @@ class RestorantView extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(
-          height: 6,
+          height: 16,
         ),
         CategoryList(),
         const SizedBox(
-          height: 10,
+          height: 18,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Row(
             children: [
-              Text(
+              TitleHeading1Widget(
+                  text:
                 "168 Restaurants",
-                style: TextStyle(color: AppColors.chipBackColor, fontSize: 14, fontWeight: FontWeight.w500),
+              color: AppColors.chipBackColor, fontSize: 14, fontWeight: FontWeight.w400
               ),
             ],
           ),
@@ -38,7 +40,7 @@ class RestorantView extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: 15,
               right: 15,
-              top: 10,
+              top: 18,
               bottom: 30
             ),
             itemCount: restaurants.length,
@@ -51,7 +53,7 @@ class RestorantView extends StatelessWidget {
                     restaurant: items[index],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 16,
                   )
                 ],
               );

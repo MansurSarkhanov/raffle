@@ -49,14 +49,14 @@ class _PortfolioPageState extends State<PortfolioPage> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
               children: [
                 const SelectedButton(
                   title: 'Restaurants',
@@ -72,17 +72,23 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 )
               ],
             ),
-            const SizedBox(height: 19),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const RestorantOrderCard();
-                },
-              ),
-            )
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 9,
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 10),
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return const Padding(
+                  padding: EdgeInsets.only(left: 12.0, right: 12),
+                  child: RestorantOrderCard(),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -95,11 +101,14 @@ class RestorantOrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Padding( 
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22.w),
+          boxShadow: const [
+            BoxShadow(blurRadius: 15, spreadRadius: -7, color: Color(0xFF757575), offset: Offset(0, 0))
+          ],
           color: Colors.white,
         ),
         child: Column(
@@ -110,30 +119,39 @@ class RestorantOrderCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitleHeading1Widget(text: 'Active balance', fontSize: 13.sp, fontWeight: FontWeight.w400),
+                  TitleHeading1Widget(text: 'Active balance', fontSize: 14.sp, fontWeight: FontWeight.w400),
                   const SizedBox(
                     height: 8,
                   ),
-                  TitleHeading1Widget(text: '36.50 \$', fontSize: 26.sp, fontWeight: FontWeight.w600),
+                  TitleHeading1Widget(text: '36.50 \$', fontSize: 27.sp, fontWeight: FontWeight.w600),
                   const SizedBox(
                     height: 8,
                   ),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.arrow_drop_up_rounded,
-                        size: 20,
-                        color: Colors.red,
+                      Image.asset(
+                        'assets/icons/ic_arrow_up.png',
+                        height: 8,
+                        width: 12,
                       ),
+
                       RichText(
                         text: const TextSpan(
                           children: [
                             TextSpan(
-                                text: '13.50 \$ ',
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.red)),
+                                text: ' 13.50 \$ ',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.red,
+                                    fontFamily: 'Helvetica')),
                             TextSpan(
                               text: '(remaining balance)',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black,
+                                  fontFamily: 'Helvetica'),
                             ),
                           ],
                         ),
@@ -145,15 +163,17 @@ class RestorantOrderCard extends StatelessWidget {
             ),
             const Divider(
               height: 0,
+              thickness: 0.3,
+              color: Colors.grey,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 25),
+              padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 25),
               child: Row(
                 children: [
                   Image.asset(
                     'assets/images/im_agalarova.png',
-                    height: 40,
-                    width: 40,
+                    height: 45.h,
+                    width: 45.w,
                   ),
                   const SizedBox(
                     width: 12,

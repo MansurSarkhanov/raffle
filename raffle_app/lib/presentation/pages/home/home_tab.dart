@@ -35,7 +35,7 @@ class HomeTab extends StatelessWidget {
           elevation: 0,
           expandedHeight: 65,
           toolbarHeight: 0,
-          backgroundColor: const Color(0xFFEBEBEB),
+          backgroundColor: controller.index == 1 ? const Color(0xFFF9F9F9) : const Color(0xFFEBEBEB),
           flexibleSpace: Padding(
             padding: const EdgeInsets.only(top: 1.50),
             child: FlexibleSpaceBar(

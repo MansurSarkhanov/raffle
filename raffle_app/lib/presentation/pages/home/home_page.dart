@@ -47,13 +47,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
-      backgroundColor: restorantTabController.index == 1 ? const Color(0xFFF5F5F5) : const Color(0xFFEBEBEB),
+      backgroundColor: tabController.index == 2 ? const Color(0xFFF9F9F9) : const Color(0xFFEBEBEB),
       appBar: tabController.index == 0 || tabController.index == 2
           ? restorantTabController.index == 1 || restorantTabController.index == 4
               ? null
               : CustomSelectionAppbar(
                   controller: tabController,
                 )
+              
           : null,
       floatingActionButton: tabController.index == 2
           ? null

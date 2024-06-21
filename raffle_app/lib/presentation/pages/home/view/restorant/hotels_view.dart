@@ -50,13 +50,13 @@ class HotelsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 35.0),
       child: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(
-              height: 4,
-            ),
+              height: 35),
             Row(
               children: [
                 hotelHeaderWidget(title: 'Arriving', subTime: '2 Jun 2024'),
