@@ -57,6 +57,110 @@ class _HotelDetailViewState extends State<HotelDetailView> {
             roomPressed: () {
               handleScroll();
             },
+            personPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    child: Material(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 34.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: const Icon(Icons.close),
+                              ),
+                              Row(
+                                children: [
+                                  const TitleHeading1Widget(
+                                    text: 'Adults',
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  const Spacer(),
+                                  InkWell(
+                                    child: Container(
+                                        decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
+                                          child: TitleHeading1Widget(
+                                            text: '-',
+                                          ),
+                                        )),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 18.0),
+                                    child: TitleHeading1Widget(text: '1'),
+                                  ),
+                                  InkWell(
+                                    child: Container(
+                                      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
+                                        child: TitleHeading1Widget(
+                                          text: '+',
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                children: [
+                                  const TitleHeading1Widget(
+                                    text: 'Children',
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  const Spacer(),
+                                  InkWell(
+                                    child: Container(
+                                        decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
+                                          child: TitleHeading1Widget(
+                                            text: '-',
+                                          ),
+                                        )),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 18.0),
+                                    child: TitleHeading1Widget(text: '0'),
+                                  ),
+                                  InkWell(
+                                    child: Container(
+                                      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
+                                        child: TitleHeading1Widget(
+                                          text: '+',
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+            pickerPressed: () {},
           ),
         ),
       ),
@@ -268,8 +372,13 @@ class DetailBottomBar extends StatelessWidget {
   const DetailBottomBar({
     super.key,
     required this.roomPressed,
+    required this.personPressed,
+    required this.pickerPressed,
   });
   final VoidCallback roomPressed;
+  final VoidCallback personPressed;
+  final VoidCallback pickerPressed;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -289,47 +398,53 @@ class DetailBottomBar extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
+              child: InkWell(
+                onTap: pickerPressed,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(36),
+                      color: const Color(0xFFE9E9E9),
+                      border: Border.all(color: const Color(0xFF7D7D7D))),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: TitleHeading1Widget(
+                      text: '4-5 Jun',
+                      fontSize: 13,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: personPressed,
               child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.w),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(36),
                     color: const Color(0xFFE9E9E9),
                     border: Border.all(color: const Color(0xFF7D7D7D))),
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: TitleHeading1Widget(
-                    text: '4-5 Jun',
-                    fontSize: 13,
-                    textAlign: TextAlign.center,
-                  ),
+                  padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 19),
+                  child: Center(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TitleHeading1Widget(
+                        text: '1',
+                        fontSize: 13,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Icon(
+                        Icons.person_rounded,
+                        size: 15,
+                      )
+                    ],
+                  )),
                 ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 8.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(36),
-                  color: const Color(0xFFE9E9E9),
-                  border: Border.all(color: const Color(0xFF7D7D7D))),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 19),
-                child: Center(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TitleHeading1Widget(
-                      text: '1',
-                      fontSize: 13,
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      width: 6,
-                    ),
-                    Icon(
-                      Icons.person_rounded,
-                      size: 15,
-                    )
-                  ],
-                )),
               ),
             ),
             Expanded(
