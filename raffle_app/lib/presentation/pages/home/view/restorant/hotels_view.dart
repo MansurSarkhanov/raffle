@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/pages/map/map_page.dart';
 
@@ -100,8 +101,8 @@ class HotelsView extends StatelessWidget {
                 color: const Color(0xFFF9F9F9),
                 border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
             child: Center(
-              child: Image.asset(
-                'assets/icons/ic_location.png',
+              child: SvgPicture.asset(
+                'assets/svg/ic_location_dark.svg',
                 height: 24,
                 width: 24,
               ),

@@ -15,6 +15,30 @@ class HotelDetailView extends StatefulWidget {
 }
 
 class _HotelDetailViewState extends State<HotelDetailView> {
+  final GlobalKey silverListKey = GlobalKey();
+  final GlobalKey middleKey = GlobalKey();
+  final GlobalKey roomKey = GlobalKey();
+
+  void handleScroll() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Scrollable.ensureVisible(
+        silverListKey.currentContext!,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOut,
+      );
+      await Scrollable.ensureVisible(
+        middleKey.currentContext!,
+        duration: const Duration(milliseconds: 1),
+        curve: Curves.easeInOut,
+      );
+      Scrollable.ensureVisible(
+        roomKey.currentContext!,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +48,19 @@ class _HotelDetailViewState extends State<HotelDetailView> {
       //     tabController: tabController,
       //   ),
       // ),
+      bottomNavigationBar: Container(
+        height: 62,
+        color: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: DetailBottomBar(
+            roomPressed: () {
+              handleScroll();
+            },
+          ),
+        ),
+      ),
+
       backgroundColor: const Color(0xFFF9F9F9),
       body: CustomScrollView(
         slivers: [
@@ -32,7 +69,8 @@ class _HotelDetailViewState extends State<HotelDetailView> {
             isRestorant: false,
           ),
           SliverPadding(
-            padding: EdgeInsets.only(top: 39.h),
+            key: silverListKey,
+            padding: EdgeInsets.only(top: 37.h),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
@@ -94,7 +132,8 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                           fontWeight: FontWeight.w700,
                           textDecoration: TextDecoration.underline,
                         ),
-                        const TitleHeading1Widget(
+                        TitleHeading1Widget(
+                          key: middleKey,
                           text:
                               'Концепция ресторана высокой кухни построена вокруг легенды обожественном фрукте — персике,воздействующем сразу на пять органовчувств. Вкус — это меню, зрение иосязание — интерьер, слух — музыка. Обоняние — парфюмерная композиция,наполняющая пространство тонкимароматом цветущих персиковых деревьев.',
                           fontSize: 16,
@@ -111,6 +150,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                         ),
                         const Divider(
                           height: 0,
+                          color: Color(0xFF505050),
                           thickness: 0.3,
                         ),
                         const SizedBox(
@@ -122,6 +162,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                         ),
                         const Divider(
                           height: 0,
+                          color: Color(0xFF505050),
                           thickness: 0.3,
                         ),
                         const SizedBox(
@@ -133,13 +174,15 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                         ),
                         const Divider(
                           height: 0,
+                          color: Color(0xFF505050),
                           thickness: 0.3,
                         ),
                         hotelServices(imagePath: 'information', title: 'Need to Know'),
                       ],
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
+                    key: roomKey,
                     height: 12,
                   ),
                   const DetailHotelImage(
@@ -160,75 +203,10 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 10,
-                        offset: const Offset(0, 3), // changes position of shadow
-                      ),
-                    ]),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(36),
-                                  color: const Color(0xFFE9E9E9),
-                                  border: Border.all(color: const Color(0xFF7D7D7D))),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: Center(child: Text('4 - 5 Jun')),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8.w),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(36),
-                                color: const Color(0xFFE9E9E9),
-                                border: Border.all(color: const Color(0xFF7D7D7D))),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 19),
-                              child: Center(
-                                  child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('1'),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                  Icon(
-                                    Icons.person_rounded,
-                                    size: 15,
-                                  )
-                                ],
-                              )),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(36),
-                                  color: const Color(0xFFE9E9E9),
-                                  border: Border.all(color: const Color(0xFF7D7D7D))),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: Center(child: Text('Rooms')),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -279,6 +257,99 @@ class _HotelDetailViewState extends State<HotelDetailView> {
               fontWeight: FontWeight.w500,
               fontSize: 10,
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DetailBottomBar extends StatelessWidget {
+  const DetailBottomBar({
+    super.key,
+    required this.roomPressed,
+  });
+  final VoidCallback roomPressed;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF000000).withOpacity(0.25),
+            spreadRadius: 5,
+            blurRadius: 32,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(36),
+                    color: const Color(0xFFE9E9E9),
+                    border: Border.all(color: const Color(0xFF7D7D7D))),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: TitleHeading1Widget(
+                    text: '4-5 Jun',
+                    fontSize: 13,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(36),
+                  color: const Color(0xFFE9E9E9),
+                  border: Border.all(color: const Color(0xFF7D7D7D))),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 19),
+                child: Center(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TitleHeading1Widget(
+                      text: '1',
+                      fontSize: 13,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Icon(
+                      Icons.person_rounded,
+                      size: 15,
+                    )
+                  ],
+                )),
+              ),
+            ),
+            Expanded(
+              child: InkWell(
+                onTap: roomPressed,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(36),
+                      color: const Color(0xFFE9E9E9),
+                      border: Border.all(color: const Color(0xFF7D7D7D))),
+                  child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: TitleHeading1Widget(
+                        text: 'Rooms',
+                        fontSize: 13,
+                        textAlign: TextAlign.center,
+                      )),
+                ),
+              ),
+            ),
           ],
         ),
       ),

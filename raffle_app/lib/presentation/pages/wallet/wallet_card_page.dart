@@ -150,21 +150,26 @@ class CardPageView extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  const OderActionTitle(
+                  OderActionTitle(
+                    index: index,
                     title: "PEACH",
                     image: 'restorant_order',
                   ),
                   const SizedBox(
                     height: 32,
                   ),
-                  const OderActionTitle(
+                  OderActionTitle(
+                    index: index,
+
                     title: "PEACH",
                     image: 'restorant_order',
                   ),
                   const SizedBox(
                     height: 32,
                   ),
-                  const OderActionTitle(
+                  OderActionTitle(
+                    index: index,
+
                     title: "Emiland",
                     image: 'shop_order',
                   )
@@ -183,30 +188,40 @@ class OderActionTitle extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
+    required this.index,
   });
   final String image;
   final String title;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset('assets/svg/ic_$image.svg'),
+        index == 1 ? SvgPicture.asset('assets/svg/ic_$image.svg') : SvgPicture.asset('assets/svg/ic_empty_user.svg'),
         const SizedBox(
           width: 12,
         ),
         TitleHeading1Widget(
-          text: title,
+          text: index == 1 ? title : 'Orkhan P.',
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
         const Spacer(),
-        const TitleHeading1Widget(
+        index == 1
+            ? 
+             const TitleHeading1Widget(
           text: '-36,50 \$',
           color: Color(0xFFC1272D),
           fontWeight: FontWeight.w500,
           fontSize: 16,
-        )
+              )
+            : const TitleHeading1Widget(
+                text: '+125 \$',
+                color: Color(0xFF49A600),
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              )
       ],
     );
   }

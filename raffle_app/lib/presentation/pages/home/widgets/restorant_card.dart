@@ -171,14 +171,15 @@ class RestaurantModel {
 final List<RestaurantModel> restaurants = [
   RestaurantModel(
     name: 'Restaurants by\nEmin Agalarov',
-    logo: 'assets/demo/r.png',
+    logo: 'assets/images/im_agalarova_last.png',
     sold: 8400,
     target: 12000,
     color: const Color.fromRGBO(253, 32, 138, 1),
   ),
   RestaurantModel(
       name: 'Navikov Group',
-      logo: 'assets/demo/novikov.png',
+      logo: 'assets/images/im_novikov_last.png',
+
       sold: 6000,
       target: 14000,
       color: const Color(0xffe9b602),
@@ -188,15 +189,15 @@ final List<RestaurantModel> restaurants = [
       ])),
   RestaurantModel(
     name: 'MATA',
-    logo: 'assets/demo/m.png',
+    logo: 'assets/images/im_mata_last.png',
+
     sold: 8400,
     target: 12000,
     color: const Color.fromRGBO(253, 32, 138, 1),
   ),
   RestaurantModel(
     name: 'MATA',
-
-    logo: 'assets/demo/m.png',
+    logo: 'assets/images/im_mata_last.png',
     sold: 8400,
     target: 12000,
     color: const Color.fromRGBO(253, 32, 138, 1),

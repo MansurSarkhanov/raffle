@@ -17,7 +17,7 @@ class RestorantDetailView extends StatelessWidget {
       //     tabController: tabController,
       //   ),
       // ),
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF9F9F9),
       body: CustomScrollView(
         slivers: [
           const RestorantImageAppBar(
@@ -25,13 +25,13 @@ class RestorantDetailView extends StatelessWidget {
             isRestorant: true,
           ),
           SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 39.h, horizontal: 11.w),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 11.w),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
                   const TitleHeading1Widget(
                     text: 'PEACH',
-                    fontSize: 24,
+                    fontSize: 28,
                     letterSpacing: 4,
                     fontWeight: FontWeight.w700,
                   ),
@@ -51,15 +51,15 @@ class RestorantDetailView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      statusIcon(path: 'correct', text: "Already been"),
+                      statusIcon(path: 'already_been', text: "Already been"),
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: 'save_yellow', text: "Save"),
+                      statusIcon(path: 'save_empty', text: "Save"),
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: 'favorite', text: "Like"),
+                      statusIcon(path: 'favorite_empty', text: "Like"),
                     ],
                   ),
                   const SizedBox(
@@ -91,7 +91,6 @@ class RestorantDetailView extends StatelessWidget {
                     text:
                         'Концепция ресторана высокой кухни построена вокруг легенды обожественном фрукте — персике,воздействующем сразу на пять органовчувств. Вкус — это меню, зрение иосязание — интерьер, слух — музыка. Обоняние — парфюмерная композиция,наполняющая пространство тонкимароматом цветущих персиковых деревьев.',
                     fontSize: 16,
-                    fontFamily: "Helvetica",
                     textAlign: TextAlign.start,
                     fontWeight: FontWeight.w400,
                   ),
@@ -128,10 +127,13 @@ class RestorantDetailView extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 6,
+                  ),
                   const TitleHeading1Widget(
                     text: 'Средний чек',
                     fontSize: 16,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w200,
                   ),
                   const SizedBox(
                     height: 40,
@@ -141,7 +143,7 @@ class RestorantDetailView extends StatelessWidget {
                     color: Colors.black,
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 44,
                   ),
                   const TitleHeading1Widget(
                     text: 'Address and hours',
@@ -167,6 +169,7 @@ class RestorantDetailView extends StatelessWidget {
                     height: 32,
                   ),
                   ContactWidget(
+                    path: 'arrow_right_top',
                     onPressed: () async {
                       if (!await launchUrl(Uri.parse('https://agalarovrest.com/restorany/peach/'))) {}
                     },
@@ -176,6 +179,8 @@ class RestorantDetailView extends StatelessWidget {
                     height: 12,
                   ),
                   ContactWidget(
+                    path: 'phone',
+
                     onPressed: () {},
                     text: '+7 (495) 909 00 69',
                   ),
@@ -228,15 +233,21 @@ class RestorantDetailView extends StatelessWidget {
     return Container(
       width: 78.w,
       height: 46.h,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFEFEFEF)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFFFFFFF), boxShadow: [
+        BoxShadow(
+          blurRadius: 7,
+          offset: const Offset(0, 2),
+          color: const Color(0xFF000000).withOpacity(.15),
+        )
+      ]),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
               'assets/svg/ic_$path.svg',
-              height: 20,
-              width: 20,
+              height: 26,
+              width: 26,
             ),
             TitleHeading1Widget(
               fontFamily: 'Helvetica',
@@ -261,11 +272,9 @@ class TimeCard extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFFECECEC),
+          color: const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(10),
-          boxShadow: const [
-            BoxShadow(blurRadius: 1, spreadRadius: -5, color: Color(0xFF757575), offset: Offset(0, 5)),
-          ],
+          border: Border.all(color: const Color(0xFFEDEDED)),
         ),
         child: const Padding(
           padding: EdgeInsets.symmetric(vertical: 17.0, horizontal: 21),
@@ -291,8 +300,11 @@ class ContactWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+    required this.path,
   });
   final String? text;
+  final String? path;
+
   final VoidCallback onPressed;
 
   @override
@@ -304,10 +316,8 @@ class ContactWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(64),
-          color: const Color(0xFFECECEC),
-          boxShadow: const [
-            BoxShadow(blurRadius: 1, spreadRadius: -5, color: Color(0xFF757575), offset: Offset(0, 5)),
-          ],
+            color: const Color(0xFFFFFFFF),
+            border: Border.all(color: const Color(0xFFEEEEEE))
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 9.0, horizontal: 22),
@@ -315,7 +325,7 @@ class ContactWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                'assets/svg/ic_arrow_right_top.svg',
+                'assets/svg/ic_$path.svg',
               ),
               SizedBox(
                 width: 22.w,
@@ -345,88 +355,73 @@ class RestorantImageAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      surfaceTintColor: const Color(0xFFF9F9F9),
       pinned: true,
+      floating: false,
+      actions: [
+        const SizedBox(
+          width: 12,
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'assets/icons/ic_arrow_left.png',
+                height: 18,
+                width: 18,
+              ),
+            ),
+          ),
+        ),
+        const Spacer(),
+        Container(
+          decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/icons/ic_adress.png',
+              height: 18,
+              width: 18,
+            ),
+          ),
+        ),
+        SizedBox(width: 8.w),
+        Container(
+          decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/icons/ic_share.png',
+              height: 18,
+              width: 18,
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 12,
+        ),
+
+      ],
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xFFF9F9F9),
       expandedHeight: 370.h,
       flexibleSpace: FlexibleSpaceBar(
-        background: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(imageUrl),
-                ),
-              ),
+        collapseMode: CollapseMode.none,
+        background: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(imageUrl),
             ),
-            Positioned(
-              top: 60,
-              left: 12,
-              right: 12,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          'assets/icons/ic_arrow_left.png',
-                          height: 18,
-                          width: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        'assets/icons/ic_adress.png',
-                        height: 18,
-                        width: 18,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Container(
-                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        'assets/icons/ic_share.png',
-                        height: 18,
-                        width: 18,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            isRestorant ?? false
-                ? const Positioned(
-                    bottom: 4,
-                    right: 12,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TitleHeading1Widget(
-                          text: 'Restoran adı 1/9',
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        )
-                      ],
-                    ))
-                : const SizedBox.shrink()
-          ],
+          ),
         ),
+        
+         
       ),
     );
   }
