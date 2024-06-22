@@ -56,8 +56,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 )
               
           : null,
-      floatingActionButton: tabController.index == 2
-          ? null
+      floatingActionButton: tabController.index == 2 
+          ? restorantTabController.index == 4
+              ? null
+              : const RestorantFabButton()
           : tabController.index == 4
               ? null
               : const FabButton(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 
 class FabButton extends StatelessWidget {
@@ -45,6 +46,43 @@ class FabButton extends StatelessWidget {
             'Scan',
             style: TextStyle(fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class RestorantFabButton extends StatelessWidget {
+  const RestorantFabButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 50,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const ScanPage();
+              }));
+            },
+            child: Image.asset(
+              'assets/icons/ic_scan.png',
+              height: 19,
+              width: 21,
+            ),
+          ),
+          const SizedBox(
+            height: 1,
+          ),
+          const TitleHeading1Widget(text: 'Scan', fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400)
         ],
       ),
     );

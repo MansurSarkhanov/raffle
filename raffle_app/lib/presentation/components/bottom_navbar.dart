@@ -168,19 +168,22 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
                       height: 19,
                       width: 23.87,
                     )),
-          Tab(
-              text: "Scan",
-              icon: widget.tabController.index == 3
-                  ? Image.asset(
-                      'assets/icons/ic_scan.png',
-                      height: 19,
-                      width: 21,
-                    )
-                  : Image.asset(
-                      'assets/icons/ic_scan.png',
-                      height: 19,
-                      width: 20,
-                    )),
+          const Tab(
+              icon: SizedBox(
+            height: 19,
+          )
+              //  widget.tabController.index == 3
+              //     ? Image.asset(
+              //         'assets/icons/ic_scan.png',
+              //         height: 19,
+              //         width: 21,
+              //       )
+              //     : Image.asset(
+              //         'assets/icons/ic_scan.png',
+              //         height: 19,
+              //         width: 20,
+              //     ),
+              ),
           Tab(
               text: "Shop",
               icon: widget.tabController.index == 3
