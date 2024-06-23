@@ -17,7 +17,7 @@ import '../../../features/profile/presentation/notifier/profile_notifier.dart';
 import '../../../features/profile/presentation/notifier/profile_state.dart';
 import '../../../features/profile/presentation/page/profile_page.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({
     super.key,
     required this.size,
@@ -26,6 +26,17 @@ class HomeTab extends StatelessWidget {
 
   final Size size;
   final TabController controller;
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -35,7 +46,7 @@ class HomeTab extends StatelessWidget {
           elevation: 0,
           expandedHeight: 65,
           toolbarHeight: 0,
-          backgroundColor: controller.index == 1 ? const Color(0xFFF9F9F9) : const Color(0xFFEBEBEB),
+          backgroundColor: widget.controller.index == 1 ? const Color(0xFFF9F9F9) : const Color(0xFFEBEBEB),
           flexibleSpace: Padding(
             padding: const EdgeInsets.only(top: 1.50),
             child: FlexibleSpaceBar(
@@ -85,7 +96,7 @@ class HomeTab extends StatelessWidget {
                                     routeName: ChangeNotifierProvider.value(
                                       value: context.read<ProfileNotifier>(),
                                       child: ProfilePage(
-                                        controller: controller,
+                                        controller: widget.controller,
                                       ),
                                     ),
                                   ),
@@ -134,7 +145,7 @@ class HomeTab extends StatelessWidget {
                         context.pushTransparentRoute(const StoryView());
                       },
                       child: Container(
-                        width: size.width,
+                        width: widget.size.width,
                         // height: 404,
                         height: 200,
                         decoration: BoxDecoration(
@@ -144,7 +155,7 @@ class HomeTab extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Container(
-                      width: size.width * 0.94,
+                      width: widget.size.width * 0.94,
                       alignment: Alignment.centerLeft,
                       child: const Text(
                         'Selling fast',
@@ -204,10 +215,11 @@ class HomeTab extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return SizedBox(
-                                  height: size.height * 0.4,
-                                  width: size.width,
+                                  height: widget.size.height * 0.4,
+                                  width: widget.size.width,
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: size.width * 0.05, top: size.height * 0.03),
+                                    padding:
+                                        EdgeInsets.only(left: widget.size.width * 0.05, top: widget.size.height * 0.03),
                                     child: Column(
                                       children: [
                                         Row(
@@ -229,41 +241,41 @@ class HomeTab extends StatelessWidget {
                                               ),
                                             ),
                                             SizedBox(
-                                              width: size.width * 0.03,
+                                              width: widget.size.width * 0.03,
                                             ),
                                           ],
                                         ),
                                         SizedBox(
-                                          height: size.height * 0.04,
+                                          height: widget.size.height * 0.04,
                                         ),
                                         Column(
                                           children: [
                                             buildSortingList(context,
-                                                size: size,
+                                                size: widget.size,
                                                 onPressed: (() {}),
                                                 sortingText: 'Lowest to Highest Price',
                                                 icon: Icons.arrow_upward),
                                             SizedBox(
-                                              height: size.height * 0.02,
+                                              height: widget.size.height * 0.02,
                                             ),
                                             buildSortingList(context,
-                                                size: size,
+                                                size: widget.size,
                                                 onPressed: (() {}),
                                                 sortingText: 'Highest to Lowest Price',
                                                 icon: Icons.arrow_downward),
                                             SizedBox(
-                                              height: size.height * 0.02,
+                                              height: widget.size.height * 0.02,
                                             ),
                                             buildSortingList(context,
-                                                size: size,
+                                                size: widget.size,
                                                 onPressed: (() {}),
                                                 sortingText: 'Lowest to Highest Price',
                                                 icon: Icons.arrow_upward),
                                             SizedBox(
-                                              height: size.height * 0.02,
+                                              height: widget.size.height * 0.02,
                                             ),
                                             buildSortingList(context,
-                                                size: size,
+                                                size: widget.size,
                                                 onPressed: (() {}),
                                                 sortingText: 'Highest to Lowest Price',
                                                 icon: Icons.arrow_downward),

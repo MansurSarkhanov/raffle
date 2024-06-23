@@ -7,7 +7,7 @@ import 'package:raffle_app/presentation/pages/home/view/restorant/restorant_deta
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({super.key, required this.restaurant, required this.tabController});
-  final RestaurantModel restaurant;
+  final RestaurantModelFake restaurant;
 final TabController tabController;
   @override
   Widget build(BuildContext context) {
@@ -146,7 +146,7 @@ final TabController tabController;
   }
 }
 
-class RestaurantModel {
+class RestaurantModelFake {
   final String name;
   final int sold;
   final int target;
@@ -154,7 +154,7 @@ class RestaurantModel {
   final LinearGradient gradient;
   final String logo;
 
-  RestaurantModel({
+  RestaurantModelFake({
     required this.name,
     required this.logo,
     required this.sold,
@@ -168,15 +168,15 @@ class RestaurantModel {
   });
 }
 
-final List<RestaurantModel> restaurants = [
-  RestaurantModel(
+final List<RestaurantModelFake> restaurants = [
+  RestaurantModelFake(
     name: 'Restaurants by\nEmin Agalarov',
     logo: 'assets/images/im_agalarova_last.png',
     sold: 8400,
     target: 12000,
     color: const Color.fromRGBO(253, 32, 138, 1),
   ),
-  RestaurantModel(
+  RestaurantModelFake(
       name: 'Navikov Group',
       logo: 'assets/images/im_novikov_last.png',
 
@@ -187,7 +187,7 @@ final List<RestaurantModel> restaurants = [
         Color(0xffe9b602),
         Color(0xffe9b602),
       ])),
-  RestaurantModel(
+  RestaurantModelFake(
     name: 'MATA',
     logo: 'assets/images/im_mata_last.png',
 
@@ -195,7 +195,7 @@ final List<RestaurantModel> restaurants = [
     target: 12000,
     color: const Color.fromRGBO(253, 32, 138, 1),
   ),
-  RestaurantModel(
+  RestaurantModelFake(
     name: 'MATA',
     logo: 'assets/images/im_mata_last.png',
     sold: 8400,

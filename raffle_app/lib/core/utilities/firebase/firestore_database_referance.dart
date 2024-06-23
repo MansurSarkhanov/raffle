@@ -4,6 +4,7 @@ enum FirebaseReference {
   users,
   campaings,
   user_info,
+  restaurants,
   products;
 
   CollectionReference get ref => FirebaseFirestore.instance.collection(name);
