@@ -110,33 +110,36 @@ final TabController tabController;
                       Stack(
                         children: [
                           SizedBox(
-                            width: 140.w,
-                            child: LinearPercentIndicator(
-                              
-                              linearGradient: restaurant.gradient,
+                            width: 140, // 200.0 is the total width of the progress bar
 
+                            child: LinearPercentIndicator(
+                              linearGradient: restaurant.gradient,
                               padding: EdgeInsets.only(left: 5.w),
                               barRadius: Radius.circular(52.r),
                               animation: false,
                               animationDuration: 1500,
                               lineHeight: 18.h,
                               percent: restaurant.sold / restaurant.target,
-                              backgroundColor: const Color(0xfff1f1f1),
+                              backgroundColor: const Color(0xFFE0E0E0),
                               // progressColor: restaurant.color,
                             ),
                           ),
-                          // Container(
-                          //   width: 140.w,
-                          //   height: 18.h,
-                          //   decoration: BoxDecoration(
-
-                          //     boxShadow: [
-                          //     BoxShadow(
-                          //         blurRadius: 4,
-                          //         offset: const Offset(0, 4),
-                          //         color: const Color(0xFF000000).withOpacity(.15))
-                          //   ]),
-                          // )
+                        
+                          Container(
+                            height: 18.h,
+                            width: 140,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFFE0E0E0).withOpacity(0.08),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       Row(
