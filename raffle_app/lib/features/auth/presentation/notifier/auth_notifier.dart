@@ -4,24 +4,30 @@ import 'package:raffle_app/features/auth/presentation/notifier/auth_state.dart';
 
 class AuthNotifier extends ChangeNotifier {
   AuthNotifier(this.authRepository);
+
   final AuthRepository authRepository;
   AuthState state = AuthInitial();
 
-  Future<void> loginUser({required String email, required String password}) async {
- 
+  Future<bool> loginUser(
+      {required String email, required String password}) async {
+    state = AuthProgress();
+    notifyListeners();
     try {
-      state = AuthProgress();
-      notifyListeners();
       final result = await authRepository.loginWithEmailAndPassword(email: email, password: password);
-      if (result.isSuccess()) {
+      if (result.tryGetSuccess()!.uid.isNotEmpty) {
         state = AuthSuccess();
         notifyListeners();
-      } else if (result.isError()) {}
+
+        return true;
+      }
     } catch (e) {
       print(e.toString());
       state = AuthError();
       notifyListeners();
+      return false;
+
     }
+    return false;
   }
 
   Future<void> registerUser(
@@ -60,8 +66,6 @@ class AuthNotifier extends ChangeNotifier {
   Future<bool> signOut() async {
     try {
       final isLogut = await authRepository.logout();
-      state = AuthInitial();
-      notifyListeners();
       return isLogut;
     } catch (e) {
       return false;

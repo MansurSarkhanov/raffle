@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:raffle_app/data/local/shared_preferences_service.dart';
 import 'package:raffle_app/features/auth/data/service/firebase_auth_service.dart';
-
 import '../../../../core/utilities/firebase/firestore_database_referance.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../model/user_model.dart';

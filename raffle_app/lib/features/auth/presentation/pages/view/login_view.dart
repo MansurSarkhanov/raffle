@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/path/icon_path.dart';
 import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 
+import '../../../../../core/constants/routes.dart';
 import '../../notifier/auth_state.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback loginOnPressed;
+
   const LoginScreen({super.key, required this.loginOnPressed});
 
   @override
@@ -20,23 +23,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailLoginController = TextEditingController();
   TextEditingController passwordLoginController = TextEditingController();
-  // late AuthNotifier _authNotifier;
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   _authNotifier = context.read<AuthNotifier>();
-  //   _authNotifier.addListener(
-  //     () {
-  //       final authNotifier = _authNotifier.state;
-  //       if (authNotifier is AuthSuccess && mounted) {
-  //         context.replaceNamed(AppRoutes.home.name);
-  //       } else if (authNotifier is AuthError) {
-  //         openFlushbar(context, message: "Yeniden cəhd edin", title: "İstifadəçi tapılmadı", color: Colors.redAccent);
-  //       }
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +49,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 return CustomElevatedButton(
                     isLoading: notifier.state is AuthProgress ? true : false,
                     icon: null,
-                    onPressed: () {
+                    onPressed: () async {
                       if (emailLoginController.text.trim().isNotEmpty &&
                           passwordLoginController.text.trim().isNotEmpty) {
-                        notifier.loginUser(
-                            email: emailLoginController.text.trim(), password: passwordLoginController.text.trim());
+                        final result = await notifier.loginUser(
+                            email: emailLoginController.text.trim(),
+                            password: passwordLoginController.text.trim());
+
+                        if (result == true) {
+                          context.goNamed(AppRoutes.home.name);
+                        }
                       } else {
-                        openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
+                        openFlushbar(context,
+                            title: "Boşluları doldurun",
+                            color: Colors.redAccent);
                       }
                     },
                     buttonText: 'Daxil ol',
@@ -87,26 +80,29 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               height: 60,
               width: size.width,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(13), color: Colors.black),
-              child: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(
-                  Icons.apple,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'Apple ilə davam edin',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Avant Garde',
-                    fontWeight: FontWeight.w400,
-                  ),
-                )
-              ]),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13), color: Colors.black),
+              child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.apple,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Apple ilə davam edin',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Avant Garde',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  ]),
             ),
             const SizedBox(
               height: 10,
@@ -114,12 +110,16 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               height: 60,
               width: size.width,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(13), color: Colors.white),
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13), color: Colors.white),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
                   height: 25,
                   width: 25,
-                  decoration: BoxDecoration(image: DecorationImage(image: AssetImage(IconPath.google.toPathPng))),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(IconPath.google.toPathPng))),
                 ),
                 const SizedBox(
                   width: 5,
@@ -163,7 +163,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: widget.loginOnPressed,
                   child: const Text(
                     ' Qeydiyyatdan keçin',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF873838)),
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF873838)),
                   ),
                 ),
               ],

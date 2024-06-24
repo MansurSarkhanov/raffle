@@ -19,6 +19,7 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   late AuthNotifier _authNotifier;
+
   @override
   void initState() {
     super.initState();
@@ -29,15 +30,12 @@ class _AuthPageState extends State<AuthPage> {
         final authNotifier = _authNotifier.state;
         if (authNotifier is AuthSuccess) {
           context.replaceNamed(AppRoutes.home.name);
-          // Navigator.of(context).pushReplacement(MaterialPageRoute(
-          //   builder: (context) {
-          //     return const HomePage();
-          //   },
-          // ));
         } else if (authNotifier is AuthError) {
           openFlushbar(context,
               message: "Yeniden cəhd edin",
-              title: curIndex == 0 ? "İstifadəçi tapılmadı" : "Email və ya parol yanlıs",
+              title: curIndex == 0
+                  ? "İstifadəçi tapılmadı"
+                  : "Email və ya parol yanlıs",
               color: Colors.redAccent);
         }
       },
@@ -45,6 +43,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   int curIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     PageController pgController = PageController();
@@ -60,7 +59,9 @@ class _AuthPageState extends State<AuthPage> {
               height: size.height * 0.2,
             ),
             Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xFFE1E1E1)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color(0xFFE1E1E1)),
               child: Row(
                 children: [
                   Expanded(
@@ -71,19 +72,23 @@ class _AuthPageState extends State<AuthPage> {
                         setState(() {
                           curIndex = 0;
                           pgController.animateToPage(curIndex,
-                              duration: const Duration(milliseconds: 200), curve: Curves.bounceInOut);
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.bounceInOut);
                         });
                       },
                       child: Container(
                         height: 70,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: curIndex == 0 ? Colors.white : const Color(0xFFE1E1E1),
+                            color: curIndex == 0
+                                ? Colors.white
+                                : const Color(0xFFE1E1E1),
                             borderRadius: BorderRadius.circular(20)),
                         child: const Center(
                           child: Text(
                             "Daxil ol",
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
@@ -97,16 +102,21 @@ class _AuthPageState extends State<AuthPage> {
                         setState(() {
                           curIndex = 1;
                           pgController.animateToPage(curIndex,
-                              duration: const Duration(milliseconds: 200), curve: Curves.bounceInOut);
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.bounceInOut);
                         });
                       },
                       child: Container(
                           alignment: Alignment.center,
                           height: 70,
                           decoration: BoxDecoration(
-                              color: (curIndex == 1 ? Colors.white : const Color(0xFFE1E1E1)),
+                              color: (curIndex == 1
+                                  ? Colors.white
+                                  : const Color(0xFFE1E1E1)),
                               borderRadius: BorderRadius.circular(20)),
-                          child: const Text("Qeydiyyat", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700))),
+                          child: const Text("Qeydiyyat",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w700))),
                     ),
                   ),
                 ],
@@ -127,7 +137,8 @@ class _AuthPageState extends State<AuthPage> {
                         setState(() {
                           curIndex = 0;
                           pgController.animateToPage(curIndex,
-                              duration: const Duration(milliseconds: 200), curve: Curves.bounceInOut);
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.bounceInOut);
                         });
                       }
                     },
