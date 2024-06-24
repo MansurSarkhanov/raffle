@@ -24,7 +24,7 @@ class FabButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
-            height: 16,
+            height: 25,
           ),
           Container(
             decoration: const BoxDecoration(
@@ -40,11 +40,13 @@ class FabButton extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 2,
+            height: 3,
           ),
-          const Text(
-            'Scan',
-            style: TextStyle(fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400),
+          const TitleHeading1Widget(
+            text: 'Scan',
+            fontSize: 9,
+            color: Color(0xFF505050),
+            fontWeight: FontWeight.w400,
           )
         ],
       ),
@@ -65,7 +67,7 @@ class RestorantFabButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
-            height: 50,
+            height: 59,
           ),
           InkWell(
             onTap: () {

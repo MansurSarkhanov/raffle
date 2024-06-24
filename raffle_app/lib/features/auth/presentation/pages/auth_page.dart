@@ -50,6 +50,7 @@ class _AuthPageState extends State<AuthPage> {
     PageController pgController = PageController();
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF2F0F0),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),

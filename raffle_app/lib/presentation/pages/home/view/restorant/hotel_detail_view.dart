@@ -51,167 +51,162 @@ class _HotelDetailViewState extends State<HotelDetailView> {
       bottomNavigationBar: Container(
         height: 62,
         color: Colors.transparent,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: DetailBottomBar(
-            roomPressed: () {
-              handleScroll();
-            },
-            personPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    child: Material(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Icon(Icons.close),
-                              ),
-                              const SizedBox(
-                                height: 42,
-                              ),
-                              Row(
-                                children: [
-                                  const TitleHeading1Widget(
-                                    text: 'Adults',
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  const Spacer(),
-                                  InkWell(
-                                    child: Container(
-                                        decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD0D0D7))),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
-                                          child: TitleHeading1Widget(
-                                            text: '-',
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 18.0),
-                                    child: TitleHeading1Widget(
-                                      text: '1',
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  InkWell(
-                                    child: Container(
-                                      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+        child: DetailBottomBar(
+          roomPressed: () {
+            handleScroll();
+          },
+          personPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return Dialog(
+                  child: Material(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Icon(Icons.close),
+                            ),
+                            const SizedBox(
+                              height: 42,
+                            ),
+                            Row(
+                              children: [
+                                const TitleHeading1Widget(
+                                  text: 'Adults',
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                const Spacer(),
+                                InkWell(
+                                  child: Container(
+                                      decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD0D0D7))),
                                       child: const Padding(
                                         padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
                                         child: TitleHeading1Widget(
-                                          text: '+',
+                                          text: '-',
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500,
                                         ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                children: [
-                                  const TitleHeading1Widget(
-                                    text: 'Children',
-                                    fontSize: 19,
+                                      )),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 18.0),
+                                  child: TitleHeading1Widget(
+                                    text: '1',
+                                    fontSize: 22,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                  const Spacer(),
-                                  InkWell(
-                                    child: Container(
-                                        decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD0D0D7))),
-                                        
-                                      
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
-                                          child: TitleHeading1Widget(
-                                            text: '-',
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 18.0),
-                                    child: TitleHeading1Widget(
-                                      text: '0',
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  InkWell(
-                                    child: Container(
-                                      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
-                                        child: TitleHeading1Widget(
-                                          text: '+',
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 122,
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
-                                    ),
-                                    borderRadius: BorderRadius.circular(31),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 13),
-                                    child: Center(
+                                ),
+                                InkWell(
+                                  child: Container(
+                                    decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                                    child: const Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
                                       child: TitleHeading1Widget(
-                                        text: "Update",
-                                        fontWeight: FontWeight.w500,
+                                        text: '+',
                                         fontSize: 17,
+                                        fontWeight: FontWeight.w500,
                                       ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              children: [
+                                const TitleHeading1Widget(
+                                  text: 'Children',
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                const Spacer(),
+                                InkWell(
+                                  child: Container(
+                                      decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD0D0D7))),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
+                                        child: TitleHeading1Widget(
+                                          text: '-',
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      )),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 18.0),
+                                  child: TitleHeading1Widget(
+                                    text: '0',
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                InkWell(
+                                  child: Container(
+                                    decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                                    child: const Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
+                                      child: TitleHeading1Widget(
+                                        text: '+',
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 122,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  ),
+                                  borderRadius: BorderRadius.circular(31),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 13),
+                                  child: Center(
+                                    child: TitleHeading1Widget(
+                                      text: "Update",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 33,
-                              )
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              height: 33,
+                            )
+                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-              );
-            },
-            pickerPressed: () {},
-          ),
+                  ),
+                );
+              },
+            );
+          },
+          pickerPressed: () {},
         ),
       ),
 
@@ -224,7 +219,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
           ),
           SliverPadding(
             key: silverListKey,
-            padding: EdgeInsets.only(top: 37.h),
+            padding: EdgeInsets.only(top: 20.h),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
@@ -254,11 +249,11 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            statusIcon(path: 'save_yellow', text: "Save"),
+                            statusIcon(path: 'save_filled', text: "Save"),
                             const SizedBox(
                               width: 12,
                             ),
-                            statusIcon(path: 'favorite', text: "Like"),
+                            statusIcon(path: 'favorite_red', text: "Like"),
                           ],
                         ),
                         const SizedBox(
@@ -395,15 +390,20 @@ class _HotelDetailViewState extends State<HotelDetailView> {
     return Container(
       width: 78.w,
       height: 46.h,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFEFEFEF)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFFFFFFF), boxShadow: [
+        BoxShadow(
+          blurRadius: 7,
+          color: const Color(0xFF000000).withOpacity(.15),
+          offset: const Offset(0, 2),
+        )
+      ]),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
               'assets/svg/ic_$path.svg',
-              height: 20,
-              width: 20,
+             
             ),
             TitleHeading1Widget(
               fontFamily: 'Helvetica',

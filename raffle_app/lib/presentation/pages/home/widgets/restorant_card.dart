@@ -54,7 +54,9 @@ final TabController tabController;
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 16.w, height: 20.h, child: SvgPicture.asset('assets/svg/ic_save.svg')),
+                          SvgPicture.asset(
+                            'assets/svg/ic_save.svg',
+                          ),
                           SizedBox(
                             height: 8.h,
                           ),
@@ -105,19 +107,37 @@ final TabController tabController;
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 140.w,
-                        child: LinearPercentIndicator(
-                          linearGradient: restaurant.gradient,
-                          padding: EdgeInsets.only(left: 5.w),
-                          barRadius: Radius.circular(52.r),
-                          animation: false,
-                          animationDuration: 1500,
-                          lineHeight: 18.h,
-                          percent: restaurant.sold / restaurant.target,
-                          backgroundColor: const Color(0xfff1f1f1),
-                          // progressColor: restaurant.color,
-                        ),
+                      Stack(
+                        children: [
+                          SizedBox(
+                            width: 140.w,
+                            child: LinearPercentIndicator(
+                              
+                              linearGradient: restaurant.gradient,
+
+                              padding: EdgeInsets.only(left: 5.w),
+                              barRadius: Radius.circular(52.r),
+                              animation: false,
+                              animationDuration: 1500,
+                              lineHeight: 18.h,
+                              percent: restaurant.sold / restaurant.target,
+                              backgroundColor: const Color(0xfff1f1f1),
+                              // progressColor: restaurant.color,
+                            ),
+                          ),
+                          // Container(
+                          //   width: 140.w,
+                          //   height: 18.h,
+                          //   decoration: BoxDecoration(
+
+                          //     boxShadow: [
+                          //     BoxShadow(
+                          //         blurRadius: 4,
+                          //         offset: const Offset(0, 4),
+                          //         color: const Color(0xFF000000).withOpacity(.15))
+                          //   ]),
+                          // )
+                        ],
                       ),
                       Row(
                         children: [

@@ -17,7 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 59,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: const Color(0xFFF9F9F9),
@@ -119,7 +119,7 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 59,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: widget.tabController.index == 1 ? const Color(0xFFF5F5F5) : const Color(0xFFF9F9F9),
@@ -139,20 +139,21 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
         controller: widget.tabController,
         labelPadding: EdgeInsets.zero,
         labelColor: const Color(0xFF505050),
-        labelStyle: const TextStyle(fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400),
+        labelStyle: const TextStyle(
+            fontSize: 9, color: Color(0xFF505050), fontWeight: FontWeight.w400, fontFamily: 'Helvetica'),
         tabs: [
           Tab(
             text: "Restaurant",
             icon: widget.tabController.index == 0
                 ? Image.asset(
                     'assets/icons/ic_restorant_active.png',
-                    height: 19,
-                    width: 20,
+                    height: 21,
+                    width: 28.01,
                   )
                 : Image.asset(
                     'assets/icons/ic_restorant.png',
-                    height: 19,
-                    width: 20,
+                    height: 21,
+                    width: 28.01,
                   ),
           ),
           Tab(

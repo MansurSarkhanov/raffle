@@ -32,14 +32,20 @@ class RestorantDetailView extends StatelessWidget {
                   const TitleHeading1Widget(
                     text: 'PEACH',
                     fontSize: 28,
-                    letterSpacing: 4,
-                    fontWeight: FontWeight.w700,
+                    letterSpacing: 3,
+                    color: Color(0xFF2D2D32),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  const SizedBox(
+                    height: 4,
                   ),
                   const TitleHeading1Widget(
                     text: 'г. Москва',
                     fontSize: 13,
+                    color: Color(0xFF2D2D32),
                     fontWeight: FontWeight.w400,
                   ),
+                  
                   const TitleHeading1Widget(
                     text: 'Б. Саввинский переулок, 12 стр. 10г',
                     fontSize: 13,
@@ -51,7 +57,10 @@ class RestorantDetailView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      statusIcon(path: 'already_been', text: "Already been", isAlready: true),
+                      statusIcon(
+                        path: 'new_alreadyy',
+                        text: "Already been",
+                      ),
                       const SizedBox(
                         width: 12,
                       ),
@@ -81,8 +90,14 @@ class RestorantDetailView extends StatelessWidget {
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
                         textDecoration: TextDecoration.underline,
+                        color: Color(0xFF2D2D32),
                       ),
-                      TitleHeading1Widget(text: 'love this place', fontSize: 13, fontWeight: FontWeight.w400),
+                      TitleHeading1Widget(
+                        text: 'love this place',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF2D2D32),
+                      ),
                     ],
                   ),
                   
@@ -95,19 +110,24 @@ class RestorantDetailView extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     textDecoration: TextDecoration.underline,
                   ),
+                  const SizedBox(
+                    height: 4,
+                  ),
                   const TitleHeading1Widget(
                     text:
                         'Концепция ресторана высокой кухни построена вокруг легенды обожественном фрукте — персике,воздействующем сразу на пять органовчувств. Вкус — это меню, зрение иосязание — интерьер, слух — музыка. Обоняние — парфюмерная композиция,наполняющая пространство тонкимароматом цветущих персиковых деревьев.',
                     fontSize: 16,
                     textAlign: TextAlign.start,
                     fontWeight: FontWeight.w400,
+                    color: Color(0xFF2D2D32),
+
                   ),
                   const SizedBox(
                     height: 44,
                   ),
                   const Divider(
-                    thickness: 0.3,
-                    color: Colors.black,
+                    thickness: 0.33,
+                    color: Color(0xFFDCCCCC),
                   ),
                   const SizedBox(
                     height: 40,
@@ -115,6 +135,7 @@ class RestorantDetailView extends StatelessWidget {
                   const TitleHeading1Widget(
                     text: 'Тариф',
                     fontSize: 23,
+                    color: Color(0xFF2D2D32),
                     fontWeight: FontWeight.w500,
                   ),
                   const SizedBox(
@@ -130,6 +151,9 @@ class RestorantDetailView extends StatelessWidget {
                       ),
                       TitleHeading1Widget(
                         text: 'рублей',
+
+                        color: Color(0xFF2D2D32),
+
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
                       ),
@@ -140,6 +164,7 @@ class RestorantDetailView extends StatelessWidget {
                   ),
                   const TitleHeading1Widget(
                     text: 'Средний чек',
+                    color: Color(0xFF2D2D32),
                     fontSize: 16,
                     fontWeight: FontWeight.w200,
                   ),
@@ -147,21 +172,26 @@ class RestorantDetailView extends StatelessWidget {
                     height: 40,
                   ),
                   const Divider(
-                    thickness: 0.3,
-                    color: Colors.black,
+                    thickness: 0.33,
+                    color: Color(0xFFDCCCCC),
                   ),
                   const SizedBox(
                     height: 44,
                   ),
                   const TitleHeading1Widget(
                     text: 'Address and hours',
+                    color: Color(0xFF2D2D32),
+
+
                     fontSize: 23,
                     fontWeight: FontWeight.w500,
                   ),
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 6),
                   const TitleHeading1Widget(
                     text: 'Б. Саввинский переулок, 12 стр. 10г',
                     fontSize: 16,
+                    color: Color(0xFF2D2D32),
+
                     fontWeight: FontWeight.w300,
                   ),
                   const SizedBox(
@@ -177,7 +207,7 @@ class RestorantDetailView extends StatelessWidget {
                     height: 32,
                   ),
                   ContactWidget(
-                    path: 'arrow_right_top',
+                    path: 'arrow_top_last',
                     onPressed: () async {
                       if (!await launchUrl(Uri.parse('https://agalarovrest.com/restorany/peach/'))) {}
                     },
@@ -254,18 +284,14 @@ class RestorantDetailView extends StatelessWidget {
           children: [
             SvgPicture.asset(
               'assets/svg/ic_$path.svg',
-              height: isAlready == true ? 24 : 26,
-              width: isAlready == true ? 24 : 26,
+              height: 26,
+              width: 26,
             ),
-            if (isAlready == true) ...[
-              const SizedBox(
-                height: 2,
-              ),
-            ],
+           
             TitleHeading1Widget(
-              fontFamily: 'Helvetica',
               text: text,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
+              color: const Color(0xFF2D2D32),
               fontSize: 10,
             )
           ],
@@ -295,11 +321,23 @@ class TimeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('понедельник'),
+              TitleHeading1Widget(
+                text: 'понедельник',
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF2D2D32),
+              ),
               SizedBox(
                 height: 10,
               ),
-              Text('12:00 - 00:00'),
+              Text(
+                '12:00 - 00:00',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xFF2D2D32),
+                ),
+              ),
             ],
           ),
         ),
@@ -339,14 +377,18 @@ class ContactWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 'assets/svg/ic_$path.svg',
+                color: const Color(0xFF2D2D32),
+              
               ),
               SizedBox(
                 width: 22.w,
               ),
-              TitleHeading1Widget(
-                text: text ?? '',
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
+              Text(text ?? '',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Color(0xFF2D2D32),
+                    fontWeight: FontWeight.w300,
+                  ) 
               ),
             ],
           ),
@@ -382,9 +424,12 @@ class RestorantImageAppBar extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(9.0),
+
               child: Image.asset(
                 'assets/icons/ic_arrow_left.png',
+                color: const Color(0xFF333333),
+
                 height: 18,
                 width: 18,
               ),
@@ -395,9 +440,11 @@ class RestorantImageAppBar extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(9.0),
             child: Image.asset(
               'assets/icons/ic_adress.png',
+              color: const Color(0xFF333333),
+
               height: 18,
               width: 18,
             ),
@@ -407,9 +454,11 @@ class RestorantImageAppBar extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(9.0),
+
             child: Image.asset(
               'assets/icons/ic_share.png',
+              color: const Color(0xFF333333),
               height: 18,
               width: 18,
             ),
@@ -422,7 +471,7 @@ class RestorantImageAppBar extends StatelessWidget {
       ],
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xFFF9F9F9),
-      expandedHeight: 370.h,
+      expandedHeight: 360.h,
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.none,
         background: Container(

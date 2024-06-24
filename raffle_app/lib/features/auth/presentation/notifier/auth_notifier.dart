@@ -8,13 +8,17 @@ class AuthNotifier extends ChangeNotifier {
   AuthState state = AuthInitial();
 
   Future<void> loginUser({required String email, required String password}) async {
-    state = AuthProgress();
-    notifyListeners();
-    final result = await authRepository.loginWithEmailAndPassword(email: email, password: password);
-    if (result.isSuccess()) {
-      state = AuthSuccess();
+ 
+    try {
+      state = AuthProgress();
       notifyListeners();
-    } else if (result.isError()) {
+      final result = await authRepository.loginWithEmailAndPassword(email: email, password: password);
+      if (result.isSuccess()) {
+        state = AuthSuccess();
+        notifyListeners();
+      } else if (result.isError()) {}
+    } catch (e) {
+      print(e.toString());
       state = AuthError();
       notifyListeners();
     }

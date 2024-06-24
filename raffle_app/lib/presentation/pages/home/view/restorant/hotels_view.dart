@@ -129,7 +129,10 @@ class HotelsView extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: 'Destination or Hotel',
                     hintStyle: TextStyle(
-                        fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400, fontFamily: 'Helvetica'),
+                        fontSize: 12.sp,
+                        color: const Color(0xFFAEAEB8),
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Helvetica'),
                     prefixIconConstraints: const BoxConstraints(minHeight: 15),
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -137,6 +140,7 @@ class HotelsView extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 12.0),
                       child: Image.asset(
                         'assets/icons/ic_search.png',
+                        color: const Color(0xFFAEAEB8),
                         height: 15,
                         width: 15,
                       ),
@@ -170,14 +174,17 @@ class HotelsView extends StatelessWidget {
               text: title,
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
+              color: const Color(0xFF444444),
+
             ),
             const SizedBox(
               height: 3,
             ),
             TitleHeading1Widget(
               text: subTime,
-              fontSize: 18.sp,
+              fontSize: 19,
               fontWeight: FontWeight.w400,
+              color: const Color(0xFF444444),
             )
           ],
         ),
