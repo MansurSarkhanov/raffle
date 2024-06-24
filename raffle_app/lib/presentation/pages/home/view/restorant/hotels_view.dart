@@ -57,7 +57,7 @@ class HotelsView extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 35),
+              height: 50),
             Row(
               children: [
                 hotelHeaderWidget(title: 'Arriving', subTime: '2 Jun 2024'),
@@ -79,80 +79,78 @@ class HotelsView extends StatelessWidget {
     );
   }
 
-  Row searchHeader(BuildContext context) {
-    return Row(
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) {
-                return const MapPage();
-              },
-            ));
-          },
-          child: Container(
-            width: 68.w,
-            height: 66.h,
-            decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 10, color: const Color(0xFF858585).withOpacity(0.25), offset: const Offset(0, 2))
-                ],
-                color: const Color(0xFFF9F9F9),
-                border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
-            child: Center(
-              child: SvgPicture.asset(
-                'assets/svg/ic_location_dark.svg',
-                height: 24,
-                width: 24,
+  Widget searchHeader(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xFFF9F9F9),
+      ),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const MapPage();
+                },
+              ));
+            },
+            child: Container(
+              width: 68.w,
+              height: 66.h,
+              decoration: BoxDecoration(
+                  
+                  border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/svg/ic_location_last.svg',
+                  height: 24,
+                  width: 24,
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            height: 66.h,
-            decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 10, color: const Color(0xFF858585).withOpacity(0.25), offset: const Offset(0, 2))
-                ],
-                color: const Color(0xFFF9F9F9),
-                border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 19.0),
-                child: TextField(
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Destination or Hotel',
-                    hintStyle: TextStyle(
-                        fontSize: 12.sp,
-                        color: const Color(0xFFAEAEB8),
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Helvetica'),
-                    prefixIconConstraints: const BoxConstraints(minHeight: 15),
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: Image.asset(
-                        'assets/icons/ic_search.png',
-                        color: const Color(0xFFAEAEB8),
-                        height: 15,
-                        width: 15,
-                      ),
+          Expanded(
+            child: Container(
+              height: 66.h,
+              decoration: BoxDecoration(
+                  
+                  color: const Color(0xFFF9F9F9),
+                  border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 19.0),
+                  child: TextField(
+                    style: TextStyle(
+                      fontSize: 12.sp,
                     ),
-                    isDense: true,
+                    decoration: InputDecoration(
+                      hintText: 'Destination or Hotel',
+                      hintStyle: TextStyle(
+                          fontSize: 12.sp,
+                          color: const Color(0xFFAEAEB8),
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Helvetica'),
+                      prefixIconConstraints: const BoxConstraints(minHeight: 15),
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: Image.asset(
+                          'assets/icons/ic_search.png',
+                          color: const Color(0xFFAEAEB8),
+                          height: 15,
+                          width: 15,
+                        ),
+                      ),
+                      isDense: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

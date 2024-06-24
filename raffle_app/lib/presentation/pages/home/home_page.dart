@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               : const FabButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 24 : 12),
+        padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
         child: tabController.index == 2
             ? restorantTabController.index == 4
                 ? null

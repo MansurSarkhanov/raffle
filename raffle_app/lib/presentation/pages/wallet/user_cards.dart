@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
+import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/pages/wallet/portfolio_page.dart';
 
 import '../../../core/constants/path/image_path.dart';
@@ -185,10 +187,26 @@ class UserCards extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                TitleHeading1Widget(
-                                  text: cardColor == 'green' ? '199,50 \$' : '500 \$',
-                                  fontSize: 29,
-                                  fontWeight: FontWeight.w700,
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      child: TitleHeading1Widget(
+                                        text: context.watch<AppIndexNotifier>().isVisible
+                                            ? "***"
+                                            : cardColor == 'green'
+                                                ? '199,50 '
+                                                : '500',
+                                        fontSize: 29,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    const TitleHeading1Widget(
+                                      text: '\$',
+                                      fontSize: 29,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -244,7 +262,7 @@ class UserCards extends StatelessWidget {
                                         decoration:
                                             BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                          padding: const EdgeInsets.only(top: 12, bottom: 11),
                                           child: Center(
                                             child: TitleHeading1Widget(
                                               text: 'Portfolio',
@@ -265,7 +283,8 @@ class UserCards extends StatelessWidget {
                                       decoration: BoxDecoration(
                                           color: const Color(0xFF2F576C), borderRadius: BorderRadius.circular(8)),
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                        padding: const EdgeInsets.only(top: 12, bottom: 11),
+
                                         child: Center(
                                           child: TitleHeading1Widget(
                                             text: 'Depozit',
@@ -285,7 +304,8 @@ class UserCards extends StatelessWidget {
                                       decoration: BoxDecoration(
                                           color: const Color(0xFF2F576C), borderRadius: BorderRadius.circular(8)),
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                        padding: const EdgeInsets.only(top: 12, bottom: 11),
+
                                         child: Center(
                                           child: TitleHeading1Widget(
                                             text: 'Transfer',

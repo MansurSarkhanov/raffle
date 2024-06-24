@@ -107,6 +107,9 @@ class _CampaingListState extends State<CampaingList> {
                                     ),
                                     ],
                                   ),
+                                const SizedBox(
+                                  height: 12,
+                                ),
                                   CustomElevatedButton(
                                       isLoading: false,
                                       isBorderEnabled: true,

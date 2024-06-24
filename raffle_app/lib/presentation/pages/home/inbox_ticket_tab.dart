@@ -15,14 +15,16 @@ class InboxTicketTab extends StatefulWidget {
 }
 
 class _InboxTicketTabState extends State<InboxTicketTab> {
-  int curIndex = 0;
+  int curIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     List<Widget> rafflesScreen = [
       const TicketView(),
+
       const MessagesScreen(),
+
     ];
     return Container(
       color: const Color(0xFFEBEBEB),

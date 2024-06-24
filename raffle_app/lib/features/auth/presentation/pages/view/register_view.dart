@@ -5,9 +5,11 @@ import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dar
 import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 
 import '../../../../../core/constants/path/icon_path.dart';
+import '../../../../profile/presentation/widgets/support_controller.dart';
 import '../../notifier/auth_state.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_field.dart';
+import '../../widgets/whatsapp_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback loginOnPressed;
@@ -47,8 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-        child: Column(
+    return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,15 +199,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             )
           ]),
         ),
-        SizedBox(
-          height: size.height * 0.03,
+        const SizedBox(height: 24
         ),
         const Text(
           'və ya',
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
-        SizedBox(
-          height: size.height * 0.04,
+        const SizedBox(height: 24
         ),
         Row(
           children: [
@@ -223,10 +222,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ],
         ),
-        SizedBox(
-          height: size.height * 0.04,
-        ),
+        InkWell(
+            onTap: () {
+              SupportController.openWhatsapp(context: context, text: 'Salam', number: '+994776359777');
+            },
+            child: WhatsAppWidget(size: size)),
       ],
-    ));
+    );
   }
 }

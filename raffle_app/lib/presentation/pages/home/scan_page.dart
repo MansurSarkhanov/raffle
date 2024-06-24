@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -231,45 +233,49 @@ class _QRViewExampleState extends State<QRViewExample> {
               padding: const EdgeInsets.only(left: 8, bottom: 20),
               child: Row(
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: 40,
-                    height: 40,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(
-                        0xffd9d9d9,
-                      ),
-                    ),
-                    child: IconButton(
+                      IconButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: const Icon(Icons.close)),
-                  )
-                ],
-              ),
-            ),
-                const SizedBox(
-              height: 80,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80.0),
-              child: SizedBox(
-                child: Image.asset('assets/images/im_restaurants_qr.png'),
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          )),
+                      const Spacer(),
+                      const TitleHeading1Widget(
+                        text: 'Scan to Pay and Win',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                      const Spacer(),
+                      const TitleHeading1Widget(
+                        text: 'Help',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
-                  height: 80,
+                  height: 87,
                 ),
+            
+               
                 Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                  width: 276,
+                  height: 276,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius:
+                        const BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
+
                     child: MobileScanner(
                       onDetect: (
                         barcode,
@@ -282,43 +288,129 @@ class _QRViewExampleState extends State<QRViewExample> {
                   ),
                 ),
                 const SizedBox(
-                  height: 80,
+                  height: 23,
                 ),
-                Container(
-              width: 130,
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.27)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Column(
-                      children: [
-                        Text(
-                          '1.787',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-                        ),
-                          Text(
-                          'SOLD',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFFAA1414)),
-                        ),
-                      ],
+                    Container(
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset('assets/svg/ic_light.svg'),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 47,
                     ),
                     Container(
-                      height: 50,
-                      width: 2,
-                      color: Colors.black,
-                    ),
-                    const Text('OUT OF \n1985',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 11,
-                        ))
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset('assets/svg/ic_keyboard.svg'),
+                      ),
+                    )
                   ],
                 ),
-              ),
-            )
+                const SizedBox(
+                  height: 121,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 19.5),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFF141617).withOpacity(.5), borderRadius: BorderRadius.circular(6.38)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                          child: Column(
+                            children: [
+                              SvgPicture.asset('assets/svg/ic_scan_qr.svg'),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              const TitleHeading1Widget(
+                                text: 'QR',
+                                fontSize: 13,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF141617).withOpacity(.5),
+                              borderRadius: BorderRadius.circular(6.38)),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                            child: Column(
+                              children: [
+                                TitleHeading1Widget(
+                                  text: 'BALANCE : 40.000 ₽',
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                SizedBox(
+                                  height: 14.5,
+                                ),
+                                TitleHeading1Widget(
+                                  text: 'WALLET',
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+
+                //     Container(
+                //   width: 130,
+                //   decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.27)),
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 4),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //       children: [
+                //         const Column(
+                //           children: [
+                //             Text(
+                //               '1.787',
+                //               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                //             ),
+                //               Text(
+                //               'SOLD',
+                //               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFFAA1414)),
+                //             ),
+                //           ],
+                //         ),
+                //         Container(
+                //           height: 50,
+                //           width: 2,
+                //           color: Colors.black,
+                //         ),
+                //         const Text('OUT OF \n1985',
+                //             textAlign: TextAlign.center,
+                //             style: TextStyle(
+                //               fontWeight: FontWeight.w500,
+                //               fontSize: 11,
+                //             ))
+                //       ],
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

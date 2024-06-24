@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
+import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 
 import '../../../core/utilities/helper/route.dart';
+import '../../../features/profile/presentation/widgets/support_controller.dart';
 import 'user_cards.dart';
 import 'wallet_history_page.dart';
 
@@ -160,7 +162,6 @@ class CardPageView extends StatelessWidget {
                   ),
                   OderActionTitle(
                     index: index,
-
                     title: "PEACH",
                     image: 'restorant_order',
                   ),
@@ -169,7 +170,6 @@ class CardPageView extends StatelessWidget {
                   ),
                   OderActionTitle(
                     index: index,
-
                     title: "Emiland",
                     image: 'shop_order',
                   )
@@ -209,12 +209,11 @@ class OderActionTitle extends StatelessWidget {
         ),
         const Spacer(),
         index == 1
-            ? 
-             const TitleHeading1Widget(
-          text: '-36,50 \$',
-          color: Color(0xFFC1272D),
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
+            ? const TitleHeading1Widget(
+                text: '-36,50 \$',
+                color: Color(0xFFC1272D),
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
               )
             : const TitleHeading1Widget(
                 text: '+125 \$',
@@ -240,6 +239,15 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 40,
       title: Row(
         children: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: const Icon(Icons.arrow_back_ios_rounded),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
           CircleAvatar(
             radius: 20,
             backgroundImage: NetworkImage(context.watch<ProfileNotifier>().user?.image ?? ''),
@@ -265,11 +273,23 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           const Spacer(),
-          SvgPicture.asset('assets/svg/ic_message.svg'),
+          InkWell(
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              onTap: () {
+                SupportController.openWhatsapp(context: context, text: 'Salam', number: '+994776359777');
+              },
+              child: SvgPicture.asset('assets/svg/ic_message.svg')),
           const SizedBox(
             width: 12,
           ),
-          SvgPicture.asset('assets/svg/ic_eye.svg'),
+          InkWell(
+              onTap: () {
+                context.read<AppIndexNotifier>().visibleBalance();
+              },
+              child: SvgPicture.asset(context.watch<AppIndexNotifier>().isVisible
+                  ? 'assets/svg/ic_unvisible.svg'
+                  : 'assets/svg/ic_eye.svg')),
           const SizedBox(
             width: 12,
           ),

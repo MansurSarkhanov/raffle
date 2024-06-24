@@ -4,6 +4,8 @@ enum AppPartSection { left, right }
 
 class AppIndexNotifier extends ChangeNotifier {
   AppPartSection state = AppPartSection.left;
+
+  bool isVisible = false;
   void setIndex(int index) {
     if (index == 0) {
       state = AppPartSection.left;
@@ -12,5 +14,11 @@ class AppIndexNotifier extends ChangeNotifier {
       state = AppPartSection.right;
       notifyListeners();
     }
+  }
+
+  void visibleBalance() {
+    isVisible = !isVisible;
+    print('isVisible $isVisible');
+    notifyListeners();
   }
 }
