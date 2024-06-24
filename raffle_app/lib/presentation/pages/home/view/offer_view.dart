@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:raffle_app/core/utilities/helper/route.dart';
+import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
+import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view.dart';
+import 'package:raffle_app/injetion.dart';
 
 import '../widgets/offer_card_widget.dart';
+import '../widgets/shop_now_widget.dart';
 
 class OfferView extends StatelessWidget {
   const OfferView({super.key});
@@ -39,35 +45,14 @@ class OfferView extends StatelessWidget {
                 textColor: Colors.white,
                 title: 'Limited time only!',
                 onPressed: () {
-                  // openCupertinoBottomSheet(
-                  //     builder: (context) {
-                  //       return const ShopNowScreen(
-                  //         drawDate: '10 Decmeber 2023',
-                  //         totalNumber: 2,
-                  //         category: 1,
-                  //         prodId: '98765',
-                  //         whatYouWillWin: 'Fiat 500',
-                  //         imageUrl: [
-                  //           'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80'
-                  //         ],
-                  //         prizeName: ' Fiat 500 La Prima',
-                  //         littleImageUrl: [null],
-                  //         addMore: true,
-                  //         youWillBuy: ' Ruffle credit USD 105',
-                  //         prizeDetail:
-                  //             'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-                  //         productDetail:
-                  //             'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-                  //         soldNumber: 10,
-                  //         date: '1',
-                  //         whatWillYouWin: 'a',
-                  //       );
-                  //     },
-                  //     args: const CupertinoBottomSheetRouteArgs(
-                  //         swipeSettings: SwipeSettings(
-                  //       canCloseBySwipe: true,
-                  //       velocityThreshhold: 200,
-                  //     )));
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    context: context,
+                    builder: (context) {
+                      return const ShopNowWidget();
+                    },
+                  );
                 }),
             OffersWidget(
                 buttonText: 'Top up',
@@ -79,7 +64,10 @@ class OfferView extends StatelessWidget {
                 textColor: Colors.white,
                 title: 'Top up your account',
                 onPressed: () {
-                  // Navigator.of(context).pushNamed(RaffleWalletScreen.routeName);
+                  Navigator.of(context).push(RouteHelper.createRoute(
+                      routeName: ChangeNotifierProvider.value(
+                          value: getIt.get<ProfileNotifier>()..getUserInformation(), child: const RaffleWalletScreen()),
+                      location: RoutingLocation.rightToLeft));
                 }),
                 
           ],
@@ -88,45 +76,3 @@ class OfferView extends StatelessWidget {
     );
   }
 }
-
-// final GlobalKey _repaintBoundaryKey = GlobalKey();
-
-// /// can be used to simplify bottom sheet opening without the need for context
-// final GlobalKey<NavigatorState> cupertinoBottomSheetNavigatorKey = GlobalKey();
-
-// Future openCupertinoBottomSheet({
-//   required Widget Function(BuildContext context) builder,
-//   CupertinoBottomSheetRouteArgs? args,
-// }) async {
-//   if (cupertinoBottomSheetNavigatorKey.currentState == null) {
-//     throw '''
-//       No navigator state has been found. Add cupertinoBottomSheetNavigatorKey as a 
-//       navigatorKey argument of your App initialization
-//       example: 
-//       @override
-//       Widget build(BuildContext context) {
-//         return CupertinoBottomSheetRepaintBoundary(
-//           child: MaterialApp(
-//             navigatorKey: cupertinoBottomSheetNavigatorKey,
-//             title: 'Flutter Cupertino Bottom Sheet',
-//             theme: ThemeData(
-//               primarySwatch: Colors.red,
-//             ),
-//             home: const TestPage(),
-//           ),
-//         );
-//       }
-//     ''';
-//   }
-//   return cupertinoBottomSheetNavigatorKey.currentState!.push(
-//     CupertinoBottomSheetRoute(
-//       args: args ??
-//           const CupertinoBottomSheetRouteArgs(
-//             swipeSettings: SwipeSettings(
-//               canCloseBySwipe: true,
-//             ),
-//           ),
-//       builder: builder,
-//     ),
-//   );
-// }

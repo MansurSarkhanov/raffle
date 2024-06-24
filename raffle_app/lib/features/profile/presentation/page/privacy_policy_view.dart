@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/core/utilities/helper/route.dart';
+import 'package:raffle_app/features/profile/presentation/page/change_password_view.dart';
+import 'package:raffle_app/features/profile/presentation/page/notification_view.dart';
+import 'package:raffle_app/features/profile/presentation/page/saved_debit_view.dart';
 
 import '../../../../presentation/components/go_back_button.dart';
 import '../widgets/custom_profile_listtile.dart';
@@ -53,7 +57,10 @@ class _PrivacyPolicyViewState extends State<PrivacyPolicyView> {
                     height: 10,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(RouteHelper.createRoute(
+                          routeName: const SavedDebitCartScreen(), location: RoutingLocation.rightToLeft));
+                    },
                     child: const CustomProfileListtileWidget(
                         icon: Icon(
                           Icons.arrow_forward_ios,
@@ -65,7 +72,8 @@ class _PrivacyPolicyViewState extends State<PrivacyPolicyView> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Get.to(() => const ChangePasswordScreen());
+                      Navigator.of(context).push(RouteHelper.createRoute(
+                          routeName: const ChangePasswordScreen(), location: RoutingLocation.rightToLeft));
                     },
                     child: const CustomProfileListtileWidget(
                         icon: Icon(
@@ -78,7 +86,8 @@ class _PrivacyPolicyViewState extends State<PrivacyPolicyView> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Get.to(() => const NotificationPrefScreen());
+                      Navigator.of(context).push(RouteHelper.createRoute(
+                          routeName: const NotificationPrefScreen(), location: RoutingLocation.rightToLeft));
                     },
                     child: const CustomProfileListtileWidget(
                         isBottomDividerActive: false,
