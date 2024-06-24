@@ -66,7 +66,7 @@ class _HomeTabState extends State<HomeTab> {
                               // onTap: () => Get.to(() => const ProfileScreen()),
                               child: purpleContiner(
                                 imageUrl: ImagePath.left_p.toPathSvg,
-                                txt: 'Account ID',
+                                txt: 'Raffle ID',
                                 txtTwo: '.....',
                               ),
                             ),
@@ -105,7 +105,7 @@ class _HomeTabState extends State<HomeTab> {
                               },
                               child: purpleContiner(
                                 imageUrl: ImagePath.left_p.toPathSvg,
-                                txt: 'Account ID',
+                                txt: 'Raffle ID',
                                 txtTwo: user?.uid,
                               ),
                             ),
@@ -355,7 +355,7 @@ Stack purpleContiner({required String imageUrl, required String txt, required tx
           SizedBox(
             width: 150,
             child: TitleHeading1Widget(
-              textOverflow: TextOverflow.clip,
+              textOverflow: TextOverflow.fade,
               text: txtTwo,
               textAlign: TextAlign.center,
               color: Colors.white,

@@ -33,35 +33,47 @@ class _WalletCardPageState extends State<WalletCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const WalletAppBar(),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 27.0,
-            ),
-            child: SizedBox(
-              height: 200,
-              child: CardSwiper(
-                controller: cardController,
-                backCardOffset: const Offset(0, -20),
-                padding: EdgeInsets.zero,
-                onSwipe: (previousIndex, currentIndex, direction) {
-                  currentListIndex = currentIndex;
-                  setState(() {});
+      body: RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        onRefresh: () async {
+          return await context.read<ProfileNotifier>().getUserInformation();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const WalletAppBar(),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 27.0,
+                ),
+                child: SizedBox(
+                  height: 200,
+                  child: CardSwiper(
+                    allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
+                    controller: cardController,
+                    backCardOffset: const Offset(0, -20),
+                    padding: EdgeInsets.zero,
+                    onSwipe: (previousIndex, currentIndex, direction) {
+                      currentListIndex = currentIndex;
+                      setState(() {});
 
-                  return true;
-                },
-                cardsCount: cards.length,
-                numberOfCardsDisplayed: 3,
-                cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
-                  return cards[index];
-                },
+                      return true;
+                    },
+                    cardsCount: cards.length,
+                    numberOfCardsDisplayed: 3,
+                    cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+                      return cards[index];
+                    },
+                  ),
+                ),
               ),
-            ),
+              WalletExpenseListCard(index: currentListIndex ?? 0),
+              const SizedBox(
+                height: 400,
+              )
+            ],
           ),
-          WalletExpenseListCard(index: currentListIndex ?? 0)
-        ],
+        ),
       ),
     );
   }

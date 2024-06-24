@@ -11,12 +11,7 @@ class RestorantDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
-      //   child: RestorantBottomNavBar(
-      //     tabController: tabController,
-      //   ),
-      // ),
+     
       backgroundColor: const Color(0xFFF9F9F9),
       body: CustomScrollView(
         slivers: [

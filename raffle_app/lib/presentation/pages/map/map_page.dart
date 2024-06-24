@@ -62,6 +62,7 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
+        backgroundColor: const Color(0xFFF1F1F1),
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(156),
             child: Padding(

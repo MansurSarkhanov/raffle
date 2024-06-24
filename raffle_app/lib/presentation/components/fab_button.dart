@@ -40,10 +40,11 @@ class FabButton extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 3,
+            height: 4,
           ),
           const TitleHeading1Widget(
             text: 'Scan',
+            fontFamily: "Helvetica",
             fontSize: 9,
             color: Color(0xFF505050),
             fontWeight: FontWeight.w400,
@@ -60,7 +61,7 @@ class RestorantFabButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 50,
+      width: 85,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
