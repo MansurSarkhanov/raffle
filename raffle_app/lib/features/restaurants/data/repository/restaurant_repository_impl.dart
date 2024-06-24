@@ -16,7 +16,7 @@ class RestaurantRepositoryImpl implements RestaurantRepository {
         return Success(result);
       }
     } on Exception catch (e) {
-      return Error(Exception(e.toString()));
+      return Error(Exception(e.toString())); 
     }
     return Error(Exception());
   }

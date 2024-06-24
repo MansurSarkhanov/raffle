@@ -18,28 +18,34 @@ class _TicketViewState extends State<TicketView> {
       child: Column(
         children: [
           SizedBox(
-            height: 390,
+            height: 410,
             child: Stack(
               fit: StackFit.loose,
               textDirection: TextDirection.ltr,
               children: [
                 Positioned(
-                  top: 156,
+                  top: 180,
                   left: 6,
                   right: 6,
-                  child: TicketWinnerCard(),
+                  child: TicketWinnerCard(
+                    isBackitem: true,
+                  ),
                 ),
                 Positioned(
-                  top: 104,
+                  top: 120,
                   left: 4,
                   right: 4,
-                  child: TicketWinnerCard(),
+                  child: TicketWinnerCard(
+                    isBackitem: true,
+                  ),
                 ),
                 Positioned(
-                  top: 52,
+                  top: 60,
                   left: 2,
                   right: 2,
-                  child: TicketWinnerCard(),
+                  child: TicketWinnerCard(
+                    isBackitem: true,
+                  ),
                 ),
                 Positioned(child: TicketWinnerCard()),
               ],

@@ -16,6 +16,7 @@ class TitleHeading1Widget extends StatelessWidget {
     this.fontFamily,
     this.letterSpacing,
     this.textDecoration,
+    this.height,
   });
 
   final String text;
@@ -23,6 +24,8 @@ class TitleHeading1Widget extends StatelessWidget {
   final double? letterSpacing;
 
   final TextAlign? textAlign;
+  final double? height;
+
   final TextDecoration? textDecoration;
   final TextOverflow? textOverflow;
   final EdgeInsetsGeometry padding;
@@ -41,6 +44,7 @@ class TitleHeading1Widget extends StatelessWidget {
       child: Padding(
         padding: padding,
         child: Text(
+          
           softWrap: softWrap,
           text,
           style: TextStyle(

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/gif_path_ext.dart';
 import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
+import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/pages/home/view/story_view.dart';
 
 import '../../../core/constants/path/gif_path.dart';
@@ -343,27 +344,23 @@ Stack purpleContiner({required String imageUrl, required String txt, required tx
           const SizedBox(
             height: 6,
           ),
-          Text(
-            txt,
+          TitleHeading1Widget(
+            text: txt,
             textAlign: TextAlign.right,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              // fontFamily: 'Noveo Sans',
-              fontFamily: 'Helvetica Neue',
+            color: Colors.white,
+            fontSize: 12,
               fontWeight: FontWeight.w500,
               height: 0,
-            ),
           ),
-          Text(
-            txtTwo,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
+          SizedBox(
+            width: 150,
+            child: TitleHeading1Widget(
+              textOverflow: TextOverflow.clip,
+              text: txtTwo,
+              textAlign: TextAlign.center,
               color: Colors.white,
               fontSize: 12,
-              fontFamily: 'Helvetica Neue',
               fontWeight: FontWeight.w300,
-              height: 0,
             ),
           ),
         ],

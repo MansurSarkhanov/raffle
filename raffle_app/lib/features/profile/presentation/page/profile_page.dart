@@ -190,7 +190,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               Navigator.of(context).pop();
                               widget.controller?.index = 1;
                             },
-                            child: const ProfileLittleContainer(title: 'Live', imageUrl: 'assets/images/im_live.png'),
+                            child:
+                                const ProfileLittleContainer(title: 'Live', imageUrl: 'assets/images/im_new_live.png'),
                           ),
                           const Spacer(),
                           InkWell(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               : const FabButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
+        padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 24 : 12),
         child: tabController.index == 2
             ? restorantTabController.index == 4
                 ? null

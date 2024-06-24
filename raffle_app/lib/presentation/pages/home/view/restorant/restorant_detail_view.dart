@@ -51,7 +51,7 @@ class RestorantDetailView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      statusIcon(path: 'already_been', text: "Already been"),
+                      statusIcon(path: 'already_been', text: "Already been", isAlready: true),
                       const SizedBox(
                         width: 12,
                       ),
@@ -74,10 +74,18 @@ class RestorantDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  const Text(
-                    '1.900 people love this place',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                  const Row(
+                    children: [
+                      TitleHeading1Widget(
+                        text: '1.900 people ',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        textDecoration: TextDecoration.underline,
+                      ),
+                      TitleHeading1Widget(text: 'love this place', fontSize: 13, fontWeight: FontWeight.w400),
+                    ],
                   ),
+                  
                   const SizedBox(
                     height: 12,
                   ),
@@ -229,7 +237,7 @@ class RestorantDetailView extends StatelessWidget {
     );
   }
 
-  Container statusIcon({required String path, required String text}) {
+  Container statusIcon({required String path, required String text, bool? isAlready = false}) {
     return Container(
       width: 78.w,
       height: 46.h,
@@ -246,9 +254,14 @@ class RestorantDetailView extends StatelessWidget {
           children: [
             SvgPicture.asset(
               'assets/svg/ic_$path.svg',
-              height: 26,
-              width: 26,
+              height: isAlready == true ? 24 : 26,
+              width: isAlready == true ? 24 : 26,
             ),
+            if (isAlready == true) ...[
+              const SizedBox(
+                height: 2,
+              ),
+            ],
             TitleHeading1Widget(
               fontFamily: 'Helvetica',
               text: text,
