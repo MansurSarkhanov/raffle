@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 
-import '../../inbox_ticket_tab.dart';
-import 'hotels_view.dart';
+import '../../../../injetion.dart';
+import '../../../../presentation/pages/home/inbox_ticket_tab.dart';
+import '../../../../presentation/pages/home/view/restorant/hotels_view.dart';
+import '../notifier/restourants_notifier.dart';
 import 'restorant_view.dart';
 
 class RestorantTabView extends StatefulWidget {
@@ -23,7 +26,9 @@ class _RestorantTabViewState extends State<RestorantTabView> with TickerProvider
       physics: const NeverScrollableScrollPhysics(),
       controller: widget.restorantTabController,
       children: [
-        RestorantView(tabController: widget.restorantTabController),
+        ChangeNotifierProvider.value(
+            value: getIt.get<RestourantsNotifier>()..fetchAllRestorants(),
+            child: RestorantView(tabController: widget.restorantTabController)),
         const HotelsView(),
         ScanPage(controller: widget.restorantTabController),
         Container(
@@ -36,7 +41,6 @@ class _RestorantTabViewState extends State<RestorantTabView> with TickerProvider
     );
   }
 }
-
 
 class CategoryList extends StatelessWidget {
   CategoryList({

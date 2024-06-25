@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       SizedBox(height: size.height * 0.02),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           GoBackButton(
                             buttonBackColor: const Color(0xFFD9D9D9),

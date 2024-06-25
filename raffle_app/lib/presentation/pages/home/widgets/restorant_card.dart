@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:raffle_app/features/restaurants/data/model/restorant_model.dart';
+import 'package:raffle_app/features/restaurants/presentation/page/restorant_detail_view.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
-import 'package:raffle_app/presentation/pages/home/view/restorant/restorant_detail_view.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard({super.key, required this.restaurant, required this.tabController});
-  final RestaurantModelFake restaurant;
-final TabController tabController;
+  const RestaurantCard({super.key, required this.restaurantModel});
+  final RestaurantModel restaurantModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,8 +17,7 @@ final TabController tabController;
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) {
-            return RestorantDetailView(
-              tabController: tabController,
+            return const RestorantDetailView(
             );
           },
         ));
@@ -62,11 +61,14 @@ final TabController tabController;
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 1.5.w),
-                            child: TitleHeading1Widget(
-                              text: restaurant.name,
-                              fontSize: 22.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF2D2D32),
+                            child: SizedBox(
+                              width: 160,
+                              child: TitleHeading1Widget(
+                                text: restaurantModel.name ?? '',
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF2D2D32),
+                              ),
                             ),
                           ),
                         ],
@@ -77,8 +79,8 @@ final TabController tabController;
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage(
-                                restaurant.logo,
+                              image: NetworkImage(
+                                restaurantModel.imageUrl ?? "",
                               )),
                           // border: Border.all(
                           //   width: 0.4,
@@ -113,13 +115,17 @@ final TabController tabController;
                             width: 140, // 200.0 is the total width of the progress bar
 
                             child: LinearPercentIndicator(
-                              linearGradient: restaurant.gradient,
+                              linearGradient: const LinearGradient(
+                                colors: [Color(0xFFFE21AC), Color(0xFFFA1D33)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
                               padding: EdgeInsets.only(left: 5.w),
                               barRadius: Radius.circular(52.r),
                               animation: false,
                               animationDuration: 1500,
                               lineHeight: 18.h,
-                              percent: restaurant.sold / restaurant.target,
+                              percent: restaurantModel.percent!.toDouble() / 100,
                               backgroundColor: const Color(0xFFE0E0E0),
                               // progressColor: restaurant.color,
                             ),
@@ -146,12 +152,12 @@ final TabController tabController;
                         children: [
                           TitleHeading1Widget(
                             text:
-                            '${restaurant.sold}/',
+                            '${restaurantModel.currence}/',
                             fontWeight: FontWeight.bold,
                             fontSize: 12.sp,
                           ),
                           TitleHeading1Widget(
-                            text: '${restaurant.target} sold',
+                            text: '${restaurantModel.total} sold',
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                           )

@@ -7,6 +7,7 @@ import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
+
 import '../../../core/constants/path/image_path.dart';
 import '../../../core/utilities/helper/route.dart';
 import '../../../features/profile/presentation/widgets/support_controller.dart';
@@ -23,12 +24,17 @@ class WalletCardPage extends StatefulWidget {
 class _WalletCardPageState extends State<WalletCardPage> {
   final PageController controller = PageController();
   final CardSwiperController cardController = CardSwiperController();
-  int? currentListIndex = 0;
-  final List<Widget> cards = [
+  int currentListIndex = 0;
+  List<Widget> cards = [
     const TestCardBlue(),
     const TestCardGreen(),
     const TestCardRed(),
   ];
+
+  void onSwipe(CardSwiperDirection direction) {
+    // print(currentListIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,15 +55,42 @@ class _WalletCardPageState extends State<WalletCardPage> {
                 child: SizedBox(
                   height: 200,
                   child: CardSwiper(
+                    isLoop: true,
                     allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
                     controller: cardController,
                     backCardOffset: const Offset(0, -20),
                     padding: EdgeInsets.zero,
+                    // onTapDisabled: () {
+                    // },
                     onSwipe: (previousIndex, currentIndex, direction) {
-                      currentListIndex = currentIndex;
-                      setState(() {});
-
-                      return true;
+                      if (direction == CardSwiperDirection.right) {
+                        if (currentListIndex > 0) {
+                          setState(() {
+                            currentListIndex--;
+                          });
+                          cardController.moveTo(currentListIndex);
+                        }
+                        //  else if (currentListIndex == 0) {
+                        //   setState(() {
+                        //     currentListIndex = 2;
+                        //   });
+                        //   cardController.moveTo(currentListIndex);
+                        // }
+                      } else if (direction == CardSwiperDirection.left) {
+                        if (currentListIndex < cards.length - 1) {
+                          setState(() {
+                            currentListIndex++;
+                          });
+                          cardController.moveTo(currentListIndex);
+                        }
+                        //  else {
+                        //   setState(() {
+                        //     currentListIndex = 0;
+                        //   });
+                        //   cardController.moveTo(currentListIndex);
+                        // }
+                      }
+                      return false; // Kaydırma işlemine izin vermek için false döndürüyoruz
                     },
                     cardsCount: cards.length,
                     numberOfCardsDisplayed: 3,
@@ -67,7 +100,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
                   ),
                 ),
               ),
-              WalletExpenseListCard(index: currentListIndex ?? 0),
+              WalletExpenseListCard(index: currentListIndex),
             ],
           ),
         ),
@@ -204,7 +237,7 @@ class TestCardGreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 19.0, top: 21, bottom: 21, right: 19),
+          padding: const EdgeInsets.only(left: 23.0, top: 23, bottom: 23, right: 23),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -387,12 +420,13 @@ class TestCardBlue extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 24.0, top: 20, bottom: 20, right: 24),
+          padding: const EdgeInsets.only(left: 23.0, top: 23, bottom: 23, right: 23),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

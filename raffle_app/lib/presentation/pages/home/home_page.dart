@@ -7,11 +7,11 @@ import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
+import '../../../features/restaurants/presentation/page/restorant_tabview.dart';
 import '../../components/bottom_navbar.dart';
 import '../../components/custom_selection_appbar.dart';
 import 'home_tab.dart';
 import 'inbox_ticket_tab.dart';
-import 'view/restorant/restorant_tabview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
