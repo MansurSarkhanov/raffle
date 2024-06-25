@@ -4,7 +4,7 @@ description: "A new Flutter project."
 publish_to: 'none' 
 
 
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -58,7 +58,7 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/icons/ic_launcher.png"
-
+  remove_alpha_ios: true
 flutter_native_splash:
   color: "#435784"
   image: assets/images/im_splash.png
