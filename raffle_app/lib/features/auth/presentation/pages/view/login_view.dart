@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/path/icon_path.dart';
 import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 
-import '../../../../../core/constants/routes.dart';
 import '../../../../profile/presentation/widgets/support_controller.dart';
 import '../../notifier/auth_state.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -54,9 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     final result = await notifier.loginUser(
                         email: emailLoginController.text.trim(), password: passwordLoginController.text.trim());
 
-                    if (result == true && context.mounted) {
-                      context.goNamed(AppRoutes.home.name);
-                    }
+                    // if (result == true && context.mounted) {
+                    //   context.goNamed(AppRoutes.home.name);
+                    // }
                   } else {
                     openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
                   }

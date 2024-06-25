@@ -28,7 +28,7 @@ class _AuthPageState extends State<AuthPage> {
       () {
         final authNotifier = _authNotifier.state;
         if (authNotifier is AuthSuccess) {
-          context.replaceNamed(AppRoutes.home.name);
+          context.goNamed(AppRoutes.home.name);
         } else if (authNotifier is AuthError) {
           openFlushbar(context,
               message: "Yeniden cəhd edin",

@@ -11,6 +11,7 @@ import 'package:raffle_app/presentation/components/custom_text.dart';
 import '../../../core/constants/path/image_path.dart';
 import '../../../core/utilities/helper/route.dart';
 import '../../../features/profile/presentation/widgets/support_controller.dart';
+import 'portfolio_page.dart';
 import 'wallet_history_page.dart';
 
 class WalletCardPage extends StatefulWidget {
@@ -33,6 +34,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: const WalletAppBar(),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async {
@@ -41,7 +43,6 @@ class _WalletCardPageState extends State<WalletCardPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const WalletAppBar(),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 27.0,
@@ -68,9 +69,6 @@ class _WalletCardPageState extends State<WalletCardPage> {
                 ),
               ),
               WalletExpenseListCard(index: currentListIndex ?? 0),
-              const SizedBox(
-                height: 400,
-              )
             ],
           ),
         ),
@@ -435,9 +433,8 @@ class TestCardBlue extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                        //   return const PortfolioPage();
-                        // }));
+                        Navigator.of(context).push(RouteHelper.createRoute(
+                            routeName: const PortfolioPage(), location: RoutingLocation.rightToLeft));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -526,40 +523,6 @@ class TestCardBlue extends StatelessWidget {
     );
   }
 }
-
-// class CardPageView extends StatelessWidget {
-//   const CardPageView({
-//     super.key,
-//     required this.controller,
-//     required this.cardColorName,
-//     required this.index,
-//   });
-
-//   final PageController controller;
-//   final String cardColorName;
-//   final int index;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 12.5),
-//       child: Column(
-//         children: [
-//           UserCards(
-//             cardColor: cardColorName,
-//             onAction: () {
-//               controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
-//             },
-//           ),
-//           const SizedBox(
-//             height: 24,
-//           ),
-
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class OderActionTitle extends StatelessWidget {
   const OderActionTitle({
