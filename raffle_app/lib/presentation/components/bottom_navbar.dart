@@ -46,57 +46,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Tab(
             text: "Home",
             icon: widget.tabController.index == 0
-                ? SvgPicture.asset(
-                    'assets/svg/home_active.svg',
-                    height: 20,
-                    width: 21,
-                  )
-                : Image.asset(
-                    'assets/images/im_home.png',
-                    height: 20,
-                    width: 20,
-                  ),
+                ? SvgPicture.asset('assets/svg/ic_home_selected.svg')
+                : SvgPicture.asset('assets/svg/ic_home_unselected.svg'),
           ),
           Tab(
               text: "Live",
               icon: widget.tabController.index == 1
-                  ? Image.asset(
-                      'assets/images/im_live_active.png',
-                      height: 20,
-                      width: 20,
-                    )
-                  : Image.asset(
-                      'assets/images/im_live.png',
-                      height: 20,
-                      width: 20,
-                    )),
-          const Tab(text: "", icon: SizedBox(height: 20)),
+                  ? SvgPicture.asset('assets/svg/ic_live_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_live_unselected.svg')),
+          Tab(
+              text: "Scan",
+              icon: widget.tabController.index == 2
+                  ? SvgPicture.asset('assets/svg/ic_scan_restorant.svg')
+                  : SvgPicture.asset('assets/svg/ic_scan_restorant.svg')),
           Tab(
               text: "Offer",
               icon: widget.tabController.index == 3
-                  ? Image.asset(
-                      'assets/images/im_offer_active.png',
-                      height: 20,
-                      width: 20,
-                    )
-                  : SvgPicture.asset(
-                      'assets/svg/offer.svg',
-                      height: 20,
-                      width: 20,
-                    )),
+                  ? SvgPicture.asset('assets/svg/ic_offer_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_offer_unselected.svg')),
           Tab(
               text: "Inbox",
               icon: widget.tabController.index == 4
-                  ? Image.asset(
-                      'assets/images/im_inbox_active.png',
-                      height: 20,
-                      width: 20,
-                    )
-                  : Image.asset(
-                      'assets/images/im_inbox.png',
-                      height: 20,
-                      width: 20,
-                    )),
+                  ? SvgPicture.asset('assets/svg/ic_raffle_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_raffle_unselected.svg')),
         ],
       ),
     );
@@ -145,72 +117,31 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
           Tab(
             text: "Restaurant",
             icon: widget.tabController.index == 0
-                ? Image.asset(
-                    'assets/icons/ic_restorant_active.png',
-                    height: 21,
-                    width: 28.01,
-                  )
-                : Image.asset(
-                    'assets/icons/ic_restorant.png',
-                    height: 21,
-                    width: 28.01,
-                  ),
+                  ? SvgPicture.asset('assets/svg/ic_restorant_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_restorant_unselected.svg')
+
           ),
           Tab(
               text: "Hotel",
               icon: widget.tabController.index == 1
-                  ? Image.asset(
-                      'assets/icons/ic_bed_active.png',
-                      height: 19,
-                      width: 23.87,
-                    )
-                  : Image.asset(
-                      'assets/icons/ic_bed.png',
-                      height: 19,
-                      width: 23.87,
-                    )),
-          const Tab(
-              icon: SizedBox(
-            height: 19,
-          )
-              //  widget.tabController.index == 3
-              //     ? Image.asset(
-              //         'assets/icons/ic_scan.png',
-              //         height: 19,
-              //         width: 21,
-              //       )
-              //     : Image.asset(
-              //         'assets/icons/ic_scan.png',
-              //         height: 19,
-              //         width: 20,
-              //     ),
-              ),
+                  ? SvgPicture.asset('assets/svg/ic_hotel_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_hotel_unselected.svg')),
+          Tab(
+              text: "Scan",
+              icon: widget.tabController.index == 2
+                  ? SvgPicture.asset('assets/svg/ic_scan_restorant.svg')
+                  : SvgPicture.asset('assets/svg/ic_scan_restorant.svg')),
+             
           Tab(
               text: "Shop",
               icon: widget.tabController.index == 3
-                  ? Image.asset(
-                      'assets/icons/ic_shop_active.png',
-                      height: 19,
-                      width: 20,
-                    )
-                  : Image.asset(
-                      'assets/icons/ic_shop.png',
-                      height: 19,
-                      width: 20,
-                    )),
+                  ? SvgPicture.asset('assets/svg/ic_shop_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_shop_unselected.svg')),
           Tab(
               text: "Raffle",
               icon: widget.tabController.index == 4
-                  ? Image.asset(
-                      'assets/images/im_inbox_active.png',
-                      height: 20,
-                      width: 20,
-                    )
-                  : Image.asset(
-                      'assets/images/im_inbox.png',
-                      height: 20,
-                      width: 20,
-                    ))
+                  ? SvgPicture.asset('assets/svg/ic_raffle_selected.svg')
+                  : SvgPicture.asset('assets/svg/ic_raffle_unselected.svg'))
         ],
       ),
     );

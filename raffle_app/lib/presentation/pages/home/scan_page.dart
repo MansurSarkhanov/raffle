@@ -6,8 +6,8 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 
 class ScanPage extends StatefulWidget {
-  const ScanPage({super.key});
-
+  const ScanPage({super.key, required this.controller});
+  final TabController controller;
   @override
   State<ScanPage> createState() => _ScanPageState();
 }
@@ -37,26 +37,24 @@ class _ScanPageState extends State<ScanPage> {
                   decoration: BoxDecoration(
                 // color: Colors.black.withOpacity(0),
                 gradient: LinearGradient(
-
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
                     const Color(0xFF000000).withOpacity(.9), // #000000
                     const Color(0xFFBB0000).withOpacity(0.3), // #BB0000 33.01%
                     const Color(0xFFA80000).withOpacity(0.4), // #A80000 67.5%
                     const Color(0xFF000000).withOpacity(.8), // #000000 100%
                     const Color(0xFF020101).withOpacity(.9), // #020101 100%
-            ],
+                  ],
                   stops: const [
-              0.0, // 0%
-              0.3301, // 33.01%
-              0.675, // 67.5%
-              1.0, // 100%
-              1.0, // 100%
-            ],
+                    0.0, // 0%
+                    0.3301, // 33.01%
+                    0.675, // 67.5%
+                    1.0, // 100%
+                    1.0, // 100%
+                  ],
                 ),
-              )
-              ),
+              )),
             ),
           ),
           // Ortadaki QR kod okuma alanı
@@ -64,16 +62,16 @@ class _ScanPageState extends State<ScanPage> {
             child: Column(
               children: [
                 const SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, bottom: 20),
-              child: Row(
-                children: [
+                  height: 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, bottom: 20),
+                  child: Row(
+                    children: [
                       IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                          onPressed: () {
+                            widget.controller.index = 0;
+                          },
                           icon: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
@@ -101,8 +99,6 @@ class _ScanPageState extends State<ScanPage> {
                 const SizedBox(
                   height: 87,
                 ),
-            
-               
                 Container(
                   width: 276,
                   height: 276,
@@ -112,7 +108,6 @@ class _ScanPageState extends State<ScanPage> {
                   child: ClipRRect(
                     borderRadius:
                         const BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
-
                     child: MobileScanner(
                       onDetect: (
                         barcode,
@@ -212,8 +207,6 @@ class _ScanPageState extends State<ScanPage> {
                     ],
                   ),
                 )
-
-              
               ],
             ),
           ),

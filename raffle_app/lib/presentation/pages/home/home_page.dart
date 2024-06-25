@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
 import '../../components/bottom_navbar.dart';
 import '../../components/custom_selection_appbar.dart';
-import '../../components/fab_button.dart';
 import 'home_tab.dart';
 import 'inbox_ticket_tab.dart';
 import 'view/restorant/restorant_tabview.dart';
@@ -30,16 +31,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     restorantTabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
       setState(() {});
-
     });
     restorantTabController.addListener(() {
-      if (restorantTabController.index == 2) {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return const ScanPage();
-          },
-        ));
-      }
       setState(() {});
     });
   }
@@ -50,35 +43,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: true,
       backgroundColor: tabController.index == 2 ? const Color(0xFFF9F9F9) : const Color(0xFFEBEBEB),
-      appBar: tabController.index == 0 || tabController.index == 2
-          ? restorantTabController.index == 1 || restorantTabController.index == 4
-              ? null
+      appBar: tabController.index == 2 ||
+              tabController.index == 4 ||
+              restorantTabController.index == 1 ||
+              restorantTabController.index == 2 ||
+              restorantTabController.index == 4
+          ? null
               : CustomSelectionAppbar(
                   controller: tabController,
-                )
-              
-          : null,
-      floatingActionButton: tabController.index == 2 
-          ? restorantTabController.index == 4
-              ? null
-              : const RestorantFabButton()
-          : tabController.index == 4
-              ? null
-              : const FabButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            ),
+         
+  
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
-        child: tabController.index == 2
-            ? restorantTabController.index == 4
-                ? null
-                : RestorantBottomNavBar(tabController: restorantTabController)
-            : tabController.index == 4
-                ? null
+        child: tabController.index == 2 || restorantTabController.index == 2
+            ? null
+            : context.watch<AppIndexNotifier>().state == AppPartSection.right
+                ? RestorantBottomNavBar(tabController: restorantTabController)
                 : BottomNavBar(tabController: tabController),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
-        child: TabBarView(
+        padding: EdgeInsets.only(bottom: tabController.index == 2 || restorantTabController.index == 2 ? 0 : 20.0),
+        child: context.watch<AppIndexNotifier>().state == AppPartSection.right
+            ? RestorantTabView(
+                restorantTabController: restorantTabController,
+              )
+            : TabBarView(
           controller: tabController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
@@ -87,7 +77,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               controller: tabController,
             ),
             const LiveView(),
-            RestorantTabView(restorantTabController: restorantTabController),
+                  ScanPage(
+                    controller: tabController,
+                  ),
             const OfferView(),
             InboxTicketTab(
               controller: tabController,

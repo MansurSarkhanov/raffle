@@ -15,6 +15,7 @@ class _TicketViewState extends State<TicketView> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
+      padding: EdgeInsets.only(bottom: 60),
       child: Column(
         children: [
           SizedBox(

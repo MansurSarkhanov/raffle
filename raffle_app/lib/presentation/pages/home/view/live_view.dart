@@ -17,7 +17,10 @@ class _LiveViewState extends State<LiveView> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(left: size.width * 0.05, right: size.width * 0.05, top: size.height * 0.08),
+      padding: EdgeInsets.only(
+        left: size.width * 0.05,
+        right: size.width * 0.05,
+      ),
       child: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: size.height * 0.2),
         child: Column(
