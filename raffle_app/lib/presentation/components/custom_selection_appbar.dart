@@ -95,7 +95,6 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
               child: GestureDetector(
                 onTap: () {
                   appIndexNotifier.setIndex(2);
-                  controller.index = 2;
                 },
                 child: Container(
                   width: 115.w,

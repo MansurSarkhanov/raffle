@@ -2,31 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
+import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 
 import '../../inbox_ticket_tab.dart';
 import 'hotels_view.dart';
 import 'restorant_view.dart';
 
-class RestorantTabView extends StatelessWidget {
+class RestorantTabView extends StatefulWidget {
   const RestorantTabView({super.key, required this.restorantTabController});
   final TabController restorantTabController;
+
+  @override
+  State<RestorantTabView> createState() => _RestorantTabViewState();
+}
+
+class _RestorantTabViewState extends State<RestorantTabView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
       physics: const NeverScrollableScrollPhysics(),
-      controller: restorantTabController,
+      controller: widget.restorantTabController,
       children: [
-        RestorantView(tabController: restorantTabController),
+        RestorantView(tabController: widget.restorantTabController),
         const HotelsView(),
-        Container(
-          color: AppColors.backColor,
-
-        ),
+        ScanPage(controller: widget.restorantTabController),
         Container(
           color: AppColors.backColor,
         ),
         InboxTicketTab(
-          controller: restorantTabController,
+          controller: widget.restorantTabController,
         )
       ],
     );
