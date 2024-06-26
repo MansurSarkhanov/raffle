@@ -5,8 +5,10 @@ class Places {
   String? location;
   int? savedCount;
   bool? isFavorite;
+  String? imageDetail;
 
-  Places({this.foodName, this.isSaved, this.imageUrl, this.location, this.savedCount, this.isFavorite});
+  Places(
+      {this.foodName, this.isSaved, this.imageUrl, this.location, this.savedCount, this.isFavorite, this.imageDetail});
 
   Places.fromJson(Map<String, dynamic> json) {
     foodName = json['foodName'];
@@ -15,6 +17,9 @@ class Places {
     location = json['location'];
     savedCount = json['savedCount'];
     isFavorite = json['isFavorite'];
+    imageDetail = json['imageDetail'];
+
+
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +29,8 @@ class Places {
     data['imageUrl'] = imageUrl;
     data['location'] = location;
     data['savedCount'] = savedCount;
-    data['isFavorite'] = isFavorite;
+    data['imageDetail'] = imageDetail;
+
     return data;
   }
 }

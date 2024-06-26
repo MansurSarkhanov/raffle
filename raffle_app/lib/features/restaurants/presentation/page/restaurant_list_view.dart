@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_state.dart';
-import 'package:raffle_app/features/restaurants/presentation/page/place_of_restaurants_list.dart';
 
 import '../../../../presentation/pages/home/widgets/restorant_card.dart';
 
 class RestaurantListView extends StatelessWidget {
-  const RestaurantListView({super.key});
+  const RestaurantListView({super.key, required this.controller});
+  final PageController controller;
   @override
   Widget build(BuildContext context) {
     return Consumer<RestourantsNotifier>(
@@ -25,18 +24,12 @@ class RestaurantListView extends StatelessWidget {
               return Column(
                 children: [
                   InkWell(
-                    onTap: () {
-                      Navigator.push(context, CupertinoPageRoute(
-                        builder: (context) {
-                          return PlaceOfRestaurantsList(places: restorants.restaurants[index].places);
-                        },
-                      )
-                          // RouteHelper.createRoute(
-                          //     routeName: PlaceOfRestaurantsList(places: restorants.restaurants[index].places),
-                          //     location: RoutingLocation.rightToLeft),
-                          );
+                    onTap: () async {
+                      await context.read<RestourantsNotifier>().selectRestorant(index);
+                      controller.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
                     },
                     child: RestaurantCard(
+                      gradient: gradients[index],
                       restaurantModel: restorants.restaurants[index],
                     ),
                   ),

@@ -9,7 +9,15 @@ class RestaurantModel {
   int? percent;
   String? id;
 
-  RestaurantModel({this.places, this.total, this.currence, this.imageUrl, this.name, this.percent, this.id});
+  RestaurantModel({
+    this.places,
+    this.total,
+    this.currence,
+    this.imageUrl,
+    this.name,
+    this.percent,
+    this.id,
+  });
 
   RestaurantModel.fromJson(Map<String, dynamic> json) {
     if (json['places'] != null) {
@@ -23,7 +31,8 @@ class RestaurantModel {
     imageUrl = json['imageUrl'];
     name = json['name'];
     percent = json['percent'];
-id = json['id'];
+    id = json['id'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -36,7 +45,8 @@ id = json['id'];
     data['imageUrl'] = imageUrl;
     data['name'] = name;
     data['percent'] = percent;
-data['id'] = id;
+    data['id'] = id;
+
 
     return data;
   }

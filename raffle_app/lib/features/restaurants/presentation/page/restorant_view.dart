@@ -6,15 +6,15 @@ import '../../../../core/constants/colors.dart';
 import '../../../../presentation/components/custom_text.dart';
 import 'restorant_tabview.dart';
 
-
 final navigationKey = GlobalKey<NavigatorState>();
+
 class RestorantView extends StatelessWidget {
-  const RestorantView({
+  RestorantView({
     super.key,
     required this.tabController,
   });
   final TabController tabController;
-
+  final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,17 +36,12 @@ class RestorantView extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Navigator(
-            onPopPage: (route, result) {
-              if (!route.didPop(result)) {
-                return false;
-              }
-              return true;
-            },
-            key: navigationKey,
-            pages: const [
-              MaterialPage(child: PlaceOfRestaurantsList()),
-              MaterialPage(child: RestaurantListView()),
+          child: PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              RestaurantListView(controller: pageController),
+              const PlaceOfRestaurantsList(),
             ],
           ),
         )

@@ -6,14 +6,14 @@ import 'package:raffle_app/features/restaurants/data/model/restorant_model.dart'
 import 'package:raffle_app/presentation/components/custom_text.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard({super.key, required this.restaurantModel});
+  const RestaurantCard({super.key, required this.restaurantModel, required this.gradient});
   final RestaurantModel restaurantModel;
+  final FakeGradient gradient;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-     
       child: SizedBox(
         width: 365.w,
         // height: 210.h,
@@ -22,12 +22,7 @@ class RestaurantCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(18),
             boxShadow: const [
-              BoxShadow(
-                color: Color(0xFFE3E3E3),
-                offset: Offset(0, 0),
-                blurRadius: 5, spreadRadius: 2
-              ),
-            
+              BoxShadow(color: Color(0xFFE3E3E3), offset: Offset(0, 0), blurRadius: 5, spreadRadius: 2),
             ],
           ),
           child: Padding(
@@ -70,13 +65,12 @@ class RestaurantCard extends StatelessWidget {
                         height: 90.h,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
                               restaurantModel.imageUrl ?? "",
                             ),
                           ),
                         ),
-                      
                       ),
                     ],
                   ),
@@ -99,11 +93,7 @@ class RestaurantCard extends StatelessWidget {
                             width: 140, // 200.0 is the total width of the progress bar
 
                             child: LinearPercentIndicator(
-                              linearGradient: const LinearGradient(
-                                colors: [Color(0xFFFE21AC), Color(0xFFFA1D33)],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
+                              linearGradient: gradient.gradient,
                               padding: EdgeInsets.only(left: 5.w),
                               barRadius: Radius.circular(52.r),
                               animation: false,
@@ -114,7 +104,6 @@ class RestaurantCard extends StatelessWidget {
                               // progressColor: restaurant.color,
                             ),
                           ),
-                        
                           Container(
                             height: 18.h,
                             width: 140,
@@ -135,8 +124,7 @@ class RestaurantCard extends StatelessWidget {
                       Row(
                         children: [
                           TitleHeading1Widget(
-                            text:
-                            '${restaurantModel.currence}/',
+                            text: '${restaurantModel.currence}/',
                             fontWeight: FontWeight.bold,
                             fontSize: 12.sp,
                           ),
@@ -159,60 +147,26 @@ class RestaurantCard extends StatelessWidget {
   }
 }
 
-class RestaurantModelFake {
-  final String name;
-  final int sold;
-  final int target;
-  final Color color;
+class FakeGradient {
   final LinearGradient gradient;
-  final String logo;
 
-  RestaurantModelFake({
-    required this.name,
-    required this.logo,
-    required this.sold,
-    required this.target,
-    required this.color,
-    this.gradient = const LinearGradient(
-      colors: [Color(0xFFFE21AC), Color(0xFFFA1D33)],
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-    ),
-  });
+  FakeGradient({required this.gradient});
 }
 
-final List<RestaurantModelFake> restaurants = [
-  RestaurantModelFake(
-    name: 'Restaurants by\nEmin Agalarov',
-    logo: 'assets/images/im_agalarova_last.png',
-    sold: 8400,
-    target: 12000,
-    color: const Color.fromRGBO(253, 32, 138, 1),
-  ),
-  RestaurantModelFake(
-      name: 'Navikov Group',
-      logo: 'assets/images/im_novikov_last.png',
-
-      sold: 6000,
-      target: 14000,
-      color: const Color(0xffe9b602),
+final List<FakeGradient> gradients = [
+  FakeGradient(
       gradient: const LinearGradient(colors: [
-        Color(0xffe9b602),
-        Color(0xffe9b602),
-      ])),
-  RestaurantModelFake(
-    name: 'MATA',
-    logo: 'assets/images/im_mata_last.png',
-
-    sold: 8400,
-    target: 12000,
-    color: const Color.fromRGBO(253, 32, 138, 1),
-  ),
-  RestaurantModelFake(
-    name: 'MATA',
-    logo: 'assets/images/im_mata_last.png',
-    sold: 8400,
-    target: 12000,
-    color: const Color.fromRGBO(253, 32, 138, 1),
-  ),
+    Color(0xFFFE21AC),
+    Color(0xFFFA1D33),
+  ])),
+  FakeGradient(
+      gradient: const LinearGradient(colors: [
+    Color(0xFFFFD339),
+    Color(0xFFE9B502),
+  ])),
+  FakeGradient(
+      gradient: const LinearGradient(colors: [
+    Color(0xFFFE21AC),
+    Color(0xFFFA1D33),
+  ])),
 ];

@@ -40,8 +40,20 @@ class PlaceOfRestorantCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SvgPicture.asset(
-                            'assets/svg/ic_save.svg',
+                          Stack(children: [
+                            SvgPicture.asset(
+                              'assets/svg/ic_save.svg',
+                            ),
+                            Positioned.fill(
+                              left: 6,
+                              top: 1,
+                              child: TitleHeading1Widget(
+                                text: "${places?.savedCount}",
+                                fontSize: 15.6,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          ]
                           ),
                           SizedBox(
                             height: 8.h,

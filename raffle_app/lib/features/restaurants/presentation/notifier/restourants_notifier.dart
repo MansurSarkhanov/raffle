@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/restorant_model.dart';
 import '../../domain/repository/restaurant_repository.dart';
 import 'restourants_state.dart';
 
@@ -8,6 +9,13 @@ class RestourantsNotifier extends ChangeNotifier {
 
   final RestaurantRepository restaurantRepository;
   RestaurantsState state = RestaurantsInitial();
+  List<RestaurantModel>? restorantModel;
+  int index = 0;
+
+  selectRestorant(int restorantIndex) {
+    index = restorantIndex;
+    notifyListeners();
+  }
 
   Future<void> fetchAllRestorants() async {
     try {
@@ -18,6 +26,7 @@ class RestourantsNotifier extends ChangeNotifier {
       final result = await restaurantRepository.getRestaurants();
       if (result.isSuccess()) {
         state = RestourantsSuccess(restaurants: result.tryGetSuccess()!);
+        restorantModel = result.tryGetSuccess();
         notifyListeners();
       }
       if (result.isError()) {

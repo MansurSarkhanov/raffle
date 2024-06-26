@@ -8,15 +8,18 @@ import '../../data/model/place_model.dart';
 
 class FoodRestorantDetailView extends StatelessWidget {
   const FoodRestorantDetailView({super.key, required this.placeModel});
-  final Places placeModel;
+  final Places? placeModel;
+  
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       body: CustomScrollView(
         slivers: [
-          const RestorantImageAppBar(
-            imageUrl: 'assets/images/im_burger.png',
+          RestorantImageAppBar(
+            imageUrl: placeModel?.imageDetail ??
+                'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
             isRestorant: true,
           ),
           SliverPadding(
@@ -25,7 +28,7 @@ class FoodRestorantDetailView extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   TitleHeading1Widget(
-                    text: placeModel.foodName ?? '',
+                    text: placeModel?.foodName ?? 'Null',
                     fontSize: 28,
                     letterSpacing: 3,
                     color: const Color(0xFF2D2D32),
@@ -35,7 +38,7 @@ class FoodRestorantDetailView extends StatelessWidget {
                     height: 4,
                   ),
                   TitleHeading1Widget(
-                    text: placeModel.location ?? '',
+                    text: placeModel?.location ?? '',
                     fontSize: 13,
                     color: const Color(0xFF2D2D32),
                     fontWeight: FontWeight.w400,
@@ -58,12 +61,12 @@ class FoodRestorantDetailView extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: placeModel.isSaved ?? false ? "save_filled" : 'save_empty', text: "Save"),
+                      statusIcon(path: placeModel?.isSaved ?? false ? "save_filled" : 'save_empty', text: "Save"),
                       const SizedBox(
                         width: 12,
                       ),
                       statusIcon(
-                          path: placeModel.isFavorite ?? false ? "favorite_red" : 'favorite_empty', text: "Like"),
+                          path: placeModel?.isFavorite ?? false ? "favorite_red" : 'favorite_empty', text: "Like"),
                     ],
                   ),
                   const SizedBox(
@@ -456,7 +459,7 @@ class RestorantImageAppBar extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(imageUrl),
+              image: isRestorant == true ? NetworkImage(imageUrl) : AssetImage(imageUrl),
             ),
           ),
         ),
