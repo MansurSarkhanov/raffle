@@ -20,6 +20,7 @@ class RestorantTabView extends StatefulWidget {
 }
 
 class _RestorantTabViewState extends State<RestorantTabView> with TickerProviderStateMixin {
+
   @override
   Widget build(BuildContext context) {
     return TabBarView(

@@ -4,9 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../presentation/components/custom_text.dart';
+import '../../data/model/place_model.dart';
 
-class RestorantDetailView extends StatelessWidget {
-  const RestorantDetailView({super.key});
+class FoodRestorantDetailView extends StatelessWidget {
+  const FoodRestorantDetailView({super.key, required this.placeModel});
+  final Places placeModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,20 +24,20 @@ class RestorantDetailView extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  const TitleHeading1Widget(
-                    text: 'PEACH',
+                  TitleHeading1Widget(
+                    text: placeModel.foodName ?? '',
                     fontSize: 28,
                     letterSpacing: 3,
-                    color: Color(0xFF2D2D32),
+                    color: const Color(0xFF2D2D32),
                     fontWeight: FontWeight.w500,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
-                  const TitleHeading1Widget(
-                    text: 'г. Москва',
+                  TitleHeading1Widget(
+                    text: placeModel.location ?? '',
                     fontSize: 13,
-                    color: Color(0xFF2D2D32),
+                    color: const Color(0xFF2D2D32),
                     fontWeight: FontWeight.w400,
                   ),
                   const TitleHeading1Widget(
@@ -56,11 +58,12 @@ class RestorantDetailView extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: 'save_empty', text: "Save"),
+                      statusIcon(path: placeModel.isSaved ?? false ? "save_filled" : 'save_empty', text: "Save"),
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: 'favorite_empty', text: "Like"),
+                      statusIcon(
+                          path: placeModel.isFavorite ?? false ? "favorite_red" : 'favorite_empty', text: "Like"),
                     ],
                   ),
                   const SizedBox(

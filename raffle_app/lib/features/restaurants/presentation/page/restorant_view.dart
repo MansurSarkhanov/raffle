@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/features/restaurants/presentation/page/place_of_restaurants_list.dart';
 import 'package:raffle_app/features/restaurants/presentation/page/restaurant_list_view.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../presentation/components/custom_text.dart';
 import 'restorant_tabview.dart';
 
+
+final navigationKey = GlobalKey<NavigatorState>();
 class RestorantView extends StatelessWidget {
   const RestorantView({
     super.key,
@@ -32,7 +35,21 @@ class RestorantView extends StatelessWidget {
             ],
           ),
         ),
-        const RestaurantListView()
+        Expanded(
+          child: Navigator(
+            onPopPage: (route, result) {
+              if (!route.didPop(result)) {
+                return false;
+              }
+              return true;
+            },
+            key: navigationKey,
+            pages: const [
+              MaterialPage(child: PlaceOfRestaurantsList()),
+              MaterialPage(child: RestaurantListView()),
+            ],
+          ),
+        )
       ],
     );
   }

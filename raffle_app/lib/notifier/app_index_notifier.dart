@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 enum AppPartSection { left, right }
 
 class AppIndexNotifier extends ChangeNotifier {
+
+
   AppPartSection state = AppPartSection.left;
 
   bool isVisible = false;

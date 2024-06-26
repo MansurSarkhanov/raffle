@@ -21,6 +21,7 @@ final class AppRouter {
 
   AppRouter({required AuthNotifier authNotifier}) {
     _appRouter = GoRouter(
+      
       initialLocation: AppRoutes.splash.path,
       routes: [
         GoRoute(
@@ -28,6 +29,7 @@ final class AppRouter {
           name: AppRoutes.splash.name,
           builder: (context, state) => const SplashPage(),
         ),
+      
         GoRoute(
           path: AppRoutes.auth.path,
           name: AppRoutes.auth.name,

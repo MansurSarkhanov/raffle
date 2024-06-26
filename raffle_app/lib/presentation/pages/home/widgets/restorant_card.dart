@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:raffle_app/features/restaurants/data/model/restorant_model.dart';
-import 'package:raffle_app/features/restaurants/presentation/page/restorant_detail_view.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -14,14 +13,7 @@ class RestaurantCard extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return const RestorantDetailView(
-            );
-          },
-        ));
-      },
+     
       child: SizedBox(
         width: 365.w,
         // height: 210.h,
@@ -80,19 +72,11 @@ class RestaurantCard extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                restaurantModel.imageUrl ?? "",
-                              )),
-                          // border: Border.all(
-                          //   width: 0.4,
-                          //   color: Colors.black,
-                          // ),
+                              restaurantModel.imageUrl ?? "",
+                            ),
+                          ),
                         ),
-                        // child: Image.asset(
-                        //   fit: BoxFit.cover,
-                        //   restaurant.logo,
-                        //   width: 86,
-                        //   height: 86,
-                        // ),
+                      
                       ),
                     ],
                   ),

@@ -23,6 +23,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController tabController;
   late final TabController restorantTabController;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   @override
   void initState() {
@@ -37,23 +41,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
-      backgroundColor: tabController.index == 2 ? const Color(0xFFF9F9F9) : const Color(0xFFEBEBEB),
+      backgroundColor: context.watch<AppIndexNotifier>().state == AppPartSection.left
+          ? const Color(0xFFEBEBEB)
+          : const Color(0xFFF9F9F9),
       appBar: tabController.index == 2 ||
               tabController.index == 4 ||
               restorantTabController.index == 1 ||
               restorantTabController.index == 2 ||
               restorantTabController.index == 4
           ? null
-              : CustomSelectionAppbar(
-                  controller: tabController,
+          : CustomSelectionAppbar(
+              controller: tabController,
             ),
-         
-  
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
         child: tabController.index == 2 || restorantTabController.index == 2
@@ -69,24 +74,31 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 restorantTabController: restorantTabController,
               )
             : TabBarView(
-          controller: tabController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            HomeTab(
-              size: size,
-              controller: tabController,
-            ),
-            const LiveView(),
+                controller: tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  HomeTab(
+                    size: size,
+                    controller: tabController,
+                  ),
+                  const LiveView(),
                   ScanPage(
                     controller: tabController,
                   ),
-            const OfferView(),
-            InboxTicketTab(
-              controller: tabController,
-            )
-          ],
-        ),
+                  const OfferView(),
+                  InboxTicketTab(
+                    controller: tabController,
+                  )
+                ],
+              ),
       ),
     );
+  }
+  
+  @override
+  void dispose() {
+    tabController.dispose();
+    restorantTabController.dispose();
+    super.dispose();
   }
 }

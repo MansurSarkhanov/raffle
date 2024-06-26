@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:raffle_app/features/restaurants/presentation/page/restorant_detail_view.dart';
+import 'package:raffle_app/features/restaurants/presentation/page/food_restorant_detail_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/restorant/hotels_view.dart';
 
 import '../../../../components/custom_text.dart';

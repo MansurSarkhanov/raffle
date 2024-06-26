@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(390, 844),
       builder: (_, child) {
         return MaterialApp.router(
+          
           routerConfig: GetIt.instance<AppRouter>().instance,
           debugShowCheckedModeBanner: false,
           title: 'Raffle App',
