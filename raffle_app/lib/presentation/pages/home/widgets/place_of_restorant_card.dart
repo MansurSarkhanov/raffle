@@ -82,11 +82,37 @@ class PlaceOfRestorantCard extends StatelessWidget {
                           const SizedBox(
                             height: 4,
                           ),
-                          TitleHeading1Widget(
-                            text: '₽₽₽₽₽ * Mediterranean , Asian',
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF2D2D32),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/svg/ic_simvol.svg',
+                              ),
+                              SvgPicture.asset(
+                                'assets/svg/ic_simvol.svg',
+                              ),
+                              SvgPicture.asset(
+                                'assets/svg/ic_simvol.svg',
+                              ),
+                              SvgPicture.asset(
+                                'assets/svg/ic_simvol.svg',
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              SvgPicture.asset(
+                                'assets/svg/ic_dot.svg',
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+
+                              TitleHeading1Widget(
+                                text: 'Mediterranean , Asian',
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF2D2D32),
+                              ),
+                            ],
                           ),
                         ],
                       ),
