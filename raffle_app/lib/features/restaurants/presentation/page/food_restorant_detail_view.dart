@@ -3,20 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../components/custom_text.dart';
+import '../../../../presentation/components/custom_text.dart';
+import '../../data/model/place_model.dart';
 
-class RestorantDetailView extends StatelessWidget {
-  const RestorantDetailView({super.key, required this.tabController});
-  final TabController tabController;
+class FoodRestorantDetailView extends StatelessWidget {
+  const FoodRestorantDetailView({super.key, required this.placeModel});
+  final Places? placeModel;
+  
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
-     
       backgroundColor: const Color(0xFFF9F9F9),
       body: CustomScrollView(
         slivers: [
-          const RestorantImageAppBar(
-            imageUrl: 'assets/images/im_burger.png',
+          RestorantImageAppBar(
+            imageUrl: placeModel?.imageDetail ??
+                'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
             isRestorant: true,
           ),
           SliverPadding(
@@ -24,23 +27,22 @@ class RestorantDetailView extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  const TitleHeading1Widget(
-                    text: 'PEACH',
+                  TitleHeading1Widget(
+                    text: placeModel?.foodName ?? 'Null',
                     fontSize: 28,
                     letterSpacing: 3,
-                    color: Color(0xFF2D2D32),
+                    color: const Color(0xFF2D2D32),
                     fontWeight: FontWeight.w500,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
-                  const TitleHeading1Widget(
-                    text: 'г. Москва',
+                  TitleHeading1Widget(
+                    text: placeModel?.location ?? '',
                     fontSize: 13,
-                    color: Color(0xFF2D2D32),
+                    color: const Color(0xFF2D2D32),
                     fontWeight: FontWeight.w400,
                   ),
-                  
                   const TitleHeading1Widget(
                     text: 'Б. Саввинский переулок, 12 стр. 10г',
                     fontSize: 13,
@@ -59,11 +61,12 @@ class RestorantDetailView extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: 'save_empty', text: "Save"),
+                      statusIcon(path: placeModel?.isSaved ?? false ? "save_filled" : 'save_empty', text: "Save"),
                       const SizedBox(
                         width: 12,
                       ),
-                      statusIcon(path: 'favorite_empty', text: "Like"),
+                      statusIcon(
+                          path: placeModel?.isFavorite ?? false ? "favorite_red" : 'favorite_empty', text: "Like"),
                     ],
                   ),
                   const SizedBox(
@@ -95,7 +98,6 @@ class RestorantDetailView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  
                   const SizedBox(
                     height: 12,
                   ),
@@ -115,7 +117,6 @@ class RestorantDetailView extends StatelessWidget {
                     textAlign: TextAlign.start,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF2D2D32),
-
                   ),
                   const SizedBox(
                     height: 44,
@@ -146,9 +147,7 @@ class RestorantDetailView extends StatelessWidget {
                       ),
                       TitleHeading1Widget(
                         text: 'рублей',
-
                         color: Color(0xFF2D2D32),
-
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
                       ),
@@ -176,8 +175,6 @@ class RestorantDetailView extends StatelessWidget {
                   const TitleHeading1Widget(
                     text: 'Address and hours',
                     color: Color(0xFF2D2D32),
-
-
                     fontSize: 23,
                     fontWeight: FontWeight.w500,
                   ),
@@ -186,7 +183,6 @@ class RestorantDetailView extends StatelessWidget {
                     text: 'Б. Саввинский переулок, 12 стр. 10г',
                     fontSize: 16,
                     color: Color(0xFF2D2D32),
-
                     fontWeight: FontWeight.w300,
                   ),
                   const SizedBox(
@@ -213,7 +209,6 @@ class RestorantDetailView extends StatelessWidget {
                   ),
                   ContactWidget(
                     path: 'phone',
-
                     onPressed: () {},
                     text: '+7 (495) 909 00 69',
                   ),
@@ -282,7 +277,6 @@ class RestorantDetailView extends StatelessWidget {
               height: 26,
               width: 26,
             ),
-           
             TitleHeading1Widget(
               text: text,
               fontWeight: FontWeight.w400,
@@ -361,10 +355,9 @@ class ContactWidget extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(64),
+            borderRadius: BorderRadius.circular(64),
             color: const Color(0xFFFFFFFF),
-            border: Border.all(color: const Color(0xFFEEEEEE))
-        ),
+            border: Border.all(color: const Color(0xFFEEEEEE))),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 9.0, horizontal: 22),
           child: Row(
@@ -373,7 +366,6 @@ class ContactWidget extends StatelessWidget {
               SvgPicture.asset(
                 'assets/svg/ic_$path.svg',
                 color: const Color(0xFF2D2D32),
-              
               ),
               SizedBox(
                 width: 22.w,
@@ -383,8 +375,7 @@ class ContactWidget extends StatelessWidget {
                     fontSize: 18,
                     color: Color(0xFF2D2D32),
                     fontWeight: FontWeight.w300,
-                  ) 
-              ),
+                  )),
             ],
           ),
         ),
@@ -420,11 +411,9 @@ class RestorantImageAppBar extends StatelessWidget {
             decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.all(9.0),
-
               child: Image.asset(
                 'assets/icons/ic_arrow_left.png',
                 color: const Color(0xFF333333),
-
                 height: 18,
                 width: 18,
               ),
@@ -439,7 +428,6 @@ class RestorantImageAppBar extends StatelessWidget {
             child: Image.asset(
               'assets/icons/ic_adress.png',
               color: const Color(0xFF333333),
-
               height: 18,
               width: 18,
             ),
@@ -450,7 +438,6 @@ class RestorantImageAppBar extends StatelessWidget {
           decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
           child: Padding(
             padding: const EdgeInsets.all(9.0),
-
             child: Image.asset(
               'assets/icons/ic_share.png',
               color: const Color(0xFF333333),
@@ -462,7 +449,6 @@ class RestorantImageAppBar extends StatelessWidget {
         const SizedBox(
           width: 12,
         ),
-
       ],
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xFFF9F9F9),
@@ -473,12 +459,10 @@ class RestorantImageAppBar extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(imageUrl),
+              image: isRestorant == true ? NetworkImage(imageUrl) : AssetImage(imageUrl),
             ),
           ),
         ),
-        
-         
       ),
     );
   }

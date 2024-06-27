@@ -7,8 +7,18 @@ class UserModel {
   String? number;
   String? image;
   int? balance;
+  String? raffleId;
 
-  UserModel({this.email, this.password, this.uid, this.name, this.surname, this.number, this.balance, this.image});
+  UserModel(
+      {this.email,
+      this.password,
+      this.uid,
+      this.name,
+      this.surname,
+      this.number,
+      this.balance,
+      this.image,
+      this.raffleId});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
@@ -19,7 +29,7 @@ class UserModel {
     number = json['number'];
     balance = json['balance'];
     image = json['image'];
-
+    raffleId = json['raffle_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -32,6 +42,7 @@ class UserModel {
     data['number'] = number;
     data['balance'] = balance;
     data['image'] = image;
+    data['raffle_id'] = raffleId;
 
 
     return data;

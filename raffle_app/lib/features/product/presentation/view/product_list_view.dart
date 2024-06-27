@@ -67,7 +67,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                 child: Row(
                   children: [
                     Container(
-                      width: 140,
+                      width: 150,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 6, right: 6, top: 6),

@@ -21,4 +21,11 @@ class AppIndexNotifier extends ChangeNotifier {
     print('isVisible $isVisible');
     notifyListeners();
   }
+
+  int currentListIndex = 0;
+
+  void changeCurrentCardIndex(int index) {
+    currentListIndex = index;
+    notifyListeners();
+  }
 }

@@ -7,9 +7,11 @@ import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
+
 import '../../../core/constants/path/image_path.dart';
 import '../../../core/utilities/helper/route.dart';
 import '../../../features/profile/presentation/widgets/support_controller.dart';
+import '../../../packages/card_swiper.dart';
 import 'portfolio_page.dart';
 import 'wallet_history_page.dart';
 
@@ -23,12 +25,12 @@ class WalletCardPage extends StatefulWidget {
 class _WalletCardPageState extends State<WalletCardPage> {
   final PageController controller = PageController();
   final CardSwiperController cardController = CardSwiperController();
-  int? currentListIndex = 0;
-  final List<Widget> cards = [
+  List<Widget> cards = [
     const TestCardBlue(),
     const TestCardGreen(),
     const TestCardRed(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,31 +45,27 @@ class _WalletCardPageState extends State<WalletCardPage> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 27.0,
-                ),
+                padding: const EdgeInsets.only(bottom: 14),
                 child: SizedBox(
-                  height: 200,
-                  child: CardSwiper(
-                    allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
-                    controller: cardController,
-                    backCardOffset: const Offset(0, -20),
-                    padding: EdgeInsets.zero,
-                    onSwipe: (previousIndex, currentIndex, direction) {
-                      currentListIndex = currentIndex;
-                      setState(() {});
-
-                      return true;
+                  height: 220,
+                  child: Swiper(
+                  
+                    onIndexChanged: (value) {
+                      context.read<AppIndexNotifier>().changeCurrentCardIndex(value);
                     },
-                    cardsCount: cards.length,
-                    numberOfCardsDisplayed: 3,
-                    cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+                    axisDirection: AxisDirection.right,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: cards.length,
+                    itemWidth: 400,
+                    itemHeight: 200,
+                    layout: SwiperLayout.STACK,
+                    itemBuilder: (context, index) {
                       return cards[index];
                     },
                   ),
                 ),
               ),
-              WalletExpenseListCard(index: currentListIndex ?? 0),
+              WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
             ],
           ),
         ),
@@ -204,7 +202,7 @@ class TestCardGreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 19.0, top: 21, bottom: 21, right: 19),
+          padding: const EdgeInsets.only(left: 23.0, top: 23, bottom: 23, right: 23),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -387,12 +385,13 @@ class TestCardBlue extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 24.0, top: 20, bottom: 20, right: 24),
+          padding: const EdgeInsets.only(left: 23.0, top: 23, bottom: 23, right: 23),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

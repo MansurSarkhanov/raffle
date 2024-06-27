@@ -5,7 +5,7 @@ import '../../domain/repository/restaurant_repository.dart';
 import '../service/restaurants_service.dart';
 
 class RestaurantRepositoryImpl implements RestaurantRepository {
-  final RestaurantsService restaurantsService;
+  final RestaurantsServiceImpl restaurantsService;
   RestaurantRepositoryImpl({required this.restaurantsService});
 
   @override

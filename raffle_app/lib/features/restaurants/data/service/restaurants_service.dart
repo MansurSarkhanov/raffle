@@ -20,7 +20,9 @@ class RestaurantsServiceImpl implements RestaurantsService {
         },
       ).get();
       if (response.docs.isNotEmpty) {
+
         final restaurantsList = response.docs.map((e) => e.data()).toList();
+
         return restaurantsList;
       }
       return null;

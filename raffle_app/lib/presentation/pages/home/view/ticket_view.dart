@@ -14,7 +14,36 @@ class TicketView extends StatefulWidget {
 class _TicketViewState extends State<TicketView> {
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    final size = MediaQuery.of(context).size;
+    return 0 == 0
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: size.height * 0.2,
+                ),
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.white,
+                  child: SizedBox(height: 50, width: 50, child: Image.asset('assets/images/im_ticket.png')),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const TitleHeading1Widget(
+                  text: 'You can see your Active Tickets here after you\nhave made a purchase',
+                  textAlign: TextAlign.center,
+                  color: Color(0xFF494949),
+                  fontSize: 15,
+                  fontFamily: 'Helvetica',
+                  fontWeight: FontWeight.w400,
+                )
+              ],
+            ),
+          )
+        : const SingleChildScrollView(
       padding: EdgeInsets.only(bottom: 60),
       child: Column(
         children: [

@@ -79,6 +79,10 @@ class _WalletHistoryPageState extends State<WalletHistoryPage> {
           const SizedBox(
             height: 24,
           ),
+          const MothStatisticCard(),
+          const SizedBox(
+            height: 24,
+          ),
           const Padding(
             padding: EdgeInsets.only(bottom: 24.0, left: 12),
             child: Row(
@@ -122,6 +126,84 @@ class _WalletHistoryPageState extends State<WalletHistoryPage> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class MothStatisticCard extends StatelessWidget {
+  const MothStatisticCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [BoxShadow(blurRadius: 12, color: const Color(0xFF000000).withOpacity(0.18))],
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 35),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TitleHeading1Widget(
+                text: 'Этот месяц\nИюнь',
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+              const SizedBox(
+                height: 14,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      SvgPicture.asset('assets/svg/ic_history_restorant.svg'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const TitleHeading1Widget(
+                        text: '80%',
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      SvgPicture.asset('assets/svg/ic_history_hotel.svg'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const TitleHeading1Widget(
+                        text: '10%',
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      SvgPicture.asset('assets/svg/ic_history_shop.svg'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const TitleHeading1Widget(
+                        text: '10%',
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

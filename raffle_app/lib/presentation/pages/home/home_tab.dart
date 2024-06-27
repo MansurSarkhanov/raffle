@@ -105,8 +105,8 @@ class _HomeTabState extends State<HomeTab> {
                               },
                               child: purpleContiner(
                                 imageUrl: ImagePath.left_p.toPathSvg,
-                                txt: 'Raffle ID',
-                                txtTwo: user?.uid,
+                                txt: 'Account ID',
+                                txtTwo: "Raffle  ${user?.raffleId}",
                               ),
                             ),
                           ),
@@ -349,8 +349,8 @@ Stack purpleContiner({required String imageUrl, required String txt, required tx
             textAlign: TextAlign.right,
             color: Colors.white,
             fontSize: 12,
-              fontWeight: FontWeight.w500,
-              height: 0,
+            fontWeight: FontWeight.w500,
+            height: 0,
           ),
           SizedBox(
             width: 150,
