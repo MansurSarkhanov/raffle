@@ -11,6 +11,7 @@ import 'package:raffle_app/presentation/components/custom_text.dart';
 import '../../../core/constants/path/image_path.dart';
 import '../../../core/utilities/helper/route.dart';
 import '../../../features/profile/presentation/widgets/support_controller.dart';
+import '../../../packages/card_swiper.dart';
 import 'portfolio_page.dart';
 import 'wallet_history_page.dart';
 
@@ -31,9 +32,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
     const TestCardRed(),
   ];
 
-  void onSwipe(CardSwiperDirection direction) {
-    // print(currentListIndex);
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,52 +48,21 @@ class _WalletCardPageState extends State<WalletCardPage> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 27.0,
-                ),
+                padding: const EdgeInsets.only(bottom: 27),
                 child: SizedBox(
-                  height: 200,
-                  child: CardSwiper(
-                    isLoop: true,
-                    allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
-                    controller: cardController,
-                    backCardOffset: const Offset(0, -20),
-                    padding: EdgeInsets.zero,
-                    // onTapDisabled: () {
-                    // },
-                    onSwipe: (previousIndex, currentIndex, direction) {
-                      if (direction == CardSwiperDirection.right) {
-                        if (currentListIndex > 0) {
-                          setState(() {
-                            currentListIndex--;
-                          });
-                          cardController.moveTo(currentListIndex);
-                        }
-                        //  else if (currentListIndex == 0) {
-                        //   setState(() {
-                        //     currentListIndex = 2;
-                        //   });
-                        //   cardController.moveTo(currentListIndex);
-                        // }
-                      } else if (direction == CardSwiperDirection.left) {
-                        if (currentListIndex < cards.length - 1) {
-                          setState(() {
-                            currentListIndex++;
-                          });
-                          cardController.moveTo(currentListIndex);
-                        }
-                        //  else {
-                        //   setState(() {
-                        //     currentListIndex = 0;
-                        //   });
-                        //   cardController.moveTo(currentListIndex);
-                        // }
-                      }
-                      return false; // Kaydırma işlemine izin vermek için false döndürüyoruz
+                  height: 220,
+                  child: Swiper(
+                    onIndexChanged: (value) {
+                      currentListIndex = value;
+                      setState(() {});
                     },
-                    cardsCount: cards.length,
-                    numberOfCardsDisplayed: 3,
-                    cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+                    axisDirection: AxisDirection.right,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: cards.length,
+                    itemWidth: 400,
+                    itemHeight: 200,
+                    layout: SwiperLayout.STACK,
+                    itemBuilder: (context, index) {
                       return cards[index];
                     },
                   ),
