@@ -25,14 +25,11 @@ class WalletCardPage extends StatefulWidget {
 class _WalletCardPageState extends State<WalletCardPage> {
   final PageController controller = PageController();
   final CardSwiperController cardController = CardSwiperController();
-  int currentListIndex = 0;
   List<Widget> cards = [
     const TestCardBlue(),
     const TestCardGreen(),
     const TestCardRed(),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +45,13 @@ class _WalletCardPageState extends State<WalletCardPage> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 27),
+                padding: const EdgeInsets.only(bottom: 14),
                 child: SizedBox(
                   height: 220,
                   child: Swiper(
+                  
                     onIndexChanged: (value) {
-                      currentListIndex = value;
-                      setState(() {});
+                      context.read<AppIndexNotifier>().changeCurrentCardIndex(value);
                     },
                     axisDirection: AxisDirection.right,
                     scrollDirection: Axis.horizontal,
@@ -68,7 +65,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
                   ),
                 ),
               ),
-              WalletExpenseListCard(index: currentListIndex),
+              WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
             ],
           ),
         ),

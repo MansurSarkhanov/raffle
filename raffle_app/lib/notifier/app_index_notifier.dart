@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 enum AppPartSection { left, right }
 
 class AppIndexNotifier extends ChangeNotifier {
-
-
   AppPartSection state = AppPartSection.left;
 
   bool isVisible = false;
@@ -21,6 +19,13 @@ class AppIndexNotifier extends ChangeNotifier {
   void visibleBalance() {
     isVisible = !isVisible;
     print('isVisible $isVisible');
+    notifyListeners();
+  }
+
+  int currentListIndex = 0;
+
+  void changeCurrentCardIndex(int index) {
+    currentListIndex = index;
     notifyListeners();
   }
 }
