@@ -7,6 +7,7 @@ import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
+import 'package:raffle_app/presentation/pages/home/inbox_ticket_tab.dart';
 
 import '../../../core/constants/path/image_path.dart';
 import '../../../core/utilities/helper/route.dart';
@@ -16,14 +17,13 @@ import 'portfolio_page.dart';
 import 'wallet_history_page.dart';
 
 class WalletCardPage extends StatefulWidget {
-  const WalletCardPage({super.key});
-
+  const WalletCardPage({super.key, required this.controller});
+  final TabController controller;
   @override
   State<WalletCardPage> createState() => _WalletCardPageState();
 }
 
 class _WalletCardPageState extends State<WalletCardPage> {
-  final PageController controller = PageController();
   final CardSwiperController cardController = CardSwiperController();
   List<Widget> cards = [
     const TestCardBlue(),
@@ -35,7 +35,9 @@ class _WalletCardPageState extends State<WalletCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const WalletAppBar(),
+      appBar: WalletAppBar(
+        controller: widget.controller,
+      ),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async {
@@ -49,7 +51,6 @@ class _WalletCardPageState extends State<WalletCardPage> {
                 child: SizedBox(
                   height: 220,
                   child: Swiper(
-                  
                     onIndexChanged: (value) {
                       context.read<AppIndexNotifier>().changeCurrentCardIndex(value);
                     },
@@ -210,25 +211,28 @@ class TestCardGreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TitleHeading1Widget(
+                      const TitleHeading1Widget(
                         text: 'CashBack',
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 9,
                       ),
                       Row(
                         children: [
-                          TitleHeading1Widget(
-                            text: '199,50 ',
-                            fontSize: 29,
-                            fontWeight: FontWeight.w700,
+                          SizedBox(
+                            width: 100,
+                            child: TitleHeading1Widget(
+                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '199.50',
+                              fontSize: 29,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                          TitleHeading1Widget(
+                          const TitleHeading1Widget(
                             text: '\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
@@ -568,7 +572,9 @@ class OderActionTitle extends StatelessWidget {
 class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WalletAppBar({
     super.key,
+    required this.controller,
   });
+  final TabController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -634,7 +640,18 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(
             width: 12,
           ),
-          SvgPicture.asset('assets/svg/ic_notification.svg'),
+          InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            child: SvgPicture.asset('assets/svg/ic_notification.svg'),
+            onTap: () {
+              Navigator.of(context).push(RouteHelper.createRoute(
+                  routeName: Scaffold(
+                    body: InboxTicketTab(controller: controller),
+                  ),
+                  location: RoutingLocation.rightToLeft));
+            },
+          ),
           const SizedBox(
             width: 12,
           ),

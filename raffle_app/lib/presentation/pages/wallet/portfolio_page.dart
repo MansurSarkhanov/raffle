@@ -78,7 +78,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           ),
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 16),
               itemCount: 10,
               itemBuilder: (context, index) {
                 return const Padding(
@@ -106,8 +106,12 @@ class RestorantOrderCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22.w),
-          boxShadow: const [
-            BoxShadow(blurRadius: 15, spreadRadius: -7, color: Color(0xFF757575), offset: Offset(0, 0))
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 16,
+                spreadRadius: 0,
+                color: const Color(0xFF000000).withOpacity(0.25),
+                offset: const Offset(0, 0))
           ],
           color: Colors.white,
         ),
@@ -115,48 +119,61 @@ class RestorantOrderCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 25),
-              child: Column(
+              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitleHeading1Widget(text: 'Active balance', fontSize: 14.sp, fontWeight: FontWeight.w400),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  TitleHeading1Widget(text: '36.50 \$', fontSize: 27.sp, fontWeight: FontWeight.w600),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        'assets/icons/ic_arrow_up.png',
+                      TitleHeading1Widget(text: 'Active balance', fontSize: 14.sp, fontWeight: FontWeight.w400),
+                      const SizedBox(
                         height: 8,
-                        width: 12,
                       ),
-
-                      RichText(
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                                text: ' 13.50 \$ ',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.red,
-                                    fontFamily: 'Helvetica')),
-                            TextSpan(
-                              text: '(remaining balance)',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                  fontFamily: 'Helvetica'),
+                      TitleHeading1Widget(text: '36.50 \$', fontSize: 27.sp, fontWeight: FontWeight.w600),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/icons/ic_arrow_up.png',
+                            height: 8,
+                            width: 12,
+                          ),
+                          RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: ' 13.50 \$ ',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.red,
+                                        fontFamily: 'Helvetica')),
+                                TextSpan(
+                                  text: '(remaining balance)',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black,
+                                      fontFamily: 'Helvetica'),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          )
+                        ],
                       )
                     ],
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5.0, top: 5),
+                    child: Image.asset(
+                      'assets/images/im_portfolio_item.png',
+                      height: 28,
+                      width: 51,
+                    ),
                   )
                 ],
               ),
@@ -167,7 +184,7 @@ class RestorantOrderCard extends StatelessWidget {
               color: Colors.grey,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 25),
+              padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 12),
               child: Row(
                 children: [
                   Image.asset(
@@ -182,6 +199,35 @@ class RestorantOrderCard extends StatelessWidget {
                     text: 'NOVİKOV GROUP',
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
+                  ),
+                  const Spacer(),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 5.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TitleHeading1Widget(
+                          text: '1.747 \$',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        Row(
+                          children: [
+                            TitleHeading1Widget(
+                              text: '87,35 \$ ',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF49A600),
+                            ),
+                            TitleHeading1Widget(
+                              text: '( 5% CB)',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

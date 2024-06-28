@@ -13,11 +13,11 @@ import '../../features/profile/presentation/notifier/profile_notifier.dart';
 import '../../features/profile/presentation/page/profile_page.dart';
 
 class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidget {
-  CustomSelectionAppbar({
+  const CustomSelectionAppbar({
     super.key,
     required this.controller,
   });
-  TabController controller;
+  final TabController controller;
   @override
   Widget build(BuildContext context) {
     return Consumer<AppIndexNotifier>(builder: (context, appIndexNotifier, child) {
@@ -117,7 +117,10 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                   context,
                   RouteHelper.createRoute(
                       routeName: ChangeNotifierProvider.value(
-                          value: context.read<ProfileNotifier>(), child: const WalletCardPage()),
+                          value: context.read<ProfileNotifier>(),
+                          child: WalletCardPage(
+                            controller: controller,
+                          )),
                       location: RoutingLocation.rightToLeft,
                       transitionTime: 500,
                       reverseTransitionTime: 250),

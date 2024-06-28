@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +20,7 @@ class RestaurantListView extends StatelessWidget {
         } else if (notifier.state is RestourantsSuccess) {
           final restorants = notifier.state as RestourantsSuccess;
           return ListView.builder(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 18, bottom: 40),
+            padding: EdgeInsets.only(left: 15, right: 15, top: 18, bottom: Platform.isIOS ? 50 : 48),
             itemCount: restorants.restaurants.length,
             itemBuilder: (context, index) {
               return Column(

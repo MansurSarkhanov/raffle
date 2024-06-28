@@ -49,7 +49,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
       //   ),
       // ),
       bottomNavigationBar: Container(
-        height: 62,
+        height: 74,
         color: Colors.transparent,
         child: DetailBottomBar(
           roomPressed: () {
@@ -444,7 +444,7 @@ class DetailBottomBar extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
+        padding: const EdgeInsets.only(left: 15.0, right: 15, top: 16, bottom: 24),
         child: Row(
           children: [
             Expanded(

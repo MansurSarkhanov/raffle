@@ -247,6 +247,9 @@ class FoodRestorantDetailView extends StatelessWidget {
                       ),
                       TimeCard(),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 20,
                   )
                 ],
               ),
