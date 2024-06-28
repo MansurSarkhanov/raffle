@@ -11,7 +11,7 @@ import 'package:raffle_app/presentation/components/custom_text.dart';
 import '../../../core/constants/path/image_path.dart';
 import '../../../core/utilities/helper/route.dart';
 import '../../../features/profile/presentation/widgets/support_controller.dart';
-import '../../../packages/card_swiper.dart';
+import '../../../packages/card_swiper/card_swiper.dart';
 import 'portfolio_page.dart';
 import 'wallet_history_page.dart';
 
@@ -623,6 +623,8 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 12,
           ),
           InkWell(
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
               onTap: () {
                 context.read<AppIndexNotifier>().visibleBalance();
               },

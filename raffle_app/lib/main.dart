@@ -7,10 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:raffle_app/app_router.dart';
 import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
-import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
 
-import 'features/restaurants/domain/repository/restaurant_repository.dart';
 import 'firebase_options.dart';
 import 'injetion.dart';
 
@@ -33,9 +31,9 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => AppIndexNotifier(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => RestourantsNotifier(getIt.get<RestaurantRepository>()),
-        )
+        // ChangeNotifierProvider(
+        //   create: (context) => RestourantsNotifier(getIt.get<RestaurantRepository>()),
+        // )
       ],  
       child: const MyApp(),
     ),

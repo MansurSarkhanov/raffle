@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:raffle_app/packages/src/swiper_controller.dart';
+import 'package:raffle_app/packages/card_swiper/src/swiper_controller.dart';
 
 import 'flutter_page_indicator/flutter_page_indicator.dart';
 import 'swiper_pagination.dart';
