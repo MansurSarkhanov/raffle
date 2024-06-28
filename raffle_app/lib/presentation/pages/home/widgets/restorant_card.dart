@@ -99,8 +99,10 @@ class RestaurantCard extends StatelessWidget {
                               animation: false,
                               animationDuration: 1500,
                               lineHeight: 18.h,
+                              backgroundColor: const Color(0xFF000000).withOpacity(0.12),
+
                               percent: restaurantModel.percent!.toDouble() / 100,
-                              backgroundColor: const Color(0xFFE0E0E0),
+                              // backgroundColor: const Color(0xFFE0E0E0),
                               // progressColor: restaurant.color,
                             ),
                           ),
@@ -111,10 +113,9 @@ class RestaurantCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: const Color(0xFFE0E0E0).withOpacity(0.08),
-                                  spreadRadius: 1,
+                                  color: const Color(0xFF000000).withOpacity(0.01),
                                   blurRadius: 4,
-                                  offset: const Offset(0, 2), // changes position of shadow
+                                  offset: const Offset(0, 4), // changes position of shadow
                                 ),
                               ],
                             ),

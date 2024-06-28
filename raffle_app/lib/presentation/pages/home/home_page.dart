@@ -61,7 +61,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
-        child: tabController.index == 2 || restorantTabController.index == 2
+        child: tabController.index == 2 ||
+                restorantTabController.index == 2 ||
+                tabController.index == 4 ||
+                restorantTabController.index == 4
             ? null
             : context.watch<AppIndexNotifier>().state == AppPartSection.right
                 ? RestorantBottomNavBar(tabController: restorantTabController)

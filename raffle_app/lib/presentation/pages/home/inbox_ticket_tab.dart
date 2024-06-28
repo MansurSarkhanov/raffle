@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/components/go_back_button.dart';
 
 import '../../../shared/couple_buttons.dart';
@@ -22,9 +24,7 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
     final size = MediaQuery.of(context).size;
     List<Widget> rafflesScreen = [
       const TicketView(),
-
       const MessagesScreen(),
-
     ];
     return Container(
       color: const Color(0xFFEBEBEB),
@@ -36,11 +36,27 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GoBackButton(
-                    buttonBackColor: const Color(0xFFD9D9D9),
-                    onPressed: () {
-                      widget.controller.index = 0;
-                    }),
+                Consumer<AppIndexNotifier>(
+                  builder: (context, notifier, child) {
+                    return GoBackButton(
+                        buttonBackColor: const Color(0xFFD9D9D9),
+                        onPressed: () {
+                          print(notifier.state.name);
+                          if (notifier.state == AppPartSection.right) {
+                            if (widget.controller.index == 4) {
+                              widget.controller.index == 0;
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          } else if (widget.controller.index == 4) {
+                            widget.controller.index = 0;
+                          } else {
+                            Navigator.pop(context);
+                            widget.controller.index = 0;
+                          }
+                        });
+                  },
+                ),
                 Text(
                   'Raffles',
                   style: TextStyle(

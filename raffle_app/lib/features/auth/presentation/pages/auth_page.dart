@@ -117,7 +117,7 @@ class _AuthPageState extends State<AuthPage> {
                 height: size.height * 0.03,
               ),
               SizedBox(
-                height: curIndex == 0 ? 820 : 900,
+                height: curIndex == 0 ? 720 : 820,
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: pgController,

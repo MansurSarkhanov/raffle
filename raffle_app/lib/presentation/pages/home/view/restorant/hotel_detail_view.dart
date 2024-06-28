@@ -49,7 +49,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
       //   ),
       // ),
       bottomNavigationBar: Container(
-        height: 62,
+        height: 74,
         color: Colors.transparent,
         child: DetailBottomBar(
           roomPressed: () {
@@ -230,8 +230,8 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                       children: [
                         TitleHeading1Widget(
                           text: widget.hotelModel.name,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w500,
                         ),
                         const TitleHeading1Widget(
                           text: 'г. Москва',
@@ -268,9 +268,11 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                         const SizedBox(
                           height: 12,
                         ),
-                        const Text(
-                          '1.900 people love this place',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                        const TitleHeading1Widget(
+                          text: '1.900 people love this place',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF2D2D32),
                         ),
                         const SizedBox(
                           height: 12,
@@ -279,6 +281,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                           text: 'About',
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
+                          color: Color(0xFF2D2D32),
                           textDecoration: TextDecoration.underline,
                         ),
                         TitleHeading1Widget(
@@ -376,6 +379,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
           text: title,
           fontSize: 12,
           fontWeight: FontWeight.w400,
+          color: const Color(0xFF2D2D32),
         ),
         const Spacer(),
         const Icon(
@@ -444,7 +448,7 @@ class DetailBottomBar extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
+        padding: const EdgeInsets.only(left: 15.0, right: 15, top: 16, bottom: 24),
         child: Row(
           children: [
             Expanded(
