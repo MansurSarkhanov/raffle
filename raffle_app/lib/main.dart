@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
           
           routerConfig: GetIt.instance<AppRouter>().instance,
           debugShowCheckedModeBanner: false,
-          title: 'Raffle App',
+          title: 'Raffle',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
