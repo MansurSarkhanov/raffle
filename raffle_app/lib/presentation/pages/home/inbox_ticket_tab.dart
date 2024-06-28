@@ -43,7 +43,11 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
                         onPressed: () {
                           print(notifier.state.name);
                           if (notifier.state == AppPartSection.right) {
-                            Navigator.pop(context);
+                            if (widget.controller.index == 4) {
+                              widget.controller.index == 0;
+                            } else {
+                              Navigator.pop(context);
+                            }
                           } else if (widget.controller.index == 4) {
                             widget.controller.index = 0;
                           } else {
