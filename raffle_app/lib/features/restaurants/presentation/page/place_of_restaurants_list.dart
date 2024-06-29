@@ -7,8 +7,9 @@ import 'food_restorant_detail_view.dart';
 
 class PlaceOfRestaurantsList extends StatelessWidget {
   const PlaceOfRestaurantsList({
-    super.key,
+    super.key, required this.controller,
   });
+  final PageController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
