@@ -45,11 +45,13 @@ class RestorantView extends StatelessWidget {
                         pageController.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
                       },
                     ),
-                    Spacer(),
+                    const Spacer(),
                   ],
                   TitleHeading1Widget(
                       text:
-                      "${notifier.restorantModel?.length} Restaurants",
+                     notifier.isSelected
+                          ? "${notifier.restorantModel?[notifier.index].places?.length} Menu"
+                          : "${notifier.restorantModel?.length} Restaurants",
                       color: AppColors.chipBackColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w400),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raffle_app/features/restaurants/presentation/page/food_restorant_detail_view.dart';
-import 'package:raffle_app/presentation/pages/home/view/restorant/hotels_view.dart';
+import 'package:raffle_app/presentation/pages/home/view/hotels_view.dart';
 
-import '../../../../components/custom_text.dart';
+import '../../../components/custom_text.dart';
 
 class HotelDetailView extends StatefulWidget {
   const HotelDetailView({super.key, required this.hotelModel});
@@ -42,12 +42,6 @@ class _HotelDetailViewState extends State<HotelDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
-      //   child: RestorantBottomNavBar(
-      //     tabController: tabController,
-      //   ),
-      // ),
       bottomNavigationBar: Container(
         height: 74,
         color: Colors.transparent,
@@ -66,8 +60,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFFF9F9F9),
-
+                          color: const Color(0xFFF9F9F9),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Column(
@@ -211,7 +204,6 @@ class _HotelDetailViewState extends State<HotelDetailView> {
           pickerPressed: () {},
         ),
       ),
-
       backgroundColor: const Color(0xFFF9F9F9),
       body: CustomScrollView(
         slivers: [
@@ -409,7 +401,6 @@ class _HotelDetailViewState extends State<HotelDetailView> {
           children: [
             SvgPicture.asset(
               'assets/svg/ic_$path.svg',
-             
             ),
             TitleHeading1Widget(
               fontFamily: 'Helvetica',

@@ -49,7 +49,7 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
                           if (notifier.state == AppPartSection.right) {
                             if (widget.controller.index == 4) {
                               print('Test1');
-                              widget.controller.index == 0;
+                              widget.controller.index = 0;
                             } else {
                               print('Test2');
 
