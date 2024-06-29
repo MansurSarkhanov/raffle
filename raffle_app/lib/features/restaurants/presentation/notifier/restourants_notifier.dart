@@ -11,9 +11,15 @@ class RestourantsNotifier extends ChangeNotifier {
   RestaurantsState state = RestaurantsInitial();
   List<RestaurantModel>? restorantModel;
   int index = 0;
+  bool isSelected=false;
 
   selectRestorant(int restorantIndex) {
     index = restorantIndex;
+    isSelected=true;
+    notifyListeners();
+  }
+  void backPageListener (){
+    isSelected=false;
     notifyListeners();
   }
 
