@@ -53,28 +53,35 @@ class _CampaingListState extends State<CampaingList> {
                                         // curve:Curves.bounceOut,
                                         animationDuration: 1500,
                                         lineHeight: 25,
-                                        percent: 0.2,
+                                        percent:( e.percent!.toDouble())/100,
                                         backgroundColor: const Color(0xfff1f1f1),
-                                        progressColor: const Color.fromRGBO(
-                                          208,
-                                          43,
-                                          59,
-                                          0.70,
-                                        ),
-                                        center: const Row(
+                                        linearGradient:e.percent!<=  25? LinearGradient(colors: [
+                                          Colors.green.shade700,
+                                          Colors.green.shade900
+                                        ]):e.percent!<=  50?
+                                        LinearGradient(colors: [
+                                          Colors.yellow.shade700,
+                                          Colors.yellow.shade900
+                                        ]): LinearGradient(colors: [
+                                          Colors.red.shade700,
+                                          Colors.red.shade900
+                                        ]),
+                                        center:  Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              '${20}',
+                                              '${ e.percent!}',
                                               style: TextStyle(fontWeight: FontWeight.w500),
                                             ),
-                                            Text(
+                                            const   Text(
                                               '/${100}',
                                               style: TextStyle(fontWeight: FontWeight.w400),
                                             ),
                                           ],
                                         ),
                                       ),
+
+
                                     ),
                                     const SizedBox(
                                       height: 16,
