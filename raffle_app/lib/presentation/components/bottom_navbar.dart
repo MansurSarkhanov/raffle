@@ -104,6 +104,7 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
           widget.tabController.index = value;
           setState(() {});
         },
+        tabAlignment: TabAlignment.fill,
         splashBorderRadius: BorderRadius.circular(18),
         dividerColor: Colors.transparent,
         indicatorColor: Colors.transparent,
@@ -122,7 +123,8 @@ class _RestorantBottomNavBarState extends State<RestorantBottomNavBar> {
 
           ),
           Tab(
-              text: "Hotel",
+
+              text: " Hotels",
               icon: widget.tabController.index == 1
                   ? SvgPicture.asset('assets/svg/ic_hotel_selected.svg')
                   : SvgPicture.asset('assets/svg/ic_hotel_unselected.svg')),

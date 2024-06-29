@@ -62,13 +62,10 @@ class _HomeTabState extends State<HomeTab> {
                       return Row(
                         children: [
                           Expanded(
-                            child: GestureDetector(
-                              // onTap: () => Get.to(() => const ProfileScreen()),
-                              child: purpleContiner(
-                                imageUrl: ImagePath.left_p.toPathSvg,
-                                txt: 'Raffle ID',
-                                txtTwo: '.....',
-                              ),
+                            child: purpleContiner(
+                              imageUrl: ImagePath.left_p.toPathSvg,
+                              txt: 'Raffle ID',
+                              txtTwo: '.....',
                             ),
                           ),
                           const SizedBox(width: 5),
@@ -88,26 +85,10 @@ class _HomeTabState extends State<HomeTab> {
                       return Row(
                         children: [
                           Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  RouteHelper.createRoute(
-                                    location: RoutingLocation.leftToRight,
-                                    routeName: ChangeNotifierProvider.value(
-                                      value: context.read<ProfileNotifier>(),
-                                      child: ProfilePage(
-                                        controller: widget.controller,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: purpleContiner(
-                                imageUrl: ImagePath.left_p.toPathSvg,
-                                txt: 'Account ID',
-                                txtTwo: "Raffle  ${user?.raffleId}",
-                              ),
+                            child: purpleContiner(
+                              imageUrl: ImagePath.left_p.toPathSvg,
+                              txt: 'Account ID',
+                              txtTwo: "Raffle  ${user?.raffleId}",
                             ),
                           ),
                           const SizedBox(width: 5),

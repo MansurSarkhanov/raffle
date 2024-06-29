@@ -14,7 +14,6 @@ import 'package:raffle_app/features/profile/domain/repository/user_info_reposito
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/features/restaurants/domain/repository/restaurant_repository.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
-
 import 'data/local/shared_preferences_service.dart';
 import 'features/auth/data/service/firebase_auth_service.dart';
 import 'features/product/data/repository/product_repository_impl.dart';

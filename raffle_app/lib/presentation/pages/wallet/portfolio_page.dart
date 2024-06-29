@@ -110,7 +110,7 @@ class RestorantOrderCard extends StatelessWidget {
             BoxShadow(
                 blurRadius: 16,
                 spreadRadius: 0,
-                color: const Color(0xFF000000).withOpacity(0.25),
+                color: const Color(0xFF000000).withOpacity(0.20),
                 offset: const Offset(0, 0))
           ],
           color: Colors.white,

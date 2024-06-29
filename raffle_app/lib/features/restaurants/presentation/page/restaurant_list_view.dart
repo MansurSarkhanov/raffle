@@ -26,6 +26,8 @@ class RestaurantListView extends StatelessWidget {
               return Column(
                 children: [
                   InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                     onTap: () async {
                       await context.read<RestourantsNotifier>().selectRestorant(index);
                       controller.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);

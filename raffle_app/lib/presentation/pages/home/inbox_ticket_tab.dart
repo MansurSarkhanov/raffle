@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -17,19 +19,21 @@ class InboxTicketTab extends StatefulWidget {
 }
 
 class _InboxTicketTabState extends State<InboxTicketTab> {
-  int curIndex = 1;
+  int curIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     List<Widget> rafflesScreen = [
       const TicketView(),
+
       const MessagesScreen(),
+
     ];
     return Container(
       color: const Color(0xFFEBEBEB),
       child: Padding(
-        padding: const EdgeInsets.only(top: 40, left: 12, right: 12),
+        padding:  EdgeInsets.only(top: Platform.isIOS?56: 40, left: 12, right: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,13 +48,20 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
                           print(notifier.state.name);
                           if (notifier.state == AppPartSection.right) {
                             if (widget.controller.index == 4) {
+                              print('Test1');
                               widget.controller.index == 0;
                             } else {
+                              print('Test2');
+
                               Navigator.pop(context);
                             }
                           } else if (widget.controller.index == 4) {
+                            print('Test3');
+
                             widget.controller.index = 0;
                           } else {
+                            print('Test4');
+
                             Navigator.pop(context);
                             widget.controller.index = 0;
                           }

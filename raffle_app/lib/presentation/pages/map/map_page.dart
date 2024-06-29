@@ -61,51 +61,29 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
+        toolbarHeight: 56,
         backgroundColor: const Color(0xFFF1F1F1),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(156),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      const SizedBox(
-                        width: 9.5,
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TitleHeading1Widget(
-                            text: 'Map Area',
-                            fontSize: 13,
-                          ),
-                          TitleHeading1Widget(text: '2-3 Jun 2024', fontSize: 13)
-                        ],
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 14.0),
-                    child: Row(
-                      children: [
-                        mapSelectedButton(title: 'All', isSelected: true),
-                        mapSelectedButton(title: "New"),
-                        mapSelectedButton(title: "On sale", isSale: true),
-                        mapSelectedButton(title: "Dictinction"),
-                      ],
-                    ),
-                  ),
-                ],
+      title: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TitleHeading1Widget(
+                text: 'Map Area',
+                fontSize: 13,
               ),
-            )),
+              TitleHeading1Widget(text: '2-3 Jun 2024', fontSize: 13)
+            ],
+          ),
+        ],
+      ),
         automaticallyImplyLeading: false,
       ),
       body: Stack(

@@ -3,7 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:provider/provider.dart';
+import 'package:raffle_app/core/utilities/helper/route.dart';
+import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
+import 'package:raffle_app/presentation/pages/wallet/wallet_card_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key, required this.controller});
@@ -18,7 +22,6 @@ class _ScanPageState extends State<ScanPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Arka planda bulanıklaştırılmış kamera görüntüsü
           Positioned.fill(
             child: MobileScanner(
               onDetect: (
@@ -62,7 +65,7 @@ class _ScanPageState extends State<ScanPage> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 50,
+                  height: 56,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8, bottom: 20),
@@ -103,11 +106,14 @@ class _ScanPageState extends State<ScanPage> {
                   width: 276,
                   height: 276,
                   decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(77),
+                        bottomRight: Radius.circular(77)),
                   ),
                   child: ClipRRect(
-                    borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(77),
+                        bottomRight: Radius.circular(77)),
                     child: MobileScanner(
                       onDetect: (
                         barcode,
@@ -126,7 +132,9 @@ class _ScanPageState extends State<ScanPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9)),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: SvgPicture.asset('assets/svg/ic_light.svg'),
@@ -136,7 +144,9 @@ class _ScanPageState extends State<ScanPage> {
                       width: 47,
                     ),
                     Container(
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9)),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: SvgPicture.asset('assets/svg/ic_keyboard.svg'),
@@ -153,9 +163,11 @@ class _ScanPageState extends State<ScanPage> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: const Color(0xFF141617).withOpacity(.6), borderRadius: BorderRadius.circular(6.38)),
+                            color: const Color(0xFF141617).withOpacity(.6),
+                            borderRadius: BorderRadius.circular(6.38)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 42.0, vertical: 12),
                           child: Column(
                             children: [
                               SvgPicture.asset('assets/svg/ic_scan_qr.svg'),
@@ -176,30 +188,47 @@ class _ScanPageState extends State<ScanPage> {
                         width: 12,
                       ),
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF141617).withOpacity(.6),
-                              borderRadius: BorderRadius.circular(6.38)),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
-                            child: Column(
-                              children: [
-                                TitleHeading1Widget(
-                                  text: 'BALANCE : 40.000 ₽',
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                SizedBox(
-                                  height: 14.5,
-                                ),
-                                TitleHeading1Widget(
-                                  text: 'WALLET',
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              RouteHelper.createRoute(
+                                  routeName: ChangeNotifierProvider.value(
+                                      value: context.read<ProfileNotifier>(),
+                                      child: WalletCardPage(
+                                        controller: widget.controller,
+                                      )),
+                                  location: RoutingLocation.rightToLeft,
+                                  transitionTime: 500,
+                                  reverseTransitionTime: 250),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF141617).withOpacity(.6),
+                                borderRadius: BorderRadius.circular(6.38)),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 42.0, vertical: 12),
+                              child: Column(
+                                children: [
+                                  TitleHeading1Widget(
+                                    text: 'BALANCE : 40.000 ₽',
+                                    fontSize: 13,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  SizedBox(
+                                    height: 14.5,
+                                  ),
+                                  TitleHeading1Widget(
+                                    text: 'WALLET',
+                                    fontSize: 13,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

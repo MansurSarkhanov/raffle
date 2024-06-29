@@ -131,8 +131,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                             const SizedBox(
                               height: 2,
                             ),
-                            productModel?[index].isAnimating ?? false
-                                ? BlinkingWidget(
+                                BlinkingWidget(
                                     controller: _controller,
                                     child: LinearPercentIndicator(
                                         animation: true,
@@ -143,17 +142,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                         percent: productModel![index].percent! / 100,
                                         backgroundColor: const Color(0xffE6E6E6)),
                                   )
-                                : LinearPercentIndicator(
-                                    barRadius: const Radius.circular(52),
-                                    curve: Curves.bounceOut,
-                                    animationDuration: 1500,
-                                    lineHeight: 16.h,
-
-                                    percent: productModel![index].percent! / 100,
-                                    padding: EdgeInsets.zero,
-                                    backgroundColor: const Color(0xfff1f1f1),
-                                    progressColor: Colors.yellow[700],
-                                  ),
+                                ,
                             const SizedBox(
                               height: 10,
                             ),

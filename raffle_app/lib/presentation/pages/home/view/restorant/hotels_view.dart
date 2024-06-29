@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,7 +27,6 @@ final List<HotelModel> hotels = [
     location: "Nardaran kd.\nBaku, Azerbaijan",
     name: "Grand Hotel",
     detailImageUrl: 'assets/images/im_grand_hotel_detail.png',
-    
   ),
   HotelModel(
       imageUrl: 'assets/images/im_marriot_hotel.png',
@@ -53,101 +54,113 @@ class HotelsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50),
-            Row(
-              children: [
-                hotelHeaderWidget(title: 'Arriving', subTime: '2 Jun 2024'),
-                hotelHeaderWidget(title: 'Leaving', subTime: '3 Jun 2024'),
-              ],
+      child: Column(
+        children: [
+          SizedBox(height: Platform.isIOS ? 56 : 50),
+          searchHeader(context),
+           Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+              const    SearchHotelResult(),
+                  const    SearchHotelResult(),
+                  const    SearchHotelResult(),
+                  const    SearchHotelResult(),
+                  SizedBox(
+                    height: 42.h,
+                  ),
+                ],
+              ),
             ),
-            searchHeader(context),
-            const Column(
-              children: [
-                SearchHotelResult(),
-                SearchHotelResult(),
-                SearchHotelResult(),
-                SearchHotelResult(),
-              ],
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
 
   Widget searchHeader(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFFF9F9F9),
-      ),
-      child: Row(
+      decoration: BoxDecoration(color: Color(0xFFF9F9F9), boxShadow: [
+        BoxShadow(
+            blurRadius: 10,
+            offset: Offset(0, 2),
+            color: Color(0xFF858585).withOpacity(0.25))
+      ]),
+      child: Column(
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) {
-                  return const MapPage();
+          Row(
+            children: [
+              hotelHeaderWidget(title: 'Arriving', subTime: '2 Jun 2024'),
+              hotelHeaderWidget(title: 'Leaving', subTime: '3 Jun 2024'),
+            ],
+          ),
+          Row(
+            children: [
+              InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return MapPage();
+                  }));
                 },
-              ));
-            },
-            child: Container(
-              width: 68.w,
-              height: 66.h,
-              decoration: BoxDecoration(
-                  
-                  border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/svg/ic_location_last.svg',
-                  height: 24,
-                  width: 24,
+                child: Container(
+                  height: 66.h,
+                  width: 68.w,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFF9F9F9),
+                      border: Border.all(
+                          color: const Color(0xFFD0D0D7),
+                          strokeAlign: BorderSide.strokeAlignOutside)),
+                  child: Center(
+                      child:
+                          SvgPicture.asset('assets/svg/ic_location_last.svg')),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              height: 66.h,
-              decoration: BoxDecoration(
-                  
-                  color: const Color(0xFFF9F9F9),
-                  border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 19.0),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: 'Destination or Hotel',
-                      hintStyle: TextStyle(
+              Expanded(
+                child: Container(
+                  height: 66.h,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFF9F9F9),
+                      border: Border.all(
+                          color: const Color(0xFFD0D0D7),
+                          strokeAlign: BorderSide.strokeAlignOutside)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 19.0),
+                      child: TextField(
+                        style: TextStyle(
                           fontSize: 12.sp,
-                          color: const Color(0xFFAEAEB8),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Helvetica'),
-                      prefixIconConstraints: const BoxConstraints(minHeight: 15),
-                      border: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: Image.asset(
-                          'assets/icons/ic_search.png',
-                          color: const Color(0xFFAEAEB8),
-                          height: 15,
-                          width: 15,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Destination or Hotel',
+                          hintStyle: TextStyle(
+                              fontSize: 12.sp,
+                              color: const Color(0xFFAEAEB8),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Helvetica'),
+                          prefixIconConstraints:
+                              const BoxConstraints(minHeight: 15),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(right: 12.0),
+                            child: Image.asset(
+                              'assets/icons/ic_search.png',
+                              color: const Color(0xFFAEAEB8),
+                              height: 15,
+                              width: 15,
+                            ),
+                          ),
+                          isDense: true,
                         ),
                       ),
-                      isDense: true,
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
@@ -173,7 +186,6 @@ class HotelsView extends StatelessWidget {
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
               color: const Color(0xFF444444),
-
             ),
             const SizedBox(
               height: 3,
@@ -237,7 +249,8 @@ class SearchHotelResult extends StatelessWidget {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return HotelDetailView(hotelModel: hotels[index]);
                       }));
                     },
@@ -249,7 +262,8 @@ class SearchHotelResult extends StatelessWidget {
                           width: 160,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(image: AssetImage(hotels[index].imageUrl))),
+                              image: DecorationImage(
+                                  image: AssetImage(hotels[index].imageUrl))),
                         ),
                         SizedBox(height: 12.h),
                         TitleHeading1Widget(
@@ -273,7 +287,7 @@ class SearchHotelResult extends StatelessWidget {
             height: 42.h,
           ),
           const Divider(
-            color: Colors.black,
+            color: Color(0xFFD0D0D7),
             height: 0,
           )
         ],

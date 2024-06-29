@@ -23,27 +23,26 @@ class PlaceOfRestaurantsList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              InkWell(
-                onTap: () {
-                  final place = Provider.of<RestourantsNotifier>(context, listen: false)
-                      .restorantModel?[Provider.of<RestourantsNotifier>(context, listen: false).index]
-                      .places?[index];
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return FoodRestorantDetailView(placeModel: place);
-                      },
-                    ),
-                  );
-                },
-                child: PlaceOfRestorantCard(
+
+                PlaceOfRestorantCard(
+                  onTap: (){
+                    final place = Provider.of<RestourantsNotifier>(context, listen: false)
+                        .restorantModel?[Provider.of<RestourantsNotifier>(context, listen: false).index]
+                        .places?[index];
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return FoodRestorantDetailView(placeModel: place);
+                        },
+                      ),
+                    );
+                  },
                   places: context
                       .watch<RestourantsNotifier>()
                       .restorantModel?[context.watch<RestourantsNotifier>().index]
                       .places?[index],
                 ),
-              ),
               const SizedBox(
                 height: 16,
               )

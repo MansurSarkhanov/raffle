@@ -139,17 +139,7 @@ class ProductDetail extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            CustomElevatedButton(
-                isLoading: false,
-                isBorderEnabled: true,
-                borderRadius: 15,
-                buttonColor: Colors.blue,
-                textColor: Colors.white,
-                onPressed: () {},
-                buttonText: 'Add to Cart',
-                height: 40,
-                icon: null,
-                width: size.width)
+
           ],
         ),
       ),
