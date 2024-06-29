@@ -1,19 +1,17 @@
 name: raffle_app
 description: "A new Flutter project."
 
-publish_to: 'none' 
+publish_to: 'none'
 
-
-version: 1.0.1+1
+version: 1.0.2+3
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
 
-
 dependencies:
   flutter:
     sdk: flutter
-
+ 
   cupertino_icons: ^1.0.6
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
@@ -74,9 +72,6 @@ flutter:
     - assets/gif/
     - assets/videos/
     - assets/md/
-
-
-
 
 
   fonts:

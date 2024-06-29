@@ -26,7 +26,7 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
         backgroundColor: context.watch<AppIndexNotifier>().state == AppPartSection.left
             ? const Color(0xFFEBEBEB)
             : const Color(0xFFF9F9F9),
-        toolbarHeight: 50,
+
         title: Row(
           children: [
             Row(
@@ -145,5 +145,5 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(54);
+  Size get preferredSize => const Size.fromHeight(48);
 }

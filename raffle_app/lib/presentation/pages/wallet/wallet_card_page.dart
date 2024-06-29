@@ -43,32 +43,31 @@ class _WalletCardPageState extends State<WalletCardPage> {
         onRefresh: () async {
           return await context.read<ProfileNotifier>().getUserInformation();
         },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: SizedBox(
-                  height: 220,
-                  child: Swiper(
-                    onIndexChanged: (value) {
-                      context.read<AppIndexNotifier>().changeCurrentCardIndex(value);
-                    },
-                    axisDirection: AxisDirection.right,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: cards.length,
-                    itemWidth: 400,
-                    itemHeight: 200,
-                    layout: SwiperLayout.STACK,
-                    itemBuilder: (context, index) {
-                      return cards[index];
-                    },
-                  ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 14),
+              child: SizedBox(
+                height: 220,
+                child: Swiper(
+                  onIndexChanged: (value) {
+                    context.read<AppIndexNotifier>().changeCurrentCardIndex(value);
+                  },
+                  axisDirection: AxisDirection.right,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: cards.length,
+                  itemWidth: 400,
+                  itemHeight: 200,
+                  layout: SwiperLayout.STACK,
+                  itemBuilder: (context, index) {
+                    return cards[index];
+                  },
                 ),
               ),
-              WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
-            ],
-          ),
+            ),
+            WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
+            SizedBox(height: 48,)
+          ],
         ),
       ),
     );
@@ -100,84 +99,180 @@ class WalletExpenseListCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const TitleHeading1Widget(
-                    text: 'Последние операции',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(RouteHelper.createRoute(
-                          routeName: const WalletHistoryPage(), location: RoutingLocation.rightToLeft));
-                    },
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFD9D9D9), borderRadius: BorderRadius.all(Radius.circular(9))),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 9),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TitleHeading1Widget(
-                                text: 'Все', fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 10,
-                            )
-                          ],
+          padding: const EdgeInsets.only(left:24,right: 24,top: 24),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const TitleHeading1Widget(
+                      text: 'Последние операции',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(RouteHelper.createRoute(
+                            routeName: const WalletHistoryPage(), location: RoutingLocation.rightToLeft));
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFD9D9D9), borderRadius: BorderRadius.all(Radius.circular(9))),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 9),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TitleHeading1Widget(
+                                  text: 'Все', fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 10,
+                              )
+                            ],
+                          ),
                         ),
                       ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                const Row(
+                  children: [
+                    TitleHeading1Widget(
+                      text: '1 Июнь 2024',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
                     ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              const Row(
+                  ],
+                ),
+              index==0 ? Column(
+                  children: [
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    OderActionTitle(
+                      index: index,
+                      money: '-36,50 \$',
+                      title: "PEACH",
+                      image: 'wallet_restorant',
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    OderActionTitle(
+                      index: index,
+                      money: '-36,50 \$',
+                      title: "PEACH",
+                      image: 'wallet_restorant',
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    OderActionTitle(
+                      index: index,
+                      money: '-36,50 \$',
+                      title: "Emiland",
+                      image: 'wallet_shop',
+                    ), const SizedBox(
+                      height: 32,
+                    ),
+
+
+                  ],
+                ):
+           index==1?   Column(
                 children: [
-                  TitleHeading1Widget(
-                    text: '1 Июнь 2024',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  OderActionTitle(
+                    index: index,
+                    money: '+125 \$',
+                    title: "PEACH",
+                    image: 'wallet_restorant',
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  OderActionTitle(
+                    index: index,
+                    money: '+125 \$',
+                    title: "NOVIKOV CAFE",
+                    image: 'wallet_restorant',
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  OderActionTitle(
+                    index: index,
+                    money: '+40 \$',
+
+                    title: "Emiland",
+                    image: 'wallet_shop',
+                  ), const SizedBox(
+                    height: 32,
+                  ),
+                  OderActionTitle(
+                    index: index,
+                    money: '+125 \$',
+
+                    title: "NOVIKOV CAFE",
+                    image: 'wallet_restorant',
+                  ),
+                  const SizedBox(
+                    height: 32,
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              OderActionTitle(
-                index: index,
-                title: "PEACH",
-                image: 'wallet_restorant',
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              OderActionTitle(
-                index: index,
-                title: "PEACH",
-                image: 'wallet_restorant',
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              OderActionTitle(
-                index: index,
-                title: "Emiland",
-                image: 'wallet_shop',
-              )
-            ],
+              ):
+              Column(
+             children: [
+               const SizedBox(
+                 height: 16,
+               ),
+               OderActionTitle(
+                 index: index,
+                 money: '+125 \$',
+
+                 title: "Emil H.",
+                 image: 'empty_user',
+               ),
+               const SizedBox(
+                 height: 32,
+               ),
+               OderActionTitle(
+                 index: index,
+                 money: '+125 \$',
+                 title: "Orkhan P.",
+                 image: 'empty_user',
+
+               ),
+               const SizedBox(
+                 height: 32,
+               ),
+               OderActionTitle(
+                 index: index,
+                 money: '+125 \$',
+
+                 title: "Kamran M.",
+                 image: 'empty_user',
+
+               ), const SizedBox(
+                 height: 32,
+               ),
+
+             ],
+           )
+            
+              ],
+            ),
           ),
         ),
       ),
@@ -227,7 +322,7 @@ class TestCardGreen extends StatelessWidget {
                           SizedBox(
                             width: 100,
                             child: TitleHeading1Widget(
-                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '199.50',
+                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '199,50',
                               fontSize: 29,
                               fontWeight: FontWeight.w700,
                             ),
@@ -347,7 +442,7 @@ class TestCardRed extends StatelessWidget {
                                 color: const Color(0xFF000000).withOpacity(0.25))
                           ], color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(8)),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(top:12,bottom: 11,left:8,right: 8),
                             child: TitleHeading1Widget(
                               text: 'ID: Raffle001',
                               color: Colors.white,
@@ -355,7 +450,27 @@ class TestCardRed extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                        )
+                        ),
+                    const    SizedBox(width: 20,),
+                        Container(
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                                blurRadius: 16.54,
+                                offset: const Offset(0, 1.32),
+                                color: const Color(0xFF000000).withOpacity(0.25))
+                          ],
+                              borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top:11,bottom: 11,left:8,right: 8),
+                            child: TitleHeading1Widget(
+                              text: 'ID: I',
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -530,40 +645,35 @@ class OderActionTitle extends StatelessWidget {
   const OderActionTitle({
     super.key,
     required this.image,
-    required this.title,
-    required this.index,
+    required this.title, required this.money, required this.index,
   });
   final String image;
   final String title;
+  final String money;
   final int index;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        index == 0 ? SvgPicture.asset('assets/svg/ic_$image.svg') : SvgPicture.asset('assets/svg/ic_empty_user.svg'),
+        SvgPicture.asset('assets/svg/ic_$image.svg') ,
         const SizedBox(
           width: 12,
         ),
         TitleHeading1Widget(
-          text: index == 0 ? title : 'Orkhan P.',
+          text: title ,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
         const Spacer(),
-        index == 0
-            ? const TitleHeading1Widget(
-                text: '-36,50 \$',
-                color: Color(0xFFC1272D),
+
+             TitleHeading1Widget(
+                text: '$money',
+                color:index==0? Color(0xFFC1272D):Color(0xFF49A600),
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               )
-            : const TitleHeading1Widget(
-                text: '+125 \$',
-                color: Color(0xFF49A600),
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              )
+
       ],
     );
   }
@@ -581,10 +691,11 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
-      leadingWidth: 40,
       title: Row(
         children: [
           InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
             onTap: () {
               Navigator.of(context).pop();
             },

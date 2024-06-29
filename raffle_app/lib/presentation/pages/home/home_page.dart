@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/presentation/components/fab_button.dart';
 import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
@@ -34,22 +35,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     tabController = TabController(length: 5, vsync: this);
     restorantTabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
+      print('first chnage');
       setState(() {});
     });
     restorantTabController.addListener(() {
+      print('second chnage');
+
       setState(() {});
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
-      backgroundColor: context.watch<AppIndexNotifier>().state == AppPartSection.left
-          ? const Color(0xFFEBEBEB)
-          : const Color(0xFFF9F9F9),
+      backgroundColor:
+          context.watch<AppIndexNotifier>().state == AppPartSection.left
+              ? const Color(0xFFEBEBEB)
+              : const Color(0xFFF9F9F9),
       appBar: tabController.index == 2 ||
               tabController.index == 4 ||
               restorantTabController.index == 1 ||
@@ -59,8 +63,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           : CustomSelectionAppbar(
               controller: tabController,
             ),
+      floatingActionButton:
+        context.watch<AppIndexNotifier>().state==AppPartSection.right&&restorantTabController.index==0 ?const MapFabButton() : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
+        padding: EdgeInsets.only(
+            left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
         child: tabController.index == 2 ||
                 restorantTabController.index == 2 ||
                 tabController.index == 4 ||
@@ -71,7 +79,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 : BottomNavBar(tabController: tabController),
       ),
       body: Padding(
-        padding: EdgeInsets.only(bottom: tabController.index == 2 || restorantTabController.index == 2 ? 0 : 20.0),
+        padding: EdgeInsets.only(
+            bottom:
+                tabController.index == 2 || restorantTabController.index == 2
+                    ? 0
+                    : 28.0),
         child: context.watch<AppIndexNotifier>().state == AppPartSection.right
             ? RestorantTabView(
                 restorantTabController: restorantTabController,
@@ -97,7 +109,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
   }
-  
+
   @override
   void dispose() {
     tabController.dispose();

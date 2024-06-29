@@ -66,6 +66,8 @@ class _HotelDetailViewState extends State<HotelDetailView> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                       child: Container(
                         decoration: BoxDecoration(
+                          color: Color(0xFFF9F9F9),
+
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Column(
