@@ -66,7 +66,9 @@ class _WalletCardPageState extends State<WalletCardPage> {
               ),
             ),
             WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
-            SizedBox(height: 48,)
+            const SizedBox(
+              height: 48,
+            )
           ],
         ),
       ),
@@ -668,8 +670,8 @@ class OderActionTitle extends StatelessWidget {
         const Spacer(),
 
              TitleHeading1Widget(
-                text: '$money',
-                color:index==0? Color(0xFFC1272D):Color(0xFF49A600),
+          text: money,
+          color: index == 0 ? const Color(0xFFC1272D) : const Color(0xFF49A600),
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               )

@@ -46,6 +46,7 @@ dependencies:
   custom_refresh_indicator: ^3.1.0
   lottie: ^3.1.2
   camera: ^0.11.0+1
+  inner_shadow_widget: ^0.0.3
 
 dev_dependencies:
   flutter_test:

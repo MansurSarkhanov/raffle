@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:raffle_app/features/restaurants/data/model/restorant_model.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
@@ -88,38 +89,39 @@ class RestaurantCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Stack(
+                        alignment: Alignment.centerLeft,
                         children: [
+                          InnerShadow(
+                            blur: 3,
+                            offset: const Offset(0, 0),
+                            child: Container(
+                              height: 18.h,
+                              width: 140,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10), color: const Color(0xFFE0E0E0)),
+                            ),
+                          ),
                           SizedBox(
                             width: 140, // 200.0 is the total width of the progress bar
 
-                            child: LinearPercentIndicator(
-                              linearGradient: gradient.gradient,
-                              padding: EdgeInsets.only(left: 5.w),
-                              barRadius: Radius.circular(52.r),
-                              animation: false,
-                              animationDuration: 1500,
-                              lineHeight: 18.h,
-                              backgroundColor: const Color(0xFF000000).withOpacity(0.12),
-
-                              percent: restaurantModel.percent!.toDouble() / 100,
-                              // backgroundColor: const Color(0xFFE0E0E0),
-                              // progressColor: restaurant.color,
+                            child: InnerShadow(
+                              blur: 3,
+                              offset: const Offset(0, 0),
+                              child: LinearPercentIndicator(
+                                linearGradient: gradient.gradient,
+                                padding: const EdgeInsets.only(left: 0),
+                                barRadius: Radius.circular(52.r),
+                                animation: false,
+                                animationDuration: 1500,
+                                lineHeight: 18.h,
+                                backgroundColor: Colors.transparent,
+                                percent: restaurantModel.percent!.toDouble() / 100,
+                                // backgroundColor: const Color(0xFFE0E0E0),
+                                // progressColor: restaurant.color,
+                              ),
                             ),
                           ),
-                          Container(
-                            height: 18.h,
-                            width: 140,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color(0xFF000000).withOpacity(0.01),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 4), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                          ),
+                         
                         ],
                       ),
                       Row(

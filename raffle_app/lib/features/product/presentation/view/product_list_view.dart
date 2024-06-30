@@ -52,7 +52,10 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
             itemCount: productList?.length,
             itemBuilder: (context, index) {
               return InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
                 onTap: () {
+
                   showModalBottomSheet(
                     useSafeArea: true,
                     context: context,
