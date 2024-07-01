@@ -93,7 +93,8 @@ class RestaurantCard extends StatelessWidget {
                         children: [
                           InnerShadow(
                             blur: 3,
-                            offset: const Offset(0, 0),
+
+                            offset: const Offset(0, 0.5),
                             child: Container(
                               height: 18.h,
                               width: 140,
@@ -106,7 +107,7 @@ class RestaurantCard extends StatelessWidget {
 
                             child: InnerShadow(
                               blur: 3,
-                              offset: const Offset(0, 0),
+                              offset: const Offset(0, 0.5),
                               child: LinearPercentIndicator(
                                 linearGradient: gradient.gradient,
                                 padding: const EdgeInsets.only(left: 0),

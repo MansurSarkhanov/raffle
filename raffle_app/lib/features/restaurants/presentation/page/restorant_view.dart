@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/page/place_of_restaurants_list.dart';
@@ -33,12 +34,15 @@ class RestorantView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   if (notifier.isSelected) ...[
                     InkWell(
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
                       child:const Icon(
                         Icons.arrow_back_ios_new_outlined,
-                        size: 15,
+                        size: 18,
                       ),
                       onTap: (){
                         notifier.backPageListener();
@@ -50,11 +54,18 @@ class RestorantView extends StatelessWidget {
                   TitleHeading1Widget(
                       text:
                      notifier.isSelected
-                          ? "${notifier.restorantModel?[notifier.index].places?.length} Menu"
+                          ? "${notifier.restorantModel?[notifier.index].places?.length} Restaurants"
                           : "${notifier.restorantModel?.length} Restaurants",
                       color: AppColors.chipBackColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w400),
+                  if (notifier.isSelected) ...[
+                    const Spacer(),
+                    InkWell(
+                      child: SvgPicture.asset('assets/svg/ic_filter.svg'),
+                      onTap: () {},
+                    ),
+                  ],
                 ],
               ),
             );

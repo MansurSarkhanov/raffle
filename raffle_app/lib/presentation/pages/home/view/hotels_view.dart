@@ -80,12 +80,16 @@ class HotelsView extends StatelessWidget {
 
   Widget searchHeader(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color(0xFFF9F9F9), boxShadow: [
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9F9F9),
+        boxShadow: [
         BoxShadow(
             blurRadius: 10,
-            offset: Offset(0, 2),
-            color: Color(0xFF858585).withOpacity(0.25))
-      ]),
+            offset: const Offset(0, 3),
+            color: const Color(0xFF858585).withOpacity(0.25),
+          )
+        ],
+      ),
       child: Column(
         children: [
           Row(
@@ -102,7 +106,7 @@ class HotelsView extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return MapPage();
+                    return const MapPage();
                   }));
                 },
                 child: Container(
@@ -260,6 +264,7 @@ class SearchHotelResult extends StatelessWidget {
                         Container(
                           height: 160,
                           width: 160,
+                          
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(

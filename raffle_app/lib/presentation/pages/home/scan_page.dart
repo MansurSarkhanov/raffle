@@ -17,6 +17,7 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
+  final MobileScannerController controller = MobileScannerController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +25,7 @@ class _ScanPageState extends State<ScanPage> {
         children: [
           Positioned.fill(
             child: MobileScanner(
+              controller: controller,
               onDetect: (
                 barcode,
               ) {
@@ -110,19 +112,29 @@ class _ScanPageState extends State<ScanPage> {
                         topLeft: Radius.circular(77),
                         bottomRight: Radius.circular(77)),
                   ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(77),
-                        bottomRight: Radius.circular(77)),
-                    child: MobileScanner(
-                      onDetect: (
-                        barcode,
-                      ) {
-                        setState(() {
-                          // result = barcode;
-                        });
-                      },
-                    ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius:
+                            const BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
+                        child: MobileScanner(
+                          controller: controller,
+                          onDetect: (
+                            barcode,
+                          ) {
+                            setState(() {
+                              // result = barcode;
+                            });
+                          },
+                        ),
+                      ),
+                      Image.asset(
+                        'assets/images/im_qr.png',
+                        height: 92,
+                        width: 92,
+                      )
+                    ],
                   ),
                 ),
                 const SizedBox(

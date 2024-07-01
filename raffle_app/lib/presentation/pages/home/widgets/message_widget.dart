@@ -11,28 +11,9 @@ class MessageWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: size.height * 0.06,
-        ),
+      
         Row(
           children: [
-            // Container(
-            //     decoration: const BoxDecoration(
-            //         shape: BoxShape.circle,
-            //         gradient: LinearGradient(
-            //             colors: [
-            //               Color(0xFF00a7f8),
-            //               Color(0xFF006be5),
-            //             ],
-            //             begin: Alignment.topCenter,
-            //             end: Alignment.bottomCenter)),
-            //     child:
-            //      CircleAvatar(
-            //       // backgroundImage: AssetImage('assets/images/raffle_logo.png'),
-            //       radius: 18,
-            //       backgroundColor: Colors.transparent,
-            //       child: Image.asset('assets/images/raffle_logo.png'),
-            //     )),
             Container(
               width: 33,
               height: 33,
@@ -91,6 +72,7 @@ class MessageWidget extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 34)
       ],
     );
   }

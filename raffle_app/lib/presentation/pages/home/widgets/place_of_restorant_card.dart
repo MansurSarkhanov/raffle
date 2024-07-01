@@ -77,9 +77,10 @@ class PlaceOfRestorantCard extends StatelessWidget {
                               ),
                               TitleHeading1Widget(
                                 text: places?.location ?? '',
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF2D2D32),
+                                color: const Color(0xFF2D2D32).withOpacity(.87),
+
                               ),
                               const SizedBox(
                                 height: 4,
@@ -110,9 +111,10 @@ class PlaceOfRestorantCard extends StatelessWidget {
 
                                   TitleHeading1Widget(
                                     text: 'Mediterranean , Asian',
-                                    fontSize: 14.sp,
+                                    fontSize: 12.sp,
+
                                     fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF2D2D32),
+                                    color: const Color(0xFF2D2D32).withOpacity(.87),
                                   ),
                                 ],
                               ),

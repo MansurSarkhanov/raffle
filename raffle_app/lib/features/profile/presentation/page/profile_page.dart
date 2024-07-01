@@ -16,8 +16,8 @@ import 'package:raffle_app/features/profile/presentation/widgets/select_language
 
 import '../../../../injetion.dart';
 import '../../../../presentation/components/go_back_button.dart';
-import '../../../auth/data/service/firebase_storage_service.dart';
 import '../../../auth/presentation/widgets/whatsapp_widget.dart';
+import '../../data/service/firebase_storage_service.dart';
 import '../widgets/call_email_card.dart';
 import '../widgets/contact_method.dart';
 import '../widgets/custom_profile_listtile.dart';
@@ -68,7 +68,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      UserProfileImage(size: size, userInfo: userInfo, storage: storage),
+                      UserProfileImage(
+                        size: size,
+                        userInfo: userInfo,
+                        storage: storage,
+                        notifier: notifier,
+                      ),
                       SizedBox(
                         height: size.height * 0.02,
                       ),

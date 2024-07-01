@@ -32,7 +32,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 240,
+      height: 250.h,
       child: Consumer<ProductNotifier>(builder: (context, notifier, child) {
         if (notifier.state is ProductProgress) {
           return ListView.builder(
@@ -70,7 +70,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                 child: Row(
                   children: [
                     Container(
-                      width: 150,
+                      width: 160.w,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 6, right: 6, top: 6),
@@ -79,11 +79,12 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              height: 110.h,
+                              height: 120.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                   color: Colors.white,
-                                image: DecorationImage(image: NetworkImage(productModel?[index].image ?? '')),
+                                image: DecorationImage(
+                                    image: NetworkImage(productModel?[index].image ?? ''), fit: BoxFit.cover),
                               ),
                             ),
                             const SizedBox(
@@ -141,9 +142,33 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                         barRadius: const Radius.circular(25),
                                         lineHeight: 16.h,
                                         padding: EdgeInsets.zero,
-                                        progressColor: productModel?[index] == 0 ? Colors.green : Colors.yellow[700],
-                                        percent: productModel![index].percent! / 100,
-                                        backgroundColor: const Color(0xffE6E6E6)),
+                                linearGradient: productModel![index].percent! <= 25
+                                    ? const LinearGradient(
+                                        colors: [
+                                          Color(0xFF23B90A),
+                                          Color(0xFF23B90A),
+                                        ],
+                                      )
+                                    : productModel[index].percent! > 25 && productModel[index].percent! <= 50
+                                        ? const LinearGradient(
+                                            colors: [
+                                              Color(0xFF23B90A),
+                                              Color(0xFFF8C925),
+                                            ],
+                                          )
+                                        : productModel[index].percent! > 50 && productModel[index].percent! <= 75
+                                            ? const LinearGradient(colors: [
+                                                Color(0xFF23B90A),
+                                                Color(0xFFF8C925),
+                                                Color(0xFFEA4505),
+                                              ])
+                                            : const LinearGradient(colors: [
+                                                Color(0xFFE93B00),
+                                                Color(0xFFE93B00),
+                                              ]),
+                                percent: productModel[index].percent! / 100,
+                                backgroundColor: const Color(0xffE6E6E6),
+                              ),
                                   )
                                 ,
                             const SizedBox(
