@@ -28,7 +28,7 @@ class _RestorantTabViewState extends State<RestorantTabView> with TickerProvider
       controller: widget.restorantTabController,
       children: [
         ChangeNotifierProvider.value(
-            value: getIt.get<RestourantsNotifier>()..fetchAllRestorants(),
+            value: getIt.get<RestourantsNotifier>()..fetchAllRestorants(context),
             child: RestorantView(tabController: widget.restorantTabController)),
         const HotelsView(),
         ScanPage(controller: widget.restorantTabController),
