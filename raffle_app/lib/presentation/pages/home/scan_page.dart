@@ -83,31 +83,28 @@ class _CameraViewState extends State<CameraView> {
       children: [
         Positioned.fill(child: CameraPreview(controller)),
         Positioned.fill(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            child: Container(
-                decoration: BoxDecoration(
-              // color: Colors.black.withOpacity(0),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  const Color(0xFF000000).withOpacity(.9), // #000000
-                  const Color(0xFFBB0000).withOpacity(0.3), // #BB0000 33.01%
-                  const Color(0xFFA80000).withOpacity(0.4), // #A80000 67.5%
-                  const Color(0xFF000000).withOpacity(.8), // #000000 100%
-                  const Color(0xFF020101).withOpacity(.9), // #020101 100%
-                ],
-                stops: const [
-                  0.0, // 0%
-                  0.3301, // 33.01%
-                  0.675, // 67.5%
-                  1.0, // 100%
-                  1.0, // 100%
-                ],
-              ),
-            )),
-          ),
+          child: Container(
+              decoration: BoxDecoration(
+            // color: Colors.black.withOpacity(0),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFF000000).withOpacity(.9), // #000000
+                const Color(0xFFBB0000).withOpacity(0.3), // #BB0000 33.01%
+                const Color(0xFFA80000).withOpacity(0.4), // #A80000 67.5%
+                const Color(0xFF000000).withOpacity(.8), // #000000 100%
+                const Color(0xFF020101).withOpacity(.9), // #020101 100%
+              ],
+              stops: const [
+                0.0, // 0%
+                0.3301, // 33.01%
+                0.675, // 67.5%
+                1.0, // 100%
+                1.0, // 100%
+              ],
+            ),
+          )),
         ),
         // Ortadaki QR kod okuma alanı
         Center(
