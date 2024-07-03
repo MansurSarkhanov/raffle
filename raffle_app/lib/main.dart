@@ -34,7 +34,7 @@ Future<void> main() async {
         // ChangeNotifierProvider(
         //   create: (context) => RestourantsNotifier(getIt.get<RestaurantRepository>()),
         // )
-      ],  
+      ],
       child: const MyApp(),
     ),
   );

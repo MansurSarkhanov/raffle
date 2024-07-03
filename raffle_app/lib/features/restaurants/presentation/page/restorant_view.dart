@@ -62,6 +62,8 @@ class RestorantView extends StatelessWidget {
                   if (notifier.isSelected) ...[
                     const Spacer(),
                     InkWell(
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
                       child: SvgPicture.asset('assets/svg/ic_filter.svg'),
                       onTap: () {},
                     ),

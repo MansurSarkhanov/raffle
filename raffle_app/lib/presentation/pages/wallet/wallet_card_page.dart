@@ -321,19 +321,12 @@ class TestCardGreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 100,
-                            child: TitleHeading1Widget(
-                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '199,50',
-                              fontSize: 29,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TitleHeading1Widget(
-                            text: '\$',
+                          TitleHeading1Widget(
+                            text: context.watch<AppIndexNotifier>().isVisible ? "****\$" : '199,50\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
                           ),
+                       
                         ],
                       ),
                     ],
@@ -527,19 +520,12 @@ class TestCardBlue extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 50,
-                            child: TitleHeading1Widget(
-                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '500',
-                              fontSize: 29,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TitleHeading1Widget(
-                            text: '\$',
+                          TitleHeading1Widget(
+                            text: context.watch<AppIndexNotifier>().isVisible ? "****\$" : '500\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
                           ),
+                          
                         ],
                       ),
                     ],

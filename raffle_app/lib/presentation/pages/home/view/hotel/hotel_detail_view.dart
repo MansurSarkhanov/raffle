@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raffle_app/features/restaurants/presentation/page/food_restorant_detail_view.dart';
-import 'package:raffle_app/presentation/pages/home/view/hotels_view.dart';
+import 'package:raffle_app/presentation/pages/home/view/hotel/hotels_view.dart';
 
-import '../../../components/custom_text.dart';
+import '../../../../components/custom_text.dart';
+import 'widgets/select_people_dialog.dart';
 
 class HotelDetailView extends StatefulWidget {
   const HotelDetailView({super.key, required this.hotelModel});
@@ -53,151 +54,7 @@ class _HotelDetailViewState extends State<HotelDetailView> {
             showDialog(
               context: context,
               builder: (context) {
-                return Dialog(
-                  child: Material(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF9F9F9),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Icon(Icons.close),
-                            ),
-                            const SizedBox(
-                              height: 42,
-                            ),
-                            Row(
-                              children: [
-                                const TitleHeading1Widget(
-                                  text: 'Adults',
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                const Spacer(),
-                                InkWell(
-                                  child: Container(
-                                      decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD0D0D7))),
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
-                                        child: TitleHeading1Widget(
-                                          text: '-',
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 18.0),
-                                  child: TitleHeading1Widget(
-                                    text: '1',
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                InkWell(
-                                  child: Container(
-                                    decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
-                                      child: TitleHeading1Widget(
-                                        text: '+',
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Row(
-                              children: [
-                                const TitleHeading1Widget(
-                                  text: 'Children',
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                const Spacer(),
-                                InkWell(
-                                  child: Container(
-                                      decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD0D0D7))),
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
-                                        child: TitleHeading1Widget(
-                                          text: '-',
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 18.0),
-                                  child: TitleHeading1Widget(
-                                    text: '0',
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                InkWell(
-                                  child: Container(
-                                    decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
-                                      child: TitleHeading1Widget(
-                                        text: '+',
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 122,
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                  ),
-                                  borderRadius: BorderRadius.circular(31),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 13),
-                                  child: Center(
-                                    child: TitleHeading1Widget(
-                                      text: "Update",
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 33,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
+                return const SelectPeopleDialog();
               },
             );
           },

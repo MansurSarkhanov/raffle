@@ -7,7 +7,7 @@ import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 
 import '../../../../injetion.dart';
 import '../../../../presentation/pages/home/inbox_ticket_tab.dart';
-import '../../../../presentation/pages/home/view/hotels_view.dart';
+import '../../../../presentation/pages/home/view/hotel/hotels_view.dart';
 import '../notifier/restourants_notifier.dart';
 import 'restorant_view.dart';
 

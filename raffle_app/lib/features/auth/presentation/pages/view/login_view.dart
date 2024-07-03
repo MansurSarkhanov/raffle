@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 icon: null,
                 onPressed: () async {
                   if (emailLoginController.text.trim().isNotEmpty && passwordLoginController.text.trim().isNotEmpty) {
-                    final result = await notifier.loginUser(
+                    await notifier.loginUser(
                         email: emailLoginController.text.trim(), password: passwordLoginController.text.trim());
 
                     // if (result == true && context.mounted) {
