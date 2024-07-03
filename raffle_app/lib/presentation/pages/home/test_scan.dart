@@ -46,9 +46,10 @@ class ScanScreenState extends State<QRCodeScreen> {
       key: qrKey,
       onQRViewCreated: onQRViewCreated,
       overlay: QrScannerOverlayShape(
-        overlayColor: Colors.red.withOpacity(0.5),
+        overlayColor: Colors.red.withOpacity(0.6),
         cutOutHeight: 276,
         cutOutWidth: 276,
+        borderRadius: 20,
         cutOutBottomOffset: 100,
         borderLength: 138,
         borderColor: Colors.black,
