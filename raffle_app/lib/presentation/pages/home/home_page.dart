@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     controller: tabController,
                   ),
                   const LiveView(),
-                  const QRCodeScreen(),
+                  QRCodeScreen(controller: tabController),
                   const OfferView(),
                   InboxTicketTab(
                     controller: tabController,
