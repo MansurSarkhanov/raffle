@@ -49,6 +49,7 @@ class ScanScreenState extends State<QRCodeScreen> {
         overlayColor: Colors.red.withOpacity(0.5),
         cutOutHeight: 276,
         cutOutWidth: 276,
+        cutOutBottomOffset: 100,
         borderLength: 138,
         borderColor: Colors.black,
       ),
@@ -121,11 +122,8 @@ class ScanScreenState extends State<QRCodeScreen> {
                   ),
                 ),
                 const Spacer(
-                  flex: 2,
                 ),
-                const SizedBox(
-                  height: 60,
-                ),
+               
                 Container(
                   height: 92,
                   width: 92,
