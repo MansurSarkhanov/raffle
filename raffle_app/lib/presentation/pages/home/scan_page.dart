@@ -36,60 +36,39 @@ class CameraView extends StatefulWidget {
 }
 
 class _CameraViewState extends State<CameraView> {
-  // late CameraController controller;
-  // final CameraDescription description =
-  //     const CameraDescription(name: 'name', lensDirection: CameraLensDirection.back, sensorOrientation: 0);
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   controller = CameraController(description, ResolutionPreset.max);
-  //   controller.initialize().then((_) {
-  //     if (!mounted) {
-  //       return;
-  //     }
-  //     setState(() {});
-  //   }).catchError((Object e) {
-  //     if (e is CameraException) {
-  //       switch (e.code) {
-  //         case 'CameraAccessDenied':
-  //           // Handle access errors here.
-  //           break;
-  //         default:
-  //           // Handle other errors here.
-  //           break;
-  //       }
-  //     }
-  //   });
-  // }
-  List<CameraDescription> cameras = [];
-  late CameraDescription firstCamera;
-  late CameraController cameraController;
-
-  Future<void> openCamera() async {
-    try {
-      cameras = await availableCameras();
-      firstCamera = cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.front,
-        orElse: () => cameras.first,
-      );
-      cameraController = CameraController(
-        firstCamera,
-        ResolutionPreset.low,
-      );
-      await cameraController.initialize();
-      await cameraController.setFlashMode(FlashMode.off);
-    } catch (e) {
-      print('e');
-    }
+  late CameraController controller;
+  final CameraDescription description =
+      const CameraDescription(name: 'name', lensDirection: CameraLensDirection.back, sensorOrientation: 0);
+  @override
+  void initState() {
+    super.initState();
+    controller = CameraController(description, ResolutionPreset.max);
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    }).catchError((Object e) {
+      if (e is CameraException) {
+        switch (e.code) {
+          case 'CameraAccessDenied':
+            // Handle access errors here.
+            break;
+          default:
+            // Handle other errors here.
+            break;
+        }
+      }
+    });
   }
 
   Future<void> toggleFlashlight() async {
-    if (cameraController.value.isInitialized) {
-      if (cameraController.value.flashMode == FlashMode.off) {
-        await cameraController.setFlashMode(FlashMode.torch);
+    if (controller.value.isInitialized) {
+      if (controller.value.flashMode == FlashMode.off) {
+        await controller.setFlashMode(FlashMode.torch);
         setState(() {});
       } else {
-        await cameraController.setFlashMode(FlashMode.off);
+        await controller.setFlashMode(FlashMode.off);
         setState(() {});
       }
     }
@@ -97,224 +76,211 @@ class _CameraViewState extends State<CameraView> {
 
   @override
   Widget build(BuildContext context) {
-    // if (!cameraController.value.isInitialized) {
-    //   return Container();
-    // }
-    return FutureBuilder(
-        future: openCamera(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Stack(
-              children: [
-                Positioned.fill(child: CameraPreview(cameraController)),
-                Positioned.fill(
-                  child: Container(
-                      decoration: BoxDecoration(
-                    // color: Colors.black.withOpacity(0),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        const Color(0xFF000000).withOpacity(.9), // #000000
-                        const Color(0xFFBB0000).withOpacity(0.3), // #BB0000 33.01%
-                        const Color(0xFFA80000).withOpacity(0.4), // #A80000 67.5%
-                        const Color(0xFF000000).withOpacity(.8), // #000000 100%
-                        const Color(0xFF020101).withOpacity(.9), // #020101 100%
-                      ],
-                      stops: const [
-                        0.0, // 0%
-                        0.3301, // 33.01%
-                        0.675, // 67.5%
-                        1.0, // 100%
-                        1.0, // 100%
-                      ],
-                    ),
-                  )),
-                ),
-                // Ortadaki QR kod okuma alanı
-                Center(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 56,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8, bottom: 20),
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  widget.controller.index = 0;
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white,
-                                )),
-                            const Spacer(),
-                            const TitleHeading1Widget(
-                              text: 'Scan to Pay and Win',
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                            const Spacer(),
-                            const TitleHeading1Widget(
-                              text: 'Help',
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(
-                              width: 19,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 87,
-                      ),
-                      Container(
-                          width: 276,
-                          height: 276,
-                          decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(77),
-                              bottomRight: Radius.circular(77),
-                            ),
-                          ),
-                          child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
-                              child: CameraPreview(
-                                cameraController,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(80.0),
-                                  child: Image.asset(
-                                    'assets/images/im_qr.png',
-                                  ),
-                                ),
-                              ))),
-                      const SizedBox(
-                        height: 23,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: toggleFlashlight,
-                            child: Container(
-                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: SvgPicture.asset('assets/svg/ic_light.svg'),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 47,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SvgPicture.asset('assets/svg/ic_keyboard.svg'),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 121,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 19.5),
-                        child: Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFF141617).withOpacity(.6),
-                                  borderRadius: BorderRadius.circular(6.38)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
-                                child: Column(
-                                  children: [
-                                    SvgPicture.asset('assets/svg/ic_scan_qr.svg'),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    const TitleHeading1Widget(
-                                      text: 'QR',
-                                      fontSize: 13,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    RouteHelper.createRoute(
-                                        routeName: ChangeNotifierProvider.value(
-                                            value: context.read<ProfileNotifier>(),
-                                            child: WalletCardPage(
-                                              controller: widget.controller,
-                                            )),
-                                        location: RoutingLocation.rightToLeft,
-                                        transitionTime: 500,
-                                        reverseTransitionTime: 250),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFF141617).withOpacity(.6),
-                                      borderRadius: BorderRadius.circular(6.38)),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
-                                    child: Column(
-                                      children: [
-                                        TitleHeading1Widget(
-                                          text: 'BALANCE : 40.000 ₽',
-                                          fontSize: 13,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        SizedBox(
-                                          height: 14.5,
-                                        ),
-                                        TitleHeading1Widget(
-                                          text: 'WALLET',
-                                          fontSize: 13,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+    if (!controller.value.isInitialized) {
+      return Container();
+    }
+    return Stack(
+      children: [
+        Positioned.fill(child: CameraPreview(controller)),
+        Positioned.fill(
+          child: Container(
+              decoration: BoxDecoration(
+            // color: Colors.black.withOpacity(0),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFF000000).withOpacity(.9), // #000000
+                const Color(0xFFBB0000).withOpacity(0.3), // #BB0000 33.01%
+                const Color(0xFFA80000).withOpacity(0.4), // #A80000 67.5%
+                const Color(0xFF000000).withOpacity(.8), // #000000 100%
+                const Color(0xFF020101).withOpacity(.9), // #020101 100%
               ],
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        }
-   
+              stops: const [
+                0.0, // 0%
+                0.3301, // 33.01%
+                0.675, // 67.5%
+                1.0, // 100%
+                1.0, // 100%
+              ],
+            ),
+          )),
+        ),
+        // Ortadaki QR kod okuma alanı
+        Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 56,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8, bottom: 20),
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          widget.controller.index = 0;
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        )),
+                    const Spacer(),
+                    const TitleHeading1Widget(
+                      text: 'Scan to Pay and Win',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                    const Spacer(),
+                    const TitleHeading1Widget(
+                      text: 'Help',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 19,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 87,
+              ),
+              Container(
+                  width: 276,
+                  height: 276,
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(77),
+                      bottomRight: Radius.circular(77),
+                    ),
+                  ),
+                  child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.only(topLeft: Radius.circular(77), bottomRight: Radius.circular(77)),
+                      child: CameraPreview(
+                        controller,
+                        child: Padding(
+                          padding: const EdgeInsets.all(80.0),
+                          child: Image.asset(
+                            'assets/images/im_qr.png',
+                          ),
+                        ),
+                      ))),
+              const SizedBox(
+                height: 23,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: toggleFlashlight,
+                    child: Container(
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset('assets/svg/ic_light.svg'),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 47,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset('assets/svg/ic_keyboard.svg'),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 121,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 19.5),
+                child: Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF141617).withOpacity(.6), borderRadius: BorderRadius.circular(6.38)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                        child: Column(
+                          children: [
+                            SvgPicture.asset('assets/svg/ic_scan_qr.svg'),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            const TitleHeading1Widget(
+                              text: 'QR',
+                              fontSize: 13,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            RouteHelper.createRoute(
+                                routeName: ChangeNotifierProvider.value(
+                                    value: context.read<ProfileNotifier>(),
+                                    child: WalletCardPage(
+                                      controller: widget.controller,
+                                    )),
+                                location: RoutingLocation.rightToLeft,
+                                transitionTime: 500,
+                                reverseTransitionTime: 250),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF141617).withOpacity(.6),
+                              borderRadius: BorderRadius.circular(6.38)),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                            child: Column(
+                              children: [
+                                TitleHeading1Widget(
+                                  text: 'BALANCE : 40.000 ₽',
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                SizedBox(
+                                  height: 14.5,
+                                ),
+                                TitleHeading1Widget(
+                                  text: 'WALLET',
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
