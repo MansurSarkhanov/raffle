@@ -4,7 +4,7 @@ abstract interface class SharedPreferenceService {
   void saveString(String key, String value);
   void saveBool(String key, bool value);
   void saveInt(String key, int value);
-  String readString(String key);
+  String? readString(String key);
   bool? readBool(String key);
   int readInt(String key);
   void clear();
@@ -53,7 +53,7 @@ final class SharedPreferenceServiceImpl implements SharedPreferenceService {
   }
 
   @override
-  String readString(String key) {
-    return _prefsInstance?.getString(key) ?? 'Empty';
+  String? readString(String key) {
+    return _prefsInstance?.getString(key);
   }
 }

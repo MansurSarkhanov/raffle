@@ -8,11 +8,11 @@ class AuthNotifier extends ChangeNotifier {
   final AuthRepository authRepository;
   AuthState state = AuthInitial();
 
-  Future<bool> loginUser(
-      {required String email, required String password}) async {
+  Future<bool> loginUser({required String email, required String password}) async {
     state = AuthProgress();
     notifyListeners();
     try {
+      await Future.delayed(const Duration(seconds: 3));
       final result = await authRepository.loginWithEmailAndPassword(email: email, password: password);
       if (result.tryGetSuccess()!.uid.isNotEmpty) {
         state = AuthSuccess();
@@ -21,11 +21,9 @@ class AuthNotifier extends ChangeNotifier {
         return true;
       }
     } catch (e) {
-      print(e.toString());
       state = AuthError();
       notifyListeners();
       return false;
-
     }
     return false;
   }
@@ -54,9 +52,9 @@ class AuthNotifier extends ChangeNotifier {
     }
   }
 
-  bool checkAuth() {
+  Future<bool> checkAuth() async {
     try {
-      final isAuth = authRepository.checkAuth();
+      final isAuth = await authRepository.checkAuth();
       return isAuth;
     } catch (e) {
       return false;

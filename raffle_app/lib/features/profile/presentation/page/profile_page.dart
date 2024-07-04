@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/helper/route.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
-import 'package:raffle_app/features/auth/presentation/pages/auth_page.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_state.dart';
 import 'package:raffle_app/features/profile/presentation/page/history_page.dart';
@@ -14,6 +14,7 @@ import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view
 import 'package:raffle_app/features/profile/presentation/page/wishlist_page.dart';
 import 'package:raffle_app/features/profile/presentation/widgets/select_language.dart';
 
+import '../../../../core/constants/routes.dart';
 import '../../../../injetion.dart';
 import '../../../../presentation/components/go_back_button.dart';
 import '../../../auth/presentation/widgets/whatsapp_widget.dart';
@@ -416,8 +417,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               onTap: () async {
                                 final value = await context.read<AuthNotifier>().signOut();
                                 if (value == true && context.mounted) {
-                                  Navigator.pushReplacement(
-                                      context, MaterialPageRoute(builder: (context) => const AuthPage()));
+                                  context.goNamed(AppRoutes.auth.name);
                                 }
                               },
                               child: const Text('Logout', style: TextStyle(fontSize: 14, color: Color(0xFFA2A2A2))),

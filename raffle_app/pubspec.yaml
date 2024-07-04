@@ -47,6 +47,7 @@ dependencies:
   lottie: ^3.1.2
   camera: ^0.11.0+1
   inner_shadow_widget: ^0.0.3
+  animated_toggle_switch: ^0.8.2
 
 dev_dependencies:
   flutter_test:
@@ -90,4 +91,27 @@ flutter:
         - asset: assets/fonts/helvetica/HelveticaNeueLight.ttf
         - asset: assets/fonts/helvetica/HelveticaNeueThin.otf
         - asset: assets/fonts/helvetica/HelveticaNeueUltraLight.otf
+
+    - family: Galano
+      fonts:
+        - asset: assets/fonts/galano/GalanoGrotesqueRegular.otf
+          weight: 300
+        - asset: assets/fonts/galano/GalanoGrotesqueMedium.otf
+          weight: 400
+        - asset: assets/fonts/galano/GalanoGrotesqueMediumItalic.otf
+          weight: 400
+        - asset: assets/fonts/galano/GalanoGrotesqueSemiBold.otf
+          weight: 500
+        - asset: assets/fonts/galano/GalanoGrotesqueSemiBoldItalic.otf
+          weight: 500
+        - asset: assets/fonts/galano/GalanoGrotesqueBold.otf
+          weight: 600
+        - asset: assets/fonts/galano/GalanoGrotesqueBoldItalic.otf
+          weight: 600
+        - asset: assets/fonts/galano/GalanoGrotesqueExtraBold.otf
+          weight: 700
+        - asset: assets/fonts/galano/GalanoGrotesqueExtraBoldItalic.otf
+          weight: 700
+
+
 

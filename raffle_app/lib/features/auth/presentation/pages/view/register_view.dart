@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
+import 'package:raffle_app/features/auth/presentation/widgets/apple_login_button.dart';
+import 'package:raffle_app/features/auth/presentation/widgets/google_login_button.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 
-import '../../../../../core/constants/path/icon_path.dart';
-import '../../../../profile/presentation/widgets/support_controller.dart';
 import '../../notifier/auth_state.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../widgets/whatsapp_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
-  final VoidCallback loginOnPressed;
-  const RegisterScreen({super.key, required this.loginOnPressed});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -25,209 +23,129 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController numberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
   bool isPleasedWithConditions = false;
-  // late AuthNotifier _authNotifier;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   _authNotifier = context.read<AuthNotifier>();
-  //   _authNotifier.addListener(
-  //     () {
-  //       final authNotifier = _authNotifier.state;
-  //       if (authNotifier is AuthSuccess && mounted) {
-  //         context.replaceNamed(AppRoutes.home.name);
-  //       } else if (authNotifier is AuthError&&mounted) {
-  //         openFlushbar(context, message: "Email adresi sehvdir!", title: "Nəsə düz getmədi", color: Colors.redAccent);
-  //       }
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomTextField(
-                controller: nameController,
-                textFieldImage: null,
-                hintText: 'Ad',
-                height: size.height * 0.08,
-                width: size.width * 0.43),
-            CustomTextField(
-                controller: surNameController,
-                textFieldImage: null,
-                hintText: 'Soyad',
-                height: size.height * 0.08,
-                width: size.width * 0.43),
-          ],
-        ),
-        CustomTextField(
-            controller: numberController,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomTextField(
+                  controller: nameController,
+                  textFieldImage: null,
+                  hintText: 'Name',
+                  height: size.height * 0.08,
+                  width: size.width * 0.43),
+              CustomTextField(
+                  controller: surNameController,
+                  textFieldImage: null,
+                  hintText: 'Surname',
+                  height: size.height * 0.08,
+                  width: size.width * 0.43),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+              keyboardType: TextInputType.number,
+              controller: numberController,
+              textFieldImage: null,
+              height: size.height * 0.08,
+              width: size.width,
+              hintText: 'Mobile number'),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+            controller: emailController,
             textFieldImage: null,
             height: size.height * 0.08,
             width: size.width,
-            hintText: 'Mobil nömrə'),
-        CustomTextField(
-          controller: emailController,
-          textFieldImage: null,
-          height: size.height * 0.08,
-          width: size.width,
-          hintText: 'Email ünvan',
-        ),
-        CustomTextField(
-          isObscure: true,
-          controller: passwordController,
-          textFieldImage: null,
-          height: size.height * 0.08,
-          width: size.width,
-          hintText: 'Parol',
-        ),
-        Row(
-          children: [
-            Checkbox(
-              side: const BorderSide(color: Color(0xFFD9D9D9), width: 2),
+            hintText: 'Email address',
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+            isObscure: true,
+            controller: passwordController,
+            textFieldImage: null,
+            height: size.height * 0.08,
+            width: size.width,
+            hintText: 'Password',
+          ),
+          Row(
+            children: [
+              Checkbox(
+                side: const BorderSide(color: Color(0xFFD9D9D9), width: 2),
 
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-              value: isPleasedWithConditions,
-              //activeColor: Colors.white,
-              checkColor: Colors.black,
-              fillColor: WidgetStateProperty.all(Colors.white),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                value: isPleasedWithConditions,
+                //activeColor: Colors.white,
+                checkColor: Colors.black,
+                fillColor: WidgetStateProperty.all(Colors.white),
 
-              onChanged: (value) {
-                setState(() {
-                  isPleasedWithConditions = value!;
-                });
-              },
-            ),
-            InkWell(
-              onTap: () {},
-              child: const Text(
-                'Şərtlərlə razıyam',
-                style: TextStyle(color: Color(0xFF435784)),
-              ),
-            ),
-          ],
-        ),
-        Consumer<AuthNotifier>(
-          builder: (context, notifier, child) {
-            return CustomElevatedButton(
-                isLoading: notifier.state is AuthProgress ? true : false,
-                icon: null,
-                onPressed: () {
-                  if (nameController.text.trim().isNotEmpty &&
-                      surNameController.text.trim().isNotEmpty &&
-                      numberController.text.trim().isNotEmpty &&
-                      emailController.text.trim().isNotEmpty &&
-                      passwordController.text.trim().isNotEmpty) {
-                    notifier.registerUser(
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
-                        name: nameController.text.trim(),
-                        number: numberController.text.trim(),
-                        surname: surNameController.text.trim());
-                  } else {
-                    openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
-                  }
+                onChanged: (value) {
+                  setState(() {
+                    isPleasedWithConditions = value!;
+                  });
                 },
-                buttonText: 'Qeydiyyat',
-                width: size.width,
-                height: 60,
-                buttonColor: Colors.white,
-                textColor: Colors.white,
-                isBorderEnabled: true,
-                borderRadius: 13);
-          },
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        Container(
-          height: 60,
-          width: size.width,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(13), color: Colors.black),
-          child: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(
-              Icons.apple,
-              color: Colors.white,
-              size: 30,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              'Apple ilə davam edin',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: 'Avant Garde',
-                fontWeight: FontWeight.w400,
               ),
-            )
-          ]),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Container(
-          height: 60,
-          width: size.width,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(13), color: Colors.white),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-              height: 25,
-              width: 25,
-              decoration: BoxDecoration(image: DecorationImage(image: AssetImage(IconPath.google.toPathPng))),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              'Google ilə davam edin',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontFamily: 'Avant Garde',
-                fontWeight: FontWeight.w400,
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  'Agree with rules',
+                  style: context.typography.subheadlineBold.copyWith(fontWeight: FontWeight.w500),
+                ),
               ),
-            )
-          ]),
-        ),
-        const SizedBox(height: 24
-        ),
-        const Text(
-          'və ya',
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
-        const SizedBox(height: 24
-        ),
-        Row(
-          children: [
-            const Text(
-              'Profiliniz var?',
-              style: TextStyle(fontWeight: FontWeight.w700),
-            ),
-            InkWell(
-              onTap: widget.loginOnPressed,
-              child: const Text(
-                'Daxil olun',
-                style: TextStyle(fontWeight: FontWeight.w500, color: Color(0xFF873838)),
-              ),
-            ),
-          ],
-        ),
-        InkWell(
-            onTap: () {
-              SupportController.openWhatsapp(context: context, text: 'Salam', number: '+994776359777');
+            ],
+          ),
+          Consumer<AuthNotifier>(
+            builder: (context, notifier, child) {
+              return CustomElevatedButton(
+                  isLoading: notifier.state is AuthProgress ? true : false,
+                  icon: null,
+                  onPressed: () {
+                    if (nameController.text.trim().isNotEmpty &&
+                        surNameController.text.trim().isNotEmpty &&
+                        numberController.text.trim().isNotEmpty &&
+                        emailController.text.trim().isNotEmpty &&
+                        passwordController.text.trim().isNotEmpty) {
+                      notifier.registerUser(
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                          name: nameController.text.trim(),
+                          number: numberController.text.trim(),
+                          surname: surNameController.text.trim());
+                    } else {
+                      openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
+                    }
+                  },
+                  buttonText: 'Register',
+                  width: size.width,
+                  height: 60,
+                  buttonColor: Colors.white,
+                  textColor: Colors.white,
+                  isBorderEnabled: true,
+                  borderRadius: 45);
             },
-            child: WhatsAppWidget(size: size)),
-      ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const AppleLoginButton(),
+          const SizedBox(
+            height: 20,
+          ),
+          const GoogleLoginButton()
+        
+        ],
+      ),
     );
   }
 }

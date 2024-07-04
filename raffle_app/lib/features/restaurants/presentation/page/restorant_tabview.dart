@@ -33,7 +33,7 @@ class _RestorantTabViewState extends State<RestorantTabView> with TickerProvider
         const HotelsView(),
         ScanPage(controller: widget.restorantTabController),
         Container(
-          color: AppColors.backColor,
+          color: backColor,
         ),
         InboxTicketTab(
           controller: widget.restorantTabController,

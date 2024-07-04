@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 import 'package:raffle_app/features/product/data/model/product_model.dart';
 
-import '../../../../features/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../../shared/couple_buttons.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -14,7 +13,7 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(color: AppColors.backColor, borderRadius: BorderRadius.circular(30)),
+      decoration: BoxDecoration(color: backColor, borderRadius: BorderRadius.circular(30)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

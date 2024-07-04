@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
 
 class CustomElevatedButton extends StatefulWidget {
   final VoidCallback onPressed;
@@ -36,12 +37,25 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
     return Container(
       decoration: widget.isBorderEnabled
           ? BoxDecoration(
-              gradient: const LinearGradient(begin: Alignment(-0.00, 1.00), end: Alignment(0, -1), colors: [
-                Color(0xFF3C0AE1),
+              gradient: const LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
                 Color(0xFF4D7BFA),
-              ]),
-              border: Border.all(color: const Color(0xFFD9D9D9)),
-              borderRadius: BorderRadius.circular(widget.borderRadius))
+                  Color(0xFF3D17E6),
+                ],
+              ),
+              border: Border.all(
+                color: const Color(0xFFD9D9D9),
+              ),
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 7,
+                    offset: const Offset(0, 0), // changes position of shadow
+                  )
+                ])
           : null,
       width: widget.width,
       child: ElevatedButton(
@@ -50,7 +64,11 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
               backgroundColor: WidgetStateProperty.all(Colors.transparent),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
               shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.borderRadius)))),
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+            ),
+          ),
+        ),
           onPressed: widget.onPressed,
           child: widget.isLoading
               ? const Center(
@@ -65,7 +83,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
                     children: [
                       Text(
                         widget.buttonText,
-                        style: TextStyle(color: widget.textColor, fontSize: 18),
+                      style: context.typography.body1Bold.copyWith(color: Colors.white),
                       ),
                       if (widget.icon != null)
                         Row(
@@ -76,7 +94,8 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
                         ),
                     ],
                   ),
-                )),
+              ),
+      ),
     );
   }
 }

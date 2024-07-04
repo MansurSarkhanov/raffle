@@ -56,7 +56,7 @@ class RestorantView extends StatelessWidget {
                      notifier.isSelected
                           ? "${notifier.restorantModel?[notifier.index].places?.length} Restaurants"
                           : "${notifier.restorantModel?.length} Restaurants",
-                      color: AppColors.chipBackColor,
+                      color: chipBackColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w400),
                   if (notifier.isSelected) ...[

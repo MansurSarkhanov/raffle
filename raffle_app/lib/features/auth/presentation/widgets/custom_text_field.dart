@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
 
 class CustomTextField extends StatelessWidget {
   final double height;
   final double width;
   final String hintText;
   final String? textFieldImage;
+  final TextInputType? keyboardType;
   final TextEditingController controller;
   final bool isObscure;
   const CustomTextField({
@@ -14,45 +16,33 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.textFieldImage,
     required this.controller,
-    this.isObscure = false,
+    this.isObscure = false, this.keyboardType=TextInputType.emailAddress,
   });
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Container(
-          height: height,
-          width: width,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(13)),
-          child: TextField(
-            obscureText: isObscure,
-            controller: controller,
-            decoration: InputDecoration(
-                icon: textFieldImage != null
-                    ? Padding(
-                        padding: EdgeInsets.only(left: size.height * 0.01),
-                        child: Container(
-                          height: size.height * 0.05,
-                          width: size.width * 0.05,
-                          decoration: BoxDecoration(image: DecorationImage(image: AssetImage(textFieldImage!))),
-                        ),
-                      )
-                    : null,
-                border: InputBorder.none,
-                hintText: hintText,
-                contentPadding: EdgeInsets.only(left: size.width * 0.03)),
-            onTapOutside: (event) {
-              FocusScope.of(context).unfocus();
-            },
+    return Container(
+      height: height,
+      width: width,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      child: TextField(
+        keyboardType:keyboardType,
+        style: context.typography.footnoteBold.copyWith(fontWeight: FontWeight.w500, fontSize: 15),
+        obscureText: isObscure,
+        controller: controller,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: hintText,
+          hintStyle: context.typography.footnoteBold.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
+          contentPadding: const EdgeInsets.only(
+            left: 17,
           ),
         ),
-        SizedBox(
-          height: size.height * 0.02,
-        ),
-      ],
+        onTapOutside: (event) {
+          FocusScope.of(context).unfocus();
+        },
+      ),
     );
   }
 }
