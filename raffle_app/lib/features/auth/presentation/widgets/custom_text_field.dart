@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextEditingController controller;
   final bool isObscure;
+  final Widget? suffixIcon;
   const CustomTextField({
     super.key,
     required this.height,
@@ -16,7 +17,9 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.textFieldImage,
     required this.controller,
-    this.isObscure = false, this.keyboardType=TextInputType.emailAddress,
+    this.isObscure = false,
+    this.keyboardType = TextInputType.emailAddress,
+    this.suffixIcon,
   });
 
   @override
@@ -27,15 +30,17 @@ class CustomTextField extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: TextField(
-        keyboardType:keyboardType,
+        keyboardType: keyboardType,
         style: context.typography.footnoteBold.copyWith(fontWeight: FontWeight.w500, fontSize: 15),
         obscureText: isObscure,
         controller: controller,
         decoration: InputDecoration(
+          suffixIcon: suffixIcon,
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: context.typography.footnoteBold.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
-          contentPadding: const EdgeInsets.only(
+          contentPadding: EdgeInsets.only(
+            top: suffixIcon != null ? 12 : 0,
             left: 17,
           ),
         ),
