@@ -66,7 +66,9 @@ class _WalletCardPageState extends State<WalletCardPage> {
               ),
             ),
             WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
-            SizedBox(height: 48,)
+            const SizedBox(
+              height: 48,
+            )
           ],
         ),
       ),
@@ -319,19 +321,12 @@ class TestCardGreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 100,
-                            child: TitleHeading1Widget(
-                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '199,50',
-                              fontSize: 29,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TitleHeading1Widget(
-                            text: '\$',
+                          TitleHeading1Widget(
+                            text: context.watch<AppIndexNotifier>().isVisible ? "****\$" : '199,50\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
                           ),
+                       
                         ],
                       ),
                     ],
@@ -525,19 +520,12 @@ class TestCardBlue extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 50,
-                            child: TitleHeading1Widget(
-                              text: context.watch<AppIndexNotifier>().isVisible ? "***" : '500',
-                              fontSize: 29,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TitleHeading1Widget(
-                            text: '\$',
+                          TitleHeading1Widget(
+                            text: context.watch<AppIndexNotifier>().isVisible ? "****\$" : '500\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
                           ),
+                          
                         ],
                       ),
                     ],
@@ -668,8 +656,8 @@ class OderActionTitle extends StatelessWidget {
         const Spacer(),
 
              TitleHeading1Widget(
-                text: '$money',
-                color:index==0? Color(0xFFC1272D):Color(0xFF49A600),
+          text: money,
+          color: index == 0 ? const Color(0xFFC1272D) : const Color(0xFF49A600),
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               )

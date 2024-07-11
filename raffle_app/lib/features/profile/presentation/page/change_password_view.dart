@@ -61,7 +61,6 @@ class ChangePasswordScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print(isObsecureText);
                       },
                       child: Container(
                           height: size.height * 0.07,

@@ -10,7 +10,7 @@ abstract class AuthRepository {
       required String number,
       required String surname});
 
-  bool checkAuth();
+  Future<bool> checkAuth();
 
   Future<bool> logout();
 }

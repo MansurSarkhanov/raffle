@@ -12,11 +12,31 @@ class ContactMethod extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        InkWell(onTap: () {}, child: const ProfileRowCircle(imageUrl: 'assets/images/im_instagram.png')),
-        InkWell(onTap: () {}, child: const ProfileRowCircle(imageUrl: 'assets/images/im_facebook.png')),
-        InkWell(onTap: () {}, child: const ProfileRowCircle(imageUrl: 'assets/images/im_linkedin.png')),
-        InkWell(onTap: () {}, child: const ProfileRowCircle(imageUrl: 'assets/images/im_twitter.png')),
-        InkWell(onTap: () {}, child: const ProfileRowCircle(imageUrl: 'assets/images/im_tiktok.png')),
+        InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () {},
+            child: const ProfileRowCircle(imageUrl: 'assets/images/im_instagram.png')),
+        InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () {},
+            child: const ProfileRowCircle(imageUrl: 'assets/images/im_facebook.png')),
+        InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () {},
+            child: const ProfileRowCircle(imageUrl: 'assets/images/im_linkedin.png')),
+        InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () {},
+            child: const ProfileRowCircle(imageUrl: 'assets/images/im_twitter.png')),
+        InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () {},
+            child: const ProfileRowCircle(imageUrl: 'assets/images/im_tiktok.png')),
       ],
     );
   }

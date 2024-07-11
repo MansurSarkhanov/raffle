@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/features/profile/data/service/firebase_storage_service.dart';
 import 'package:raffle_app/features/profile/domain/repository/user_info_repository.dart';
 
 import '../../../auth/data/model/user_model.dart';
@@ -8,8 +9,10 @@ class ProfileNotifier extends ChangeNotifier {
   ProfileNotifier(this.userInfoRepository);
   final UserInfoRepository userInfoRepository;
   ProfileState state = ProfileInitial();
-  
-UserModel? user = UserModel();
+  bool isLoadingImage = false;
+  String? testImage;
+
+  UserModel? user = UserModel();
   Future<void> getUserInformation() async {
     try {
       state = ProfileProgress();
@@ -27,5 +30,14 @@ UserModel? user = UserModel();
       state = ProfileError();
       notifyListeners();
     }
+  }
+
+  Future<void> changeProfileImage(FirebaseStorageService storage) async {
+    isLoadingImage = true;
+    notifyListeners();
+    testImage = await storage.uploadImage();
+    notifyListeners();
+    isLoadingImage = false;
+    notifyListeners();
   }
 }

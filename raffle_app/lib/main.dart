@@ -9,6 +9,8 @@ import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart'
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
 
+import 'core/theme/theme_scope.dart';
+import 'core/theme/theme_scope_widget.dart';
 import 'firebase_options.dart';
 import 'injetion.dart';
 
@@ -31,11 +33,8 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => AppIndexNotifier(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (context) => RestourantsNotifier(getIt.get<RestaurantRepository>()),
-        // )
-      ],  
-      child: const MyApp(),
+      ],
+      child: const ThemeScopeWidget(child: MyApp()),
     ),
   );
 }
@@ -44,18 +43,24 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    final theme = ThemeScope.of(context);
+    final extensions = <ThemeExtension<dynamic>>[theme.appColors, theme.appTypography];
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (_, child) {
         return MaterialApp.router(
-          
           routerConfig: GetIt.instance<AppRouter>().instance,
           debugShowCheckedModeBanner: false,
           title: 'Raffle',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
+              extensions: extensions
           ),
         );
       },

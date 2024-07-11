@@ -22,6 +22,14 @@ class AppIndexNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  bool isVisiblePassword = true;
+  void visiblePassword() {
+    isVisiblePassword = !isVisiblePassword;
+    print('isVisiblePassword $isVisiblePassword');
+    notifyListeners();
+  }
+
   int currentListIndex = 0;
 
   void changeCurrentCardIndex(int index) {

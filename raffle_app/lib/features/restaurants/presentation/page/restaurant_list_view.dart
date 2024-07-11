@@ -20,7 +20,7 @@ class RestaurantListView extends StatelessWidget {
         } else if (notifier.state is RestourantsSuccess) {
           final restorants = notifier.state as RestourantsSuccess;
           return ListView.builder(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 18, bottom: Platform.isIOS ? 50 : 48),
+            padding: EdgeInsets.only(left: 15, right: 15, top: 18, bottom: Platform.isIOS ? 102 : 100),
             itemCount: restorants.restaurants.length,
             itemBuilder: (context, index) {
               return Column(

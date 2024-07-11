@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
 import 'package:raffle_app/presentation/components/fab_button.dart';
-import 'package:raffle_app/presentation/pages/home/scan_page.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
@@ -13,6 +12,7 @@ import '../../components/bottom_navbar.dart';
 import '../../components/custom_selection_appbar.dart';
 import 'home_tab.dart';
 import 'inbox_ticket_tab.dart';
+import 'test_scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       setState(() {});
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +98,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     controller: tabController,
                   ),
                   const LiveView(),
-                  ScanPage(
-                    controller: tabController,
-                  ),
+                  QRCodeScreen(controller: tabController),
                   const OfferView(),
                   InboxTicketTab(
                     controller: tabController,

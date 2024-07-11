@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 
 void openFlushbar(BuildContext context, {String? message, required String title, required Color color}) {
   Flushbar(
-    animationDuration: const Duration(milliseconds: 800),
+    
+    animationDuration: const Duration(
+      milliseconds: 600,
+    ),
+
     backgroundColor: color,
     flushbarPosition: FlushbarPosition.TOP,
     titleText: Text(

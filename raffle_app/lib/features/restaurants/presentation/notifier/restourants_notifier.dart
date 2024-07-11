@@ -11,31 +11,41 @@ class RestourantsNotifier extends ChangeNotifier {
   RestaurantsState state = RestaurantsInitial();
   List<RestaurantModel>? restorantModel;
   int index = 0;
+  bool isSelected = false;
 
   selectRestorant(int restorantIndex) {
     index = restorantIndex;
+    isSelected = true;
     notifyListeners();
   }
 
-  Future<void> fetchAllRestorants() async {
-    try {
-      state = RestourantsProgress();
+  void backPageListener() {
+    isSelected = false;
+    notifyListeners();
+  }
+
+  void saveEmitter({required RestaurantsState emitState, required BuildContext context}) {
+    if (context.mounted) {
+      state = emitState;
       notifyListeners();
+    }
+  }
+
+  Future<void> fetchAllRestorants(BuildContext context) async {
+    try {
+      saveEmitter(context: context, emitState: RestourantsProgress());
       await Future.delayed(const Duration(milliseconds: 500));
 
       final result = await restaurantRepository.getRestaurants();
       if (result.isSuccess()) {
-        state = RestourantsSuccess(restaurants: result.tryGetSuccess()!);
+        saveEmitter(emitState: RestourantsSuccess(restaurants: result.tryGetSuccess()!), context: context);
         restorantModel = result.tryGetSuccess();
-        notifyListeners();
       }
       if (result.isError()) {
-        state = RestourantsError(result.tryGetError().toString());
-        notifyListeners();
+        saveEmitter(emitState: RestourantsError(result.tryGetError().toString()), context: context);
       }
     } catch (e) {
-      state = RestourantsError("Error");
-      notifyListeners();
+      saveEmitter(emitState: RestourantsError("Error"), context: context);
     }
   }
 }

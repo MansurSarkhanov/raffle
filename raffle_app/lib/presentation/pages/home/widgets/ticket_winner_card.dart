@@ -18,13 +18,13 @@ class TicketWinnerCard extends StatelessWidget {
             offset: Offset(10, 10),
             blurRadius: 10,
             spreadRadius: -3,
-            color: AppColors.backColor,
+            color: backColor,
           ),
           BoxShadow(
             offset: Offset(-10, 10),
             blurRadius: 10,
             spreadRadius: -3,
-            color: AppColors.backColor,
+            color: backColor,
           ),
         ],
       ),
@@ -47,7 +47,7 @@ class TicketWinnerCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-                        decoration: BoxDecoration(color: AppColors.backColor, borderRadius: BorderRadius.circular(33)),
+                        decoration: BoxDecoration(color: backColor, borderRadius: BorderRadius.circular(33)),
                         child: const Center(
                           child: Padding(
                             padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),

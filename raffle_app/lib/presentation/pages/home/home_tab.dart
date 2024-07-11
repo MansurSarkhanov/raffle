@@ -11,12 +11,10 @@ import 'package:raffle_app/presentation/pages/home/view/story_view.dart';
 import '../../../core/constants/path/gif_path.dart';
 import '../../../core/constants/path/icon_path.dart';
 import '../../../core/constants/path/image_path.dart';
-import '../../../core/utilities/helper/route.dart';
 import '../../../features/campaing/presentation/view/campaing_list.dart';
 import '../../../features/product/presentation/view/product_list_view.dart';
 import '../../../features/profile/presentation/notifier/profile_notifier.dart';
 import '../../../features/profile/presentation/notifier/profile_state.dart';
-import '../../../features/profile/presentation/page/profile_page.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({

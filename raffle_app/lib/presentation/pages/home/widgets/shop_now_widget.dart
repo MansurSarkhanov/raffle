@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/constants/colors.dart';
 import '../../../../features/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../../shared/couple_buttons.dart';
 
@@ -17,7 +16,7 @@ class _ShopNowWidgetState extends State<ShopNowWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(color: AppColors.backColor, borderRadius: BorderRadius.circular(30)),
+      decoration: BoxDecoration(color: const Color(0xFFEBEBEB), borderRadius: BorderRadius.circular(30)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

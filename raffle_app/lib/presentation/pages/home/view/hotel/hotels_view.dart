@@ -58,14 +58,14 @@ class HotelsView extends StatelessWidget {
         children: [
           SizedBox(height: Platform.isIOS ? 56 : 50),
           searchHeader(context),
-           Expanded(
+          Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-              const    SearchHotelResult(),
-                  const    SearchHotelResult(),
-                  const    SearchHotelResult(),
-                  const    SearchHotelResult(),
+                  const SearchHotelResult(),
+                  const SearchHotelResult(),
+                  const SearchHotelResult(),
+                  const SearchHotelResult(),
                   SizedBox(
                     height: 42.h,
                   ),
@@ -80,12 +80,16 @@ class HotelsView extends StatelessWidget {
 
   Widget searchHeader(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color(0xFFF9F9F9), boxShadow: [
-        BoxShadow(
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9F9F9),
+        boxShadow: [
+          BoxShadow(
             blurRadius: 10,
-            offset: Offset(0, 2),
-            color: Color(0xFF858585).withOpacity(0.25))
-      ]),
+            offset: const Offset(0, 3),
+            color: const Color(0xFF858585).withOpacity(0.25),
+          )
+        ],
+      ),
       child: Column(
         children: [
           Row(
@@ -100,9 +104,8 @@ class HotelsView extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return MapPage();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                    return const MapPage();
                   }));
                 },
                 child: Container(
@@ -110,12 +113,8 @@ class HotelsView extends StatelessWidget {
                   width: 68.w,
                   decoration: BoxDecoration(
                       color: const Color(0xFFF9F9F9),
-                      border: Border.all(
-                          color: const Color(0xFFD0D0D7),
-                          strokeAlign: BorderSide.strokeAlignOutside)),
-                  child: Center(
-                      child:
-                          SvgPicture.asset('assets/svg/ic_location_last.svg')),
+                      border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
+                  child: Center(child: SvgPicture.asset('assets/svg/ic_location_last.svg')),
                 ),
               ),
               Expanded(
@@ -123,9 +122,7 @@ class HotelsView extends StatelessWidget {
                   height: 66.h,
                   decoration: BoxDecoration(
                       color: const Color(0xFFF9F9F9),
-                      border: Border.all(
-                          color: const Color(0xFFD0D0D7),
-                          strokeAlign: BorderSide.strokeAlignOutside)),
+                      border: Border.all(color: const Color(0xFFD0D0D7), strokeAlign: BorderSide.strokeAlignOutside)),
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 19.0),
@@ -140,8 +137,7 @@ class HotelsView extends StatelessWidget {
                               color: const Color(0xFFAEAEB8),
                               fontWeight: FontWeight.w400,
                               fontFamily: 'Helvetica'),
-                          prefixIconConstraints:
-                              const BoxConstraints(minHeight: 15),
+                          prefixIconConstraints: const BoxConstraints(minHeight: 15),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           prefixIcon: Padding(
@@ -249,8 +245,7 @@ class SearchHotelResult extends StatelessWidget {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                         return HotelDetailView(hotelModel: hotels[index]);
                       }));
                     },
@@ -262,8 +257,7 @@ class SearchHotelResult extends StatelessWidget {
                           width: 160,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage(hotels[index].imageUrl))),
+                              image: DecorationImage(image: AssetImage(hotels[index].imageUrl))),
                         ),
                         SizedBox(height: 12.h),
                         TitleHeading1Widget(

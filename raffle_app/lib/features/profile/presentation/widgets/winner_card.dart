@@ -132,7 +132,7 @@ class WinnerCard extends StatelessWidget {
             top: -38,
             child: ClipOval(
               child: Container(
-                color: AppColors.backColor,
+                color: backColor,
                 height: 54,
                 width: 80,
               ),
@@ -141,7 +141,7 @@ class WinnerCard extends StatelessWidget {
             left: -38,
             child: ClipOval(
               child: Container(
-                color: AppColors.backColor,
+                color: backColor,
                 height: 72,
                 width: 54,
               ),
@@ -151,7 +151,7 @@ class WinnerCard extends StatelessWidget {
             right: -38,
             child: ClipOval(
               child: Container(
-                color: AppColors.backColor,
+                color: backColor,
                 height: 72,
                 width: 54,
               ),

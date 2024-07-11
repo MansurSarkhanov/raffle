@@ -52,7 +52,7 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                         color:
                             // appIndexNotifier.state == AppPartSection.left
                             //     ? Colors.white:
-                            AppColors.unselectButtonColor),
+                            unselectButtonColor),
                     alignment: Alignment.center,
                     child: SvgPicture.asset(
                       height: 28,
@@ -75,7 +75,7 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color:
-                          appIndexNotifier.state == AppPartSection.left ? Colors.white : AppColors.unselectButtonColor),
+                          appIndexNotifier.state == AppPartSection.left ? Colors.white : unselectButtonColor),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +133,7 @@ class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidg
                   borderRadius: BorderRadius.circular(16),
                   color:
                       // appIndexNotifier.state == AppPartSection.right ? Colors.white :
-                      AppColors.unselectButtonColor,
+                      unselectButtonColor,
                 ),
                 child: Center(child: SvgPicture.asset(ImagePath.user_wallet.toPathSvg)),
               ),

@@ -11,13 +11,15 @@ class FirebaseStorageService {
   Uint8List? selectedImgeByte;
   String imageUrl = '';
 
-  Future<String?> uploadImage(String path) async {
+  Future<String?> uploadImage() async {
+    await pickImage();
     if (selectedImgeByte != null) {
-      final uploadImage = await firebaseStorageRef.child('images').child(path).child(selectedFile!.name).putData(
+      final uploadImage = await firebaseStorageRef.child('images').child(selectedFile!.name).putData(
             selectedImgeByte!,
             SettableMetadata(contentType: 'image/png'),
           );
       imageUrl = await uploadImage.ref.getDownloadURL();
+      print(imageUrl);
       return imageUrl;
     }
     return null;

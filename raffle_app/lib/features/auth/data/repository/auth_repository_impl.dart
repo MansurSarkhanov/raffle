@@ -17,7 +17,6 @@ final class AuthRepositoryImpl implements AuthRepository {
   Future<Result<User?, Exception>> loginWithEmailAndPassword({required String email, required String password}) async {
     try {
       final user = await firebaseAuth.loginWithEmailAndPassword(email: email, password: password);
-      await sharedPreference.saveBool('logged', true);
       await sharedPreference.saveString('token', user!.uid);
       return Result.success(user);
     } catch (e) {
@@ -58,7 +57,6 @@ final class AuthRepositoryImpl implements AuthRepository {
           final token = user.uid;
           print(token);
 
-          await sharedPreference.saveBool('logged', true);
           await sharedPreference.saveString('token', token);
         }
       }
@@ -74,10 +72,14 @@ final class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  bool checkAuth() {
+Future<bool> checkAuth() async {
     try {
-      final isAuth = sharedPreference.readBool('logged');
-      return isAuth ?? false;
+      final token = sharedPreference.readString('token');
+      if (token != null) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       return false;
     }
