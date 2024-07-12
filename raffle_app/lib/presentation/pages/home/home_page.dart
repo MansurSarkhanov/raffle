@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:raffle_app/features/profile/presentation/page/profile_page.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
-import 'package:raffle_app/presentation/components/fab_button.dart';
 import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
@@ -44,66 +43,66 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       setState(() {});
     });
   }
-  
+
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      extendBody: true,
-      backgroundColor:
-          context.watch<AppIndexNotifier>().state == AppPartSection.left
-              ? const Color(0xFFEBEBEB)
-              : const Color(0xFFF9F9F9),
-      appBar: tabController.index == 2 ||
-              tabController.index == 4 ||
-              restorantTabController.index == 1 ||
-              restorantTabController.index == 2 ||
-              restorantTabController.index == 4
-          ? null
-          : CustomSelectionAppbar(
-              controller: tabController,
-            ),
-      floatingActionButton:
-        context.watch<AppIndexNotifier>().state==AppPartSection.right&&restorantTabController.index==0 ?const MapFabButton() : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-            left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
-        child: tabController.index == 2 ||
-                restorantTabController.index == 2 ||
-                tabController.index == 4 ||
-                restorantTabController.index == 4
-            ? null
-            : context.watch<AppIndexNotifier>().state == AppPartSection.right
-                ? RestorantBottomNavBar(tabController: restorantTabController)
-                : BottomNavBar(tabController: tabController),
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(
-            bottom:
-                tabController.index == 2 || restorantTabController.index == 2
-                    ? 0
-                    : 28.0),
-        child: context.watch<AppIndexNotifier>().state == AppPartSection.right
+    return ZoomDrawer(
+      borderRadius: 39,
+      menuBackgroundColor: const Color(0xFF261C51),
+      isRtl: true,
+      style: DrawerStyle.defaultStyle,
+      duration: const Duration(milliseconds: 300),
+      mainScreenTapClose: true,
+      slideWidth: size.width * 0.82,
+      mainScreenScale: 0.15,
+      menuScreenWidth: double.infinity,
+      angle: 0.0,
+      controller: context.watch<AppIndexNotifier>().zoomDrawerController,
+      menuScreen: const ProfilePage(),
+      mainScreen: Scaffold(
+        extendBody: true,
+        backgroundColor:
+             const Color(0xFF9D2727),
+        appBar: CustomSelectionAppbar(
+          controller: tabController,
+        ),
+        bottomNavigationBar: BottomNavBar(tabController: tabController),
+        body: context.watch<AppIndexNotifier>().state == AppPartSection.right
             ? RestorantTabView(
                 restorantTabController: restorantTabController,
               )
-            : TabBarView(
-                controller: tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  HomeTab(
-                    size: size,
-                    controller: tabController,
+            : Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFF9D2727),
+                      Color(0xFFCE2B37),
+                      Color(0xFFFFFFFF),
+                      Color(0xFFEEEEEE),
+                      Color(0xFFEEEEEE),
+                    ],
                   ),
-                  const LiveView(),
-                  QRCodeScreen(controller: tabController),
-                  const OfferView(),
-                  InboxTicketTab(
-                    controller: tabController,
-                  )
-                ],
+                ),
+                child: TabBarView(
+                  controller: tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    HomeTab(
+                      size: size,
+                      controller: tabController,
+                    ),
+                    const LiveView(),
+                    QRCodeScreen(controller: tabController),
+                    const OfferView(),
+                    InboxTicketTab(
+                      controller: tabController,
+                    )
+                  ],
+                ),
               ),
       ),
     );

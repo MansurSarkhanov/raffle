@@ -4,7 +4,6 @@ import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/apple_login_button.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/google_login_button.dart';
-import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 import 'package:raffle_app/presentation/animation/bounce_animation.dart';
 
 import '../../notifier/auth_state.dart';
@@ -26,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordController = TextEditingController();
   bool isPleasedWithConditions = false;
 
+  bool isValidate = true;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -38,12 +38,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomTextField(
+                    isValidate: isValidate,
                     controller: nameController,
                     textFieldImage: null,
                     hintText: 'Name',
                     height: size.height * 0.08,
                     width: size.width * 0.43),
                 CustomTextField(
+                    isValidate: isValidate,
                     controller: surNameController,
                     textFieldImage: null,
                     hintText: 'Surname',
@@ -58,6 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           BounceFromBottomAnimation(
             delay: 2.3,
             child: CustomTextField(
+                isValidate: isValidate,
                 keyboardType: TextInputType.number,
                 controller: numberController,
                 textFieldImage: null,
@@ -71,6 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           BounceFromBottomAnimation(
             delay: 2.4,
             child: CustomTextField(
+              isValidate: isValidate,
               controller: emailController,
               textFieldImage: null,
               height: size.height * 0.08,
@@ -84,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           BounceFromBottomAnimation(
             delay: 2.5,
             child: CustomTextField(
+              isValidate: isValidate,
               isObscure: true,
               controller: passwordController,
               textFieldImage: null,
@@ -141,7 +146,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             number: numberController.text.trim(),
                             surname: surNameController.text.trim());
                       } else {
-                        openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
+                        isValidate = false;
+                        setState(() {});
                       }
                     },
                     buttonText: 'Register',
@@ -162,7 +168,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             height: 20,
           ),
           const BounceFromBottomAnimation(delay: 2.9, child: GoogleLoginButton())
-        
         ],
       ),
     );

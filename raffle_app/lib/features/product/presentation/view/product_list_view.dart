@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/features/product/presentation/notifier/product_notifier.dart';
 import 'package:raffle_app/features/product/presentation/notifier/product_state.dart';
 import 'package:raffle_app/presentation/pages/home/view/product_detail.dart';
 
 import '../../../../presentation/components/shimmer_selling_fast.dart';
-import '../widgets/blinking_liner_animation.dart';
 
 class ProductListView extends StatefulWidget {
   const ProductListView({super.key});
@@ -32,7 +31,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250.h,
+      height: 152.h,
       child: Consumer<ProductNotifier>(builder: (context, notifier, child) {
         if (notifier.state is ProductProgress) {
           return ListView.builder(
@@ -47,7 +46,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
           final productList = (notifier.state as ProductSuccess).productModel;
           final productModel = productList;
           return ListView.builder(
-            padding: EdgeInsets.zero,
+            padding: const EdgeInsets.only(left: 14),
             scrollDirection: Axis.horizontal,
             itemCount: productList?.length,
             itemBuilder: (context, index) {
@@ -55,149 +54,139 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 onTap: () {
-
                   showModalBottomSheet(
                     useSafeArea: true,
                     context: context,
                     isScrollControlled: true,
                     builder: (context) {
                       return ProductDetail(
-                        model: productModel[index],
+                        model: productModel![index],
                       );
                     },
                   );
                 },
                 child: Row(
                   children: [
-                    Container(
-                      width: 160.w,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 6, right: 6, top: 6),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 120.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                image: DecorationImage(
-                                    image: NetworkImage(productModel?[index].image ?? ''), fit: BoxFit.cover),
-                              ),
+                    Stack(
+                      alignment: Alignment.centerLeft,
+                      children: [
+                      
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.78,
+                          height: 134.h,
+                          decoration:
+                              BoxDecoration(borderRadius: BorderRadius.circular(29), color: Colors.white, boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.25),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: const Offset(0, 4),
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Prize: ${productModel?[index].prize ?? ''}",
-                              maxLines: 2,
-                              textAlign: TextAlign.start,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                overflow: TextOverflow.ellipsis,
-                                fontFamily: 'Helvetica Neue',
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              "Buy: ${productModel?[index].buy ?? ''}",
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                color: Color(0xFFA1A1A1),
-                                fontSize: 11,
-                                overflow: TextOverflow.ellipsis,
-                                fontFamily: 'Helvetica Neue',
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              "USD: ${productModel?[index].price ?? ''}",
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                color: Color(0xFFA1A1A1),
-                                fontSize: 11,
-                                overflow: TextOverflow.ellipsis,
-                                fontFamily: 'Helvetica Neue',
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                                BlinkingWidget(
-                                    controller: _controller,
-                                    child: LinearPercentIndicator(
-                                        animation: true,
-                                        barRadius: const Radius.circular(25),
-                                        lineHeight: 16.h,
-                                        padding: EdgeInsets.zero,
-                                linearGradient: productModel![index].percent! <= 25
-                                    ? const LinearGradient(
-                                        colors: [
-                                          Color(0xFF23B90A),
-                                          Color(0xFF23B90A),
-                                        ],
-                                      )
-                                    : productModel[index].percent! > 25 && productModel[index].percent! <= 50
-                                        ? const LinearGradient(
-                                            colors: [
-                                              Color(0xFF23B90A),
-                                              Color(0xFFF8C925),
-                                            ],
-                                          )
-                                        : productModel[index].percent! > 50 && productModel[index].percent! <= 75
-                                            ? const LinearGradient(colors: [
-                                                Color(0xFF23B90A),
-                                                Color(0xFFF8C925),
-                                                Color(0xFFEA4505),
-                                              ])
-                                            : const LinearGradient(colors: [
-                                                Color(0xFFE93B00),
-                                                Color(0xFFE93B00),
-                                              ]),
-                                percent: productModel[index].percent! / 100,
-                                backgroundColor: const Color(0xffE6E6E6),
-                              ),
-                                  )
-                                ,
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                          ]),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 6, top: 6),
+                            child: Row(
                               children: [
-                                Text(
-                                  '${productModel[index].leftPrice}',
-                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                SizedBox(
+                                  width: 152.w,
                                 ),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  '/${productModel[index].rightPrice} sold',
-                                  style: const TextStyle(fontSize: 13),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Win',
+                                      textAlign: TextAlign.start,
+                                      style: context.typography.body1Bold.copyWith(
+                                          color: const Color(0xFFFF2735),
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w900,
+                                          height: 0.9,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Text(
+                                      "${productModel?[index].prize}",
+                                      maxLines: 2,
+                                      textAlign: TextAlign.left,
+                                      style: context.typography.body2Bold
+                                          .copyWith(fontSize: 13, height: 0.9, fontWeight: FontWeight.w700),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: const Color(0xFFFF217E),
+                                          )),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
+                                        child: Center(
+                                          child: Text('Closing in 23:57:24',
+                                              style: context.typography.body2Bold.copyWith(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w600,
+                                                color: const Color(0xFFFF217E),
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 6,
+                                    ),
+                                    Stack(
+                                      alignment: Alignment.centerRight,
+                                      children: [
+                                        Container(
+                                          width: 142.w,
+                                          height: 31,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFFE600),
+                                            borderRadius: BorderRadius.circular(15.5.r),
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFF4341E4),
+                                                Color(0xFF25247E),
+                                              ],
+                                            ),
+                                          ),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(13.0),
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  
+                                  ],
                                 ),
                               ],
                             ),
-                            const Spacer()
-                          ],
+                          ),
                         ),
-                      ),
+                        Container(
+                          height: 148.h,
+                          width: MediaQuery.of(context).size.width * 0.37,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(29),
+                            color: Colors.white,
+                            image: DecorationImage(
+                                image: NetworkImage(productModel?[index].image ?? ''), fit: BoxFit.cover),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
-                      width: 12.9,
-                    ),
+                      width: 33,
+                    ), 
                   ],
                 ),
               );

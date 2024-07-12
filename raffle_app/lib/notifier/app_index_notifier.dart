@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 enum AppPartSection { left, right }
 
@@ -22,7 +23,6 @@ class AppIndexNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-
   bool isVisiblePassword = true;
   void visiblePassword() {
     isVisiblePassword = !isVisiblePassword;
@@ -34,6 +34,13 @@ class AppIndexNotifier extends ChangeNotifier {
 
   void changeCurrentCardIndex(int index) {
     currentListIndex = index;
+    notifyListeners();
+  }
+
+  final zoomDrawerController = ZoomDrawerController();
+
+  void toggleDrawer() {
+    zoomDrawerController.toggle?.call();
     notifyListeners();
   }
 }
