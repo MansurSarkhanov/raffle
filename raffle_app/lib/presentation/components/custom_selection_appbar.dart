@@ -22,7 +22,7 @@ class CustomSelectionAppbar extends StatelessWidget {
           borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(50, 50.0)),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 16.0, left: 24, right: 24),
+          padding: const EdgeInsets.only(top: 45.0, left: 24, right: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
