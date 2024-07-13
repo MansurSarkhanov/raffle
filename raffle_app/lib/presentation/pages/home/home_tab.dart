@@ -8,27 +8,25 @@ import 'package:raffle_app/presentation/components/gradient_text.dart';
 import '../../../features/campaing/presentation/view/campaing_list.dart';
 import '../../../features/product/presentation/view/product_list_view.dart';
 import '../../../features/profile/presentation/widgets/contact_method.dart';
+import '../../components/custom_selection_appbar.dart';
 import 'widgets/swipeble_home_card.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({
     super.key,
     required this.size,
-    required this.controller,
+    // required this.controller,
   });
 
   final Size size;
-  final TabController controller;
+  // final TabController controller;
 
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
-  @override
-  void initState() {
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +101,40 @@ class _HomeTabState extends State<HomeTab> {
         //     ),
         //   ),
         // ),
+        const SliverAppBar(
+          pinned: true,
+          toolbarHeight: 90,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          flexibleSpace: CustomSelectionAppbar(),
+          backgroundColor: Colors.transparent,
+        ),
         SliverList(
           delegate: SliverChildListDelegate([
-            SizedBox(
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF9D2727),
+                    Color(0xFFCE2B37),
+                    Color(0xFFFFFFFF),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                  ],
+                ),
+              ),
               width: double.infinity,
               child: Column(
                 children: [

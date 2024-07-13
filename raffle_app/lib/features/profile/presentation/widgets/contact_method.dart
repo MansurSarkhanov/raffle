@@ -16,27 +16,27 @@ class ContactMethod extends StatelessWidget {
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             onTap: () {},
-            child: const ProfileRowCircle(imageUrl: 'assets/images/im_instagram.png')),
+            child: const ProfileRowCircle(imageUrl: 'ic_facebook')),
         InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             onTap: () {},
-            child: const ProfileRowCircle(imageUrl: 'assets/images/im_facebook.png')),
+            child: const ProfileRowCircle(imageUrl: 'ic_istagram')),
         InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             onTap: () {},
-            child: const ProfileRowCircle(imageUrl: 'assets/images/im_linkedin.png')),
+            child: const ProfileRowCircle(imageUrl: 'ic_tiktok')),
         InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             onTap: () {},
-            child: const ProfileRowCircle(imageUrl: 'assets/images/im_twitter.png')),
+            child: const ProfileRowCircle(imageUrl: 'ic_youtube')),
         InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             onTap: () {},
-            child: const ProfileRowCircle(imageUrl: 'assets/images/im_tiktok.png')),
+            child: const ProfileRowCircle(imageUrl: 'ic_linkedin')),
       ],
     );
   }

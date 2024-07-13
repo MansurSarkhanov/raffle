@@ -6,10 +6,10 @@ import 'package:raffle_app/core/theme/theme_ext.dart';
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
     super.key,
-    required this.tabController,
+    // required this.tabController,
   });
 
-  final TabController tabController;
+  // final TabController tabController;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();

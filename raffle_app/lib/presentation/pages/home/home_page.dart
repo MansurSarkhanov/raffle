@@ -3,15 +3,9 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/profile/presentation/page/profile_page.dart';
 import 'package:raffle_app/notifier/app_index_notifier.dart';
-import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
-import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
 
-import '../../../features/restaurants/presentation/page/restorant_tabview.dart';
 import '../../components/bottom_navbar.dart';
-import '../../components/custom_selection_appbar.dart';
 import 'home_tab.dart';
-import 'inbox_ticket_tab.dart';
-import 'test_scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,30 +14,29 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final TabController tabController;
-  late final TabController restorantTabController;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
+class _HomePageState extends State<HomePage> {
+  // late final TabController tabController;
+  // late final TabController restorantTabController;
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 5, vsync: this);
-    restorantTabController = TabController(length: 5, vsync: this);
-    tabController.addListener(() {
-      print('first chnage');
-      setState(() {});
-    });
-    restorantTabController.addListener(() {
-      print('second chnage');
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   tabController = TabController(length: 5, vsync: this);
+  //   restorantTabController = TabController(length: 5, vsync: this);
+  //   tabController.addListener(() {
+  //     print('first chnage');
+  //     setState(() {});
+  //   });
+  //   restorantTabController.addListener(() {
+  //     print('second chnage');
 
-      setState(() {});
-    });
-  }
-
+  //     setState(() {});
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,55 +56,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       menuScreen: const ProfilePage(),
       mainScreen: Scaffold(
         extendBody: true,
-        backgroundColor:
-             const Color(0xFF9D2727),
-        appBar: CustomSelectionAppbar(
-          controller: tabController,
+        backgroundColor: const Color(0xFF9D2727),
+        // appBar: const CustomSelectionAppbar(),
+        bottomNavigationBar: const BottomNavBar(),
+        body:
+            //  context.watch<AppIndexNotifier>().state == AppPartSection.right
+            // ? RestorantTabView(
+            //     restorantTabController: restorantTabController,
+            //   )
+            // :
+            HomeTab(
+          size: size,
         ),
-        bottomNavigationBar: BottomNavBar(tabController: tabController),
-        body: context.watch<AppIndexNotifier>().state == AppPartSection.right
-            ? RestorantTabView(
-                restorantTabController: restorantTabController,
-              )
-            : Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF9D2727),
-                      Color(0xFFCE2B37),
-                      Color(0xFFFFFFFF),
-                      Color(0xFFEEEEEE),
-                      Color(0xFFEEEEEE),
-                    ],
-                  ),
-                ),
-                child: TabBarView(
-                  controller: tabController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    HomeTab(
-                      size: size,
-                      controller: tabController,
-                    ),
-                    const LiveView(),
-                    QRCodeScreen(controller: tabController),
-                    const OfferView(),
-                    InboxTicketTab(
-                      controller: tabController,
-                    )
-                  ],
-                ),
-              ),
       ),
     );
   }
 
-  @override
-  void dispose() {
-    tabController.dispose();
-    restorantTabController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   tabController.dispose();
+  //   restorantTabController.dispose();
+  //   super.dispose();
+  // }
 }
