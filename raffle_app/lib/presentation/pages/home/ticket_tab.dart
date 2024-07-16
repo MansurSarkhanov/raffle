@@ -48,7 +48,7 @@ class _TicketTabState extends State<TicketTab> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 52.0, left: 12),
+              padding: EdgeInsets.only(top: 64.0, left: 12),
               child: SwipeAppBar(),
             ),
             const SizedBox(
@@ -265,7 +265,7 @@ class TicketCards extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: 12,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 24.0),
@@ -306,12 +306,12 @@ class TicketCards extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 6,
+              height: 3,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 14.65, right: 15.8, bottom: 10),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     flex: 4,
@@ -334,7 +334,7 @@ class TicketCards extends StatelessWidget {
                                   context.typography.body2Regular.copyWith(fontSize: 10, fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              " Draw on 15 June,",
+                              "Draw on 15 June",
                               style:
                                   context.typography.body2Regular.copyWith(fontSize: 10, fontWeight: FontWeight.w400),
                             )
@@ -343,6 +343,7 @@ class TicketCards extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(width: 6,),
                   const Expanded(
                       flex: 4,
                       child: Column(

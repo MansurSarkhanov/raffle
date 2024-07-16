@@ -26,16 +26,23 @@ class _DrawsTabState extends State<DrawsTab> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: ClampingScrollPhysics(),
+
       slivers: [
         const SliverAppBar(
           pinned: true,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(45),
+              bottom: Radius.circular(40),
             ),
           ),
-          title: SwipeAppBar(),
+          title: Padding(
+            padding: EdgeInsets.only(bottom: 12.0),
+            child: SwipeAppBar(),
+          ),
+          centerTitle: false,
+
           backgroundColor: Color(0xFF08294F),
         ),
         SliverList(

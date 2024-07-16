@@ -29,7 +29,7 @@ class WalletTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 52.0, left: 12),
+              padding: EdgeInsets.only(top: 64.0, left: 12),
               child: SwipeAppBar(),
             ),
             const SizedBox(

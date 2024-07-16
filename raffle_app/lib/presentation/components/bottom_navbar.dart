@@ -34,25 +34,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-            Colors.white,
+
             const Color(0xFFEEEEEE),
             const Color(0xFFEEEEEE),
-            const Color(0xFFFFFFFF),
-            const Color(0xFFFFFFFF),
-            const Color(0xFFFFFFFF),
-            const Color(0xFFFFFFFF),
-            Colors.white.withOpacity(0.9),
-            Colors.white.withOpacity(.8),
-            Colors.white.withOpacity(0.5),
-            Colors.white.withOpacity(0.3),
-            Colors.white.withOpacity(0.01),
+            const Color(0xFFEEEEEE),
+            const Color(0xFFEEEEEE),
+
+
+            Color(0xFFEEEEEE),
+            Color(0xFFEEEEEE),
+            Color(0xFFEEEEEE).withOpacity(0.7),
+            Color(0xFFEEEEEE).withOpacity(0.6),
+            Color(0xFFEEEEEE).withOpacity(0.5),
+            Color(0xFFEEEEEE).withOpacity(0.01),
+
           ],
         ),
       ),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 16, bottom: 8),
+          padding: const EdgeInsets.only(left: 16, bottom: 16),
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [

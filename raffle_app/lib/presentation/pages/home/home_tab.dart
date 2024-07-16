@@ -25,19 +25,22 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+       physics: ClampingScrollPhysics(),
       slivers: [
         const SliverAppBar(
-        
           pinned: true,
-          toolbarHeight: 100,
-
+          toolbarHeight: 60,
           shape: RoundedRectangleBorder(
-            
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(45),
+              bottom: Radius.circular(40),
             ),
           ),
-          title: SwipeAppBar(),
+          title: Padding(
+            padding: EdgeInsets.only(bottom: 12.0),
+
+            child: SwipeAppBar(),
+          ),
+          centerTitle: false,
           backgroundColor: Color(0xFF9D2727),
 
         ),
@@ -52,6 +55,8 @@ class _HomeTabState extends State<HomeTab> {
                     Color(0xFF9D2727),
                     Color(0xFFCE2B37),
                     Color(0xFFFFFFFF),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
