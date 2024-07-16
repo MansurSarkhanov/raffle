@@ -8,7 +8,7 @@ import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/apple_login_button.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/google_login_button.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/presentation/animation/bounce_animation.dart';
 
 import '../../widgets/custom_elevated_button.dart';
@@ -58,12 +58,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 isValidate: isValidate,
                 suffixIcon: IconButton(
                   onPressed: () {
-                    context.read<AppIndexNotifier>().visiblePassword();
+                    context.read<AppNotifier>().visiblePassword();
                   },
                   icon: Icon(
-                      context.watch<AppIndexNotifier>().isVisiblePassword ? Icons.visibility_off : Icons.visibility),
+                      context.watch<AppNotifier>().isVisiblePassword ? Icons.visibility_off : Icons.visibility),
                 ),
-                isObscure: context.watch<AppIndexNotifier>().isVisiblePassword,
+                isObscure: context.watch<AppNotifier>().isVisiblePassword,
                 controller: passwordLoginController,
                 textFieldImage: IconPath.lock.toPathPng,
                 height: size.height * 0.08,
@@ -83,6 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () async {
                       if (emailLoginController.text.trim().isNotEmpty &&
                           passwordLoginController.text.trim().isNotEmpty) {
+                        isValidate = true;
+                        setState(() {});
                         final result = await notifier.loginUser(
                             email: emailLoginController.text.trim(), password: passwordLoginController.text.trim());
                         if (result && context.mounted) {

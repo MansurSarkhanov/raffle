@@ -11,8 +11,7 @@ import '../../components/custom_text.dart';
 import '../wallet/wallet_card_page.dart';
 
 class QRCodeScreen extends StatefulWidget {
-  const QRCodeScreen({super.key, required this.controller});
-  final TabController controller;
+  const QRCodeScreen({super.key});
   @override
   ScanScreenState createState() => ScanScreenState();
 }
@@ -96,7 +95,6 @@ class ScanScreenState extends State<QRCodeScreen> {
                     children: [
                       IconButton(
                           onPressed: () {
-                            widget.controller.index = 0;
                           },
                           icon: const Icon(
                             Icons.arrow_back,
@@ -206,8 +204,7 @@ class ScanScreenState extends State<QRCodeScreen> {
                               RouteHelper.createRoute(
                                   routeName: ChangeNotifierProvider.value(
                                       value: context.read<ProfileNotifier>(),
-                                      child: WalletCardPage(
-                                        controller: widget.controller,
+                                      child: const WalletCardPage(
                                       )),
                                   location: RoutingLocation.rightToLeft,
                                   transitionTime: 500,

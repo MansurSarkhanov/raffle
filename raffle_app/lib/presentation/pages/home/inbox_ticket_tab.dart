@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/presentation/components/go_back_button.dart';
 
 import '../../../shared/couple_buttons.dart';
@@ -11,8 +11,7 @@ import 'view/message_view.dart';
 import 'view/ticket_view.dart';
 
 class InboxTicketTab extends StatefulWidget {
-  const InboxTicketTab({super.key, required this.controller});
-  final TabController controller;
+  const InboxTicketTab({super.key});
 
   @override
   State<InboxTicketTab> createState() => _InboxTicketTabState();
@@ -40,25 +39,12 @@ class _InboxTicketTabState extends State<InboxTicketTab> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Consumer<AppIndexNotifier>(
+                Consumer<AppNotifier>(
                   builder: (context, notifier, child) {
                     return GoBackButton(
                         buttonBackColor: const Color(0xFFD9D9D9),
                         onPressed: () {
-                          if (notifier.state == AppPartSection.right) {
-                            if (widget.controller.index == 4) {
-                              widget.controller.index = 0;
-                            } else {
-
-                              Navigator.pop(context);
-                            }
-                          } else if (widget.controller.index == 4) {
-
-                            widget.controller.index = 0;
-                          } else {
-                            Navigator.pop(context);
-                            widget.controller.index = 0;
-                          }
+                      
                         });
                   },
                 ),

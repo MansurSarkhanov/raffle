@@ -25,7 +25,6 @@ class _RestorantTabViewState extends State<RestorantTabView> with TickerProvider
   Widget build(BuildContext context) {
     return TabBarView(
       physics: const NeverScrollableScrollPhysics(),
-      controller: widget.restorantTabController,
       children: [
         ChangeNotifierProvider.value(
             value: getIt.get<RestourantsNotifier>()..fetchAllRestorants(context),
@@ -35,8 +34,7 @@ class _RestorantTabViewState extends State<RestorantTabView> with TickerProvider
         Container(
           color: backColor,
         ),
-        InboxTicketTab(
-          controller: widget.restorantTabController,
+        const InboxTicketTab(
         )
       ],
     );

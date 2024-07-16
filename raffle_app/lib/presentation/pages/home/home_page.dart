@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/profile/presentation/page/profile_page.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/presentation/pages/home/draws_tab.dart';
+import 'package:raffle_app/presentation/pages/home/ticket_tab.dart';
+import 'package:raffle_app/presentation/pages/home/wallet_tab.dart';
 
 import '../../components/bottom_navbar.dart';
 import 'home_tab.dart';
@@ -15,29 +18,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // late final TabController tabController;
-  // late final TabController restorantTabController;
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   tabController = TabController(length: 5, vsync: this);
-  //   restorantTabController = TabController(length: 5, vsync: this);
-  //   tabController.addListener(() {
-  //     print('first chnage');
-  //     setState(() {});
-  //   });
-  //   restorantTabController.addListener(() {
-  //     print('second chnage');
-
-  //     setState(() {});
-  //   });
-  // }
-
+  
+  List<Widget> pages = [
+    const HomeTab(),
+    const DrawsTab(),
+    const TicketTab(),
+    const WalletTab(),
+  ];
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -52,30 +39,18 @@ class _HomePageState extends State<HomePage> {
       mainScreenScale: 0.15,
       menuScreenWidth: double.infinity,
       angle: 0.0,
-      controller: context.watch<AppIndexNotifier>().zoomDrawerController,
+      controller: context.watch<AppNotifier>().zoomDrawerController,
       menuScreen: const ProfilePage(),
       mainScreen: Scaffold(
         extendBody: true,
-        backgroundColor: const Color(0xFF9D2727),
-        // appBar: const CustomSelectionAppbar(),
-        bottomNavigationBar: const BottomNavBar(),
-        body:
-            //  context.watch<AppIndexNotifier>().state == AppPartSection.right
-            // ? RestorantTabView(
-            //     restorantTabController: restorantTabController,
-            //   )
-            // :
-            HomeTab(
-          size: size,
-        ),
+          backgroundColor: context.watch<AppNotifier>().currentPageIndex == 0
+              ? const Color(0xFF9D2727)
+              : context.watch<AppNotifier>().currentPageIndex == 1
+                  ? const Color(0xFF08294F)
+                  : const Color(0xFF147923),
+          bottomNavigationBar: const BottomNavBar(),
+          body: pages[context.watch<AppNotifier>().currentPageIndex]
       ),
     );
   }
-
-  // @override
-  // void dispose() {
-  //   tabController.dispose();
-  //   restorantTabController.dispose();
-  //   super.dispose();
-  // }
 }

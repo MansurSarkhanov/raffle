@@ -16,16 +16,22 @@ class ProductListView extends StatefulWidget {
 }
 
 class _ProductListViewState extends State<ProductListView> with TickerProviderStateMixin {
-  late final AnimationController _controller;
+  late final AnimationController controller;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
+    controller = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     )..repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -70,7 +76,6 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                     Stack(
                       alignment: Alignment.centerLeft,
                       children: [
-                      
                         Container(
                           width: MediaQuery.of(context).size.width * 0.78,
                           height: 134.h,
@@ -165,7 +170,6 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                         )
                                       ],
                                     )
-                                  
                                   ],
                                 ),
                               ],
@@ -186,7 +190,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                     ),
                     const SizedBox(
                       width: 33,
-                    ), 
+                    ),
                   ],
                 ),
               );

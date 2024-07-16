@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 
 class CustomSelectionAppbar extends StatelessWidget {
   const CustomSelectionAppbar({
@@ -14,15 +14,15 @@ class CustomSelectionAppbar extends StatelessWidget {
   // final TabController controller;
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppIndexNotifier>(builder: (context, appIndexNotifier, child) {
+    return Consumer<AppNotifier>(builder: (context, appIndexNotifier, child) {
       return Container(
-        height: 110,
-        decoration: const BoxDecoration(
-          color: Color(0xFF9D2727),
-          borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(50, 50.0)),
+        height: 130,
+        decoration: BoxDecoration(
+          color: context.watch<AppNotifier>().currentPageIndex == 0 ? const Color(0xFF9D2727) : const Color(0xFF147923),
+          borderRadius: const BorderRadius.vertical(bottom: Radius.elliptical(45, 45.0)),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 45.0, left: 24, right: 24),
+          padding: const EdgeInsets.only(top: 50.0, left: 24, right: 24, bottom: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -111,7 +111,7 @@ class CustomSelectionAppbar extends StatelessWidget {
                       ZoomDrawer.of(context)!.open();
                     }
 
-                    context.read<AppIndexNotifier>().toggleDrawer();
+                    context.read<AppNotifier>().toggleDrawer();
                   },
                   child: Container(
                     transform: Matrix4.rotationZ(0.174533),

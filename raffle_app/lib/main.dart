@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:raffle_app/app_router.dart';
 import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 
 import 'core/theme/theme_scope.dart';
 import 'core/theme/theme_scope_widget.dart';
@@ -28,7 +28,7 @@ Future<void> main() async {
           create: (context) => AuthNotifier(getIt.get<AuthRepository>()),
         ),
         ChangeNotifierProvider(
-          create: (context) => AppIndexNotifier(),
+          create: (context) => AppNotifier(),
         ),
       ],
       child: const ThemeScopeWidget(child: MyApp()),

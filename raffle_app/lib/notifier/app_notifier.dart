@@ -3,25 +3,25 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 enum AppPartSection { left, right }
 
-class AppIndexNotifier extends ChangeNotifier {
+class AppNotifier extends ChangeNotifier {
   AppPartSection state = AppPartSection.left;
 
   bool isVisible = false;
-  void setIndex(int index) {
-    if (index == 0) {
-      state = AppPartSection.left;
-      notifyListeners();
-    } else {
-      state = AppPartSection.right;
-      notifyListeners();
-    }
-  }
+  // void setIndex(int index) {
+  //   if (index == 0) {
+  //     state = AppPartSection.left;
+  //     notifyListeners();
+  //   } else {
+  //     state = AppPartSection.right;
+  //     notifyListeners();
+  //   }
+  // }
 
-  void visibleBalance() {
-    isVisible = !isVisible;
-    print('isVisible $isVisible');
-    notifyListeners();
-  }
+  // void visibleBalance() {
+  //   isVisible = !isVisible;
+  //   print('isVisible $isVisible');
+  //   notifyListeners();
+  // }
 
   bool isVisiblePassword = true;
   void visiblePassword() {
@@ -30,15 +30,19 @@ class AppIndexNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  int currentListIndex = 0;
+  int currentPageIndex = 0;
+
+  void changeTabIndex(int index) {
+    currentPageIndex = index;
+    notifyListeners();
+  }
 
   void changeCurrentCardIndex(int index) {
-    currentListIndex = index;
+    // currentPageIndex = index;
     notifyListeners();
   }
 
   final zoomDrawerController = ZoomDrawerController();
-
   void toggleDrawer() {
     zoomDrawerController.toggle?.call();
     notifyListeners();

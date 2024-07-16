@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
 import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/pages/home/inbox_ticket_tab.dart';
 
@@ -17,8 +17,7 @@ import 'portfolio_page.dart';
 import 'wallet_history_page.dart';
 
 class WalletCardPage extends StatefulWidget {
-  const WalletCardPage({super.key, required this.controller});
-  final TabController controller;
+  const WalletCardPage({super.key});
   @override
   State<WalletCardPage> createState() => _WalletCardPageState();
 }
@@ -35,8 +34,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: WalletAppBar(
-        controller: widget.controller,
+      appBar: const WalletAppBar(
       ),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
@@ -51,7 +49,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
                 height: 220,
                 child: Swiper(
                   onIndexChanged: (value) {
-                    context.read<AppIndexNotifier>().changeCurrentCardIndex(value);
+                    context.read<AppNotifier>().changeCurrentCardIndex(value);
                   },
                   axisDirection: AxisDirection.right,
                   scrollDirection: Axis.horizontal,
@@ -65,7 +63,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
                 ),
               ),
             ),
-            WalletExpenseListCard(index: context.watch<AppIndexNotifier>().currentListIndex),
+            // WalletExpenseListCard(index: context.watch<AppNotifier>().currentListIndex),
             const SizedBox(
               height: 48,
             )
@@ -322,7 +320,7 @@ class TestCardGreen extends StatelessWidget {
                       Row(
                         children: [
                           TitleHeading1Widget(
-                            text: context.watch<AppIndexNotifier>().isVisible ? "****\$" : '199,50\$',
+                            text: context.watch<AppNotifier>().isVisible ? "****\$" : '199,50\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
                           ),
@@ -521,7 +519,7 @@ class TestCardBlue extends StatelessWidget {
                       Row(
                         children: [
                           TitleHeading1Widget(
-                            text: context.watch<AppIndexNotifier>().isVisible ? "****\$" : '500\$',
+                            text: context.watch<AppNotifier>().isVisible ? "****\$" : '500\$',
                             fontSize: 29,
                             fontWeight: FontWeight.w700,
                           ),
@@ -670,9 +668,7 @@ class OderActionTitle extends StatelessWidget {
 class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WalletAppBar({
     super.key,
-    required this.controller,
   });
-  final TabController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -731,9 +727,10 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
               onTap: () {
-                context.read<AppIndexNotifier>().visibleBalance();
+                // context.read<AppIndexNotifier>().visibleBalance();
               },
-              child: SvgPicture.asset(context.watch<AppIndexNotifier>().isVisible
+              child: SvgPicture.asset(
+                  context.watch<AppNotifier>().isVisible
                   ? 'assets/svg/ic_unvisible.svg'
                   : 'assets/svg/ic_eye.svg')),
           const SizedBox(
@@ -745,8 +742,8 @@ class WalletAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: SvgPicture.asset('assets/svg/ic_notification.svg'),
             onTap: () {
               Navigator.of(context).push(RouteHelper.createRoute(
-                  routeName: Scaffold(
-                    body: InboxTicketTab(controller: controller),
+                  routeName: const Scaffold(
+                    body: InboxTicketTab(),
                   ),
                   location: RoutingLocation.rightToLeft));
             },

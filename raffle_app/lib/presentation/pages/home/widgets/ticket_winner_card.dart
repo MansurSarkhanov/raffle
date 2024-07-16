@@ -18,13 +18,14 @@ class TicketWinnerCard extends StatelessWidget {
             offset: Offset(10, 10),
             blurRadius: 10,
             spreadRadius: -3,
-            color: backColor,
+            color: Colors.transparent,
           ),
           BoxShadow(
             offset: Offset(-10, 10),
             blurRadius: 10,
             spreadRadius: -3,
-            color: backColor,
+            color: Colors.transparent,
+
           ),
         ],
       ),
@@ -184,7 +185,7 @@ class TicketWinnerCard extends StatelessWidget {
             child: ClipOval(
               // clipper: CustomClip(),
               child: Container(
-                color: const Color(0xFFEBEBEB),
+                color: Colors.transparent,
                 height: 80,
                 width: 55,
               ),
@@ -194,7 +195,7 @@ class TicketWinnerCard extends StatelessWidget {
             right: -42,
             child: ClipOval(
               child: Container(
-                color: const Color(0xFFEBEBEB),
+                color: Colors.transparent,
                 height: 80,
                 width: 55,
               ),
@@ -205,7 +206,7 @@ class TicketWinnerCard extends StatelessWidget {
             child: ClipOval(
               // clipper: CustomClip(),
               child: Container(
-                color: const Color(0xFFEBEBEB),
+                color: Colors.transparent,
                 height: 55,
                 width: 80,
               ),
@@ -214,22 +215,5 @@ class TicketWinnerCard extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class CustomClip extends CustomClipper<Rect> {
-  final double left;
-  final double top;
-  final double width;
-  final double hight;
-  CustomClip({required this.left, required this.top, required this.width, required this.hight});
-  @override
-  Rect getClip(Size size) {
-    return Rect.fromLTWH(left, top, width, hight);
-  }
-
-  @override
-  bool shouldReclip(oldClipper) {
-    return false;
   }
 }
