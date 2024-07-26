@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:raffle_app/features/restaurants/data/repository/restaurant_repository_impl.dart';
+import 'package:raffle_app/features/restaurants/data/service/restaurants_service.dart';
 
 import '../../data/model/restorant_model.dart';
 import '../../domain/repository/restaurant_repository.dart';
 import 'restourants_state.dart';
 
 class RestourantsNotifier extends ChangeNotifier {
-  RestourantsNotifier(this.restaurantRepository);
 
-  final RestaurantRepository restaurantRepository;
+  RestaurantRepository restaurantRepository = RestaurantRepositoryImpl(restaurantsService: RestaurantsServiceImpl());
   RestaurantsState state = RestaurantsInitial();
   List<RestaurantModel>? restorantModel;
   int index = 0;

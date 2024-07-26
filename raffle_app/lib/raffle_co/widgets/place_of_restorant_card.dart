@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../features/restaurants/data/model/place_model.dart';
-import '../../../components/custom_text.dart';
+import '../../features/restaurants/data/model/place_model.dart';
+import '../../presentation/components/custom_text.dart';
 
 class PlaceOfRestorantCard extends StatelessWidget {
   const PlaceOfRestorantCard({super.key, required this.places, required this.onTap});
@@ -55,8 +55,7 @@ class PlaceOfRestorantCard extends StatelessWidget {
                                     fontWeight: FontWeight.w700,
                                   ),
                                 )
-                              ]
-                              ),
+                              ]),
                               SizedBox(
                                 height: 8.h,
                               ),
@@ -80,7 +79,6 @@ class PlaceOfRestorantCard extends StatelessWidget {
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xFF2D2D32).withOpacity(.87),
-
                               ),
                               const SizedBox(
                                 height: 4,
@@ -108,11 +106,9 @@ class PlaceOfRestorantCard extends StatelessWidget {
                                   const SizedBox(
                                     width: 4,
                                   ),
-
                                   TitleHeading1Widget(
                                     text: 'Mediterranean , Asian',
                                     fontSize: 12.sp,
-
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF2D2D32).withOpacity(.87),
                                   ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 
-import '../../../shared/painter/liner_dash_painter.dart';
-import '../../components/custom_text.dart';
-import '../../components/gradient_text.dart';
+import '../../presentation/components/custom_text.dart';
+import '../../presentation/components/gradient_text.dart';
+import '../../shared/painter/liner_dash_painter.dart';
 import 'wallet_tab.dart';
 
 class TicketTab extends StatefulWidget {
@@ -15,23 +17,22 @@ class TicketTab extends StatefulWidget {
 }
 
 class _TicketTabState extends State<TicketTab> {
-  bool isLeftSelected = true;
   final PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
         BackgroundColorCard(
             flex: 6,
             downColor: Colors.white,
-            gradient: isLeftSelected
+            gradient: context.watch<AppNotifier>().ticketLeftSelected
                 ? const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0xFFCE2B37),
                       Color(0xFFFF603D),
+                      Color(0xFFFF603D),
+                      Color(0xFFCE2B37),
                       Color(0xFFFFFFFF),
                     ],
                   )
@@ -40,6 +41,7 @@ class _TicketTabState extends State<TicketTab> {
                     end: Alignment.bottomCenter,
                     colors: [
                       Color(0xFF595959),
+                      Color(0xFF595959),
                       Color(0xFF8D8D8D),
                       Color(0xFFFFFFFF),
                     ],
@@ -47,9 +49,8 @@ class _TicketTabState extends State<TicketTab> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 64.0, left: 12),
-              child: SwipeAppBar(),
+            SizedBox(
+              height: 112.h,
             ),
             const SizedBox(
               height: 16,
@@ -78,7 +79,9 @@ class _TicketTabState extends State<TicketTab> {
                     duration: const Duration(milliseconds: 300),
                     height: 52.h,
                     decoration: BoxDecoration(
-                      color: isLeftSelected ? const Color(0xFFD98940) : const Color(0xFF8C8C8C),
+                      color: context.watch<AppNotifier>().ticketLeftSelected
+                          ? const Color(0xFFD98940)
+                          : const Color(0xFF8C8C8C),
                       borderRadius: BorderRadius.circular(42),
                     ),
                   ),
@@ -90,7 +93,9 @@ class _TicketTabState extends State<TicketTab> {
                         AnimatedAlign(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.linearToEaseOut,
-                          alignment: isLeftSelected ? Alignment.centerLeft : Alignment.centerRight,
+                          alignment: context.watch<AppNotifier>().ticketLeftSelected
+                              ? Alignment.centerLeft
+                              : Alignment.centerRight,
                           child: Container(
                             width: 182.w,
                             height: 60.h,
@@ -110,8 +115,7 @@ class _TicketTabState extends State<TicketTab> {
                                 splashColor: Colors.transparent,
                                 onTap: () {
                                   Future.delayed(const Duration(microseconds: 100), () {
-                                    isLeftSelected = true;
-                                    setState(() {});
+                                    context.read<AppNotifier>().toggleTicketSwither();
                                   });
                                   controller.animateToPage(0,
                                       duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
@@ -119,7 +123,9 @@ class _TicketTabState extends State<TicketTab> {
                                 child: Center(
                                   child: Text('Active Tickets',
                                       style: context.typography.headlineBold.copyWith(
-                                          fontWeight: isLeftSelected ? FontWeight.w800 : FontWeight.w600,
+                                          fontWeight: context.watch<AppNotifier>().ticketLeftSelected
+                                              ? FontWeight.w800
+                                              : FontWeight.w600,
                                           fontSize: 18.sp)),
                                 ),
                               ),
@@ -130,8 +136,7 @@ class _TicketTabState extends State<TicketTab> {
                                 splashColor: Colors.transparent,
                                 onTap: () {
                                   Future.delayed(const Duration(microseconds: 100), () {
-                                    isLeftSelected = false;
-                                    setState(() {});
+                                    context.read<AppNotifier>().toggleTicketSwither();
                                   });
                                   controller.animateToPage(1,
                                       duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
@@ -140,7 +145,9 @@ class _TicketTabState extends State<TicketTab> {
                                   child: Text(
                                     'Expired Tickets',
                                     style: context.typography.headlineBold.copyWith(
-                                        fontWeight: isLeftSelected ? FontWeight.w600 : FontWeight.w800,
+                                        fontWeight: context.watch<AppNotifier>().ticketLeftSelected
+                                            ? FontWeight.w600
+                                            : FontWeight.w800,
                                         fontSize: 18.sp),
                                   ),
                                 ),
@@ -343,7 +350,9 @@ class TicketCards extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 6,),
+                  const SizedBox(
+                    width: 6,
+                  ),
                   const Expanded(
                       flex: 4,
                       child: Column(

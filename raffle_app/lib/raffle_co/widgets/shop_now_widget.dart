@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../features/auth/presentation/widgets/custom_elevated_button.dart';
-import '../../../../shared/couple_buttons.dart';
+import '../../features/auth/presentation/widgets/custom_elevated_button.dart';
+import '../../shared/couple_buttons.dart';
 
 class ShopNowWidget extends StatefulWidget {
   const ShopNowWidget({super.key});

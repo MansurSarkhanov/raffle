@@ -93,7 +93,6 @@ class RestaurantCard extends StatelessWidget {
                         children: [
                           InnerShadow(
                             blur: 3,
-
                             offset: const Offset(0, 0.5),
                             child: Container(
                               height: 18.h,
@@ -122,7 +121,6 @@ class RestaurantCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                         
                         ],
                       ),
                       Row(

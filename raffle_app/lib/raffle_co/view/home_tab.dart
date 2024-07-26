@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 import 'package:raffle_app/presentation/components/gradient_text.dart';
-import 'package:raffle_app/presentation/pages/home/wallet_tab.dart';
 
-import '../../../features/campaing/presentation/view/campaing_list.dart';
-import '../../../features/product/presentation/view/product_list_view.dart';
-import '../../../features/profile/presentation/widgets/contact_method.dart';
-import 'widgets/just_launch_card.dart';
-import 'widgets/swipeble_home_card.dart';
-import 'widgets/top_up_card.dart';
+import '../../features/campaing/presentation/view/campaing_list.dart';
+import '../../features/product/presentation/view/product_list_view.dart';
+import '../../features/profile/presentation/widgets/contact_method.dart';
+import '../widgets/just_launch_card.dart';
+import '../widgets/swipeble_home_card.dart';
+import '../widgets/top_up_card.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({
@@ -25,25 +25,23 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-       physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       slivers: [
-        const SliverAppBar(
-          pinned: true,
-          toolbarHeight: 60,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(40),
-            ),
-          ),
-          title: Padding(
-            padding: EdgeInsets.only(bottom: 12.0),
-
-            child: SwipeAppBar(),
-          ),
-          centerTitle: false,
-          backgroundColor: Color(0xFF9D2727),
-
-        ),
+        // const SliverAppBar(
+        //   pinned: true,
+        //   toolbarHeight: 70,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.vertical(
+        //       bottom: Radius.circular(40),
+        //     ),
+        //   ),
+        //   title: Padding(
+        //     padding: EdgeInsets.only(bottom: 12.0),
+        //     child: SwipeAppBar(),
+        //   ),
+        //   centerTitle: false,
+        //   backgroundColor: Color(0xFF9D2727),
+        // ),
         SliverList(
           delegate: SliverChildListDelegate([
             Container(
@@ -52,6 +50,7 @@ class _HomeTabState extends State<HomeTab> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
+                    Color(0xFF9D2727),
                     Color(0xFF9D2727),
                     Color(0xFFCE2B37),
                     Color(0xFFFFFFFF),
@@ -67,13 +66,15 @@ class _HomeTabState extends State<HomeTab> {
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
-
                   ],
                 ),
               ),
               width: double.infinity,
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 112.h,
+                  ),
                   const TopUpCard(),
                   SwipebleHomeCards(),
                   const SizedBox(height: 10),

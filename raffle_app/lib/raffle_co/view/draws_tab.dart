@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 
-import '../../../features/campaing/presentation/view/campaing_list.dart';
-import 'wallet_tab.dart';
+import '../../features/campaing/presentation/view/campaing_list.dart';
 
 class DrawsTab extends StatefulWidget {
   const DrawsTab({super.key});
@@ -26,25 +25,8 @@ class _DrawsTabState extends State<DrawsTab> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      physics: ClampingScrollPhysics(),
-
+      physics: const ClampingScrollPhysics(),
       slivers: [
-        const SliverAppBar(
-          pinned: true,
-          toolbarHeight: 60,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(40),
-            ),
-          ),
-          title: Padding(
-            padding: EdgeInsets.only(bottom: 12.0),
-            child: SwipeAppBar(),
-          ),
-          centerTitle: false,
-
-          backgroundColor: Color(0xFF08294F),
-        ),
         SliverList(
           delegate: SliverChildListDelegate([
             Container(
@@ -54,13 +36,9 @@ class _DrawsTabState extends State<DrawsTab> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Color(0xFF08294F),
+                    Color(0xFF08294F),
                     Color(0xFF4370E5),
                     Color(0xFFFFFFFF),
-                    Color(0xFFEEEEEE),
-                    Color(0xFFEEEEEE),
-                    Color(0xFFEEEEEE),
-                    Color(0xFFEEEEEE),
-                    Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
@@ -72,6 +50,9 @@ class _DrawsTabState extends State<DrawsTab> {
               width: double.infinity,
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 112.h,
+                  ),
                   SizedBox(
                     height: 380.h,
                     child: PageView.builder(

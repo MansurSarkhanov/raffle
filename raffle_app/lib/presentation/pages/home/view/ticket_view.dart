@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
-import 'package:raffle_app/presentation/pages/home/widgets/ticket_winner_card.dart';
+import 'package:raffle_app/raffle_co/widgets/ticket_winner_card.dart';
 
 import '../../../../features/profile/presentation/widgets/winner_card.dart';
 

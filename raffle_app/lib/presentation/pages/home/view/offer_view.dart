@@ -5,8 +5,8 @@ import 'package:raffle_app/features/profile/presentation/notifier/profile_notifi
 import 'package:raffle_app/features/profile/presentation/page/ruffle_wallet_view.dart';
 import 'package:raffle_app/injetion.dart';
 
-import '../widgets/offer_card_widget.dart';
-import '../widgets/shop_now_widget.dart';
+import '../../../../raffle_co/widgets/offer_card_widget.dart';
+import '../../../../raffle_co/widgets/shop_now_widget.dart';
 
 class OfferView extends StatelessWidget {
   const OfferView({super.key});

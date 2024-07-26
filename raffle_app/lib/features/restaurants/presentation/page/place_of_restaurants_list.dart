@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle_app/presentation/pages/home/widgets/place_of_restorant_card.dart';
+import 'package:raffle_app/raffle_co/widgets/place_of_restorant_card.dart';
 
 import '../notifier/restourants_notifier.dart';
 import 'food_restorant_detail_view.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../raffle_co/widgets/live_winner_widget.dart';
+import '../../../../raffle_co/widgets/live_winning_widget.dart';
 import '../../../../shared/couple_buttons.dart';
-import '../widgets/live_winner_widget.dart';
-import '../widgets/live_winning_widget.dart';
 import 'watch_live_view.dart';
 
 class LiveView extends StatefulWidget {

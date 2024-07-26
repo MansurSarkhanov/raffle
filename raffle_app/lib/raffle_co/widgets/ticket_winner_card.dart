@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
 
-import '../../../../shared/painter/liner_dash_painter.dart';
+import '../../shared/painter/liner_dash_painter.dart';
 
 class TicketWinnerCard extends StatelessWidget {
   const TicketWinnerCard({super.key, this.isBackitem = false});
@@ -25,7 +25,6 @@ class TicketWinnerCard extends StatelessWidget {
             blurRadius: 10,
             spreadRadius: -3,
             color: Colors.transparent,
-
           ),
         ],
       ),
@@ -123,7 +122,6 @@ class TicketWinnerCard extends StatelessWidget {
                             const SizedBox(
                               width: 6,
                             ),
-                        
                             isBackitem == true
                                 ? const Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,

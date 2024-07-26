@@ -34,20 +34,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-
             const Color(0xFFEEEEEE),
             const Color(0xFFEEEEEE),
             const Color(0xFFEEEEEE),
             const Color(0xFFEEEEEE),
-
-
-            Color(0xFFEEEEEE),
-            Color(0xFFEEEEEE),
-            Color(0xFFEEEEEE).withOpacity(0.7),
-            Color(0xFFEEEEEE).withOpacity(0.6),
-            Color(0xFFEEEEEE).withOpacity(0.5),
-            Color(0xFFEEEEEE).withOpacity(0.01),
-
+            const Color(0xFFEEEEEE),
+            const Color(0xFFEEEEEE),
+            const Color(0xFFEEEEEE).withOpacity(0.7),
+            const Color(0xFFEEEEEE).withOpacity(0.6),
+            const Color(0xFFEEEEEE).withOpacity(0.5),
+            const Color(0xFFEEEEEE).withOpacity(0.01),
           ],
         ),
       ),
@@ -60,7 +56,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             children: [
               TabBarItem(
                 index: 0,
-
                 imagePath: 'home',
                 text: "Home",
                 onPress: () {
@@ -69,7 +64,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               TabBarItem(
                 index: 1,
-
                 imagePath: 'draws',
                 text: "Draws",
                 onPress: () {
@@ -78,7 +72,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               TabBarItem(
                 index: 2,
-
                 imagePath: 'ticket',
                 text: "Ticket",
                 onPress: () {
@@ -87,7 +80,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               TabBarItem(
                 index: 3,
-
                 imagePath: 'wallet',
                 text: "Wallet",
                 onPress: () {
