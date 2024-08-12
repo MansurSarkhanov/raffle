@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:inner_shadow_widget/inner_shadow_widget.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:raffle_app/features/restaurants/data/model/restorant_model.dart';
 import 'package:raffle_app/presentation/components/custom_text.dart';
+import 'package:raffle_app/raffle_place/components/restorant_grid_card.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({super.key, required this.restaurantModel, required this.gradient});
@@ -20,10 +19,12 @@ class RestaurantCard extends StatelessWidget {
         // height: 210.h,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(18),
-            boxShadow: const [
-              BoxShadow(color: Color(0xFFE3E3E3), offset: Offset(0, 0), blurRadius: 5, spreadRadius: 2),
+            gradient: const LinearGradient(
+                begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.white, Color(0xFFBABABA)]),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(.25), offset: const Offset(0, 4), blurRadius: 4, spreadRadius: 2),
             ],
           ),
           child: Padding(
@@ -49,14 +50,20 @@ class RestaurantCard extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 1.5.w),
-                            child: SizedBox(
-                              width: 160,
-                              child: TitleHeading1Widget(
-                                text: restaurantModel.name ?? '',
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF2D2D32),
-                              ),
+                            child: TitleHeading1Widget(
+                              text: restaurantModel.name ?? '',
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF2D2D32),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 1.5.w),
+                            child: TitleHeading1Widget(
+                              text: 'Moscow',
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF2D2D32),
                             ),
                           ),
                         ],
@@ -75,6 +82,7 @@ class RestaurantCard extends StatelessWidget {
                       ),
                     ],
                   ),
+
                 ),
                 SizedBox(height: 24.h),
                 const Divider(
@@ -83,63 +91,63 @@ class RestaurantCard extends StatelessWidget {
                   color: Color(0xff8A8A8A),
                 ),
                 SizedBox(height: 21.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 22.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Stack(
-                        alignment: Alignment.centerLeft,
-                        children: [
-                          InnerShadow(
-                            blur: 3,
-                            offset: const Offset(0, 0.5),
-                            child: Container(
-                              height: 18.h,
-                              width: 140,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10), color: const Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 140, // 200.0 is the total width of the progress bar
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 22.w),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Stack(
+                //         alignment: Alignment.centerLeft,
+                //         children: [
+                //           InnerShadow(
+                //             blur: 3,
+                //             offset: const Offset(0, 0.5),
+                //             child: Container(
+                //               height: 18.h,
+                //               width: 140,
+                //               decoration: BoxDecoration(
+                //                   borderRadius: BorderRadius.circular(10), color: const Color(0xFFE0E0E0)),
+                //             ),
+                //           ),
+                //           SizedBox(
+                //             width: 140, // 200.0 is the total width of the progress bar
 
-                            child: InnerShadow(
-                              blur: 3,
-                              offset: const Offset(0, 0.5),
-                              child: LinearPercentIndicator(
-                                linearGradient: gradient.gradient,
-                                padding: const EdgeInsets.only(left: 0),
-                                barRadius: Radius.circular(52.r),
-                                animation: false,
-                                animationDuration: 1500,
-                                lineHeight: 18.h,
-                                backgroundColor: Colors.transparent,
-                                percent: restaurantModel.percent!.toDouble() / 100,
-                                // backgroundColor: const Color(0xFFE0E0E0),
-                                // progressColor: restaurant.color,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TitleHeading1Widget(
-                            text: '${restaurantModel.currence}/',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.sp,
-                          ),
-                          TitleHeading1Widget(
-                            text: '${restaurantModel.total} sold',
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                //             child: InnerShadow(
+                //               blur: 3,
+                //               offset: const Offset(0, 0.5),
+                //               child: LinearPercentIndicator(
+                //                 linearGradient: gradient.gradient,
+                //                 padding: const EdgeInsets.only(left: 0),
+                //                 barRadius: Radius.circular(52.r),
+                //                 animation: false,
+                //                 animationDuration: 1500,
+                //                 lineHeight: 18.h,
+                //                 backgroundColor: Colors.transparent,
+                //                 percent: restaurantModel.percent!.toDouble() / 100,
+                //                 // backgroundColor: const Color(0xFFE0E0E0),
+                //                 // progressColor: restaurant.color,
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //       Row(
+                //         children: [
+                //           TitleHeading1Widget(
+                //             text: '${restaurantModel.currence}/',
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 12.sp,
+                //           ),
+                //           TitleHeading1Widget(
+                //             text: '${restaurantModel.total} sold',
+                //             fontSize: 12.sp,
+                //             fontWeight: FontWeight.w400,
+                //           )
+                //         ],
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -149,26 +157,3 @@ class RestaurantCard extends StatelessWidget {
   }
 }
 
-class FakeGradient {
-  final LinearGradient gradient;
-
-  FakeGradient({required this.gradient});
-}
-
-final List<FakeGradient> gradients = [
-  FakeGradient(
-      gradient: const LinearGradient(colors: [
-    Color(0xFFFE21AC),
-    Color(0xFFFA1D33),
-  ])),
-  FakeGradient(
-      gradient: const LinearGradient(colors: [
-    Color(0xFFFFD339),
-    Color(0xFFE9B502),
-  ])),
-  FakeGradient(
-      gradient: const LinearGradient(colors: [
-    Color(0xFFFE21AC),
-    Color(0xFFFA1D33),
-  ])),
-];

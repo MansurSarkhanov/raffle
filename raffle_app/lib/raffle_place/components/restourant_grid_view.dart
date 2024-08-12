@@ -5,12 +5,10 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_state.dart';
+import 'package:raffle_app/raffle_place/components/restorant_grid_card.dart';
 
-import '../../../../raffle_co/widgets/restorant_card.dart';
-import '../../../../raffle_place/components/restorant_grid_card.dart';
-
-class RestaurantListView extends StatelessWidget {
-  const RestaurantListView({
+class RestaurantGridView extends StatelessWidget {
+  const RestaurantGridView({
     super.key,
     required this.controller,
   });
@@ -23,26 +21,24 @@ class RestaurantListView extends StatelessWidget {
           return Center(child: Lottie.asset('assets/images/lottie_loading.json'));
         } else if (notifier.state is RestourantsSuccess) {
           final restorants = notifier.state as RestourantsSuccess;
-          return ListView.builder(
+          return GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: .7, crossAxisSpacing: 30, mainAxisSpacing: 30),
             padding: EdgeInsets.only(left: 15, right: 15, top: 18, bottom: Platform.isIOS ? 102 : 100),
             itemCount: restorants.restaurants.length,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () {
-                    },
-                    child: RestaurantCard(
-                      gradient: gradients[index],
-                      restaurantModel: restorants.restaurants[index],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  )
-                ],
+              return InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () async {
+                  // await context.read<RestourantsNotifier>().selectRestorant(index);
+                  controller.jumpToPage(1);
+                },
+                child: RestaurantGridCard(
+                  gradient: gradients[index],
+                  restaurantModel: restorants.restaurants[index],
+                ),
               );
             },
           );
