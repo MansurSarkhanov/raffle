@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
@@ -133,18 +134,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: CustomElevatedButton(
                     isLoading: notifier.state is AuthProgress ? true : false,
                     icon: null,
-                    onPressed: () {
+                    onPressed: () async {
                       if (nameController.text.trim().isNotEmpty &&
                           surNameController.text.trim().isNotEmpty &&
                           numberController.text.trim().isNotEmpty &&
                           emailController.text.trim().isNotEmpty &&
                           passwordController.text.trim().isNotEmpty) {
-                        notifier.registerUser(
+                        final result = await notifier.registerUser(
                             email: emailController.text.trim(),
                             password: passwordController.text.trim(),
                             name: nameController.text.trim(),
                             number: numberController.text.trim(),
                             surname: surNameController.text.trim());
+                        if (result && context.mounted) {
+                          context.goNamed('home');
+                          return;
+                        }
                       } else {
                         isValidate = false;
                         setState(() {});

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
-import 'package:raffle_app/features/restaurants/presentation/page/restaurant_list_view.dart';
 import 'package:raffle_app/raffle_place/components/restourant_grid_view.dart';
+import 'package:raffle_app/raffle_place/notifier.dart';
 
 class RafflePlacePage extends StatefulWidget {
   const RafflePlacePage({super.key, required this.controller});
@@ -13,13 +14,8 @@ class RafflePlacePage extends StatefulWidget {
 }
 
 class _RafflePlacePageState extends State<RafflePlacePage> {
-  @override
-  Widget build(BuildContext context) {
-    return TabBarView(
-      physics: const NeverScrollableScrollPhysics(),
-      controller: widget.controller,
-      children: [
-        const RestaurantTab(),
+  List<Widget> pages = [
+    const RestaurantTab(),
         Container(
           color: Colors.red,
         ),
@@ -32,7 +28,10 @@ class _RafflePlacePageState extends State<RafflePlacePage> {
         Container(
           color: Colors.red,
         )
-      ],
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: pages[context.watch<RafflePlaceNotifier>().currentPageIndex]
     );
   }
 }
@@ -52,8 +51,7 @@ class _RestaurantTabState extends State<RestaurantTab> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(color: Colors.white),
-      child: PageView(children: [
-        SingleChildScrollView(
+      child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,7 +85,7 @@ class _RestaurantTabState extends State<RestaurantTab> {
                             color: Colors.white,
                             fontSize: 40,
                             height: 0.9,
-                            fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -110,11 +108,9 @@ class _RestaurantTabState extends State<RestaurantTab> {
                     )
                   ],
                 ),
-              ),
-            
-            
+            ),
               Padding(
-                padding: const EdgeInsets.only(left: 12.0, bottom: 12),
+              padding: const EdgeInsets.only(left: 12.0),
                 child: Text('Restaurants', style: context.typography.body2Bold),
               ),
               SizedBox(
@@ -135,14 +131,8 @@ class _RestaurantTabState extends State<RestaurantTab> {
               const SizedBox(
                 height: 100,
               )
-            ],
-          ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 112.0),
-          child: RestaurantListView(controller: controller),
-        )
-      ] 
       ),
     );
   }

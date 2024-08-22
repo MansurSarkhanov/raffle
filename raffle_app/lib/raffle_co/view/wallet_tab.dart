@@ -149,7 +149,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 210,
+      width: 180.w,
       decoration: const BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(45, 45.0)),
@@ -186,7 +186,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                     alignment:
                         context.watch<AppNotifier>().isLeftSelected ? Alignment.centerLeft : Alignment.centerRight,
                     child: Container(
-                      width: 130,
+                      width: 120,
                       height: 44.h,
                       decoration: BoxDecoration(
                         color: context.watch<AppNotifier>().isLeftSelected
@@ -210,7 +210,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                             });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
+                            padding: const EdgeInsets.only(left: 10.0),
                             child: Row(
                               children: [
                                 Image.asset(
@@ -244,7 +244,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                             });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 14.0),
+                            padding: const EdgeInsets.only(right: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -258,7 +258,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                                     width: 5.w,
                                   ),
                                 ],
-                                SvgPicture.asset('assets/svg/test.svg'),
+                                SvgPicture.asset('assets/svg/test.svg', height: 24, width: 24),
                               ],
                             ),
                           ),

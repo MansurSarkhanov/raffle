@@ -9,6 +9,7 @@ import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart'
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/raffle_place/notifier.dart';
 
 import 'core/theme/theme_scope.dart';
 import 'core/theme/theme_scope_widget.dart';
@@ -30,6 +31,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => AppNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RafflePlaceNotifier(),
         ),
         ChangeNotifierProvider(
           create: (context) => RestourantsNotifier()..fetchAllRestorants(context),

@@ -9,38 +9,44 @@ class RestaurantGridCard extends StatelessWidget {
   final FakeGradient gradient;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFEFEFEF),
-        borderRadius: BorderRadius.circular(29),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 160.h,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(29),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  restaurantModel.imageUrl ?? "",
+    return Column(children: [
+      Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFEFEFEF),
+          borderRadius: BorderRadius.circular(29),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 160.h,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(29),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    restaurantModel.imageUrl ?? "",
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 8.h),
-          Center(
-            child: TitleHeading1Widget(
-              text: restaurantModel.name ?? '',
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w400,
-              color: const Color(0xFF2D2D32),
+            SizedBox(height: 8.h),
+            Center(
+              child: TitleHeading1Widget(
+                text: restaurantModel.name ?? '',
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+                color: const Color(0xFF2D2D32),
+              ),
             ),
-          ),
-          SizedBox(height: 8.h),
-          Row(
+            SizedBox(height: 8.h),
+            
+          ],
+        ),
+      ),
+      SizedBox(height: 8.h),
+      Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TitleHeading1Widget(
@@ -55,8 +61,7 @@ class RestaurantGridCard extends StatelessWidget {
               )
             ],
           ),
-        ],
-      ),
+    ] 
     );
   }
 }

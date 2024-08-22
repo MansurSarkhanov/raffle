@@ -167,7 +167,7 @@ class _TicketTabState extends State<TicketTab> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 64),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 64),
                     child: TicketCards(),
                   ),
                   Padding(
@@ -221,7 +221,7 @@ class TicketCards extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 12.0, left: 24, right: 10),
+              padding: const EdgeInsets.only(top: 10.0, left: 24, right: 9.5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -272,7 +272,7 @@ class TicketCards extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 11,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 24.0),

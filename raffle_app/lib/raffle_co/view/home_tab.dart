@@ -27,21 +27,6 @@ class _HomeTabState extends State<HomeTab> {
     return CustomScrollView(
       physics: const ClampingScrollPhysics(),
       slivers: [
-        // const SliverAppBar(
-        //   pinned: true,
-        //   toolbarHeight: 70,
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.vertical(
-        //       bottom: Radius.circular(40),
-        //     ),
-        //   ),
-        //   title: Padding(
-        //     padding: EdgeInsets.only(bottom: 12.0),
-        //     child: SwipeAppBar(),
-        //   ),
-        //   centerTitle: false,
-        //   backgroundColor: Color(0xFF9D2727),
-        // ),
         SliverList(
           delegate: SliverChildListDelegate([
             Container(
@@ -77,7 +62,6 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   const TopUpCard(),
                   SwipebleHomeCards(),
-                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Row(
