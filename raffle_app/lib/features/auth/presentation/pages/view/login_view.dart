@@ -87,7 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {});
                         final result = await notifier.loginUser(
                             email: emailLoginController.text.trim(), password: passwordLoginController.text.trim());
-                        if (result && context.mounted) {
+                        print(result);
+
+                        if (result) {
                           context.goNamed('home');
                           return;
                         } else {
@@ -100,23 +102,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             pageBuilder: (context, anim1, anim2) {
                               return Align(
                                 alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  height: 150.h,
-                                  margin: const EdgeInsets.only(bottom: 30, left: 12, right: 12),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(32),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 27),
-                                    child: Scaffold(
-                                      backgroundColor: Colors.white,
-                                      body: Column(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Container(
+                                    height: 150.h,
+                                    margin: const EdgeInsets.only(bottom: 30, left: 12, right: 12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(32),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 27),
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           IconButton(
                                               onPressed: () {
+                                                print('sdfsdfsdf');
                                                 Navigator.pop(context);
                                               },
                                               icon: const Icon(Icons.close)),
@@ -133,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ],
                                           ),
                                         ],
-                                      ),
+                                      )
                                     ),
                                   ),
                                 ),
