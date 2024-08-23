@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               return Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
-                                  height: 124.h,
+                                  height: 150.h,
                                   margin: const EdgeInsets.only(bottom: 30, left: 12, right: 12),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -115,11 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
-                                          InkWell(
-                                              onTap: () {
+                                          IconButton(
+                                              onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: const Icon(Icons.close)),
+                                              icon: const Icon(Icons.close)),
                                           const SizedBox(
                                             height: 18,
                                           ),

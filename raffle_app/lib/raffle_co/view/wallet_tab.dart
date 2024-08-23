@@ -149,7 +149,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180.w,
+      width: 183.w,
       decoration: const BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(45, 45.0)),
@@ -187,7 +187,7 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                         context.watch<AppNotifier>().isLeftSelected ? Alignment.centerLeft : Alignment.centerRight,
                     child: Container(
                       width: 120,
-                      height: 44.h,
+                      height: 42.h,
                       decoration: BoxDecoration(
                         color: context.watch<AppNotifier>().isLeftSelected
                             ? const Color(0xFFCE2B37)
@@ -213,6 +213,9 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                             padding: const EdgeInsets.only(left: 10.0),
                             child: Row(
                               children: [
+                                const SizedBox(
+                                  width: 4,
+                                ),
                                 Image.asset(
                                   'assets/images/im_r.png',
                                   height: 24,
@@ -220,12 +223,16 @@ class _SwipeAppBarState extends State<SwipeAppBar> {
                                 ),
                                 if (context.watch<AppNotifier>().isLeftSelected) ...[
                                   SizedBox(
-                                    width: 5.w,
+                                    width: 4.w,
                                   ),
                                   Text(
                                     'RAFFLE\n& CO.',
                                     style: context.typography.title1Bold.copyWith(
-                                        fontWeight: FontWeight.w800, fontSize: 14, color: Colors.white, height: .9),
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      height: 13 / 15,
+                                    ),
                                   ),
                                 ]
                               ],

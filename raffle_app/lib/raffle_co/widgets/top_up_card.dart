@@ -32,7 +32,7 @@ class TopUpCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 23),
+          padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -41,11 +41,13 @@ class TopUpCard extends StatelessWidget {
                 children: [
                   Text(
                     'Available Wallet Balance',
-                    style: context.typography.body1Regular.copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+                    style: context.typography.body1Regular
+                        .copyWith(fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: -.3),
                   ),
                   Text(
                     'AED100.00',
-                    style: context.typography.body1Regular.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                    style: context.typography.body1Regular
+                        .copyWith(fontSize: 18, fontWeight: FontWeight.w700, letterSpacing: -.3),
                   )
                 ],
               ),

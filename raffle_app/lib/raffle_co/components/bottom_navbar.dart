@@ -21,7 +21,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
+      height: 125,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -40,7 +40,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             const Color(0xFFEEEEEE),
             const Color(0xFFEEEEEE),
             const Color(0xFFEEEEEE),
-            const Color(0xFFEEEEEE).withOpacity(0.7),
             const Color(0xFFEEEEEE).withOpacity(0.6),
             const Color(0xFFEEEEEE).withOpacity(0.5),
             const Color(0xFFEEEEEE).withOpacity(0.01),
@@ -50,7 +49,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 16, bottom: 16),
+          padding: const EdgeInsets.only(left: 16, bottom: 10),
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
@@ -244,12 +243,15 @@ class TabBarItem extends StatelessWidget {
           ),
         ),
         index == context.watch<AppNotifier>().currentPageIndex
-            ? Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: Container(
-                  height: 6,
-                  width: 10,
-                  decoration: BoxDecoration(color: const Color(0xFFEC008B), borderRadius: BorderRadius.circular(4)),
+            ? Positioned(
+                bottom: 6,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Container(
+                    height: 6,
+                    width: 10,
+                    decoration: BoxDecoration(color: const Color(0xFFEC008B), borderRadius: BorderRadius.circular(4)),
+                  ),
                 ),
               )
             : Padding(

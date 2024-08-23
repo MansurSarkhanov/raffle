@@ -103,13 +103,13 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                       textAlign: TextAlign.start,
                                       style: context.typography.body1Bold.copyWith(
                                           color: const Color(0xFFFF2735),
-                                          fontSize: 30,
+                                          fontSize: 28,
+                                          height: 32 / 28,
                                           fontWeight: FontWeight.w900,
-                                          height: 0.9,
                                           fontStyle: FontStyle.italic),
                                     ),
                                     Text(
-                                      "${productModel?[index].prize}",
+                                      "100 Grams of Gold",
                                       maxLines: 2,
                                       textAlign: TextAlign.left,
                                       style: context.typography.body2Bold
@@ -137,7 +137,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 6,
+                                      height: 4,
                                     ),
                                     Stack(
                                       alignment: Alignment.centerRight,
@@ -148,6 +148,16 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                           decoration: BoxDecoration(
                                             color: const Color(0xFFFFE600),
                                             borderRadius: BorderRadius.circular(15.5.r),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 30.0),
+                                            child: Center(
+                                              child: Text(
+                                                'Buy AED20',
+                                                style: context.typography.body2Bold.copyWith(
+                                                    fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         Container(
@@ -161,7 +171,7 @@ class _ProductListViewState extends State<ProductListView> with TickerProviderSt
                                             ),
                                           ),
                                           child: const Padding(
-                                            padding: EdgeInsets.all(13.0),
+                                            padding: EdgeInsets.all(10.0),
                                             child: Icon(
                                               Icons.add,
                                               color: Colors.white,

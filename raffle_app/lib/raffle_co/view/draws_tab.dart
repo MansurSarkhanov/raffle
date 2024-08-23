@@ -44,6 +44,11 @@ class _DrawsTabState extends State<DrawsTab> {
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+                    Color(0xFFEEEEEE),
+
                   ],
                 ),
               ),
@@ -68,9 +73,7 @@ class _DrawsTabState extends State<DrawsTab> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Stack(
@@ -137,6 +140,7 @@ class _DrawsTabState extends State<DrawsTab> {
                                         child: Text('Active Tickets',
                                             style: context.typography.headlineBold.copyWith(
                                                 fontWeight: isLeftSelected ? FontWeight.w800 : FontWeight.w600,
+                                                letterSpacing: -.5,
                                                 fontSize: 18.sp)),
                                       ),
                                     ),
@@ -157,6 +161,7 @@ class _DrawsTabState extends State<DrawsTab> {
                                         child: Text(
                                           'Expired Tickets',
                                           style: context.typography.headlineBold.copyWith(
+                                              letterSpacing: -.5,
                                               fontWeight: isLeftSelected ? FontWeight.w600 : FontWeight.w800,
                                               fontSize: 18.sp),
                                         ),
@@ -170,6 +175,9 @@ class _DrawsTabState extends State<DrawsTab> {
                         ),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 32,
                   ),
                   const CampaingList(),
                   const SizedBox(

@@ -18,7 +18,7 @@ class TopUpPage extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color(0xFF18FDAA),
+                Color(0xFF01EE8A),
                 Color(0xFF1AFCAA),
                 Color(0xFFEEEEEE),
               ],
@@ -55,7 +55,7 @@ class TopUpPage extends StatelessWidget {
                                     color: const Color(0xFF4000FF), width: 4, strokeAlign: BorderSide.strokeAlignInside)
                                 : Border.all(color: Colors.white, width: 4, strokeAlign: BorderSide.strokeAlignInside)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 21),
+                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 21),
                           child: Text(
                             'AED50.00',
                             style: context.typography.body2Bold.copyWith(fontSize: 18, fontWeight: FontWeight.w600),

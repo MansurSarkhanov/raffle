@@ -69,14 +69,16 @@ class _HomeTabState extends State<HomeTab> {
                         Text(
                           'FEATURED',
                           style: context.typography.body2Bold.copyWith(
-                            fontSize: 29,
+                            fontSize: 28,
+                            height: 32 / 28,
+                            letterSpacing: -1,
                             fontWeight: FontWeight.w900,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   const ProductListView(),
                   const SizedBox(height: 31),
                   const JustLaunchedCard(),
@@ -85,7 +87,7 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   const JustLaunchedCard(),
                   const SizedBox(
-                    height: 62,
+                    height: 24,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -101,7 +103,7 @@ class _HomeTabState extends State<HomeTab> {
                     ),
                   ),
                   const SizedBox(
-                    height: 14,
+                    height: 24,
                   ),
                   const CampaingList(),
                   const SizedBox(

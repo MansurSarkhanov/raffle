@@ -18,7 +18,7 @@ class JustLaunchedCard extends StatelessWidget {
           offset: const Offset(0, 21),
         )
       ]),
-      height: 600,
+      height: 597,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Stack(
@@ -41,7 +41,8 @@ class JustLaunchedCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text('JUST LAUNCHED',
                         style: context.typography.body2Bold
-                            .copyWith(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
+                          .copyWith(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -.5),
+                    ),
                   ),
                 ],
               ),
@@ -53,10 +54,13 @@ class JustLaunchedCard extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(28), color: Colors.white),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 24, top: 24),
+                      padding: const EdgeInsets.only(
+                        left: 20.0,
+                        right: 24,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -90,23 +94,27 @@ class JustLaunchedCard extends StatelessWidget {
                                   fit: BoxFit.fill, image: AssetImage('assets/images/im_samsung.png'))),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 24),
+                          padding: const EdgeInsets.only(left: 20.0, right: 24, top: 12),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Win',
                                   style: context.typography.body2Bold.copyWith(
                                       color: const Color(0xFFFF2738),
-                                      fontSize: 50,
+                                      fontSize: 44,
                                       height: 56 / 50,
                                       fontWeight: FontWeight.w900,
                                       fontStyle: FontStyle.italic)),
                               Text(
                                 'Samsung S24 Ultra',
                                 style: context.typography.body2Bold.copyWith(
-                                  fontSize: 24,
+                                  fontSize: 23,
+                                  letterSpacing: -.5,
                                   fontWeight: FontWeight.w700,
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 2,
                               ),
                               Stack(
                                 alignment: Alignment.center,
@@ -120,7 +128,33 @@ class JustLaunchedCard extends StatelessWidget {
                                         decoration: BoxDecoration(
                                             color: const Color(0xFFFFE600), borderRadius: BorderRadius.circular(27.5)),
                                         height: 56,
-                                        width: 220),
+                                      width: 220,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Buy AED20',
+                                              style: context.typography.body2Bold.copyWith(
+                                                fontSize: 18,
+                                                letterSpacing: -.5,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Modesh Shopping Card',
+                                              style: context.typography.body2Bold.copyWith(
+                                                fontSize: 10,
+                                                letterSpacing: -.5,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   Positioned(
                                     right: 0,
@@ -129,10 +163,21 @@ class JustLaunchedCard extends StatelessWidget {
                                           gradient: const LinearGradient(colors: [
                                             Color(0xFF6058F4),
                                             Color(0xFF38338E),
-                                          ]),
+                                            ],
+                                          ),
                                           borderRadius: BorderRadius.circular(34)),
                                       height: 68,
                                       width: 188,
+                                      child: Center(
+                                        child: Text(
+                                          'Add to Cart',
+                                          style: context.typography.body2Bold.copyWith(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -140,14 +185,18 @@ class JustLaunchedCard extends StatelessWidget {
                               const SizedBox(
                                 height: 9,
                               ),
-                              Text(
-                                'Draw Date: 26 July, 2024 or earlier if the campaign is sold out',
-                                style:
-                                    context.typography.body2Bold.copyWith(color: const Color(0xFF7C7C7C), fontSize: 10),
+                              Center(
+                                child: Text(
+                                  'Draw Date: 26 July, 2024 or earlier if the campaign is sold out',
+                                  style:
+                                      context.typography.body2Bold.copyWith(
+                                    color: const Color(0xFF7C7C7C),
+                                    fontSize: 11,
+                                    letterSpacing: -.5,
+                                  ),
+                                ),
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
+                             
                             ],
                           ),
                         ),

@@ -59,10 +59,11 @@ class _TicketTabState extends State<TicketTab> {
               padding: const EdgeInsets.only(left: 12.0),
               child: Text(
                 "TICKETS",
-                style: context.typography.body2Bold.copyWith(fontSize: 34, fontWeight: FontWeight.w900),
+                style: context.typography.body2Bold
+                    .copyWith(fontSize: 34.sp, fontWeight: FontWeight.w900, letterSpacing: -.9, height: 34 / 40),
               ),
             ),
-            const SizedBox(height: 21),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Stack(
@@ -126,6 +127,7 @@ class _TicketTabState extends State<TicketTab> {
                                           fontWeight: context.watch<AppNotifier>().ticketLeftSelected
                                               ? FontWeight.w800
                                               : FontWeight.w600,
+                                          letterSpacing: -.5,
                                           fontSize: 18.sp)),
                                 ),
                               ),
@@ -148,6 +150,7 @@ class _TicketTabState extends State<TicketTab> {
                                         fontWeight: context.watch<AppNotifier>().ticketLeftSelected
                                             ? FontWeight.w600
                                             : FontWeight.w800,
+                                        letterSpacing: -.5,
                                         fontSize: 18.sp),
                                   ),
                                 ),
@@ -165,6 +168,7 @@ class _TicketTabState extends State<TicketTab> {
               child: PageView(
                 controller: controller,
                 scrollDirection: Axis.horizontal,
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 64),
@@ -205,6 +209,7 @@ class TicketCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
     return Stack(
       children: [
         Container(
@@ -282,28 +287,44 @@ class TicketCards extends StatelessWidget {
                 children: [
                   Text(
                     'Prize: AZN2,000 Cash',
-                    style: context.typography.body2Regular.copyWith(fontSize: 15, fontWeight: FontWeight.w600),
+                    style: context.typography.body2Regular.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: -0.5,
+                    ),
                   ),
                   Text(
                     "Product: Voucher AZN50",
-                    style: context.typography.body2Regular.copyWith(fontSize: 15, fontWeight: FontWeight.w500),
+                    style: context.typography.body2Regular.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: -0.5,
+                    ),
                   ),
                   const SizedBox(
                     height: 2,
                   ),
                   Text(
                     "Issued on:",
-                    style: context.typography.body2Regular.copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+                    style: context.typography.body2Regular.copyWith(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: -0.5,
+                    ),
                   ),
                   Text(
                     "27 June 2024, 05:25 PM",
-                    style: context.typography.body2Regular.copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+                    style: context.typography.body2Regular.copyWith(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: -0.5,
+                    ),
                   ),
                 ],
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 10,
             ),
             SizedBox(
               height: 4,
@@ -313,7 +334,7 @@ class TicketCards extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 3,
+              height: 1,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 14.65, right: 15.8, bottom: 10),
@@ -337,13 +358,19 @@ class TicketCards extends StatelessWidget {
                           children: [
                             Text(
                               "Sold out.",
-                              style:
-                                  context.typography.body2Regular.copyWith(fontSize: 10, fontWeight: FontWeight.w600),
+                              style: context.typography.body2Regular.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.5,
+                              ),
                             ),
                             Text(
                               "Draw on 15 June",
-                              style:
-                                  context.typography.body2Regular.copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+                              style: context.typography.body2Regular.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: -0.5,
+                              ),
                             )
                           ],
                         ),
@@ -363,11 +390,13 @@ class TicketCards extends StatelessWidget {
                             text: 'Ticket No.',
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
+                            letterSpacing: -0.5,
                           ),
                           TitleHeading1Widget(
                             text: 'RR-00001-00000001',
                             fontSize: 15,
                             fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
                           ),
                         ],
                       ))

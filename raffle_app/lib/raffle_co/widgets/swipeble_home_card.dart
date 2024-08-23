@@ -22,7 +22,6 @@ final PageController controller = PageController();
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: Container(
-                  
                   height: 318.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -43,7 +42,12 @@ final PageController controller = PageController();
                       child: Text(
                         'BIG \nDREAM\nBIG \nPRIZE!',
                         style: context.typography.largeTitle2Bold
-                            .copyWith(color: Colors.white, fontSize: 44, fontWeight: FontWeight.w900, height: 0.9),
+                            .copyWith(
+                          color: Colors.white,
+                          fontSize: 52,
+                          fontWeight: FontWeight.w900,
+                          height: 43 / 52,
+                        ),
                       ),
                     ),
                   ),
@@ -53,7 +57,7 @@ final PageController controller = PageController();
           ),
         ),
         const SizedBox(
-          height: 16,
+          height: 12,
         ),
         Align(
           alignment: Alignment.centerRight,
@@ -61,7 +65,7 @@ final PageController controller = PageController();
             padding: const EdgeInsets.only(right: 36.0),
             child: SmoothPageIndicator(
               effect: const ExpandingDotsEffect(
-                  dotColor: Color(0xFFA4A4A4), activeDotColor: Color(0xFF424242), dotHeight: 8, dotWidth: 8),
+                  dotColor: Color(0xFFA6A6A6), activeDotColor: Color(0xFF424242), dotHeight: 8, dotWidth: 8),
               controller: controller,
               count: 5,
             ),

@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             );
           },
           child: context.watch<AppNotifier>().isLeftSelected
-              ? const BottomNavBar()
+              ? const SafeArea(child: BottomNavBar())
               : PlaceBottomNavbar(tabController: controller),
         ),
         body: AnimatedSwitcher(

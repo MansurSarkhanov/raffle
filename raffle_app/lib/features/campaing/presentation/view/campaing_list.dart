@@ -25,7 +25,7 @@ class _CampaingListState extends State<CampaingList> {
             children: campaingList!
                 .map((e) => InkWell(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 48.0, left: 14, right: 14),
+                        padding: const EdgeInsets.only(bottom: 48.0, left: 14, right: 14),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
