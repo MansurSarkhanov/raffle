@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/page/place_of_restaurants_list.dart';
-import 'package:raffle_app/features/restaurants/presentation/page/restaurant_list_view.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../presentation/components/custom_text.dart';
@@ -79,7 +78,7 @@ class RestorantView extends StatelessWidget {
             controller: pageController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              RestaurantListView(controller: pageController),
+              // RestaurantListView(controller: pageController),
               PlaceOfRestaurantsList(controller: pageController),
             ],
           ),

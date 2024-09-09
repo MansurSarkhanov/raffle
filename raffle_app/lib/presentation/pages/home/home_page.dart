@@ -1,18 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
-import 'package:raffle_app/presentation/components/fab_button.dart';
-import 'package:raffle_app/presentation/pages/home/view/live_view.dart';
-import 'package:raffle_app/presentation/pages/home/view/offer_view.dart';
+import 'package:raffle_app/features/profile/presentation/page/profile_page.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/raffle_co/view/draws_tab.dart';
+import 'package:raffle_app/raffle_co/view/ticket_tab.dart';
+import 'package:raffle_app/raffle_co/view/wallet_tab.dart';
+import 'package:raffle_app/raffle_place/components/place_bottom_navbar.dart';
+import 'package:raffle_app/raffle_place/raffle_place_page.dart';
 
-import '../../../features/restaurants/presentation/page/restorant_tabview.dart';
-import '../../components/bottom_navbar.dart';
-import '../../components/custom_selection_appbar.dart';
-import 'home_tab.dart';
-import 'inbox_ticket_tab.dart';
-import 'test_scan.dart';
+import '../../../raffle_co/components/bottom_navbar.dart';
+import '../../../raffle_co/view/home_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,97 +21,96 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final TabController tabController;
-  late final TabController restorantTabController;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
+  late final TabController controller;
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 5, vsync: this);
-    restorantTabController = TabController(length: 5, vsync: this);
-    tabController.addListener(() {
-      print('first chnage');
-      setState(() {});
-    });
-    restorantTabController.addListener(() {
-      print('second chnage');
-
-      setState(() {});
-    });
+    controller = TabController(length: 5, vsync: this);
   }
-  
 
+  List<Widget> pages = [
+    const HomeTab(),
+    const DrawsTab(),
+    const TicketTab(),
+    const WalletTab(),
+  ];
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      extendBody: true,
-      backgroundColor:
-          context.watch<AppIndexNotifier>().state == AppPartSection.left
-              ? const Color(0xFFEBEBEB)
-              : const Color(0xFFF9F9F9),
-      appBar: tabController.index == 2 ||
-              tabController.index == 4 ||
-              restorantTabController.index == 1 ||
-              restorantTabController.index == 2 ||
-              restorantTabController.index == 4
-          ? null
-          : CustomSelectionAppbar(
-              controller: tabController,
-            ),
-      floatingActionButton:
-        context.watch<AppIndexNotifier>().state==AppPartSection.right&&restorantTabController.index==0 ?const MapFabButton() : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-            left: 12.0, right: 12, bottom: Platform.isIOS ? 20 : 12),
-        child: tabController.index == 2 ||
-                restorantTabController.index == 2 ||
-                tabController.index == 4 ||
-                restorantTabController.index == 4
-            ? null
-            : context.watch<AppIndexNotifier>().state == AppPartSection.right
-                ? RestorantBottomNavBar(tabController: restorantTabController)
-                : BottomNavBar(tabController: tabController),
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(
-            bottom:
-                tabController.index == 2 || restorantTabController.index == 2
-                    ? 0
-                    : 28.0),
-        child: context.watch<AppIndexNotifier>().state == AppPartSection.right
-            ? RestorantTabView(
-                restorantTabController: restorantTabController,
-              )
-            : TabBarView(
-                controller: tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  HomeTab(
-                    size: size,
-                    controller: tabController,
+    return ZoomDrawer(
+      borderRadius: 39,
+      menuBackgroundColor: const Color(0xFF261C51),
+      isRtl: true,
+      style: DrawerStyle.defaultStyle,
+      duration: const Duration(milliseconds: 300),
+      mainScreenTapClose: true,
+      slideWidth: size.width * 0.82,
+      mainScreenScale: 0.15,
+      menuScreenWidth: double.infinity,
+      angle: 0.0,
+      controller: context.watch<AppNotifier>().zoomDrawerController,
+      menuScreen: const ProfilePage(),
+      mainScreen: Scaffold(
+        extendBody: true,
+        bottomNavigationBar: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 400),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          child: context.watch<AppNotifier>().isLeftSelected
+              ? BottomNavBar()
+              : PlaceBottomNavbar(tabController: controller),
+        ),
+        body: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 400),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            child: Stack(
+              children: [
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  child: context.watch<AppNotifier>().isLeftSelected
+                      ? pages[context.watch<AppNotifier>().currentPageIndex]
+                      : RafflePlacePage(controller: controller),
+                ),
+                SizedBox(
+                  height: 112.h,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
+                    decoration: BoxDecoration(
+                      color: context.watch<AppNotifier>().currentPageIndex == 0
+                          ? const Color(0xFF9D2727)
+                          : context.watch<AppNotifier>().currentPageIndex == 1
+                              ? const Color(0xFF08294F)
+                              : context.watch<AppNotifier>().currentPageIndex == 2
+                                  ? context.watch<AppNotifier>().ticketLeftSelected
+                                      ? const Color(0xFFFF603D)
+                                      : const Color(0xFF595959)
+                                  : const Color(0xFF18852A),
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(30),
+                      ),
+                    ),
+                    alignment: Alignment.bottomLeft,
+                    child: const SwipeAppBar(),
                   ),
-                  const LiveView(),
-                  QRCodeScreen(controller: tabController),
-                  const OfferView(),
-                  InboxTicketTab(
-                    controller: tabController,
-                  )
-                ],
-              ),
+                ),
+              ],
+            )),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    restorantTabController.dispose();
-    super.dispose();
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
-import '../widgets/campaing_winner_widget.dart';
+import '../../../../raffle_co/widgets/campaing_winner_widget.dart';
 
 class WatchLiveScreen extends StatefulWidget {
   final String date;

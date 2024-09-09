@@ -6,10 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_state.dart';
 
-import '../../../../presentation/pages/home/widgets/restorant_card.dart';
+import '../../../../raffle_co/widgets/restorant_card.dart';
+import '../../../../raffle_place/components/restorant_grid_card.dart';
 
 class RestaurantListView extends StatelessWidget {
-  const RestaurantListView({super.key, required this.controller});
+  const RestaurantListView({
+    super.key,
+    required this.controller,
+  });
   final PageController controller;
   @override
   Widget build(BuildContext context) {
@@ -28,9 +32,7 @@ class RestaurantListView extends StatelessWidget {
                   InkWell(
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
-                    onTap: () async {
-                      await context.read<RestourantsNotifier>().selectRestorant(index);
-                      controller.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+                    onTap: () {
                     },
                     child: RestaurantCard(
                       gradient: gradients[index],

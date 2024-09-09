@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:raffle_app/app_router.dart';
 import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/raffle_place/notifier.dart';
 
 import 'core/theme/theme_scope.dart';
 import 'core/theme/theme_scope_widget.dart';
@@ -19,9 +21,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // final SharedPreferences prefs = await SharedPreferences.getInstance();
-  // await prefs.remove("logged");
-  // await prefs.remove("token");
 
   await init();
   runApp(
@@ -31,7 +30,13 @@ Future<void> main() async {
           create: (context) => AuthNotifier(getIt.get<AuthRepository>()),
         ),
         ChangeNotifierProvider(
-          create: (context) => AppIndexNotifier(),
+          create: (context) => AppNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RafflePlaceNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RestourantsNotifier()..fetchAllRestorants(context),
         ),
       ],
       child: const ThemeScopeWidget(child: MyApp()),
@@ -45,6 +50,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ThemeScope.of(context);
     final extensions = <ThemeExtension<dynamic>>[theme.appColors, theme.appTypography];
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [
+        SystemUiOverlay.top,
+      ],
+    );
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -58,10 +69,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Raffle',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-              extensions: extensions
-          ),
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+              extensions: extensions),
         );
       },
     );

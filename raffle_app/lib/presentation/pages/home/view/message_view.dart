@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/message_widget.dart';
+import '../../../../raffle_co/widgets/message_widget.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});

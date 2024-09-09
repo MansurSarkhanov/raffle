@@ -20,7 +20,9 @@ class ThemeScopeWidget extends StatefulWidget {
 }
 
 class ThemeScopeWidgetState extends State<ThemeScopeWidget> {
+  final String gilroy = 'Gilroy';
   final String galano = 'Galano';
+
 
   @override
   Widget build(BuildContext context) {

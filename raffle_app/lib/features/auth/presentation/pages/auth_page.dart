@@ -18,12 +18,17 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  final PageController pgController = PageController();
+
   int curIndex = 0;
   bool isLoginSelected = true;
-
+  @override
+  dispose() {
+    pgController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
-    PageController pgController = PageController();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,

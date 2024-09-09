@@ -237,8 +237,7 @@ class _CameraViewState extends State<CameraView> {
                             RouteHelper.createRoute(
                                 routeName: ChangeNotifierProvider.value(
                                     value: context.read<ProfileNotifier>(),
-                                    child: WalletCardPage(
-                                      controller: widget.controller,
+                                    child: const WalletCardPage(
                                     )),
                                 location: RoutingLocation.rightToLeft,
                                 transitionTime: 500,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/path/icon_path.dart';
@@ -7,8 +8,7 @@ import 'package:raffle_app/core/utilities/extension/icon_path_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/apple_login_button.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/google_login_button.dart';
-import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/presentation/animation/bounce_animation.dart';
 
 import '../../widgets/custom_elevated_button.dart';
@@ -31,6 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
     authNotifier = Provider.of<AuthNotifier>(context, listen: false);
   }
 
+  bool isValidate = true;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -40,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BounceFromBottomAnimation(
             delay: 2.2,
             child: CustomTextField(
+                isValidate: isValidate,
                 controller: emailLoginController,
                 textFieldImage: IconPath.person.toPathPng,
                 height: size.height * 0.08,
@@ -52,14 +55,15 @@ class _LoginScreenState extends State<LoginScreen> {
           BounceFromBottomAnimation(
             delay: 2.3,
             child: CustomTextField(
+                isValidate: isValidate,
                 suffixIcon: IconButton(
                   onPressed: () {
-                    context.read<AppIndexNotifier>().visiblePassword();
+                    context.read<AppNotifier>().visiblePassword();
                   },
                   icon: Icon(
-                      context.watch<AppIndexNotifier>().isVisiblePassword ? Icons.visibility_off : Icons.visibility),
+                      context.watch<AppNotifier>().isVisiblePassword ? Icons.visibility_off : Icons.visibility),
                 ),
-                isObscure: context.watch<AppIndexNotifier>().isVisiblePassword,
+                isObscure: context.watch<AppNotifier>().isVisiblePassword,
                 controller: passwordLoginController,
                 textFieldImage: IconPath.lock.toPathPng,
                 height: size.height * 0.08,
@@ -79,15 +83,76 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () async {
                       if (emailLoginController.text.trim().isNotEmpty &&
                           passwordLoginController.text.trim().isNotEmpty) {
+                        isValidate = true;
+                        setState(() {});
                         final result = await notifier.loginUser(
                             email: emailLoginController.text.trim(), password: passwordLoginController.text.trim());
-                        if (result && context.mounted) {
+                        print(result);
+
+                        if (result) {
                           context.goNamed('home');
+                          return;
                         } else {
-                          openFlushbar(context, title: "Istifadeci tapilmadi", color: Colors.redAccent);
+                          showGeneralDialog(
+                            barrierLabel: "Label",
+                            barrierDismissible: true,
+                            barrierColor: Colors.black.withOpacity(0.5),
+                            transitionDuration: const Duration(milliseconds: 400),
+                            context: context,
+                            pageBuilder: (context, anim1, anim2) {
+                              return Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Container(
+                                    height: 150.h,
+                                    margin: const EdgeInsets.only(bottom: 30, left: 12, right: 12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(32),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 27),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                print('sdfsdfsdf');
+                                                Navigator.pop(context);
+                                              },
+                                              icon: const Icon(Icons.close)),
+                                          const SizedBox(
+                                            height: 18,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'User not found, please try again',
+                                                style: context.typography.body2Bold
+                                                    .copyWith(fontSize: 15, color: Colors.black38),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            transitionBuilder: (context, anim1, anim2, child) {
+                              return SlideTransition(
+                                position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(anim1),
+                                child: child,
+                              );
+                            },
+                          );
                         }
                       } else {
-                        openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
+                        isValidate = false;
+                        setState(() {});
                       }
                     },
                     buttonText: 'Login',

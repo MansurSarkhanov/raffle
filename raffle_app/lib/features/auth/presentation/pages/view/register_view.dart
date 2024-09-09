@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/apple_login_button.dart';
 import 'package:raffle_app/features/auth/presentation/widgets/google_login_button.dart';
-import 'package:raffle_app/features/auth/presentation/widgets/open_flushbar.dart';
 import 'package:raffle_app/presentation/animation/bounce_animation.dart';
 
 import '../../notifier/auth_state.dart';
@@ -26,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordController = TextEditingController();
   bool isPleasedWithConditions = false;
 
+  bool isValidate = true;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -38,12 +39,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomTextField(
+                    isValidate: isValidate,
                     controller: nameController,
                     textFieldImage: null,
                     hintText: 'Name',
                     height: size.height * 0.08,
                     width: size.width * 0.43),
                 CustomTextField(
+                    isValidate: isValidate,
                     controller: surNameController,
                     textFieldImage: null,
                     hintText: 'Surname',
@@ -58,6 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           BounceFromBottomAnimation(
             delay: 2.3,
             child: CustomTextField(
+                isValidate: isValidate,
                 keyboardType: TextInputType.number,
                 controller: numberController,
                 textFieldImage: null,
@@ -71,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           BounceFromBottomAnimation(
             delay: 2.4,
             child: CustomTextField(
+              isValidate: isValidate,
               controller: emailController,
               textFieldImage: null,
               height: size.height * 0.08,
@@ -84,6 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           BounceFromBottomAnimation(
             delay: 2.5,
             child: CustomTextField(
+              isValidate: isValidate,
               isObscure: true,
               controller: passwordController,
               textFieldImage: null,
@@ -128,20 +134,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: CustomElevatedButton(
                     isLoading: notifier.state is AuthProgress ? true : false,
                     icon: null,
-                    onPressed: () {
+                    onPressed: () async {
                       if (nameController.text.trim().isNotEmpty &&
                           surNameController.text.trim().isNotEmpty &&
                           numberController.text.trim().isNotEmpty &&
                           emailController.text.trim().isNotEmpty &&
                           passwordController.text.trim().isNotEmpty) {
-                        notifier.registerUser(
+                        final result = await notifier.registerUser(
                             email: emailController.text.trim(),
                             password: passwordController.text.trim(),
                             name: nameController.text.trim(),
                             number: numberController.text.trim(),
                             surname: surNameController.text.trim());
+                        if (result && context.mounted) {
+                          context.goNamed('home');
+                          return;
+                        }
                       } else {
-                        openFlushbar(context, title: "Boşluları doldurun", color: Colors.redAccent);
+                        isValidate = false;
+                        setState(() {});
                       }
                     },
                     buttonText: 'Register',
@@ -162,7 +173,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             height: 20,
           ),
           const BounceFromBottomAnimation(delay: 2.9, child: GoogleLoginButton())
-        
         ],
       ),
     );

@@ -28,7 +28,7 @@ class AuthNotifier extends ChangeNotifier {
     return false;
   }
 
-  Future<void> registerUser(
+  Future<bool> registerUser(
       {required String email,
       required String password,
       required String name,
@@ -36,20 +36,30 @@ class AuthNotifier extends ChangeNotifier {
       required String surname}) async {
     state = AuthProgress();
     notifyListeners();
-    final result = await authRepository.registerWithEmailAndPassword(
+    try {
+      final result = await authRepository.registerWithEmailAndPassword(
       email: email,
       password: password,
       name: name,
       number: number,
       surname: surname,
     );
-    if (result.isSuccess()) {
+      if (result.tryGetSuccess()!.uid.isNotEmpty) {
       state = AuthSuccess();
       notifyListeners();
+        return true;
     } else if (result.isError()) {
       state = AuthError();
       notifyListeners();
+        return false;
     }
+    } catch (e) {
+      state = AuthError();
+      notifyListeners();
+      return false;
+    }
+    return false;
+    
   }
 
   Future<bool> checkAuth() async {

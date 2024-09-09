@@ -1,149 +1,237 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle_app/core/utilities/extension/image_path_ext.dart';
-import 'package:raffle_app/notifier/app_index_notifier.dart';
-import 'package:raffle_app/presentation/pages/wallet/wallet_card_page.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
 
-import '../../core/constants/colors.dart';
-import '../../core/constants/path/image_path.dart';
-import '../../core/utilities/helper/route.dart';
-import '../../features/profile/presentation/notifier/profile_notifier.dart';
-import '../../features/profile/presentation/page/profile_page.dart';
-
-class CustomSelectionAppbar extends StatelessWidget implements PreferredSizeWidget {
+class CustomSelectionAppbar extends StatefulWidget {
   const CustomSelectionAppbar({
     super.key,
-    required this.controller,
   });
-  final TabController controller;
+
+  @override
+  State<CustomSelectionAppbar> createState() => _CustomSelectionAppbarState();
+}
+
+class _CustomSelectionAppbarState extends State<CustomSelectionAppbar> {
+  bool isLeftSelected = true;
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppIndexNotifier>(builder: (context, appIndexNotifier, child) {
-      return AppBar(
-        elevation: 0,
-        backgroundColor: context.watch<AppIndexNotifier>().state == AppPartSection.left
-            ? const Color(0xFFEBEBEB)
-            : const Color(0xFFF9F9F9),
-
-        title: Row(
-          children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      RouteHelper.createRoute(
-                          routeName: ChangeNotifierProvider.value(
-                              value: context.read<ProfileNotifier>(), child: ProfilePage(controller: controller)),
-                          location: RoutingLocation.leftToRight,
-                          transitionTime: 400,
-                          reverseTransitionTime: 400),
-                    );
-                  },
-                  child: Container(
-                    width: 55.w,
-                    height: 47.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        // color:AppColors.standartWhiteColor,
-                        color:
-                            // appIndexNotifier.state == AppPartSection.left
-                            //     ? Colors.white:
-                            unselectButtonColor),
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      height: 28,
-                      ImagePath.user_profile.toPathSvg,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(width: 7),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  appIndexNotifier.setIndex(0);
-                  controller.index = 0;
-                },
-                child: Container(
-                  width: 115.w,
-                  height: 47.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color:
-                          appIndexNotifier.state == AppPartSection.left ? Colors.white : unselectButtonColor),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 30.h, width: 30.h, child: Image.asset(ImagePath.raffle_logo.toPathPng)),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SvgPicture.asset('assets/svg/raffle_text.svg'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  appIndexNotifier.setIndex(2);
-                },
-                child: Container(
-                  width: 115.w,
-                  height: 47.h,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.transparent),
-                  child: Image.asset(appIndexNotifier.state == AppPartSection.right
-                      ? 'assets/images/im_raffle_map.png'
-                      : 'assets/images/im_unselected_map.png'),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 7,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  RouteHelper.createRoute(
-                      routeName: ChangeNotifierProvider.value(
-                          value: context.read<ProfileNotifier>(),
-                          child: WalletCardPage(
-                            controller: controller,
-                          )),
-                      location: RoutingLocation.rightToLeft,
-                      transitionTime: 500,
-                      reverseTransitionTime: 250),
-                );
-              },
-              child: Container(
-                width: 55.w,
-                height: 47.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color:
-                      // appIndexNotifier.state == AppPartSection.right ? Colors.white :
-                      unselectButtonColor,
-                ),
-                child: Center(child: SvgPicture.asset(ImagePath.user_wallet.toPathSvg)),
-              ),
-            ),
-          ],
+    return Consumer<AppNotifier>(builder: (context, appIndexNotifier, child) {
+      return Container(
+        height: 130,
+        decoration: BoxDecoration(
+          color: context.watch<AppNotifier>().currentPageIndex == 0 ? const Color(0xFF9D2727) : const Color(0xFF147923),
+          borderRadius: const BorderRadius.vertical(bottom: Radius.elliptical(45, 45.0)),
         ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 60.h,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(42),
+                ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                height: 52.h,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFD6D6D6),
+                  borderRadius: BorderRadius.circular(42),
+                ),
+              ),
+              SizedBox(
+                height: 60.h,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    AnimatedAlign(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.linearToEaseOut,
+                      alignment: isLeftSelected ? Alignment.centerLeft : Alignment.centerRight,
+                      child: Container(
+                        width: 182.w,
+                        height: 60.h,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFFFE201),
+                              Color(0xFFFFD900),
+                            ],
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(51),
+                        ),
+                        alignment: Alignment.center,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              Future.delayed(const Duration(microseconds: 100), () {
+                                isLeftSelected = true;
+                                setState(() {});
+                              });
+                              // controller.animateToPage(0,
+                              //     duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                            },
+                            child: Center(
+                              child: Text('Active Tickets',
+                                  style: context.typography.headlineBold.copyWith(
+                                      fontWeight: isLeftSelected ? FontWeight.w800 : FontWeight.w600, fontSize: 18.sp)),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              Future.delayed(const Duration(microseconds: 100), () {
+                                isLeftSelected = false;
+                                setState(() {});
+                              });
+                              // controller.animateToPage(1,
+                              //     duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                            },
+                            child: Center(
+                              child: Text(
+                                'Expired Tickets',
+                                style: context.typography.headlineBold.copyWith(
+                                    fontWeight: isLeftSelected ? FontWeight.w600 : FontWeight.w800, fontSize: 18.sp),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        //  Padding(
+        //   padding: const EdgeInsets.only(top: 50.0, left: 24, right: 24, bottom: 12),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: [
+        //       Container(
+        //         height: 38.h,
+        //         width: 180,
+        //         decoration: BoxDecoration(
+        //           gradient: const LinearGradient(begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [
+        //             Color(0xFFF77F06),
+        //             Color(0xFFE5A819),
+        //           ]),
+        //           borderRadius: BorderRadius.circular(21),
+        //         ),
+        //         child: Stack(
+        //           children: [
+        //             AnimatedAlign(
+        //               duration: const Duration(milliseconds: 300),
+        //               curve: Curves.decelerate,
+        //               alignment: Alignment.centerLeft,
+        //               child: Container(
+        //                 width: 122,
+        //                 height: 44.h,
+        //                 decoration: BoxDecoration(
+        //                   gradient: const LinearGradient(
+        //                     begin: Alignment.topCenter,
+        //                     end: Alignment.bottomCenter,
+        //                     colors: [
+        //                       Color(0xFF4FD675),
+        //                       Color(0xFF0B560C),
+        //                     ],
+        //                   ),
+        //                   borderRadius: BorderRadius.circular(21),
+        //                 ),
+        //                 alignment: Alignment.center,
+        //               ),
+        //             ),
+        //             Row(
+        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //               children: [
+        //                 Padding(
+        //                   padding: const EdgeInsets.only(left: 18.0),
+        //                   child: Row(
+        //                     children: [
+        //                       Image.asset(
+        //                         'assets/images/im_raffle_logo.png',
+        //                         height: 24,
+        //                         width: 24,
+        //                       ),
+        //                       SizedBox(
+        //                         width: 5.w,
+        //                       ),
+        //                       InkWell(
+        //                         highlightColor: Colors.transparent,
+        //                         splashColor: Colors.transparent,
+        //                         onTap: () {},
+        //                         child: Center(
+        //                           child: Text(
+        //                             'raffle',
+        //                             style: context.typography.title1Bold
+        //                                 .copyWith(fontWeight: FontWeight.w800, fontSize: 15, color: Colors.white),
+        //                           ),
+        //                         ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //                 Padding(
+        //                   padding: const EdgeInsets.only(right: 18.0),
+        //                   child: InkWell(
+        //                     highlightColor: Colors.transparent,
+        //                     splashColor: Colors.transparent,
+        //                     onTap: () {},
+        //                     child: Center(child: SvgPicture.asset('assets/svg/test.svg')),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //       InkWell(
+        //           onTap: () {
+        //             if (ZoomDrawer.of(context)!.isOpen()) {
+        //               ZoomDrawer.of(context)!.close();
+        //             } else {
+        //               ZoomDrawer.of(context)!.open();
+        //             }
+
+        //             context.read<AppNotifier>().toggleDrawer();
+        //           },
+        //           child: Container(
+        //             transform: Matrix4.rotationZ(0.174533),
+        //             decoration: BoxDecoration(
+        //                 borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white, width: 2)),
+        //             child: const Padding(
+        //               padding: EdgeInsets.all(12.0),
+        //               child: Icon(
+        //                 Icons.person,
+        //                 color: Colors.white,
+        //               ),
+        //             ),
+        //           )),
+        //     ],
+        //   ),
+        // ),
       );
     });
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(48);
 }
