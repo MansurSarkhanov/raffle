@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 
 class JustLaunchedCard extends StatelessWidget {
@@ -67,6 +68,10 @@ class JustLaunchedCard extends StatelessWidget {
                           Image.asset(
                             'assets/images/im_sold.png',
                             width: 92,
+                          ),
+                          SvgPicture.asset('assets/svg/logo.svg'),
+                          const SizedBox(
+                            width: 10,
                           ),
                           Image.asset(
                             'assets/images/im_total.png',

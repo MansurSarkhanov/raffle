@@ -1,89 +1,119 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
 
-import '../../../../presentation/components/go_back_button.dart';
+import '../../../../presentation/pages/home/view/profile_detail.dart';
+import '../../../../raffle_co/view/wallet_tab.dart';
+import '../../../auth/presentation/widgets/custom_text_field.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
+class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
+
+  @override
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+}
+
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  final passwordController = TextEditingController();
+  final confirmpasswordController = TextEditingController();
+  final oldpasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    
     var isObsecureText = false;
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F1F1),
-      body: Padding(
-        padding: EdgeInsets.only(top: size.height * 0.08, right: size.width * 0.04, left: size.width * 0.04),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GoBackButton(
-                    buttonBackColor: const Color(0xFFD9D9D9),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-                const Text(
-                  'Change Password',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-                ),
+      body: Stack(
+        children: [
+          const BackgroundColorCard(
+            downColor: Color(0xFFEEEEEE),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1A026C),
+                Color(0xFF7518E8),
+                Color(0xFFEEEEEE),
               ],
             ),
-            SizedBox(
-              height: size.height * 0.1,
-            ),
-            Column(
-              children: [
-                Container(
-                  height: size.height * 0.08,
-                  width: size.width,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
-                  child: Center(
-                    child: PasswordTextField(isObsecureText: isObsecureText, size: size),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                Container(
-                  height: size.height * 0.08,
-                  width: size.width,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
-                  child: Center(
-                    child: PasswordTextField(isObsecureText: isObsecureText, size: size),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+          ),
+          Column(
+            children: [
+              const TopUpAppBar(
+                text: 'Change Password',
+              ),
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                      },
-                      child: Container(
-                          height: size.height * 0.07,
-                          width: size.width * 0.4,
-                          decoration:
-                              BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xFF435784)),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Update',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontFamily: 'Helvetica Neue',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          )),
+                    const SizedBox(
+                      height: 20,
                     ),
+                    CustomTextField(
+                        isValidate: true,
+                        controller: oldpasswordController,
+                        textFieldImage: null,
+                        hintText: 'Old Password',
+                        height: size.height * 0.07,
+                        width: size.width),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomTextField(
+                        isValidate: true,
+                        controller: passwordController,
+                        textFieldImage: null,
+                        hintText: 'New Password',
+                        height: size.height * 0.07,
+                        width: size.width),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomTextField(
+                      isValidate: true,
+                      controller: confirmpasswordController,
+                      textFieldImage: null,
+                      height: size.height * 0.07,
+                      width: size.width,
+                      hintText: 'Re-enter Password',
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Color(0xFF1C29D1),
+                                Color(0xFF7166FE),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(34.r),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 55),
+                            child: Text(
+                              'Update',
+                              style: context.typography.body2Regular.copyWith(color: Colors.white),
+                            ),
+                    ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+             
+            ],
+          ),
+        ],
       ),
     );
   }

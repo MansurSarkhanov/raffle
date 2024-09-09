@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final bool isObscure;
   final Widget? suffixIcon;
+  final Color? backColor;
+
   final bool isValidate;
 
   const CustomTextField({
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.emailAddress,
     this.suffixIcon,
     required this.isValidate,
+    this.backColor,
   });
 
   @override
@@ -33,7 +36,7 @@ class CustomTextField extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           border: Border.all(color: isValidate ? Colors.transparent : Colors.red),
-          color: Colors.white,
+          color: backColor ?? Colors.white,
           borderRadius: BorderRadius.circular(16)),
       child: TextField(
         keyboardType: keyboardType,

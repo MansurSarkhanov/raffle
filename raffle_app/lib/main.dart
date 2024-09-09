@@ -38,6 +38,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => RestourantsNotifier()..fetchAllRestorants(context),
         ),
+        
       ],
       child: const ThemeScopeWidget(child: MyApp()),
     ),
