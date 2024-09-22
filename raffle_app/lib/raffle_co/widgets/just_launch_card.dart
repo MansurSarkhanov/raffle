@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
-
 class JustLaunchedCard extends StatelessWidget {
   const JustLaunchedCard({
     super.key,
@@ -40,7 +40,8 @@ class JustLaunchedCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Text('JUST LAUNCHED',
+                    child: Text(
+                      AppLocalizations.of(context)!.just_launch,
                         style: context.typography.body2Bold
                           .copyWith(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -.5),
                     ),

@@ -24,7 +24,7 @@ class RestaurantCard extends StatelessWidget {
                 begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.white, Color(0xFFBABABA)]),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withOpacity(.25), offset: const Offset(0, 4), blurRadius: 4, spreadRadius: 2),
+                  color: Colors.black.withOpacity(.25), offset: const Offset(0, 1), blurRadius: 4, spreadRadius: 0),
             ],
           ),
           child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 
@@ -40,8 +41,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
           Column(
             children: [
-              const TopUpAppBar(
-                text: 'Change Password',
+              TopUpAppBar(
+                text: AppLocalizations.of(context)!.change_password,
               ),
               const SizedBox(height: 12),
               Padding(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/presentation/pages/home/test_scan.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -56,7 +58,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               TabBarItem(
                 index: 0,
                 imagePath: 'home',
-                text: "Home",
+                text: AppLocalizations.of(context)!.home,
                 onPress: () {
                   context.read<AppNotifier>().changeTabIndex(0);
                 },
@@ -64,15 +66,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
               TabBarItem(
                 index: 1,
                 imagePath: 'draws',
-                text: "Draws",
+                text: AppLocalizations.of(context)!.draws,
                 onPress: () {
                   context.read<AppNotifier>().changeTabIndex(1);
                 },
               ),
               TabBarItem(
+                index: 4,
+                imagePath: 'ic_scan_restorant',
+                text: "Scan",
+                onPress: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return const QRCodeScreen();
+                    },
+                  ));
+                },
+              ),
+              TabBarItem(
                 index: 2,
                 imagePath: 'ticket',
-                text: "Ticket",
+                text: AppLocalizations.of(context)!.ticket,
                 onPress: () {
                   context.read<AppNotifier>().changeTabIndex(2);
                 },
@@ -80,67 +94,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
               TabBarItem(
                 index: 3,
                 imagePath: 'wallet',
-                text: "Wallet",
+                text: AppLocalizations.of(context)!.wallet,
                 onPress: () {
                   context.read<AppNotifier>().changeTabIndex(3);
                 },
               ),
-              Stack(alignment: Alignment.bottomCenter, children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        barrierColor: Colors.transparent,
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (context) {
-                          return const ShopModalSheet();
-                        },
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 20.3,
-                            color: Colors.black.withOpacity(0.25),
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(15.0.dm),
-                        child: Image.asset(
-                          'assets/images/im_raffle_tab.png',
-                          height: 38,
-                          width: 38,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: Container(
-                    height: 6,
-                    width: 10,
-                    decoration: const BoxDecoration(color: Colors.transparent, shape: BoxShape.circle),
-                  ),
-                )
-              ]),
               TabBarItem(
                 index: 5,
                 onPress: () {
                   context.read<AppNotifier>().toggleDrawer();
                 },
                 imagePath: 'more',
-                text: "Menu",
+                text: AppLocalizations.of(context)!.menu,
               ),
             ],
           ),
@@ -215,23 +180,19 @@ class TabBarItem extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         Padding(
-          padding: const EdgeInsets.only(right: 12.0),
+          padding: const EdgeInsets.only(right: 12.0, bottom: 12.0),
           child: InkWell(
             onTap: onPress,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 20.3,
-                    color: Colors.black.withOpacity(0.25),
-                  )
-                ],
+               
               ),
-              child: Padding(
-                padding: EdgeInsets.all(17.0.dm),
+              child: SizedBox(
+                width: 68.0.dm,
                 child: Tab(
+                  
                   icon: SvgPicture.asset('assets/svg/$imagePath.svg'),
                   child: Text(
                     text,
@@ -244,7 +205,7 @@ class TabBarItem extends StatelessWidget {
         ),
         index == context.watch<AppNotifier>().currentPageIndex
             ? Positioned(
-                bottom: 6,
+                bottom: 0,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 12.0),
                   child: Container(

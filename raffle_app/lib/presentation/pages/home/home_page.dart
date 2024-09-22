@@ -3,8 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:raffle_app/core/theme/theme_ext.dart';
+import 'package:raffle_app/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:raffle_app/features/profile/presentation/page/profile_page.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/presentation/pages/home/test_scan.dart';
 import 'package:raffle_app/raffle_co/view/draws_tab.dart';
 import 'package:raffle_app/raffle_co/view/ticket_tab.dart';
 import 'package:raffle_app/raffle_co/view/wallet_tab.dart';
@@ -22,11 +25,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final TabController controller;
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 5, vsync: this);
   }
 
   List<Widget> pages = [
@@ -34,6 +35,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     const DrawsTab(),
     const TicketTab(),
     const WalletTab(),
+    const QRCodeScreen(),
+
   ];
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           },
           child: context.watch<AppNotifier>().isLeftSelected
               ? const BottomNavBar()
-              : PlaceBottomNavbar(tabController: controller),
+              : const PlaceBottomNavbar(),
         ),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 400),
@@ -85,7 +88,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 },
                 child: context.watch<AppNotifier>().isLeftSelected
                     ? pages[context.watch<AppNotifier>().currentPageIndex]
-                    : RafflePlacePage(controller: controller),
+                    : const RafflePlacePage(),
               ),
               SizedBox(
                 height: 112.h,
@@ -112,11 +115,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       const SwipeAppBar(),
                       Padding(
                         padding: const EdgeInsets.only(right: 12.0),
-                        child: InkWell(
-                          onTap: () {
-                            context.read<AppNotifier>().toggleDrawer();
-                          },
-                          child: SvgPicture.asset('assets/svg/user.svg'),
+                        child: Row(
+                          children: [
+                            Text(
+                              context.watch<ProfileNotifier>().user?.name ?? '',
+                              style: context.typography.body2Bold.copyWith(color: Colors.white),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                context.read<AppNotifier>().toggleDrawer();
+                              },
+                              child: SvgPicture.asset('assets/svg/user.svg'),
+                            ),
+                          ],
                         ),
                       ),
                     ],

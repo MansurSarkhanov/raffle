@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,8 +13,11 @@ import 'package:raffle_app/features/profile/presentation/notifier/profile_notifi
 import 'package:raffle_app/features/profile/presentation/notifier/profile_state.dart';
 import 'package:raffle_app/features/profile/presentation/page/change_password_view.dart';
 import 'package:raffle_app/presentation/components/gradient_text.dart';
+import 'package:raffle_app/presentation/pages/home/view/card_view.dart';
+import 'package:raffle_app/presentation/pages/home/view/currency_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/favorite_view.dart';
 import 'package:raffle_app/presentation/pages/home/view/profile_detail.dart';
+import 'package:raffle_app/presentation/pages/home/view/select_language_view.dart';
 
 import '../../../../presentation/components/go_back_button.dart';
 import '../../../auth/presentation/notifier/auth_notifier.dart';
@@ -104,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               );
                             },
                             iconPath: 'ic_personal',
-                            text: "Personal Details",
+                            text: AppLocalizations.of(context)!.personal_detail,
                           ),
                           const SizedBox(
                             height: 24,
@@ -118,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               );
                             },
                             iconPath: 'ic_password',
-                            text: "Change Password",
+                            text: AppLocalizations.of(context)!.change_password,
                           ),
                           const SizedBox(
                             height: 24,
@@ -132,31 +136,49 @@ class _ProfilePageState extends State<ProfilePage> {
                               );
                             },
                             iconPath: 'ic_favori',
-                            text: "Favorites",
+                            text: AppLocalizations.of(context)!.favorites,
                           ),
                           const SizedBox(
                             height: 24,
                           ),
                           ProfileComponent(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SelectLanguageView(),
+                                ),
+                              );
+                            },
                             iconPath: 'ic_language',
-                            text: "Language",
+                            text: AppLocalizations.of(context)!.language,
                           ),
                           const SizedBox(
                             height: 24,
                           ),
                           ProfileComponent(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const CurrencyView(),
+                                ),
+                              );
+                            },
                             iconPath: 'ic_currency',
-                            text: "Currency",
+                            text: AppLocalizations.of(context)!.currency,
                           ),
                           const SizedBox(
                             height: 24,
                           ),
                           ProfileComponent(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const CardView(),
+                                ),
+                              );
+                            },
                             iconPath: 'ic_card',
-                            text: "Saved Cards",
+                            text: AppLocalizations.of(context)!.save_card,
                           ),
                           const SizedBox(
                             height: 32,
@@ -281,7 +303,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 16,
                                 ),
                                 Text(
-                                  'Logout',
+                                  AppLocalizations.of(context)!.logout,
                                   style: context.typography.body2Bold.copyWith(color: Colors.white, fontSize: 19),
                                 )
                               ],
@@ -302,15 +324,15 @@ class _ProfilePageState extends State<ProfilePage> {
                             height: 32,
                           ),
                           Text(
-                            'Get in touch',
+                            AppLocalizations.of(context)!.get_in_touch,
                             style: context.typography.body2Bold.copyWith(color: Colors.white, fontSize: 25),
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-                          const ContactCard(
+                          ContactCard(
                             isGradient: true,
-                            text: "Have questions?\nChat with us",
+                            text: AppLocalizations.of(context)!.have_question,
                             color: Colors.transparent,
                           ),
                           const SizedBox(
@@ -436,7 +458,7 @@ class ProfileComponent extends StatelessWidget {
             ),
             Text(
               text,
-              style: context.typography.body2Bold.copyWith(color: Colors.white, fontSize: 18),
+              style: context.typography.body2Bold.copyWith(color: Colors.white, fontSize: 16),
             ),
             const Spacer(),
             SvgPicture.asset('assets/svg/right_arrow.svg')

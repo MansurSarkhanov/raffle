@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 
 import '../../features/campaing/presentation/view/campaing_list.dart';
+import '../../presentation/pages/home/view/watch_live_view.dart';
 
 class DrawsTab extends StatefulWidget {
   const DrawsTab({super.key});
@@ -48,7 +50,6 @@ class _DrawsTabState extends State<DrawsTab> {
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
                     Color(0xFFEEEEEE),
-
                   ],
                 ),
               ),
@@ -66,14 +67,25 @@ class _DrawsTabState extends State<DrawsTab> {
                       itemCount: 5,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 6, top: 12, bottom: 12, left: 12),
-                          child: Image.asset('assets/images/im_draw_test.png'),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const WatchLiveScreen(
+                                    videoUrl: 'https://emiland.com/front/videos/Emiland_Header.mp4',
+                                    date: '17 June 2023',
+                                    time: '10:00 AM'),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 6, top: 12, bottom: 12, left: 12),
+                            child: Image.asset('assets/images/im_draw_test.png'),
+                          ),
                         );
                       },
                     ),
                   ),
-                  
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Stack(
@@ -137,7 +149,7 @@ class _DrawsTabState extends State<DrawsTab> {
                                         //     duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                                       },
                                       child: Center(
-                                        child: Text('Active Tickets',
+                                        child: Text(AppLocalizations.of(context)!.active_ticket,
                                             style: context.typography.headlineBold.copyWith(
                                                 fontWeight: isLeftSelected ? FontWeight.w800 : FontWeight.w600,
                                                 letterSpacing: -.5,
@@ -159,7 +171,7 @@ class _DrawsTabState extends State<DrawsTab> {
                                       },
                                       child: Center(
                                         child: Text(
-                                          'Expired Tickets',
+                                          AppLocalizations.of(context)!.expired_ticket,
                                           style: context.typography.headlineBold.copyWith(
                                               letterSpacing: -.5,
                                               fontWeight: isLeftSelected ? FontWeight.w600 : FontWeight.w800,

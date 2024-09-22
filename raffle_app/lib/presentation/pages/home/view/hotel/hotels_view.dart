@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -56,20 +54,23 @@ class HotelsView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 35.0),
       child: Column(
         children: [
-          SizedBox(height: Platform.isIOS ? 56 : 50),
-          searchHeader(context),
+          const SizedBox(height: 112),
+          // searchHeader(context),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SearchHotelResult(),
-                  const SearchHotelResult(),
-                  const SearchHotelResult(),
-                  const SearchHotelResult(),
-                  SizedBox(
-                    height: 42.h,
-                  ),
-                ],
+            child: Container(
+              color: Colors.white,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SearchHotelResult(),
+                    const SearchHotelResult(),
+                    const SearchHotelResult(),
+                    const SearchHotelResult(),
+                    SizedBox(
+                      height: 42.h,
+                    ),
+                  ],
+                ),
               ),
             ),
           )
@@ -232,7 +233,7 @@ class SearchHotelResult extends StatelessWidget {
             height: 19,
           ),
           SizedBox(
-            height: 226.h,
+            height: 230.h,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               itemCount: hotels.length,

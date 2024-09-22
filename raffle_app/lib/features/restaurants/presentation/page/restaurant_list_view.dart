@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_state.dart';
+import 'package:raffle_app/features/restaurants/presentation/page/food_restorant_detail_view.dart';
 
 import '../../../../raffle_co/widgets/restorant_card.dart';
 import '../../../../raffle_place/components/restorant_grid_card.dart';
@@ -12,9 +13,7 @@ import '../../../../raffle_place/components/restorant_grid_card.dart';
 class RestaurantListView extends StatelessWidget {
   const RestaurantListView({
     super.key,
-    required this.controller,
   });
-  final PageController controller;
   @override
   Widget build(BuildContext context) {
     return Consumer<RestourantsNotifier>(
@@ -33,6 +32,14 @@ class RestaurantListView extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     onTap: () {
+                      final place = Provider.of<RestourantsNotifier>(context, listen: false)
+                          .restorantModel?[Provider.of<RestourantsNotifier>(context, listen: false).index]
+                          .places?[index];
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return FoodRestorantDetailView(placeModel: place);
+                        },
+                      ));
                     },
                     child: RestaurantCard(
                       gradient: gradients[index],

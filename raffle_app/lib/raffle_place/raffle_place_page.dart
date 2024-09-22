@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
+import 'package:raffle_app/notifier/app_notifier.dart';
+import 'package:raffle_app/presentation/pages/home/view/hotel/hotels_view.dart';
 import 'package:raffle_app/raffle_place/components/restourant_grid_view.dart';
-import 'package:raffle_app/raffle_place/notifier.dart';
+
+import '../features/restaurants/presentation/page/restaurant_list_view.dart';
+import '../presentation/pages/home/test_scan.dart';
+import '../presentation/pages/wallet/wallet_card_page.dart';
 
 class RafflePlacePage extends StatefulWidget {
-  const RafflePlacePage({super.key, required this.controller});
-  final TabController controller;
+  const RafflePlacePage({super.key});
 
   @override
   State<RafflePlacePage> createState() => _RafflePlacePageState();
@@ -16,22 +20,23 @@ class RafflePlacePage extends StatefulWidget {
 class _RafflePlacePageState extends State<RafflePlacePage> {
   List<Widget> pages = [
     const RestaurantTab(),
-        Container(
-          color: Colors.red,
+    const HotelsView(),
+    const QRCodeScreen(),
+    Container(
+      color: Colors.white,
+      child: const Center(
+        child: Text(
+          'Cooming Soon',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
-        Container(
-          color: Colors.red,
-        ),
-        Container(
-          color: Colors.red,
-        ),
-        Container(
-          color: Colors.red,
-        )
+      ),
+    ),
+    const WalletCardPage()
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: pages[context.watch<RafflePlaceNotifier>().currentPageIndex]
+    return Scaffold(
+      body: pages[context.watch<AppNotifier>().coCurrentPageIndex],
     );
   }
 }
@@ -46,12 +51,19 @@ class RestaurantTab extends StatefulWidget {
 }
 
 class _RestaurantTabState extends State<RestaurantTab> {
-  final PageController controller = PageController();
+  int index = 0;
+
+  void goNextIndex() {
+    index = 1;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(color: Colors.white),
-      child: SingleChildScrollView(
+    return IndexedStack(index: index, children: [
+      Container(
+        decoration: const BoxDecoration(color: Colors.white),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -85,7 +97,7 @@ class _RestaurantTabState extends State<RestaurantTab> {
                             color: Colors.white,
                             fontSize: 40,
                             height: 0.9,
-                          fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -108,15 +120,17 @@ class _RestaurantTabState extends State<RestaurantTab> {
                     )
                   ],
                 ),
-            ),
+              ),
               Padding(
-              padding: const EdgeInsets.only(left: 12.0),
+                padding: const EdgeInsets.only(left: 12.0),
                 child: Text('Restaurants', style: context.typography.body2Bold),
               ),
               SizedBox(
                 height: 600,
                 child: RestaurantGridView(
-                  controller: controller,
+                  onTap: () {
+                    goNextIndex();
+                  },
                 ),
               ),
               const SizedBox(
@@ -131,9 +145,17 @@ class _RestaurantTabState extends State<RestaurantTab> {
               const SizedBox(
                 height: 100,
               )
-          ],
+            ],
+          ),
         ),
       ),
-    );
+      const Scaffold(
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: EdgeInsets.only(top: 112.0),
+          child: RestaurantListView(),
+        ),
+      )
+    ]);
   }
 }

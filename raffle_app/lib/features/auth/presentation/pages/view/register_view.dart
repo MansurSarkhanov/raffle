@@ -3,8 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
-import 'package:raffle_app/features/auth/presentation/widgets/apple_login_button.dart';
-import 'package:raffle_app/features/auth/presentation/widgets/google_login_button.dart';
 import 'package:raffle_app/presentation/animation/bounce_animation.dart';
 
 import '../../notifier/auth_state.dart';
@@ -168,11 +166,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SizedBox(
             height: 20,
           ),
-          const BounceFromBottomAnimation(delay: 2.8, child: AppleLoginButton()),
-          const SizedBox(
-            height: 20,
-          ),
-          const BounceFromBottomAnimation(delay: 2.9, child: GoogleLoginButton())
+          // const BounceFromBottomAnimation(delay: 2.8, child: AppleLoginButton()),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // const BounceFromBottomAnimation(delay: 2.9, child: GoogleLoginButton())
         ],
       ),
     );

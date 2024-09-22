@@ -45,7 +45,7 @@ class ScanScreenState extends State<QRCodeScreen> {
       key: qrKey,
       onQRViewCreated: onQRViewCreated,
       overlay: QrScannerOverlayShape(
-        overlayColor: Colors.red.withOpacity(0.6),
+        overlayColor: Colors.white.withOpacity(0.6),
         cutOutHeight: 276,
         cutOutWidth: 276,
         borderRadius: 20,
@@ -74,10 +74,7 @@ class ScanScreenState extends State<QRCodeScreen> {
     return Center(
       child: Stack(
         children: [
-          Positioned.fill(
-              child: Container(
-            color: Colors.red,
-          )),
+        
           Positioned(
             top: 0,
             child: _scanQrCodeWidget(context),
@@ -87,7 +84,7 @@ class ScanScreenState extends State<QRCodeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 56,
+                  height: 50,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8, bottom: 20),
@@ -95,6 +92,7 @@ class ScanScreenState extends State<QRCodeScreen> {
                     children: [
                       IconButton(
                           onPressed: () {
+                            Navigator.pop(context);
                           },
                           icon: const Icon(
                             Icons.arrow_back,

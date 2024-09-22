@@ -10,9 +10,9 @@ import 'package:raffle_app/raffle_place/components/restorant_grid_card.dart';
 class RestaurantGridView extends StatelessWidget {
   const RestaurantGridView({
     super.key,
-    required this.controller,
+    this.onTap,
   });
-  final PageController controller;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return Consumer<RestourantsNotifier>(
@@ -31,10 +31,7 @@ class RestaurantGridView extends StatelessWidget {
               return InkWell(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
-                onTap: () async {
-                  // await context.read<RestourantsNotifier>().selectRestorant(index);
-                  controller.jumpToPage(1);
-                },
+                onTap: onTap,
                 child: RestaurantGridCard(
                   gradient: gradients[index],
                   restaurantModel: restorants.restaurants[index],

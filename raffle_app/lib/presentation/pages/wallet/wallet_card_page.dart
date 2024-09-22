@@ -34,8 +34,8 @@ class _WalletCardPageState extends State<WalletCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const WalletAppBar(
-      ),
+      // appBar: const WalletAppBar(
+      // ),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async {
@@ -43,6 +43,9 @@ class _WalletCardPageState extends State<WalletCardPage> {
         },
         child: Column(
           children: [
+            const SizedBox(
+              height: 112,
+            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 14),
               child: SizedBox(
@@ -63,7 +66,7 @@ class _WalletCardPageState extends State<WalletCardPage> {
                 ),
               ),
             ),
-            // WalletExpenseListCard(index: context.watch<AppNotifier>().currentListIndex),
+            const WalletExpenseListCard(index: 0),
             const SizedBox(
               height: 48,
             )

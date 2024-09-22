@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class WalletTab extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
               child: Text(
-                "WALLET",
+                AppLocalizations.of(context)!.wallet,
                 style: context.typography.body2Bold.copyWith(fontSize: 34, fontWeight: FontWeight.w900),
               ),
             ),
@@ -93,8 +94,8 @@ class WalletTopUpCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Available Wallet Balance',
-                    style: context.typography.body1Regular.copyWith(fontSize: 18, fontWeight: FontWeight.w500),
+                    AppLocalizations.of(context)!.aviable_balance_title,
+                    style: context.typography.body1Regular.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     'AED 0.00',

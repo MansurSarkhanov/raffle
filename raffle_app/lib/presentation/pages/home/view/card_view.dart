@@ -5,14 +5,14 @@ import 'package:raffle_app/presentation/pages/home/view/profile_detail.dart';
 
 import '../../../../raffle_co/view/wallet_tab.dart';
 
-class FavoriteView extends StatefulWidget {
-  const FavoriteView({super.key});
+class CardView extends StatefulWidget {
+  const CardView({super.key});
 
   @override
-  State<FavoriteView> createState() => _FavoriteViewState();
+  State<CardView> createState() => _CardViewState();
 }
 
-class _FavoriteViewState extends State<FavoriteView> {
+class _CardViewState extends State<CardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,7 @@ class _FavoriteViewState extends State<FavoriteView> {
           Column(
             children: [
               TopUpAppBar(
-                text: AppLocalizations.of(context)!.language,
+                text: AppLocalizations.of(context)!.change_password,
               ),
               const SizedBox(height: 12),
               Padding(
@@ -46,14 +46,14 @@ class _FavoriteViewState extends State<FavoriteView> {
                       const SizedBox(
                         height: 200,
                       ),
-                      SvgPicture.asset('assets/svg/Vector.svg'),
+                      SvgPicture.asset('assets/svg/saved_card.svg'),
                       const SizedBox(
                         height: 32,
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 60.0),
                         child: Text(
-                          'No favorites yet. Double tap an item to add it to your favorites.',
+                          'It looks like you don’t have any saved cards.',
                           textAlign: TextAlign.center,
                         ),
                       )

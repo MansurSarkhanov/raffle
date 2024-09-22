@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
@@ -58,7 +59,7 @@ class _TicketTabState extends State<TicketTab> {
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
               child: Text(
-                "TICKETS",
+                AppLocalizations.of(context)!.ticket,
                 style: context.typography.body2Bold
                     .copyWith(fontSize: 34.sp, fontWeight: FontWeight.w900, letterSpacing: -.9, height: 34 / 40),
               ),
@@ -122,7 +123,7 @@ class _TicketTabState extends State<TicketTab> {
                                       duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                                 },
                                 child: Center(
-                                  child: Text('Active Tickets',
+                                  child: Text(AppLocalizations.of(context)!.active_ticket,
                                       style: context.typography.headlineBold.copyWith(
                                           fontWeight: context.watch<AppNotifier>().ticketLeftSelected
                                               ? FontWeight.w800
@@ -145,7 +146,7 @@ class _TicketTabState extends State<TicketTab> {
                                 },
                                 child: Center(
                                   child: Text(
-                                    'Expired Tickets',
+                                    AppLocalizations.of(context)!.expired_ticket,
                                     style: context.typography.headlineBold.copyWith(
                                         fontWeight: context.watch<AppNotifier>().ticketLeftSelected
                                             ? FontWeight.w600

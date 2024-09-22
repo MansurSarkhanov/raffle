@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/raffle_co/view/top_up/top_up_page.dart';
-
 
 class TopUpCard extends StatelessWidget {
   const TopUpCard({
@@ -48,7 +48,7 @@ class TopUpCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Available Wallet Balance',
+                      AppLocalizations.of(context)!.aviable_balance_title,
                       style: context.typography.body1Regular
                           .copyWith(fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: -.3),
                     ),

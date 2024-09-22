@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
@@ -67,7 +68,7 @@ class _HomeTabState extends State<HomeTab> {
                     child: Row(
                       children: [
                         Text(
-                          'FEATURED',
+                          AppLocalizations.of(context)!.features,
                           style: context.typography.body2Bold.copyWith(
                             fontSize: 28,
                             height: 32 / 28,
@@ -94,7 +95,7 @@ class _HomeTabState extends State<HomeTab> {
                     child: Row(
                       children: [
                         GradientText(
-                          'Dreamers\nto WINNERS',
+                          AppLocalizations.of(context)!.dream_winners,
                           gradient: const LinearGradient(colors: [Color(0xFF264C86), Color(0xFF07224A)]),
                           style: context.typography.title3Bold
                               .copyWith(fontSize: 32, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),

@@ -1,0 +1,35 @@
+{
+    "@@locale":"en",
+    "aviable_balance_title": "Available Wallet Balance",
+    "top_up":"Top-up",
+    "big_dream":"BIG\nDREAM\nBIG\nPRIZE",
+    "features":"Features",
+    "win":"Win",
+    "game_of_gold":"100 Game of Gold",
+    "closing":"closing in 23:57:24",
+    "just_launch":"JUST LAUNCHED",
+    "add_card":"Add to Cart",
+    "dream_winners":"Dreamers\nto WINNERS",
+    "congrats":"CONGRATS",
+    "ticket_no":"Ticket No",
+    "announced":"Announced on",
+    "home":"Home",
+    "draws":"Draws",
+    "ticket":"Ticket",
+    "wallet":"Wallet",
+    "menu":"Menu",
+    "language":"Language",
+    "personal_detail":"Personal Details",
+    "change_password":"Change Password",
+    "favorites":"Favorites",
+    "currency":"Currency",
+    "save_card":"Save Cards",
+    "logout":"Logout",
+    "get_in_touch":"Get in touch",
+    "have_question":"Have questions?\nChat with us",
+    "active_ticket":"Active Tickets",
+    "expired_ticket":"Expired Tickets"
+    
+
+
+}

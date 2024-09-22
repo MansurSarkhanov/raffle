@@ -31,7 +31,6 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF2F0F0),
       body: BounceFromBottomAnimation(
         delay: 2.2,
