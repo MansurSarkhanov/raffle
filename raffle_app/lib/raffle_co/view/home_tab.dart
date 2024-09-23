@@ -62,7 +62,7 @@ class _HomeTabState extends State<HomeTab> {
                     height: 112.h,
                   ),
                   const TopUpCard(),
-                  SwipebleHomeCards(),
+                  const SwipebleHomeCards(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Row(
@@ -82,11 +82,15 @@ class _HomeTabState extends State<HomeTab> {
                   const SizedBox(height: 20),
                   const ProductListView(),
                   const SizedBox(height: 31),
-                  const JustLaunchedCard(),
+                  const JustLaunchedCard(
+                    isFirst: true,
+                  ),
                   const SizedBox(
                     height: 52,
                   ),
-                  const JustLaunchedCard(),
+                  const JustLaunchedCard(
+                    isFirst: false,
+                  ),
                   const SizedBox(
                     height: 24,
                   ),

@@ -144,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             name: nameController.text.trim(),
                             number: numberController.text.trim(),
                             surname: surNameController.text.trim());
-                        if (result && context.mounted) {
+                        if (result) {
                           context.goNamed('home');
                           return;
                         }

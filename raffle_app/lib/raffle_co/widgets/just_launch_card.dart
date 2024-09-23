@@ -3,10 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
+
 class JustLaunchedCard extends StatelessWidget {
   const JustLaunchedCard({
     super.key,
+    required this.isFirst,
   });
+  final bool isFirst;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class JustLaunchedCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
                       AppLocalizations.of(context)!.just_launch,
-                        style: context.typography.body2Bold
+                      style: context.typography.body2Bold
                           .copyWith(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -.5),
                     ),
                   ),
@@ -70,7 +73,12 @@ class JustLaunchedCard extends StatelessWidget {
                             'assets/images/im_sold.png',
                             width: 92,
                           ),
-                          SvgPicture.asset('assets/svg/logo.svg'),
+                          isFirst
+                              ? SvgPicture.asset('assets/svg/logo.svg')
+                              : Image.asset(
+                                  'assets/images/novikov.png',
+                                  width: 60,
+                                ),
                           const SizedBox(
                             width: 10,
                           ),
@@ -131,9 +139,9 @@ class JustLaunchedCard extends StatelessWidget {
                                   Positioned(
                                     left: 0,
                                     child: Container(
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xFFFFE600), borderRadius: BorderRadius.circular(27.5)),
-                                        height: 56,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFFFE600), borderRadius: BorderRadius.circular(27.5)),
+                                      height: 56,
                                       width: 220,
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 12.0),
@@ -166,9 +174,10 @@ class JustLaunchedCard extends StatelessWidget {
                                     right: 0,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          gradient: const LinearGradient(colors: [
-                                            Color(0xFF6058F4),
-                                            Color(0xFF38338E),
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFF6058F4),
+                                              Color(0xFF38338E),
                                             ],
                                           ),
                                           borderRadius: BorderRadius.circular(34)),
@@ -194,15 +203,13 @@ class JustLaunchedCard extends StatelessWidget {
                               Center(
                                 child: Text(
                                   'Draw Date: 26 July, 2024 or earlier if the campaign is sold out',
-                                  style:
-                                      context.typography.body2Bold.copyWith(
+                                  style: context.typography.body2Bold.copyWith(
                                     color: const Color(0xFF7C7C7C),
                                     fontSize: 11,
                                     letterSpacing: -.5,
                                   ),
                                 ),
                               ),
-                             
                             ],
                           ),
                         ),

@@ -218,7 +218,7 @@ class ScanScreenState extends State<QRCodeScreen> {
                               child: Column(
                                 children: [
                                   TitleHeading1Widget(
-                                    text: 'BALANCE : 40.000 ₽',
+                                    text: 'BALANCE : 0 ',
                                     fontSize: 13,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400,

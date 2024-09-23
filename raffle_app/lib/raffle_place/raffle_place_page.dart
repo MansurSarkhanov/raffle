@@ -57,6 +57,10 @@ class _RestaurantTabState extends State<RestaurantTab> {
     index = 1;
     setState(() {});
   }
+  void backNextIndex() {
+    index = 0;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,11 +153,27 @@ class _RestaurantTabState extends State<RestaurantTab> {
           ),
         ),
       ),
-      const Scaffold(
+      Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: EdgeInsets.only(top: 112.0),
-          child: RestaurantListView(),
+          padding: const EdgeInsets.only(top: 112.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        backNextIndex();
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                  const Text('Restaurants'),
+                  IconButton(onPressed: () {}, icon: const SizedBox())
+                ],
+              ),
+              const Expanded(child: RestaurantListView()),
+            ],
+          ),
         ),
       )
     ]);
