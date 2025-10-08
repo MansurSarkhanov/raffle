@@ -39,9 +39,9 @@ dependencies:
   chewie: ^1.7.1
   dismissible_page: ^1.0.2
   story: ^1.1.0
-  mobile_scanner: ^4.0.1
+  mobile_scanner: ^6.0.11
   smooth_page_indicator: ^1.2.0
-  google_maps_flutter: ^2.7.0
+  google_maps_flutter: ^2.10.1
   qr_code_scanner: ^1.0.1
   flutter_card_swiper: ^7.0.1
   custom_refresh_indicator: ^3.1.0
