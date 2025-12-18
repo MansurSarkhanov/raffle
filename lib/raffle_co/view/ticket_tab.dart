@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../presentation/components/custom_text.dart';
 import '../../presentation/components/gradient_text.dart';
 import '../../shared/painter/liner_dash_painter.dart';

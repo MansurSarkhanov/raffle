@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../presentation/pages/home/view/profile_detail.dart';
 import '../../../../raffle_co/view/wallet_tab.dart';
 import '../../../auth/presentation/widgets/custom_text_field.dart';

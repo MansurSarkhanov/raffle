@@ -13,58 +13,57 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.6
-  provider: ^6.1.2
-  flutter_svg: ^2.0.10+1
-  firebase_core: ^3.0.0
-  firebase_auth: ^5.0.0
-  video_player: ^2.8.6
-  url_launcher: ^6.3.0
-  dio: ^5.4.3+1
-  firebase_storage: ^12.0.0
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.5+1
+  flutter_svg: ^2.2.3
+  firebase_core: ^4.3.0
+  firebase_auth: ^6.1.3
+  video_player: ^2.10.1
+  url_launcher: ^6.3.2
+  dio: ^5.9.0
+  firebase_storage: ^13.0.5
   shimmer: ^3.0.0
-  cloud_firestore: ^5.0.0
-  image_picker: ^1.1.2
-  shared_preferences: ^2.2.3
-  intl: ^0.19.0
-  get_it: ^7.7.0
-  go_router: ^14.1.4
-  multiple_result: ^5.1.0
-  equatable: ^2.0.5
-  another_flushbar: ^1.12.30
-  percent_indicator: ^4.2.3
-  flutter_markdown: ^0.6.15
-  google_fonts: ^6.2.1
+  cloud_firestore: ^6.1.1
+  image_picker: ^1.2.1
+  shared_preferences: ^2.5.4
+  intl: ^0.20.2
+  get_it: ^9.2.0
+  go_router: ^17.0.1
+  multiple_result: ^5.2.0
+  equatable: ^2.0.7
+  another_flushbar: ^1.12.32
+  percent_indicator: ^4.2.5
+  flutter_markdown: ^0.7.7+1
+  google_fonts: ^6.3.3
   flutter_screenutil: ^5.9.3
-  chewie: ^1.7.1
+  chewie: ^1.13.0
   dismissible_page: ^1.0.2
   story: ^1.1.0
-  mobile_scanner: ^6.0.11
-  smooth_page_indicator: ^1.2.0
-  google_maps_flutter: ^2.10.1
+  mobile_scanner: ^7.1.4
+  smooth_page_indicator: ^2.0.1
+  google_maps_flutter: ^2.14.0
   qr_code_scanner: ^1.0.1
-  flutter_card_swiper: ^7.0.1
-  custom_refresh_indicator: ^3.1.0
-  lottie: ^3.1.2
-  camera: ^0.11.0+1
+  flutter_card_swiper: ^7.2.0
+  custom_refresh_indicator: ^4.0.1
+  lottie: ^3.3.2
+  camera: ^0.11.3
   inner_shadow_widget: ^0.0.3
-  animated_toggle_switch: ^0.8.2
+  animated_toggle_switch: ^0.8.5
   scrollable_reorderable_navbar: ^0.0.1
   flutter_zoom_drawer: ^3.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^2.2.9
-  flutter_lints: ^3.0.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.7
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
-flutter_launcher_icons:
-  android: true
+  
+flutter_launcher_icons:  
   ios: true
   image_path: "assets/images/app_logo.png"
   remove_alpha_ios: true
 flutter_native_splash:
-  color: "#435784"
   image: assets/images/im_splash.png
 flutter:
   generate: true

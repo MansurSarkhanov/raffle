@@ -21,18 +21,13 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     _controller = VideoPlayerController.asset(VideosPath.raffle_splash_video.toPath);
     _controller.initialize();
-    if (mounted) {
-      setState(() {
-        _controller.play();
-        Future.delayed(const Duration(milliseconds: 4250)).then((value) async {
+    Future.delayed(const Duration(milliseconds: 4250)).then((value) async {
           if (await context.read<AuthNotifier>().checkAuth()) {
             context.replaceNamed(AppRoutes.home.name);
           } else {
             context.replaceNamed(AppRoutes.auth.name);
           }
         });
-      });
-    }
   }
 
   @override

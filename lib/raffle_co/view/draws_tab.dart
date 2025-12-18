@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 
 import '../../features/campaing/presentation/view/campaing_list.dart';
+import '../../l10n/app_localizations.dart';
 import '../../presentation/pages/home/view/watch_live_view.dart';
 
 class DrawsTab extends StatefulWidget {

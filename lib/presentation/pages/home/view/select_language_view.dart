@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/presentation/pages/home/view/profile_detail.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../raffle_co/view/wallet_tab.dart';
 
 class SelectLanguageView extends StatefulWidget {

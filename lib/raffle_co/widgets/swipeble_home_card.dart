@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class SwipebleHomeCards extends StatefulWidget {
   const SwipebleHomeCards({
@@ -31,7 +32,7 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
   @override
   void initState() {
     super.initState();
-    _startAutoScroll();
+    // _startAutoScroll();
     _videoPlayerController1 = VideoPlayerController.networkUrl(
       Uri.parse('https://emiland.com/front/videos/Emiland_Header.mp4'),
     );
@@ -77,21 +78,21 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
     });
   }
 
-  void _startAutoScroll() {
-    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-      if (_currentPage < 2) {
-        // Sayfa sayısı - 1 (örneğin, 3 sayfa varsa 2)
-        _currentPage++;
-      } else {
-        _currentPage = 0; // En son sayfada ise başa döner
-      }
-      controller.animateToPage(
-        _currentPage,
-        duration: const Duration(milliseconds: 300), // Sayfa geçiş animasyonu süresi
-        curve: Curves.easeInOut, // Geçiş animasyonu eğrisi
-      );
-    });
-  }
+  // void _startAutoScroll() {
+  //   _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+  //     if (_currentPage < 2) {
+  //       // Sayfa sayısı - 1 (örneğin, 3 sayfa varsa 2)
+  //       _currentPage++;
+  //     } else {
+  //       _currentPage = 0; // En son sayfada ise başa döner
+  //     }
+  //     controller.animateToPage(
+  //       _currentPage,
+  //       duration: const Duration(milliseconds: 300), // Sayfa geçiş animasyonu süresi
+  //       curve: Curves.easeInOut, // Geçiş animasyonu eğrisi
+  //     );
+  //   });
+  // }
 
   void _handleVideoPlayback(int newPage) {
     // Yeni sayfaya göre video kontrolü
@@ -172,6 +173,7 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
           borderRadius: BorderRadius.circular(40),
         ),
         child: FutureBuilder(
+           future: _initializedVideoPlayerFuture2,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return ClipRRect(
@@ -193,7 +195,7 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
               );
             }
           },
-          future: _initializedVideoPlayerFuture2,
+         
         ),
       ),
     ];

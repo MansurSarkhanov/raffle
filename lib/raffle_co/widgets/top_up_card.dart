@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/raffle_co/view/top_up/top_up_page.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class TopUpCard extends StatelessWidget {
   const TopUpCard({
