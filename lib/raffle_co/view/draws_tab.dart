@@ -5,6 +5,7 @@ import 'package:raffle_app/core/theme/theme_ext.dart';
 import '../../features/campaing/presentation/view/campaing_list.dart';
 import '../../l10n/app_localizations.dart';
 import '../../presentation/pages/home/view/watch_live_view.dart';
+import '../widgets/swipeble_home_card.dart';
 
 class DrawsTab extends StatefulWidget {
   const DrawsTab({super.key});
@@ -15,9 +16,20 @@ class DrawsTab extends StatefulWidget {
 
 class _DrawsTabState extends State<DrawsTab> {
   final PageController controller = PageController(viewportFraction: 0.7);
+  late List<VideoItem> videoItems;
 
   bool isLeftSelected = true;
 
+  @override
+  void initState() {
+    super.initState();
+   videoItems = [
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/11%20September%202025.mp4?alt=media&token=f31b9f41-6619-4c94-9b2d-177f2886deb0'),
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/11%20September%202025.mp4?alt=media&token=f31b9f41-6619-4c94-9b2d-177f2886deb0'),
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/11%20September%202025.mp4?alt=media&token=f31b9f41-6619-4c94-9b2d-177f2886deb0'),
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/11%20September%202025.mp4?alt=media&token=f31b9f41-6619-4c94-9b2d-177f2886deb0'),
+    ];
+  }
   @override
   void dispose() {
     controller.dispose();
@@ -64,15 +76,15 @@ class _DrawsTabState extends State<DrawsTab> {
                     child: PageView.builder(
                       padEnds: false,
                       controller: controller,
-                      itemCount: 5,
+                      itemCount: videoItems.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => const WatchLiveScreen(
-                                    videoUrl: 'https://emiland.com/front/videos/Emiland_Header.mp4',
+                                builder: (context) =>  WatchLiveScreen(
+                                    videoUrl: videoItems[index].url,
                                     date: '17 June 2023',
                                     time: '10:00 AM'),
                               ),

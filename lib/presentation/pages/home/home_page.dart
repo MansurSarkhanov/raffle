@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   );
                 },
                 child: context.watch<AppNotifier>().isLeftSelected
-                    ? pages[context.watch<AppNotifier>().currentPageIndex]
+                    ? IndexedStack(index:context.watch<AppNotifier>().currentPageIndex ,children:pages)
                     : const RafflePlacePage(),
               ),
               SizedBox(

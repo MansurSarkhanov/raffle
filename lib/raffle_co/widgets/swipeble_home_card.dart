@@ -22,50 +22,20 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
   final PageController controller = PageController();
   late Timer _timer; // Otomatik geçiş için Timer
   int _currentPage = 0;
-  late VideoPlayerController _videoPlayerController1;
-  late VideoPlayerController _videoPlayerController2;
-  late ChewieController _chewieController1;
-  late ChewieController _chewieController2;
-  late Future<void> _initializedVideoPlayerFuture1;
-  late Future<void> _initializedVideoPlayerFuture2;
+  late List<VideoItem> videoItems;
 
   @override
   void initState() {
     super.initState();
-    // _startAutoScroll();
-    _videoPlayerController1 = VideoPlayerController.networkUrl(
-      Uri.parse('https://emiland.com/front/videos/Emiland_Header.mp4'),
-    );
-    _initializedVideoPlayerFuture1 = _videoPlayerController1.initialize().then((_) {
-      _chewieController1 = ChewieController(
-        autoInitialize: true,
-        isLive: false,
-        showOptions: false,
-        showControls: false,
-        videoPlayerController: _videoPlayerController1,
-        autoPlay: false, // Başlangıçta otomatik oynatma kapalı
-        looping: true,
-        aspectRatio: 1.5,
-      );
-    });
+    videoItems = [
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/11%20September%202025.mp4?alt=media&token=f31b9f41-6619-4c94-9b2d-177f2886deb0'),
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/%F0%9F%92%AD%20What%20would%20YOU%20do%20with%20AED5%2C000%2C000%20.mp4?alt=media&token=524b96ed-fc42-4d15-a36d-db6dec509699'),
+      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/Win%20AED1%2C000%2C000%20with%20Dream%20Dubai%20%26%20Mai%20Dubai%F0%9F%9A%A8.mp4?alt=media&token=ca469332-3149-4369-8d54-ec93eddc10dc'),
 
-    // İkinci video için controller ve future initialization
-    _videoPlayerController2 = VideoPlayerController.networkUrl(
-      Uri.parse(
+      // VideoItem('https://emiland.com/front/videos/Emiland_Header.mp4'),
+      VideoItem(
           'https://firebasestorage.googleapis.com/v0/b/raffle-1b71c.appspot.com/o/videos%2F1%20Minute%20of%20PARIS.mp4?alt=media&token=49e29a28-7a21-43e1-8f90-059f43b96240'),
-    );
-    _initializedVideoPlayerFuture2 = _videoPlayerController2.initialize().then((_) {
-      _chewieController2 = ChewieController(
-        autoInitialize: true,
-        isLive: false,
-        showOptions: false,
-        showControls: false,
-        videoPlayerController: _videoPlayerController2,
-        autoPlay: false, // Başlangıçta otomatik oynatma kapalı
-        looping: true,
-        aspectRatio: 1.5,
-      );
-    });
+    ];
 
     controller.addListener(() {
       final newPage = controller.page!.round();
@@ -76,42 +46,45 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
         _handleVideoPlayback(newPage);
       }
     });
+    _startAutoScroll();
   }
+void _startAutoScroll() {
+  _timer = Timer.periodic(const Duration(seconds: 6), (Timer timer) {
+    final totalPages = 1 + videoItems.length; // 1 basit kart + video kartları
 
-  // void _startAutoScroll() {
-  //   _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-  //     if (_currentPage < 2) {
-  //       // Sayfa sayısı - 1 (örneğin, 3 sayfa varsa 2)
-  //       _currentPage++;
-  //     } else {
-  //       _currentPage = 0; // En son sayfada ise başa döner
-  //     }
-  //     controller.animateToPage(
-  //       _currentPage,
-  //       duration: const Duration(milliseconds: 300), // Sayfa geçiş animasyonu süresi
-  //       curve: Curves.easeInOut, // Geçiş animasyonu eğrisi
-  //     );
-  //   });
-  // }
+    if (_currentPage < totalPages - 1) {
+      _currentPage++;
+    } else {
+      _currentPage = 0;
+    }
 
-  void _handleVideoPlayback(int newPage) {
-    // Yeni sayfaya göre video kontrolü
-    if (newPage == 1) {
-      _videoPlayerController1.play();
-      _videoPlayerController2.pause();
-    } else if (newPage == 2) {
-      _videoPlayerController2.play();
-      _videoPlayerController1.pause();
+    controller.animateToPage(
+      _currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  });
+}
+
+
+ void _handleVideoPlayback(int index) {
+  for (int i = 0; i < videoItems.length; i++) {
+    if (index == i + 1) {
+      videoItems[i].controller.play();
+    } else {
+      videoItems[i].controller.pause();
     }
   }
+}
+
 
   @override
   void dispose() {
-    _videoPlayerController1.dispose();
-    _chewieController1.dispose();
-    _videoPlayerController2.dispose();
-    _chewieController2.dispose();
+    for (var video in videoItems) {
+      video.dispose();
+    }
     controller.dispose();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -119,85 +92,7 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
   Widget build(BuildContext context) {
     final List<Widget> cards = [
       _simpleCard(context),
-      Container(
-        height: 318.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 4,
-              color: const Color(0xFF000000).withOpacity(.25),
-              offset: const Offset(0, 4),
-            )
-          ],
-          color: const Color(0xFFEF920F),
-          borderRadius: BorderRadius.circular(40),
-        ),
-        child: FutureBuilder(
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(40), // Yuvarlatılmış köşeler için
-                child: FittedBox(
-                  fit: BoxFit.cover, // Videonun Container'a tamamen sığması için
-                  child: SizedBox(
-                    width: _chewieController1.videoPlayerController.value.size.width, // Video genişliği
-                    height: _chewieController1.videoPlayerController.value.size.height, // Video yüksekliği
-                    child: Chewie(controller: _chewieController1),
-                  ),
-                ),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.blue,
-                ),
-              );
-            }
-          },
-          future: _initializedVideoPlayerFuture1,
-        ),
-      ),
-      Container(
-        height: 318.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 4,
-              color: const Color(0xFF000000).withOpacity(.25),
-              offset: const Offset(0, 4),
-            )
-          ],
-          color: const Color(0xFFEF920F),
-          borderRadius: BorderRadius.circular(40),
-        ),
-        child: FutureBuilder(
-           future: _initializedVideoPlayerFuture2,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(40), // Yuvarlatılmış köşeler için
-                child: FittedBox(
-                  fit: BoxFit.cover, // Videonun Container'a tamamen sığması için
-                  child: SizedBox(
-                    width: _chewieController2.videoPlayerController.value.size.width, // Video genişliği
-                    height: _chewieController2.videoPlayerController.value.size.height, // Video yüksekliği
-                    child: Chewie(controller: _chewieController2),
-                  ),
-                ),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.blue,
-                ),
-              );
-            }
-          },
-         
-        ),
-      ),
+      ...videoItems.map((video) => _buildVideoCard(video)).toList(),
     ];
     return Column(
       children: [
@@ -209,7 +104,8 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: cards[index],
               );
             },
@@ -224,13 +120,55 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
             padding: const EdgeInsets.only(right: 36.0),
             child: SmoothPageIndicator(
               effect: const ExpandingDotsEffect(
-                  dotColor: Color(0xFFA6A6A6), activeDotColor: Color(0xFF424242), dotHeight: 8, dotWidth: 8),
+                  dotColor: Color(0xFFA6A6A6),
+                  activeDotColor: Color(0xFF424242),
+                  dotHeight: 8,
+                  dotWidth: 8),
               controller: controller,
               count: cards.length,
             ),
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildVideoCard(VideoItem video) {
+    return Container(
+      height: 318.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 4,
+            color: const Color(0xFF000000).withOpacity(.25),
+            offset: const Offset(0, 4),
+          )
+        ],
+        color: const Color(0xFFEF920F),
+        borderRadius: BorderRadius.circular(40),
+      ),
+      child: FutureBuilder(
+        future: video.initializeFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(40),
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: video.controller.value.size.width,
+                  height: video.controller.value.size.height,
+                  child: Chewie(controller: video.chewieController),
+                ),
+              ),
+            );
+          } else {
+            return const Center(
+                child: CircularProgressIndicator(color: Colors.blue));
+          }
+        },
+      ),
     );
   }
 
@@ -265,5 +203,32 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
         ),
       ),
     );
+  }
+}
+
+class VideoItem {
+  final String url;
+  late final VideoPlayerController controller;
+  late final ChewieController chewieController;
+  late final Future<void> initializeFuture;
+
+  VideoItem(this.url) {
+    controller = VideoPlayerController.networkUrl(Uri.parse(url));
+    initializeFuture = controller.initialize().then((_) {
+      chewieController = ChewieController(
+        autoInitialize: true,
+        isLive: false,
+        showControls: false,
+        videoPlayerController: controller,
+        autoPlay: false,
+        looping: true,
+        aspectRatio: 1.5,
+      );
+    });
+  }
+
+  void dispose() {
+    controller.dispose();
+    chewieController.dispose();
   }
 }

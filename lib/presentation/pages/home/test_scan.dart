@@ -74,7 +74,6 @@ class ScanScreenState extends State<QRCodeScreen> {
     return Center(
       child: Stack(
         children: [
-        
           Positioned(
             top: 0,
             child: _scanQrCodeWidget(context),
@@ -118,9 +117,7 @@ class ScanScreenState extends State<QRCodeScreen> {
                     ],
                   ),
                 ),
-                const Spacer(
-                ),
-               
+                const Spacer(),
                 Container(
                   height: 92,
                   width: 92,
@@ -144,7 +141,9 @@ class ScanScreenState extends State<QRCodeScreen> {
                     InkWell(
                       // onTap: toggleFlashlight,
                       child: Container(
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(9)),
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: SvgPicture.asset('assets/svg/ic_light.svg'),
@@ -155,7 +154,9 @@ class ScanScreenState extends State<QRCodeScreen> {
                       width: 47,
                     ),
                     Container(
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9)),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: SvgPicture.asset('assets/svg/ic_keyboard.svg'),
@@ -172,9 +173,11 @@ class ScanScreenState extends State<QRCodeScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: const Color(0xFF141617).withOpacity(.6), borderRadius: BorderRadius.circular(6.38)),
+                            color: const Color(0xFF141617).withOpacity(.6),
+                            borderRadius: BorderRadius.circular(6.38)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 42.0, vertical: 12),
                           child: Column(
                             children: [
                               SvgPicture.asset('assets/svg/ic_scan_qr.svg'),
@@ -202,8 +205,7 @@ class ScanScreenState extends State<QRCodeScreen> {
                               RouteHelper.createRoute(
                                   routeName: ChangeNotifierProvider.value(
                                       value: context.read<ProfileNotifier>(),
-                                      child: const WalletCardPage(
-                                      )),
+                                      child: const WalletCardPage()),
                                   location: RoutingLocation.rightToLeft,
                                   transitionTime: 500,
                                   reverseTransitionTime: 250),
@@ -214,7 +216,8 @@ class ScanScreenState extends State<QRCodeScreen> {
                                 color: const Color(0xFF141617).withOpacity(.6),
                                 borderRadius: BorderRadius.circular(6.38)),
                             child: const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 42.0, vertical: 12),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 42.0, vertical: 12),
                               child: Column(
                                 children: [
                                   TitleHeading1Widget(

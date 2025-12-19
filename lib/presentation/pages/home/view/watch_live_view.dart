@@ -166,19 +166,19 @@ class _WatchLiveScreenState extends State<WatchLiveScreen> {
                         prize: 'Campaing: Samsung Galaxy S23 Plus with Raffle Credit',
                         winner: ' Tofiq Mammadov (TM-12345)'),
                     const CamPaingAndWinnerWidget(
-                        campaignNumber: '1',
+                        campaignNumber: '2',
                         prize: 'Campaing: Samsung Galaxy S23 Plus with Raffle Credit',
                         winner: ' Tofiq Mammadov (TM-12345)'),
                     const CamPaingAndWinnerWidget(
-                        campaignNumber: '1',
+                        campaignNumber: '3',
                         prize: 'Campaing: Samsung Galaxy S23 Plus with Raffle Credit',
                         winner: ' Tofiq Mammadov (TM-12345)'),
                     const CamPaingAndWinnerWidget(
-                        campaignNumber: '1',
+                        campaignNumber: '4',
                         prize: 'Campaing: Samsung Galaxy S23 Plus with Raffle Credit',
                         winner: ' Tofiq Mammadov (TM-12345)'),
                     const CamPaingAndWinnerWidget(
-                        campaignNumber: '1',
+                        campaignNumber: '5',
                         prize: 'Campaing: Samsung Galaxy S23 Plus with Raffle Credit',
                         winner: ' Tofiq Mammadov (TM-12345)'),
                   ],

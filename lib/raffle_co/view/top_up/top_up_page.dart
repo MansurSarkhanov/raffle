@@ -4,11 +4,25 @@ import 'package:flutter_svg/svg.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
 import 'package:raffle_app/raffle_co/view/wallet_tab.dart';
 
-class TopUpPage extends StatelessWidget {
+class TopUpPage extends StatefulWidget {
   const TopUpPage({super.key});
 
   @override
+  State<TopUpPage> createState() => _TopUpPageState();
+}
+
+class _TopUpPageState extends State<TopUpPage> {
+
+  int currentIndex= 0;
+
+  void selectAmount(int index){
+    setState(() {
+      currentIndex=index;
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+    final amounts=['AED25.00','AED50.00','AED100.00','AED150.00','AED200.00'];
     return Scaffold(
       body: Stack(
         children: [
@@ -42,23 +56,26 @@ class TopUpPage extends StatelessWidget {
                 child: ListView.builder(
                   padding: const EdgeInsets.only(left: 12),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: amounts.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(19),
-                            border: index == 0
-                                ? Border.all(
-                                    color: const Color(0xFF4000FF), width: 4, strokeAlign: BorderSide.strokeAlignInside)
-                                : Border.all(color: Colors.white, width: 4, strokeAlign: BorderSide.strokeAlignInside)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 21),
-                          child: Text(
-                            'AED50.00',
-                            style: context.typography.body2Bold.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+                      padding:  EdgeInsets.only(right: 8.0),
+                      child: InkWell(
+                        onTap: ()=>selectAmount(index),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(19),
+                              border: currentIndex==index
+                                  ? Border.all(
+                                      color: const Color(0xFF4000FF), width: 4, strokeAlign: BorderSide.strokeAlignInside)
+                                  : Border.all(color: Colors.white, width: 4, strokeAlign: BorderSide.strokeAlignInside)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 21),
+                            child: Text(
+                             amounts[index],
+                              style: context.typography.body2Bold.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                       ),
