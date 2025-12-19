@@ -98,7 +98,7 @@ class WalletTopUpCard extends StatelessWidget {
                     style: context.typography.body1Regular.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    'AED 0.00',
+                    'AED 100.0',
                     style: context.typography.body1Regular.copyWith(fontSize: 28, fontWeight: FontWeight.w800),
                   )
                 ],

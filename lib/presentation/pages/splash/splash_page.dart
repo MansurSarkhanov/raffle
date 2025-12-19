@@ -15,19 +15,44 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  late VideoPlayerController _controller;
+ late VideoPlayerController _controller;
+  bool _isInitialized = false;
+
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(VideosPath.raffle_splash_video.toPath);
-    _controller.initialize();
-    Future.delayed(const Duration(milliseconds: 4250)).then((value) async {
-          if (await context.read<AuthNotifier>().checkAuth()) {
-            context.replaceNamed(AppRoutes.home.name);
-          } else {
-            context.replaceNamed(AppRoutes.auth.name);
-          }
-        });
+    _initVideo();
+  }
+
+  Future<void> _initVideo() async {
+    _controller = VideoPlayerController.asset(
+      VideosPath.raffle_splash_video.toPath,
+    );
+
+    await _controller.initialize();
+    _controller
+      ..setLooping(false)
+      ..play();
+
+    setState(() {
+      _isInitialized = true;
+    });
+
+    Future.delayed(const Duration(seconds: 4), () async {
+      if (!mounted) return;
+
+      if (await context.read<AuthNotifier>().checkAuth()) {
+        context.replaceNamed(AppRoutes.home.name);
+      } else {
+        context.replaceNamed(AppRoutes.auth.name);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
