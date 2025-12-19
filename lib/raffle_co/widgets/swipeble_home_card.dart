@@ -11,8 +11,9 @@ import '../../l10n/app_localizations.dart';
 
 class SwipebleHomeCards extends StatefulWidget {
   const SwipebleHomeCards({
-    super.key,
+    super.key, required this.isActive,
   });
+  final bool isActive;
 
   @override
   State<SwipebleHomeCards> createState() => _SwipebleHomeCardsState();
@@ -23,7 +24,16 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
   late Timer _timer; // Otomatik geçiş için Timer
   int _currentPage = 0;
   late List<VideoItem> videoItems;
+@override
+void didUpdateWidget(covariant SwipebleHomeCards oldWidget) {
+  super.didUpdateWidget(oldWidget);
 
+  if (!widget.isActive) {
+    for (var video in videoItems) {
+      video.controller.setVolume(0);
+    }
+  }
+}
   @override
   void initState() {
     super.initState();

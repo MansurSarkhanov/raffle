@@ -28,18 +28,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    
   }
 
-  List<Widget> pages = [
-    const HomeTab(),
+ 
+  @override
+  Widget build(BuildContext context) {
+     List<Widget> pages = [
+     HomeTab(isActive: context.watch<AppNotifier>().currentPageIndex==0),
     const DrawsTab(),
     const TicketTab(),
     const WalletTab(),
     const QRCodeScreen(),
 
   ];
-  @override
-  Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return ZoomDrawer(
       borderRadius: 39,

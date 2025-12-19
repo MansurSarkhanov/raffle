@@ -15,14 +15,16 @@ import '../widgets/top_up_card.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({
-    super.key,
+    super.key, required this.isActive,
   });
+  final bool isActive;
 
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -62,7 +64,7 @@ class _HomeTabState extends State<HomeTab> {
                     height: 112.h,
                   ),
                   const TopUpCard(),
-                  const SwipebleHomeCards(),
+                   SwipebleHomeCards(isActive:widget.isActive ,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Row(
