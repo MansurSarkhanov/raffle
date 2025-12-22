@@ -26,9 +26,9 @@ class ScanScreenState extends State<QRCodeScreen> {
   void reassemble() async {
     super.reassemble();
     if (Platform.isAndroid) {
-      await controller!.pauseCamera();
+      await controller?.pauseCamera();
     } else if (Platform.isIOS) {
-      controller!.resumeCamera();
+      controller?.resumeCamera();
     }
   }
 

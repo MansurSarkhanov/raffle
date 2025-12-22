@@ -14,10 +14,12 @@ class TopUpPage extends StatefulWidget {
 class _TopUpPageState extends State<TopUpPage> {
 
   int currentIndex= 0;
+  String selectedAmount='AED25.00';
 
-  void selectAmount(int index){
+  void selectAmount({required int index,required String text}){
     setState(() {
       currentIndex=index;
+      selectedAmount=text;
     });
   }
   @override
@@ -61,7 +63,7 @@ class _TopUpPageState extends State<TopUpPage> {
                     return Padding(
                       padding:  EdgeInsets.only(right: 8.0),
                       child: InkWell(
-                        onTap: ()=>selectAmount(index),
+                        onTap: ()=>selectAmount(index: index,text:amounts[index] ),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -198,7 +200,7 @@ class _TopUpPageState extends State<TopUpPage> {
                             style: context.typography.body2Bold.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            'AED50.00',
+                            selectedAmount,
                             style: context.typography.body2Bold.copyWith(fontSize: 27, fontWeight: FontWeight.w700),
                           ),
                           Text(

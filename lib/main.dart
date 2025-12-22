@@ -8,6 +8,9 @@ import 'package:raffle_app/app_router.dart';
 import 'package:raffle_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:raffle_app/features/auth/presentation/notifier/auth_notifier.dart';
 import 'package:raffle_app/features/restaurants/presentation/notifier/restourants_notifier.dart';
+import 'package:raffle_app/features/tickets/data/services/ticket_service.dart';
+import 'package:raffle_app/features/tickets/domain/repository/ticket_repository.dart';
+import 'package:raffle_app/features/tickets/presentation/notifier/ticket_provider.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/raffle_place/notifier.dart';
 
@@ -38,7 +41,9 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => RestourantsNotifier()..fetchAllRestorants(context),
         ),
-        
+         ChangeNotifierProvider(
+          create: (context) => TicketProvider(repository:TicketRepository(service:TicketServiceImpl() ) ),
+        ),
       ],
       child: const ThemeScopeWidget(child: MyApp()),
     ),

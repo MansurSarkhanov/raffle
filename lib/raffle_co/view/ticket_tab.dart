@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
+import 'package:raffle_app/features/tickets/data/models/ticket_model.dart';
+import 'package:raffle_app/features/tickets/presentation/notifier/ticket_state.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
 
+import '../../features/tickets/presentation/notifier/ticket_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../presentation/components/custom_text.dart';
 import '../../presentation/components/gradient_text.dart';
@@ -19,6 +22,13 @@ class TicketTab extends StatefulWidget {
 
 class _TicketTabState extends State<TicketTab> {
   final PageController controller = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<TicketProvider>().getUserTickets();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -194,11 +204,7 @@ class _TicketTabState extends State<TicketTab> {
                 scrollDirection: Axis.horizontal,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 64),
-                    child: TicketCards(),
-                  ),
+                  TicketCards(),
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18.0, vertical: 64),
@@ -234,33 +240,90 @@ class _TicketTabState extends State<TicketTab> {
   }
 }
 
-class TicketCards extends StatelessWidget {
+class TicketCards extends StatefulWidget {
   const TicketCards({
     super.key,
   });
 
   @override
+  State<TicketCards> createState() => _TicketCardsState();
+}
+
+class _TicketCardsState extends State<TicketCards> {
+  bool isExpanded = false;
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 45, // Alt kart bir az aşağıda və hissəvi görünür
-          left: 0,
-          right: 0,
-          child: _buildTicketCard(context, shadow: false),
-        ),
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: _buildTicketCard(context, shadow: true),
-        ),
-      
-      ],
+    const double overlap = 48;
+
+    return Consumer<TicketProvider>(
+      builder: (context, provider, child) {
+        if (provider.state is TicketProgress) {
+          return CircularProgressIndicator();
+        } else if (provider.state is TicketSuccess) {
+          final ticketList = provider.state as TicketSuccess;
+          final listView = ListView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(bottom: 150, top: 24),
+            itemCount: ticketList.data.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 8,
+                  left: 16,
+                  right: 16,
+                ),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isExpanded = false;
+                    });
+                  },
+                  child: _buildTicketCard(context,
+                      shadow: false, ticket: ticketList.data[index]),
+                ),
+              );
+            },
+          );
+          final stackView = Stack(
+            alignment: Alignment.topCenter,
+            children: List.generate(ticketList.data.length, (index) {
+              int reverseIndex = ticketList.data.length - 1 - index;
+              return Positioned(
+                top: reverseIndex * overlap,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 24),
+                  child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = true;
+                        });
+                      },
+                      child: _buildTicketCard(context,
+                          shadow: true, ticket: ticketList.data[index])),
+                ),
+              );
+            }),
+          );
+          return AnimatedCrossFade(
+            firstChild: stackView,
+            secondChild: listView,
+            crossFadeState: isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 800),
+            firstCurve: Curves.easeInOut,
+            secondCurve: Curves.easeInOut,
+          );
+        }
+        return SizedBox.shrink();
+      },
     );
   }
 
-  Widget _buildTicketCard(BuildContext context, {required bool shadow}) {
+  Widget _buildTicketCard(BuildContext context,
+      {required bool shadow, required TicketModel ticket}) {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -346,7 +409,7 @@ class TicketCards extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Prize: AZN2,000 Cash',
+                  'Prize: AZN${ticket.price} Cash',
                   style: context.typography.body2Regular.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -354,7 +417,7 @@ class TicketCards extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Product: Voucher AZN50",
+                  "Product:${ticket.product}",
                   style: context.typography.body2Regular.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -373,7 +436,7 @@ class TicketCards extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "27 June 2024, 05:25 PM",
+                  ticket.issuedOn,
                   style: context.typography.body2Regular.copyWith(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
@@ -426,7 +489,7 @@ class TicketCards extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Draw on 15 June",
+                            ticket.soldOut,
                             style: context.typography.body2Regular.copyWith(
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
@@ -441,7 +504,7 @@ class TicketCards extends StatelessWidget {
                 const SizedBox(
                   width: 6,
                 ),
-                const Expanded(
+                Expanded(
                     flex: 4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -454,7 +517,7 @@ class TicketCards extends StatelessWidget {
                           letterSpacing: -0.5,
                         ),
                         TitleHeading1Widget(
-                          text: 'RR-00001-00000001',
+                          text: ticket.ticketNo,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 0,
