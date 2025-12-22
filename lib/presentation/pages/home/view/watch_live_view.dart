@@ -34,7 +34,7 @@ class _WatchLiveScreenState extends State<WatchLiveScreen> {
           looping: true,
           deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
           deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
-          aspectRatio: 1.5);
+          aspectRatio: 9/16);
     });
   }
 

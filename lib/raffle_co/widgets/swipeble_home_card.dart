@@ -44,6 +44,7 @@ void didUpdateWidget(covariant SwipebleHomeCards oldWidget) {
 
       // VideoItem('https://emiland.com/front/videos/Emiland_Header.mp4'),
       VideoItem(
+        aspectRatio: 1.5,
           'https://firebasestorage.googleapis.com/v0/b/raffle-1b71c.appspot.com/o/videos%2F1%20Minute%20of%20PARIS.mp4?alt=media&token=49e29a28-7a21-43e1-8f90-059f43b96240'),
     ];
 
@@ -218,11 +219,13 @@ void _startAutoScroll() {
 
 class VideoItem {
   final String url;
+  final double? aspectRatio;
   late final VideoPlayerController controller;
   late final ChewieController chewieController;
   late final Future<void> initializeFuture;
 
-  VideoItem(this.url) {
+  VideoItem(this.url,{this.aspectRatio,}) {
+
     controller = VideoPlayerController.networkUrl(Uri.parse(url));
     initializeFuture = controller.initialize().then((_) {
       chewieController = ChewieController(
@@ -232,7 +235,7 @@ class VideoItem {
         videoPlayerController: controller,
         autoPlay: false,
         looping: true,
-        aspectRatio: 1.5,
+        aspectRatio: aspectRatio?? 9/16,
       );
     });
   }
