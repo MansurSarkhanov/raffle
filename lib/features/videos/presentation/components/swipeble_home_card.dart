@@ -1,17 +1,20 @@
 import 'dart:async';
-
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/theme/theme_ext.dart';
+import 'package:raffle_app/features/videos/presentation/notifier/video_notifier.dart';
+import 'package:raffle_app/features/videos/presentation/notifier/video_state.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class SwipebleHomeCards extends StatefulWidget {
   const SwipebleHomeCards({
-    super.key, required this.isActive,
+    super.key,
+    required this.isActive,
   });
   final bool isActive;
 
@@ -23,30 +26,23 @@ class _SwipebleHomeCardsState extends State<SwipebleHomeCards> {
   final PageController controller = PageController();
   late Timer _timer; // Otomatik geçiş için Timer
   int _currentPage = 0;
-  late List<VideoItem> videoItems;
-@override
-void didUpdateWidget(covariant SwipebleHomeCards oldWidget) {
-  super.didUpdateWidget(oldWidget);
+  List<VideoItem>? videoItems;
 
-  if (!widget.isActive) {
-    for (var video in videoItems) {
-      video.controller.setVolume(0);
-    }
-  }
-}
+  // @override
+  // void didUpdateWidget(covariant SwipebleHomeCards oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+
+  //   if (!widget.isActive) {
+  //     for (var video in videoItems) {
+  //       video.controller.setVolume(0);
+  //     }
+  //   }
+  // }
+
   @override
   void initState() {
     super.initState();
-    videoItems = [
-      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/11%20September%202025.mp4?alt=media&token=f31b9f41-6619-4c94-9b2d-177f2886deb0'),
-      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/%F0%9F%92%AD%20What%20would%20YOU%20do%20with%20AED5%2C000%2C000%20.mp4?alt=media&token=524b96ed-fc42-4d15-a36d-db6dec509699'),
-      VideoItem('https://firebasestorage.googleapis.com/v0/b/raffle-ec654.appspot.com/o/Win%20AED1%2C000%2C000%20with%20Dream%20Dubai%20%26%20Mai%20Dubai%F0%9F%9A%A8.mp4?alt=media&token=ca469332-3149-4369-8d54-ec93eddc10dc'),
-
-      // VideoItem('https://emiland.com/front/videos/Emiland_Header.mp4'),
-      VideoItem(
-        aspectRatio: 1.5,
-          'https://firebasestorage.googleapis.com/v0/b/raffle-1b71c.appspot.com/o/videos%2F1%20Minute%20of%20PARIS.mp4?alt=media&token=49e29a28-7a21-43e1-8f90-059f43b96240'),
-    ];
+    context.read<VideoNotifier>().getVideos();
 
     controller.addListener(() {
       final newPage = controller.page!.round();
@@ -59,39 +55,38 @@ void didUpdateWidget(covariant SwipebleHomeCards oldWidget) {
     });
     _startAutoScroll();
   }
-void _startAutoScroll() {
-  _timer = Timer.periodic(const Duration(seconds: 6), (Timer timer) {
-    final totalPages = 1 + videoItems.length; // 1 basit kart + video kartları
 
-    if (_currentPage < totalPages - 1) {
-      _currentPage++;
-    } else {
-      _currentPage = 0;
-    }
+  void _startAutoScroll() {
+    _timer = Timer.periodic(const Duration(seconds: 6), (Timer timer) {
+      final totalPages = 1 + (videoItems?.length ?? 0);
 
-    controller.animateToPage(
-      _currentPage,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  });
-}
+      if (_currentPage < totalPages - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
 
+      controller.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
 
- void _handleVideoPlayback(int index) {
-  for (int i = 0; i < videoItems.length; i++) {
-    if (index == i + 1) {
-      videoItems[i].controller.play();
-    } else {
-      videoItems[i].controller.pause();
+  void _handleVideoPlayback(int index) {
+    for (int i = 0; i < (videoItems?.length ?? 0); i++) {
+      if (index == i + 1) {
+        videoItems![i].controller.play();
+      } else {
+        videoItems![i].controller.pause();
+      }
     }
   }
-}
-
 
   @override
   void dispose() {
-    for (var video in videoItems) {
+    for (var video in videoItems ?? []) {
       video.dispose();
     }
     controller.dispose();
@@ -100,48 +95,67 @@ void _startAutoScroll() {
   }
 
   @override
+  void didUpdateWidget(covariant SwipebleHomeCards oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!widget.isActive) {
+      for (var video in videoItems ?? <VideoItem>[]) {
+        video.controller.setVolume(0.0);
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<Widget> cards = [
-      _simpleCard(context),
-      ...videoItems.map((video) => _buildVideoCard(video)).toList(),
-    ];
-    return Column(
-      children: [
-        SizedBox(
-          height: 344.h,
-          child: PageView.builder(
-            controller: controller,
-            itemCount: cards.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                child: cards[index],
-              );
-            },
-          ),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 36.0),
-            child: SmoothPageIndicator(
-              effect: const ExpandingDotsEffect(
-                  dotColor: Color(0xFFA6A6A6),
-                  activeDotColor: Color(0xFF424242),
-                  dotHeight: 8,
-                  dotWidth: 8),
-              controller: controller,
-              count: cards.length,
+    return Consumer<VideoNotifier>(builder: (context, provider, child) {
+      if (provider.state is VideoProgress) {
+        return CircularProgressIndicator();
+      } else if (provider.state is VideoSuccess) {
+        final state = provider.state as VideoSuccess;
+        videoItems ??= state.vidoes
+            ?.map((e) => VideoItem(e.videoUrl, videoMode: e.videoMode))
+            .toList();
+        final List<Widget> cards = [
+          _simpleCard(context),
+          ...videoItems!.map((video) => _buildVideoCard(video)).toList()
+        ];
+        return Column(
+          children: [
+            SizedBox(
+              height: 344.h,
+              child: PageView.builder(
+                controller: controller,
+                itemCount: cards.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 12),
+                    child: cards[index],
+                  );
+                },
+              ),
             ),
-          ),
-        )
-      ],
-    );
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 36.0),
+                child: SmoothPageIndicator(
+                  effect: const ExpandingDotsEffect(
+                      dotColor: Color(0xFFA6A6A6),
+                      activeDotColor: Color(0xFF424242),
+                      dotHeight: 8,
+                      dotWidth: 8),
+                  controller: controller,
+                  count: cards.length,
+                ),
+              ),
+            )
+          ],
+        );
+      }
+      return SizedBox.shrink();
+    });
   }
 
   Widget _buildVideoCard(VideoItem video) {
@@ -219,13 +233,12 @@ void _startAutoScroll() {
 
 class VideoItem {
   final String url;
-  final double? aspectRatio;
+  final String videoMode;
   late final VideoPlayerController controller;
   late final ChewieController chewieController;
   late final Future<void> initializeFuture;
 
-  VideoItem(this.url,{this.aspectRatio,}) {
-
+  VideoItem(this.url, {required this.videoMode}) {
     controller = VideoPlayerController.networkUrl(Uri.parse(url));
     initializeFuture = controller.initialize().then((_) {
       chewieController = ChewieController(
@@ -235,7 +248,7 @@ class VideoItem {
         videoPlayerController: controller,
         autoPlay: false,
         looping: true,
-        aspectRatio: aspectRatio?? 9/16,
+        aspectRatio: videoMode == 'Portrait' ? 9 / 16 : 1.5,
       );
     });
   }

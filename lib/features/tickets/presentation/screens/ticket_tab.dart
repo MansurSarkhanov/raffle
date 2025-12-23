@@ -6,12 +6,12 @@ import 'package:raffle_app/features/tickets/data/models/ticket_model.dart';
 import 'package:raffle_app/features/tickets/presentation/notifier/ticket_state.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
 
-import '../../features/tickets/presentation/notifier/ticket_provider.dart';
-import '../../l10n/app_localizations.dart';
-import '../../presentation/components/custom_text.dart';
-import '../../presentation/components/gradient_text.dart';
-import '../../shared/painter/liner_dash_painter.dart';
-import 'wallet_tab.dart';
+import '../notifier/ticket_provider.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../../presentation/components/custom_text.dart';
+import '../../../../presentation/components/gradient_text.dart';
+import '../../../../shared/painter/liner_dash_painter.dart';
+import '../../../../raffle_co/view/wallet_tab.dart';
 
 class TicketTab extends StatefulWidget {
   const TicketTab({super.key});

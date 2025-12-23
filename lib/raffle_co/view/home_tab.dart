@@ -10,7 +10,7 @@ import '../../features/product/presentation/view/product_list_view.dart';
 import '../../features/profile/presentation/widgets/contact_method.dart';
 import '../../l10n/app_localizations.dart';
 import '../widgets/just_launch_card.dart';
-import '../widgets/swipeble_home_card.dart';
+import '../../features/videos/presentation/components/swipeble_home_card.dart';
 import '../widgets/top_up_card.dart';
 
 class HomeTab extends StatefulWidget {

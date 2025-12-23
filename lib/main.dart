@@ -11,6 +11,9 @@ import 'package:raffle_app/features/restaurants/presentation/notifier/restourant
 import 'package:raffle_app/features/tickets/data/services/ticket_service.dart';
 import 'package:raffle_app/features/tickets/domain/repository/ticket_repository.dart';
 import 'package:raffle_app/features/tickets/presentation/notifier/ticket_provider.dart';
+import 'package:raffle_app/features/videos/data/service/video_service.dart';
+import 'package:raffle_app/features/videos/domain/repository/videos_repository.dart';
+import 'package:raffle_app/features/videos/presentation/notifier/video_notifier.dart';
 import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/raffle_place/notifier.dart';
 
@@ -43,6 +46,9 @@ Future<void> main() async {
         ),
          ChangeNotifierProvider(
           create: (context) => TicketProvider(repository:TicketRepository(service:TicketServiceImpl() ) ),
+        ),
+          ChangeNotifierProvider(
+          create: (context) => VideoNotifier(repository:VideosRepository(service:VideoServiceImpl() ) ),
         ),
       ],
       child: const ThemeScopeWidget(child: MyApp()),
