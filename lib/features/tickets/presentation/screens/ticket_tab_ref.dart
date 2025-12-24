@@ -74,6 +74,7 @@ class _TicketTabState extends State<TicketTabRef> {
             ),
             const SizedBox(height: 24),
             TicketToggle(controller: _controller),
+            const SizedBox(height: 8),
             Expanded(
               child: PageView(
                 controller: _controller,

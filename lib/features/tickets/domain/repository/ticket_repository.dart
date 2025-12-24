@@ -20,4 +20,14 @@ class TicketRepository implements TicketDomain {
       return Error(Exception(e.toString()));
     }
   }
+  
+  @override
+  Future<Result<bool, Exception>> buyTicket(TicketModel ticketModel) async {
+     try {
+      await service.buyTicket(ticketModel);
+        return Success(true);
+    } catch (e) {
+      return Error(Exception(e.toString()));
+    }
+  }
 }

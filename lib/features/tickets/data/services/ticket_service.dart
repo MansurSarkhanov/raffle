@@ -6,6 +6,7 @@ import '../models/ticket_model.dart';
 
 abstract class TicketService {
   Future<DocumentReference<TicketDataModel>?> getUserTicket();
+  Future<bool> buyTicket(TicketModel ticket);
 }
 
 class TicketServiceImpl implements TicketService {
@@ -28,6 +29,19 @@ class TicketServiceImpl implements TicketService {
       return response;
     } catch (e) {
       return null;
+    }
+  }
+
+  @override
+  Future<bool> buyTicket(TicketModel ticket) async {
+    try {
+      final uid = sharedPreferenceService.readString('token');
+      await _firebaseReference.doc(uid).update({
+        'data': FieldValue.arrayUnion([ticket.toJson()])
+      });
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

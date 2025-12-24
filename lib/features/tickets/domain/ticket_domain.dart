@@ -4,4 +4,6 @@ import '../data/models/ticket_model.dart';
 
 abstract class TicketDomain {
   Future<Result<TicketDataModel?, Exception>> getUserTickets();
+  Future<Result<bool, Exception>> buyTicket(TicketModel ticket);
+
 }

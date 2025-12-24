@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/theme_ext.dart';
-import '../../../../presentation/components/custom_text.dart';
 import '../../../../presentation/components/gradient_text.dart';
 import '../../../../shared/painter/liner_dash_painter.dart';
 import '../../data/models/ticket_model.dart';
@@ -9,11 +8,14 @@ import '../../data/models/ticket_model.dart';
 class TicketCardItem extends StatelessWidget {
   final TicketModel ticket;
   final bool shadow;
+  final bool showDashLine;
+  final String cardCount;
+
 
   const TicketCardItem({
     required this.ticket,
     this.shadow = false,
-    super.key,
+    super.key, required this.showDashLine, required this.cardCount,
   });
 
   @override
@@ -26,31 +28,31 @@ class TicketCardItem extends StatelessWidget {
         ),
         boxShadow: shadow
             ? [
-          BoxShadow(
-            blurRadius: 50,
-            spreadRadius: 10,
-            offset: const Offset(0, 4),
-            color: Colors.black.withOpacity(0.25),
-          )
-        ]
+                BoxShadow(
+                  blurRadius: 50,
+                  spreadRadius: 10,
+                  offset: const Offset(0, 30),
+                  color: Colors.black.withValues(alpha: 0.15),
+                )
+              ]
             : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildHeader(context),
-          SizedBox(height: 17.h),
+          _buildHeader(context: context,cardCount:   cardCount,showCount:showDashLine ),
+          SizedBox(height: 16.h),
           _buildDetails(context),
-          const SizedBox(height: 6),
-          _buildDashedLine(),
           const SizedBox(height: 4),
+          showDashLine ? _buildDashedLine() : SizedBox.shrink(),
+          const SizedBox(height: 6),
           _buildFooter(context),
         ],
       ),
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
+  Widget _buildHeader({required BuildContext context,required String cardCount,required bool showCount}) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 24, right: 10),
       child: Row(
@@ -73,17 +75,32 @@ class TicketCardItem extends StatelessWidget {
               ),
             ],
           ),
-          Container(
+        showCount?  Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               gradient: LinearGradient(
                 colors: [Color(0xFFCE2B37), Color(0xFFF09A1A)],
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(8),
+            child:  Padding(
+              padding: EdgeInsets.all(10),
               child: Text(
-                '5',
+               cardCount,
+                style: TextStyle(
+                  fontSize: 19,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ):Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            color: Colors.white
+            ),
+            child:  Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+               cardCount,
                 style: TextStyle(
                   fontSize: 19,
                   color: Colors.white,
@@ -134,6 +151,7 @@ class TicketCardItem extends StatelessWidget {
       height: 4,
       child: CustomPaint(
         painter: DashedLinePainter(),
+        size: const Size(double.infinity, 2),
       ),
     );
   }
@@ -170,7 +188,7 @@ class TicketCardItem extends StatelessWidget {
               Text(
                 ticket.ticketNo,
                 style: context.typography.body2Bold.copyWith(
-                  fontSize: 15,
+                  fontSize: 13,
                 ),
               ),
             ],
