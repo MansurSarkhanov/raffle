@@ -9,11 +9,11 @@ import 'package:raffle_app/features/profile/presentation/page/profile_page.dart'
 import 'package:raffle_app/notifier/app_notifier.dart';
 import 'package:raffle_app/presentation/pages/home/test_scan.dart';
 import 'package:raffle_app/raffle_co/view/draws_tab.dart';
-import 'package:raffle_app/features/tickets/presentation/screens/ticket_tab.dart';
 import 'package:raffle_app/raffle_co/view/wallet_tab.dart';
 import 'package:raffle_app/raffle_place/components/place_bottom_navbar.dart';
 import 'package:raffle_app/raffle_place/raffle_place_page.dart';
 
+import '../../../features/tickets/presentation/screens/ticket_tab_ref.dart';
 import '../../../raffle_co/components/bottom_navbar.dart';
 import '../../../raffle_co/view/home_tab.dart';
 
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
      List<Widget> pages = [
      HomeTab(isActive: context.watch<AppNotifier>().currentPageIndex==0),
     const DrawsTab(),
-    const TicketTab(),
+    const TicketTabRef(),
     const WalletTab(),
     const QRCodeScreen(),
 
