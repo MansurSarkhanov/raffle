@@ -29,9 +29,9 @@ class TicketCardItem extends StatelessWidget {
         boxShadow: shadow
             ? [
                 BoxShadow(
-                  blurRadius: 50,
-                  spreadRadius: 10,
-                  offset: const Offset(0, 30),
+                  blurRadius: 10,
+                  spreadRadius: 1,
+                  offset: const Offset(0, 12),
                   color: Colors.black.withValues(alpha: 0.15),
                 )
               ]

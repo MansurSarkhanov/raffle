@@ -36,25 +36,25 @@ class _TicketTabState extends State<TicketTabRef> {
           downColor: Colors.white,
           gradient: isLeftSelected
               ? const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFF603D),
-              Color(0xFFFF603D),
-              Color(0xFFCE2B37),
-              Color(0xFFFFFFFF),
-            ],
-          )
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFFFF603D),
+                    Color(0xFFFF603D),
+                    Color(0xFFCE2B37),
+                    Color(0xFFFFFFFF),
+                  ],
+                )
               : const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF595959),
-              Color(0xFF595959),
-              Color(0xFF8D8D8D),
-              Color(0xFFFFFFFF),
-            ],
-          ),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF595959),
+                    Color(0xFF595959),
+                    Color(0xFF8D8D8D),
+                    Color(0xFFFFFFFF),
+                  ],
+                ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +79,16 @@ class _TicketTabState extends State<TicketTabRef> {
               child: PageView(
                 controller: _controller,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  TicketCards(),
+                children: [
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      await context.read<TicketProvider>().getUserTickets();
+                    },
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.only(bottom: 120),
+                      child: TicketCards(),
+                    ),
+                  ),
                   _EmptyTicketView(),
                 ],
               ),
