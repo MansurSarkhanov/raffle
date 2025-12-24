@@ -22,7 +22,9 @@ class _TicketTabState extends State<TicketTabRef> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<TicketProvider>().getUserTickets());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<TicketProvider>().watchUserTickets();
+    });
   }
 
   @override
@@ -80,14 +82,13 @@ class _TicketTabState extends State<TicketTabRef> {
                 controller: _controller,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  RefreshIndicator(
-                    onRefresh: () async {
-                      await context.read<TicketProvider>().getUserTickets();
-                    },
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.only(bottom: 120),
-                      child: TicketCards(),
-                    ),
+                  SingleChildScrollView(
+                    padding: EdgeInsets.only(bottom: 120),
+                    child: Column(
+                        children: List.generate(
+                      2,
+                      (index) => TicketCards(),
+                    )),
                   ),
                   _EmptyTicketView(),
                 ],

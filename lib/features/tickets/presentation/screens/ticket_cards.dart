@@ -46,14 +46,12 @@ class _TicketCardsState extends State<TicketCards> {
   }
 
   Widget _buildScrollableStack(List<TicketModel> tickets) {
-    final totalHeight = (tickets.length - 1) * currentOverlap + cardHeight + 20;
+    final totalHeight = (tickets.length - 1) * currentOverlap + cardHeight +10;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 800),
       curve: Curves.bounceOut,
-      height: totalHeight < MediaQuery.of(context).size.height
-          ? totalHeight
-          : totalHeight,
+      height:totalHeight,
       child: Stack(
         alignment: Alignment.topCenter,
         children: List.generate(tickets.length, (index) {

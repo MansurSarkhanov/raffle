@@ -5,7 +5,7 @@ import '../../../../data/local/shared_preferences_service.dart';
 import '../models/ticket_model.dart';
 
 abstract class TicketService {
-  Future<DocumentReference<TicketDataModel>?> getUserTicket();
+  Stream<List<TicketModel>> getUserTicket();
   Future<bool> buyTicket(TicketModel ticket);
 }
 
@@ -13,24 +13,25 @@ class TicketServiceImpl implements TicketService {
   final _firebaseReference = FirebaseReference.tickets.ref;
   final SharedPreferenceService sharedPreferenceService =
       SharedPreferenceServiceImpl();
+ 
   @override
-  Future<DocumentReference<TicketDataModel>?> getUserTicket() async {
-    try {
-      final uid = sharedPreferenceService.readString('token');
-      final response = _firebaseReference.doc(uid).withConverter(
-        fromFirestore: (snapshot, options) {
-          return TicketDataModel.fromJson(snapshot.data()!);
-        },
-        toFirestore: (value, options) {
-          return value.toJson();
-        },
-      );
+  Stream<List<TicketModel>> getUserTicket() {
+    final uid = sharedPreferenceService.readString('token');
 
-      return response;
-    } catch (e) {
-      return null;
-    }
+    return _firebaseReference.doc(uid).snapshots().map((snapshot) {
+      if (!snapshot.exists) {
+        return <TicketModel>[];
+      }
+
+      final data = snapshot.data() as Map<String, dynamic>;
+      final List list = data['data'] ?? [];
+
+      return list
+          .map((e) => TicketModel.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    });
   }
+
 
   @override
   Future<bool> buyTicket(TicketModel ticket) async {
