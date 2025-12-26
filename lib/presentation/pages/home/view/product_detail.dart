@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:raffle_app/core/constants/colors.dart';
 import 'package:raffle_app/features/product/data/model/product_model.dart';
+import 'package:raffle_app/features/tickets/data/models/ticket_model.dart';
+import 'package:raffle_app/features/tickets/presentation/notifier/ticket_provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../shared/couple_buttons.dart';
 
@@ -13,7 +17,8 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(color: backColor, borderRadius: BorderRadius.circular(30)),
+      decoration: BoxDecoration(
+          color: backColor, borderRadius: BorderRadius.circular(30)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -38,11 +43,13 @@ class ProductDetail extends StatelessWidget {
                   children: [
                     Text(
                       'Buy:USD ${model.price}',
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w700),
                     ),
                     Text(
                       '${model.prize}',
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
                       height: size.height * 0.01,
@@ -51,32 +58,63 @@ class ProductDetail extends StatelessWidget {
                       'Date: 31 October, 2023',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Color(0xFFA2A2A2), fontSize: 14, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: Color(0xFFA2A2A2),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
                 Container(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(17), border: Border.all(color: Colors.grey)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(17),
+                      border: Border.all(color: Colors.grey)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12),
-                    child: Container(
-                      decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(11)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "rafflebasics credit",
-                              style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700),
-                            ),
-                            Text(
-                              "8.4AZN",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
-                            ),
-                          ],
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 12),
+                    child: InkWell(
+                      onTap: () async {
+                        var uuid = Uuid();
+                        final result = await context
+                            .read<TicketProvider>()
+                            .buyTicket(TicketModel(
+                                id: uuid.v4(),
+                                issuedOn: '27 June 2024, 05:25 PM',
+                                price: '10000',
+                                product: 'Test Ticket',
+                                soldOut: 'Draw on 15 June, 2024',
+                                ticketNo: 'RR-00001-00000004'));
+                                if(result){
+                                  Navigator.of(context).pop();
+                                }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(11)),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "rafflebasics credit",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Text(
+                                "8.4AZN",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -108,7 +146,8 @@ class ProductDetail extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     onTap: () {},
                     child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
                       child: const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Center(
@@ -124,7 +163,8 @@ class ProductDetail extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     onTap: () {},
                     child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
                       child: const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Center(
@@ -138,7 +178,6 @@ class ProductDetail extends StatelessWidget {
               ],
             ),
             const Spacer(),
-
           ],
         ),
       ),

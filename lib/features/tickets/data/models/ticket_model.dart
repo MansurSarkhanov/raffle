@@ -19,6 +19,7 @@ class TicketDataModel{
 
 
 class TicketModel {
+  final String id;
   final String issuedOn;
   final String price;
   final String product;
@@ -30,11 +31,12 @@ class TicketModel {
     required this.price,
     required this.product,
     required this.soldOut,
-    required this.ticketNo,
+    required this.ticketNo, required this.id,
   });
 
   factory TicketModel.fromJson(Map<String, dynamic> json) {
     return TicketModel(
+      id: json['id']??'',
       issuedOn: json['issuedOn'] ?? '',
       price: json['price'] ?? '',
       product: json['product'] ?? '',
@@ -45,6 +47,7 @@ class TicketModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id':id,
       'issuedOn': issuedOn,
       'price': price,
       'product': product,
